@@ -5,13 +5,13 @@ Gerenciador de projetos para uma organização independente de alunos da Estáci
 Foi feito o setup do projeto em uma máquina com o python versão 3.10.11 e poetry 1.4.2, recomendo está versão em específico para rodar o projeto. Além disso, seguindo as boas práticas de projetos python, crie antes de tudo um ambiente virtual para instalar tudo, na linha de comando:
 
 ```
-    python -m venv venv
+python -m venv venv
 ```
 
 Este comando criará um ambiente virtual de nome venv no diretório atual. Ativo-o em um ambiente Linux com:
 
 ```
-    source venv/bin/activate
+source venv/bin/activate
 ```
 
 Em um ambiente Windows:
