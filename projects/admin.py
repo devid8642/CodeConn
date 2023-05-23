@@ -7,7 +7,7 @@ from .models import Project
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'author', 'is_approved', 'date_created')
     list_display_links = ('id', 'title')
-    search_fields = ('title',)
     list_editable = ('is_approved',)
     list_filter = ('is_approved', )
     ordering = ('-id', '-date_created')
+    search_fields = ('title', 'author__username')
