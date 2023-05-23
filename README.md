@@ -57,6 +57,9 @@ Para rodar todos os testes da aplicação execute:
 pytest
 ```
 
+## Contribuindo
+Segue o arquivo para os participantes do projeto com o guia de contribuição: [contribuindo](contrib.md)
+
 ## Dependências de produção
 --- VOU ESCREVER DPS ---
 
