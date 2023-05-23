@@ -14,7 +14,6 @@ class Project(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     is_approved = models.BooleanField('Publicado', default=False)
 
-
     def __str__(self):
         return f'Project {self.id} - {self.title}'
 
