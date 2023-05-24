@@ -1,0 +1,9 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    {% for project in projects %}
+        <p>{{ project.title }}</p>
+        <p>{{ project.description }}</p>
+        <p>{{ project.author }}</p>
+    {% endfor %}
+{% endblock content %}
