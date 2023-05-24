@@ -4,6 +4,8 @@ from .models import Project
 
 
 def home(request):
+    # Add week logic
+
     week_projects = Project.objects.filter(
         is_approved=True,
     )
