@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+
 from . models import User
 
-def loginn(request):
+
+def login_view(request):
     if request.method == 'GET':
         return render(request, 'auth/pages/login.html')
     else:
@@ -16,7 +18,8 @@ def loginn(request):
         # Redirect indicating error message
         return render(request, 'auth/pages/login.html')
 
-def register(request):
+
+def register_view(request):
     if request.method == 'GET':
         return render(request, 'auth/pages/register.html')
     else:
@@ -34,7 +37,7 @@ def register(request):
             # Redirect indicating error message
             return render(request, 'auth/pages/register.html')
         try:
-            User.objects.get(email = request.POST['email'])
+            User.objects.get(email=request.POST['email'])
         except User.DoesNotExist:
             User.objects.create_user(
                 username=request.POST['username'],
@@ -46,6 +49,7 @@ def register(request):
             # Redirect indicating error message
             return render(request, 'auth/pages/register.html')
 
-def logoutt(request):
+
+def logout_view(request):
     logout(request)
     return redirect('projects:home')

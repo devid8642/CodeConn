@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 from .models import Project
+from .forms import ProjectForm
 
 
 def home(request):
@@ -10,7 +12,7 @@ def home(request):
 
     return render(
         request,
-        'users/pages/home.html',
+        'projects/pages/home.html',
         context={
             'week_projects': week_projects,
         }
@@ -24,8 +26,44 @@ def all_projects(request):
 
     return render(
         request,
-        'users/pages/all_projects.html',
+        'projects/pages/all_projects.html',
         context={
             'projects': projects,
+        }
+    )
+
+
+def project_detail(request, pk):
+    project = get_object_or_404(
+        Project,
+        id=pk,
+    )
+
+    return render(
+        request,
+        'projects/pages/project_detail.html',
+        context={
+            'project': project,
+        }
+    )
+
+
+def project_create(request):
+    form = ProjectForm(request.POST or None)
+
+    if form.is_valid():
+        project = form.save(commit=False)
+        project.author = request.user
+        project.is_approved = False
+
+        project.save()
+
+        return redirect(reverse('projects:home'))
+
+    return render(
+        request,
+        'projects/pages/project_create.html',
+        context={
+            'form': form,
         }
     )

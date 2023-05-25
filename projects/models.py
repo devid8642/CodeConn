@@ -1,5 +1,7 @@
 from django.db import models
+
 from users.models import User
+
 
 class Project(models.Model):
     title = models.CharField('Título', max_length=50)
@@ -19,10 +21,16 @@ class Project(models.Model):
         db_table = 'projects'
         ordering = ['-created_at']
 
+
 class Comment(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments')
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name='comments'
+    )
     author = models.ForeignKey(
-    User, on_delete=models.SET_NULL, related_name='comment_user', null=True, default=''
+        User, on_delete=models.SET_NULL,
+        related_name='comment_user',
+        null=True,
+        default='',
     )
     comment = models.TextField('Comentário')
     created_at = models.DateTimeField(auto_now_add=True)
