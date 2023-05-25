@@ -4,11 +4,9 @@ from .models import Project
 
 
 def home(request):
-    # Add week logic
-
     week_projects = Project.objects.filter(
         is_approved=True,
-    )
+    )[:4]
 
     return render(
         request,
@@ -22,7 +20,7 @@ def home(request):
 def all_projects(request):
     projects = Project.objects.filter(
         is_approved=True,
-    ).order_by('-id')
+    )
 
     return render(
         request,
