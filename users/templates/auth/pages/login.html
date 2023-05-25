@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form action="/users/login/" method="POST">
+    <form action="{% url 'users:login' %}" method="POST">
         {% csrf_token %}
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" maxlength="255">
