@@ -1,0 +1,26 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'users:register' %}" method="POST">
+        {% csrf_token %}
+        <label for="username">Usuário:</label>
+        <input type="text" name="username" id="username" maxlength="255" required>
+        <br>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" maxlength="255" required>
+        <br>
+        <br>
+        <label for="password">Senha:</label>
+        <input type="password" name="password" id="password" required>
+        <br>
+        <br>
+        <label for="confirmed_password">Confirme sua senha:</label>
+        <input type="password" name="confirmed_password" id="confirmed_password" required>
+        <br>
+        <br>
+        <input type="submit" value="Registre-se">
+    </form>
+
+{% endblock content %}
