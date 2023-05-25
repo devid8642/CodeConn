@@ -1,0 +1,9 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <form action="{% url 'projects:project_edit' project.id %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Editar</button>
+    </form>
+{% endblock content %}

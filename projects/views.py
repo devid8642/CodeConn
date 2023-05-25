@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import Http404
 from django.urls import reverse
 
 from .models import Project
@@ -67,3 +68,45 @@ def project_create(request):
             'form': form,
         }
     )
+
+
+def project_edit(request, pk):
+    project = get_object_or_404(
+        Project,
+        id=pk,
+    )
+    form = ProjectForm(
+        request.POST or None,
+        instance=project,
+    )
+
+    if form.is_valid():
+        project = form.save(commit=False)
+        project.is_approved = False
+        project.save()
+
+        return redirect(reverse('projects:home'))
+
+    return render(
+        request,
+        'projects/pages/project_edit.html',
+        context={
+            'form': form,
+            'project': project,
+        }
+    )
+
+
+def project_delete(request):
+    if not request.POST:
+        raise Http404
+
+    project_id = request.POST.get('project_id')
+    project = get_object_or_404(
+        Project,
+        id=project_id,
+    )
+
+    project.delete()
+
+    return redirect(reverse('projects:home'))
