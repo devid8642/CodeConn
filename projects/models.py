@@ -17,6 +17,7 @@ class Project(models.Model):
 
     class Meta:
         db_table = 'projects'
+        ordering = ['-created_at']
 
 class Comment(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments')
@@ -32,3 +33,4 @@ class Comment(models.Model):
 
     class Meta:
         db_table = 'comments'
+        ordering = ['-created_at']
