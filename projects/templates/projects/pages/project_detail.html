@@ -4,4 +4,24 @@
     <p>{{ project.title }}</p>
     <p>{{ project.description }}</p>
     <p>{{ project.author }}</p>
+
+    <h2>Comment here</h2>
+    <form action="{% url 'projects:project_detail' project.id %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_div }}
+        <button type="submit">Comentar</button>
+    </form>
+    <h3>Todos os Comentários</h3>
+    {% for comment in comments %}
+        <p>{{ comment.comment }}</p>
+        <h4>Comentado por: {{ comment.author.username }}</h4>
+        {% if comment.author == request.user %}
+            <form action="{% url 'projects:comment_delete' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="comment-id" value="{{ comment.id }}">
+                <button type="submit">Deletar comentário</button>
+            </form>
+        {% endif %}
+        <hr>
+    {% endfor %}
 {% endblock content %}

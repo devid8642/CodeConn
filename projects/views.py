@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.urls import reverse
 
-from .models import Project
-from .forms import ProjectForm
+from .models import Project, Comment
+from .forms import ProjectForm, CommentForm
 
 
 def home(request):
@@ -39,13 +39,53 @@ def project_detail(request, pk):
         Project,
         id=pk,
     )
+    comments = Comment.objects.filter(
+        project=project,
+    ).order_by('-created_at')
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.project = project
+            comment.author = request.user
+
+            comment.save()
+
+            return redirect(
+                reverse('projects:project_detail', kwargs={'pk': pk})
+            )
+
+    else:
+        comment_form = CommentForm()
 
     return render(
         request,
         'projects/pages/project_detail.html',
         context={
             'project': project,
+            'comments': comments,
+            'comment_form': comment_form,
         }
+    )
+
+
+def comment_delete(request):
+    if not request.POST:
+        raise Http404
+
+    comment_id = request.POST.get('comment-id')
+    comment = get_object_or_404(
+        Comment,
+        author=request.user,
+        id=comment_id,
+    )
+    project_id = comment.project.id
+    comment.delete()
+
+    return redirect(
+        reverse('projects:project_detail', kwargs={'pk': project_id})
     )
 
 

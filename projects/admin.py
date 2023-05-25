@@ -12,6 +12,7 @@ class ProjectAdmin(admin.ModelAdmin):
     ordering = ('-id', '-created_at')
     search_fields = ('title', 'author__username')
 
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'project', 'author', 'created_at', 'updated_at')
