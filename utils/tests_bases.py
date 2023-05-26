@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import reverse, resolve
 
 from projects.models import Project
 from users.models import User
@@ -12,6 +12,9 @@ class ProjectMixin:
         username: str = 'username',
         password: str = '123456',
     ) -> User:
+        '''
+        Create a user with the registration parameters.
+        '''
 
         return User.objects.create(
             email=email,
@@ -27,6 +30,9 @@ class ProjectMixin:
         is_approved: bool = False,
         author_data: User = None,
     ) -> Project:
+        '''
+        Create a project and a user to be its author.
+        '''
 
         if author_data is None:
             author_data = {}
@@ -44,13 +50,16 @@ class ProjectMixin:
         email: str = 'username@email.com',
         password: str = '123456',
     ) -> None:
+        '''
+        Create a user and login.
+        '''
         self.make_author()
         self.client.login(
             username='username',
             password='123456',
         )
 
-    def base_test_function(
+    def response_test_function(
         self,
         url: str,
         url_kwargs: bool = False,
@@ -59,6 +68,9 @@ class ProjectMixin:
         data: dict = None,
         follow: bool = True,
     ):
+        '''
+        Simplifies responses tests that use GET or POST methods.
+        '''
         if url_kwargs:
             reversed_url = reverse(url, kwargs={'pk': pk})
 
@@ -80,15 +92,23 @@ class ProjectMixin:
 
 class ProjectTestBase(TestCase, ProjectMixin):
     def setUp(self, *args, **kwargs):
-        '''
-        Not validated yet.
-        '''
-        self.project_form_data = {
-            **self.make_project,
-        }
-
-        self.register_form_data = {
-            **self.make_author,
-        }
-
         return super().setUp(*args, **kwargs)
+
+    def view_test_function(self, url: str, view: any) -> None:
+        '''
+        Base view function test.
+        '''
+        resolved_view = resolve(reverse(url))
+
+        self.assertIs(resolved_view.func, view)
+
+    def template_test_function(
+        self, url: str, template_url: str
+    ) -> None:
+        '''
+        Base template test function.
+        '''
+        response = self.response_test_function(url)
+        template = template_url
+
+        self.assertTemplateUsed(response, template)
