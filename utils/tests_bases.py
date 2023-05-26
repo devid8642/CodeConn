@@ -62,8 +62,7 @@ class ProjectMixin:
     def response_test_function(
         self,
         url: str,
-        url_kwargs: bool = False,
-        pk: int = 1,
+        url_kwargs: dict = None,
         method: str = 'get',
         data: dict = None,
         follow: bool = True,
@@ -71,11 +70,7 @@ class ProjectMixin:
         '''
         Simplifies responses tests that use GET or POST methods.
         '''
-        if url_kwargs:
-            reversed_url = reverse(url, kwargs={'pk': pk})
-
-        else:
-            reversed_url = reverse(url)
+        reversed_url = reverse(url, kwargs=url_kwargs)
 
         if method == 'get':
             response = self.client.get(
@@ -94,21 +89,23 @@ class ProjectTestBase(TestCase, ProjectMixin):
     def setUp(self, *args, **kwargs):
         return super().setUp(*args, **kwargs)
 
-    def view_test_function(self, url: str, view: any) -> None:
+    def view_test_function(
+        self, url: str, view: any, url_kwargs: dict = None
+    ) -> None:
         '''
         Base view function test.
         '''
-        resolved_view = resolve(reverse(url))
+        resolved_view = resolve(reverse(url, kwargs=url_kwargs))
 
         self.assertIs(resolved_view.func, view)
 
     def template_test_function(
-        self, url: str, template_url: str
+        self, url: str, template_url: str, url_kwargs: dict = None
     ) -> None:
         '''
         Base template test function.
         '''
-        response = self.response_test_function(url)
+        response = self.response_test_function(url, url_kwargs=url_kwargs)
         template = template_url
 
         self.assertTemplateUsed(response, template)
