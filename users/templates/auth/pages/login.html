@@ -4,7 +4,15 @@
 
     <form action="{% url 'users:login' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="form-control">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+            </div>
+            <br>
+            <br>
+        {% endfor %}
         <button type="submit">Login</button>
     </form>
 
