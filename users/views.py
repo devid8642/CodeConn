@@ -1,54 +1,48 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-
-from . models import User
-
+from .models import User
+from .forms import LoginForm, RegisterForm
 
 def login_view(request):
-    if request.method == 'GET':
-        return render(request, 'auth/pages/login.html')
-    else:
-        if 'email' in request.POST and 'password' in request.POST:
-            email = request.POST['email']
-            password = request.POST['password']
-            user = authenticate(request, email=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('projects:home')
-        # Redirect indicating error message
-        return render(request, 'auth/pages/login.html')
+    form = LoginForm(request.POST or None)
+    if form.is_valid():
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('projects:home')
+        else:
+            form.add_error(field=None, error='Email ou senha inválidos')
+    return render(
+        request,
+        'auth/pages/login.html',
+        context={
+            'form': form
+        }
+    )
 
 
 def register_view(request):
-    if request.method == 'GET':
-        return render(request, 'auth/pages/register.html')
-    else:
-        expected_fields = [
-            'username',
-            'email',
-            'password',
-            'confirmed_password'
-        ]
-        for field in expected_fields:
-            if field not in request.POST:
-                # Redirect indicating error message
-                return render(request, 'auth/pages/register.html')
-        if request.POST['password'] != request.POST['confirmed_password']:
-            # Redirect indicating error message
-            return render(request, 'auth/pages/register.html')
-        try:
-            User.objects.get(email=request.POST['email'])
-        except User.DoesNotExist:
-            User.objects.create_user(
-                username=request.POST['username'],
-                email=request.POST['email'],
-                password=request.POST['password']
-            )
-            return redirect('users:login')
-        else:
-            # Redirect indicating error message
-            return render(request, 'auth/pages/register.html')
-
+    form = RegisterForm(request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        confirmed_password = form.cleaned_data.get('confirmed_password')
+        User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+        return redirect('users:login')
+    return render(
+        request,
+        'auth/pages/register.html',
+        context={
+            'form': form
+        }
+    )
 
 def logout_view(request):
     logout(request)
