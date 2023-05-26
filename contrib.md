@@ -5,7 +5,7 @@ Segue abaixo um modelo de como contribuir com o projeto.
 Antes de criar uma branch e codar certifique-se de atualizar a sua master local. Então, estando na master você pode executar.
 
 ```
-git pull
+git pull origin master
 ```
 
 ## Criando um ramo
@@ -51,7 +51,7 @@ Nesse caso é hora de fazer o merge na master e enviar para o GH. Para isso prim
 
 ```
 git checkout master
-git pull
+git pull origin master
 ```
 
 Após isso tente fazer o merge:
