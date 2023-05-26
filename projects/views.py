@@ -99,7 +99,7 @@ def project_create(request):
 
         project.save()
 
-        return redirect(reverse('projects:home'))
+        return redirect('projects:home')
 
     return render(
         request,
@@ -125,7 +125,7 @@ def project_edit(request, pk):
         project.is_approved = False
         project.save()
 
-        return redirect(reverse('projects:home'))
+        return redirect('projects:home')
 
     return render(
         request,
@@ -149,4 +149,4 @@ def project_delete(request):
 
     project.delete()
 
-    return redirect(reverse('projects:home'))
+    return redirect('projects:home')
