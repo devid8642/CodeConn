@@ -1,0 +1,12 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+    {{ user }}
+    {{ projects }}
+    {{ owner }}
+    {% if owner == True %}
+        <a href="#">Teste</a>
+    {% endif %}
+
+{% endblock content %}

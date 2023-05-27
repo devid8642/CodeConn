@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .models import User
+from projects.models import Project
 from .forms import LoginForm, RegisterForm
 
 def login_view(request):
@@ -47,3 +48,23 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect('projects:home')
+
+
+def user_detail(request, id):
+    user = get_object_or_404(
+        User,
+        id=id
+    )
+    user_projects = Project.objects.filter(author=user)
+    owner = False
+    if request.user.is_authenticated and request.user.id == id:
+        owner = True
+    return render(
+        request,
+        'users/pages/user_detail.html',
+        context={
+            'user': user,
+            'projects': user_projects,
+            'owner': owner
+        }
+    )
