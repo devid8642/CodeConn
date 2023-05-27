@@ -1,0 +1,19 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'users:user_update' id %}" method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="form-control">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                <br>
+                <br>
+            </div>
+        {% endfor %}
+        <button type="submit">Atualizar</button>
+    </form>
+
+{% endblock content %}

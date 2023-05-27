@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import check_password, make_password
+from django.urls import reverse
 from .models import User
 from projects.models import Project
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UpdateForm
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -51,10 +53,7 @@ def logout_view(request):
 
 
 def user_detail(request, id):
-    user = get_object_or_404(
-        User,
-        id=id
-    )
+    user = get_object_or_404(User, id=id)
     user_projects = Project.objects.filter(author=user)
     owner = False
     if request.user.is_authenticated and request.user.id == id:
@@ -68,3 +67,49 @@ def user_detail(request, id):
             'owner': owner
         }
     )
+
+
+def user_update(request, id):
+    if request.user.is_authenticated and request.user.id == id:
+        user = get_object_or_404(User, id=id)
+        if request.method == 'POST':
+            form = UpdateForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                email = form.cleaned_data.get('email')
+                password = form.cleaned_data.get('password')
+                new_password = form.cleaned_data.get('new_password')
+                if check_password(password, user.password):
+                    update_fields = []
+                    if username != user.username:
+                        user.username = username
+                        update_fields.append('username')
+                    if email != user.email:
+                        user.email = email
+                        update_fields.append('email')
+                    if new_password:
+                        user.password = make_password(new_password)
+                        update_fields.append('password')
+                        user.save(update_fields=update_fields)
+                        return redirect('users:login')
+                    user.save(update_fields=update_fields)
+                    return redirect(
+                            reverse('users:user_detail', kwargs={'id': user.id})
+                    )
+                else:
+                    form.add_error(field=None, error='Senha atual incorreta')
+        else:
+            data = {
+                'username': user.username,
+                'email': user.email,
+            }
+            form = UpdateForm(initial=data)
+        return render(
+            request,
+            'users/pages/user_update.html',
+            context={
+                'form': form,
+                'id': user.id
+            }
+        )
+    return redirect('projects:home')
