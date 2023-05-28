@@ -48,6 +48,12 @@ class ProjectMixin:
 
 class ProjectTestBase(TestCase, ProjectMixin):
     def setUp(self, *args, **kwargs):
+        self.project_form_data = {
+            'title': 'Project title',
+            'description': 'Project description',
+            'explanatory_text': 'Project explanatory',
+        }
+
         return super().setUp(*args, **kwargs)
 
     def view_test_function(
@@ -111,10 +117,12 @@ class ProjectTestBase(TestCase, ProjectMixin):
             email=email,
             password=password,
         )
-        self.client.login(
+        login = self.client.login(
             email=email,
             password=password,
         )
+
+        return login
 
     def response_test_function(
         self,
