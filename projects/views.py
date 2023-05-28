@@ -37,6 +37,7 @@ def all_projects(request):
 def project_detail(request, pk):
     project = get_object_or_404(
         Project,
+        is_approved=True,
         id=pk,
     )
     comments = Comment.objects.filter(
