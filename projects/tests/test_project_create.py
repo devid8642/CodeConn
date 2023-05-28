@@ -11,6 +11,8 @@ class ProjectCreateTests(ProjectTestBase):
         )
 
     def test_project_create_load_correct_template(self):
+        self.register_and_login()
+
         self.template_test_function(
             'projects:project_create',
             'projects/pages/project_create.html',

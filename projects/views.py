@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.urls import reverse
 
@@ -72,6 +73,7 @@ def project_detail(request, pk):
     )
 
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def comment_delete(request):
     if not request.POST:
         raise Http404
@@ -90,6 +92,7 @@ def comment_delete(request):
     )
 
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def project_create(request):
     form = ProjectForm(request.POST or None)
 
@@ -111,6 +114,7 @@ def project_create(request):
     )
 
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def project_edit(request, pk):
     project = get_object_or_404(
         Project,
@@ -138,6 +142,7 @@ def project_edit(request, pk):
     )
 
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def project_delete(request):
     if not request.POST:
         raise Http404

@@ -21,6 +21,7 @@ class ProjectDeleteTests(ProjectTestBase):
         self.assertEqual(response.status_code, 200)
 
     def test_project_delete_receive_get_method(self):
+        self.register_and_login()
         response = self.response_test_function('projects:project_delete')
 
         self.assertEqual(response.status_code, 404)

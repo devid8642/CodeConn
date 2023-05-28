@@ -5,12 +5,14 @@
     <p>{{ project.description }}</p>
     <p>{{ project.author }}</p>
 
-    <h2>Comment here</h2>
-    <form action="{% url 'projects:project_detail' project.id %}" method="POST">
-        {% csrf_token %}
-        {{ comment_form.as_div }}
-        <button type="submit">Comentar</button>
-    </form>
+    {% if request.user.is_authenticated %}
+        <h2>Comment here</h2>
+        <form action="{% url 'projects:project_detail' project.id %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_div }}
+            <button type="submit">Comentar</button>
+        </form>
+    {% endif %}
     <h3>Todos os Comentários</h3>
     {% for comment in comments %}
         <p>{{ comment.comment }}</p>
