@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
 
-from projects.models import Project
+from projects.models import Project, Comment
 from users.models import User
 
 
@@ -16,7 +16,7 @@ class ProjectMixin:
         Create a user with the registration parameters.
         '''
 
-        return User.objects.create(
+        return User.objects.create_user(
             email=email,
             username=username,
             password=password,
@@ -45,18 +45,75 @@ class ProjectMixin:
             author=self.make_author(**author_data)
         )
 
+
+class ProjectTestBase(TestCase, ProjectMixin):
+    def setUp(self, *args, **kwargs):
+        return super().setUp(*args, **kwargs)
+
+    def view_test_function(
+        self, url: str, view: any, url_kwargs: dict = None
+    ) -> None:
+        '''
+        Base view function test.
+        '''
+        resolved_view = resolve(reverse(url, kwargs=url_kwargs))
+
+        self.assertIs(resolved_view.func, view)
+
+    def template_test_function(
+        self, url: str, template_url: str, url_kwargs: dict = None
+    ) -> None:
+        '''
+        Base template test function.
+        '''
+        response = self.response_test_function(url, url_kwargs=url_kwargs)
+        template = template_url
+
+        self.assertTemplateUsed(response, template)
+
+    def make_project_and_login(self) -> Project:
+        '''
+        Create a approved project and make login with the project's author
+        '''
+        project = self.make_project(is_approved=True)
+        self.client.login(
+            email='username@email.com',
+            password='123456',
+        )
+
+        return project
+
+    def make_comment_and_login(self) -> Comment:
+        '''
+        Create a comment in a project and make login with the comment's author
+        '''
+        project = self.make_project(is_approved=True)
+        self.client.login(
+            email='username@email.com',
+            password='123456'
+        )
+
+        return Comment.objects.create(
+            project=project,
+            author=project.author,
+            comment='Test comment',
+        )
+
     def register_and_login(
         self,
         email: str = 'username@email.com',
         password: str = '123456',
-    ) -> None:
+    ) -> User:
         '''
         Create a user and login.
         '''
-        self.make_author()
+        self.make_author(
+            email=email,
+            password=password,
+        )
         self.client.login(
-            username='username',
-            password='123456',
+            email=email,
+            password=password,
         )
 
     def response_test_function(
@@ -83,29 +140,3 @@ class ProjectMixin:
             )
 
         return response
-
-
-class ProjectTestBase(TestCase, ProjectMixin):
-    def setUp(self, *args, **kwargs):
-        return super().setUp(*args, **kwargs)
-
-    def view_test_function(
-        self, url: str, view: any, url_kwargs: dict = None
-    ) -> None:
-        '''
-        Base view function test.
-        '''
-        resolved_view = resolve(reverse(url, kwargs=url_kwargs))
-
-        self.assertIs(resolved_view.func, view)
-
-    def template_test_function(
-        self, url: str, template_url: str, url_kwargs: dict = None
-    ) -> None:
-        '''
-        Base template test function.
-        '''
-        response = self.response_test_function(url, url_kwargs=url_kwargs)
-        template = template_url
-
-        self.assertTemplateUsed(response, template)
