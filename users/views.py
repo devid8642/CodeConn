@@ -79,7 +79,18 @@ def user_update(request, id):
                 email = form.cleaned_data.get('email')
                 password = form.cleaned_data.get('password')
                 new_password = form.cleaned_data.get('new_password')
-                if check_password(password, user.password):
+
+                check = check_password(password, user.password)
+                if not check:
+                    form.add_error(field='password', error='Senha atual incorreta')
+                exists = User.objects.filter(email=email).exists()
+                if exists and email != user.email:
+                     form.add_error(
+                        field='email',
+                        error='Este email já está em uso'
+                    )
+
+                if check and not exists:
                     update_fields = []
                     if username != user.username:
                         user.username = username
@@ -96,8 +107,6 @@ def user_update(request, id):
                     return redirect(
                             reverse('users:user_detail', kwargs={'id': user.id})
                     )
-                else:
-                    form.add_error(field=None, error='Senha atual incorreta')
         else:
             data = {
                 'username': user.username,

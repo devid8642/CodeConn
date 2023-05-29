@@ -65,16 +65,6 @@ class UpdateForm(forms.Form):
         required=False
     )
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if email:
-            exists = User.objects.filter(email=email).exists()
-            if exists:
-                user = User.objects.get(email=email)
-                if email != user.email:
-                    raise ValidationError('Já existe um usuário com este email')
-        return email
-
     def clean_new_password(self):
         new_password = self.cleaned_data.get('new_password')
         if new_password:
