@@ -1,1 +1,7 @@
 {% load static %}
+
+<form action="{% url 'projects:project_search' %}">
+  {% csrf_token %}
+  <input type="text" name="q" placeholder="Pesquisar" value={{ search_term }}>
+  <button type="submit">Pesquisar</button>
+</form>

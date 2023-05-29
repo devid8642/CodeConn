@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.urls import reverse
+from django.db.models import Q
 
 from .models import Project, Comment
 from .forms import ProjectForm, CommentForm
@@ -29,6 +30,30 @@ def all_projects(request):
     return render(
         request,
         'projects/pages/all_projects.html',
+        context={
+            'projects': projects,
+        }
+    )
+
+
+def project_search(request):
+    search_term = request.GET.get('q', '').strip()
+
+    if not search_term:
+        raise Http404
+
+    projects = Project.objects.filter(
+        Q(
+            Q(title__icontains=search_term) |
+            Q(description__icontains=search_term) |
+            Q(author__username__icontains=search_term)
+        ),
+        is_approved=True,
+    )
+
+    return render(
+        request,
+        'projects/pages/project_search.html',
         context={
             'projects': projects,
         }
