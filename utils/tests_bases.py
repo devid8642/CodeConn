@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
-
 from projects.models import Project, Comment
 from users.models import User
 
@@ -46,16 +45,7 @@ class ProjectMixin:
         )
 
 
-class ProjectTestBase(TestCase, ProjectMixin):
-    def setUp(self, *args, **kwargs):
-        self.project_form_data = {
-            'title': 'Project title',
-            'description': 'Project description',
-            'explanatory_text': 'Project explanatory',
-        }
-
-        return super().setUp(*args, **kwargs)
-
+class TestBase(TestCase, ProjectMixin):
     def view_test_function(
         self, url: str, view: any, url_kwargs: dict = None
     ) -> None:
@@ -65,7 +55,7 @@ class ProjectTestBase(TestCase, ProjectMixin):
         resolved_view = resolve(reverse(url, kwargs=url_kwargs))
 
         self.assertIs(resolved_view.func, view)
-
+    
     def template_test_function(
         self, url: str, template_url: str, url_kwargs: dict = None
     ) -> None:
@@ -76,6 +66,61 @@ class ProjectTestBase(TestCase, ProjectMixin):
         template = template_url
 
         self.assertTemplateUsed(response, template)
+    
+    def response_test_function(
+        self,
+        url: str,
+        url_kwargs: dict = None,
+        method: str = 'get',
+        data: dict = None,
+        follow: bool = True,
+    ):
+        '''
+        Simplifies responses tests that use GET or POST methods.
+        '''
+        reversed_url = reverse(url, kwargs=url_kwargs)
+
+        if method == 'get':
+            response = self.client.get(
+                reversed_url, data=data, follow=follow
+            )
+
+        elif method == 'post':
+            response = self.client.post(
+                reversed_url, data=data, follow=follow
+            )
+
+        return response
+    
+    def register_and_login(
+        self,
+        email: str = 'username@email.com',
+        password: str = '123456',
+    ) -> User:
+        '''
+        Create a user and login.
+        '''
+        self.make_author(
+            email=email,
+            password=password,
+        )
+        login = self.client.login(
+            email=email,
+            password=password,
+        )
+
+        return login
+
+
+class ProjectTestBase(TestBase):
+    def setUp(self, *args, **kwargs):
+        self.project_form_data = {
+            'title': 'Project title',
+            'description': 'Project description',
+            'explanatory_text': 'Project explanatory',
+        }
+
+        return super().setUp(*args, **kwargs)
 
     def make_project_and_login(self) -> Project:
         '''
@@ -105,46 +150,8 @@ class ProjectTestBase(TestCase, ProjectMixin):
             comment='Test comment',
         )
 
-    def register_and_login(
-        self,
-        email: str = 'username@email.com',
-        password: str = '123456',
-    ) -> User:
-        '''
-        Create a user and login.
-        '''
-        self.make_author(
-            email=email,
-            password=password,
-        )
-        login = self.client.login(
-            email=email,
-            password=password,
-        )
 
-        return login
-
-    def response_test_function(
-        self,
-        url: str,
-        url_kwargs: dict = None,
-        method: str = 'get',
-        data: dict = None,
-        follow: bool = True,
-    ):
-        '''
-        Simplifies responses tests that use GET or POST methods.
-        '''
-        reversed_url = reverse(url, kwargs=url_kwargs)
-
-        if method == 'get':
-            response = self.client.get(
-                reversed_url, data=data, follow=follow
-            )
-
-        elif method == 'post':
-            response = self.client.post(
-                reversed_url, data=data, follow=follow
-            )
-
-        return response
+class UserTestBase(TestBase):
+    def setUp(self, *args, **kwargs):
+        self.expected_user = self.make_author()
+        return super().setUp(*args, **kwargs)

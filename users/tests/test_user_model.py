@@ -1,12 +1,8 @@
 from django.contrib.auth.hashers import make_password 
-from utils.tests_bases import ProjectTestBase
+from utils.tests_bases import UserTestBase
 from users.models import User
 
-class TestUserModel(ProjectTestBase):
-    def setUp(self, *args, **kwargs):
-        self.expected_user = self.make_author()
-        return super().setUp(*args, **kwargs)
-
+class TestUserModel(UserTestBase):
     def test_user_create(self):
         user = User.objects.get(id=self.expected_user.id)
         self.assertEqual(self.expected_user, user)
