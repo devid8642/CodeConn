@@ -149,9 +149,3 @@ class ProjectTestBase(TestBase):
             author=project.author,
             comment='Test comment',
         )
-
-
-class UserTestBase(TestBase):
-    def setUp(self, *args, **kwargs):
-        self.expected_user = self.make_author()
-        return super().setUp(*args, **kwargs)
