@@ -1,6 +1,9 @@
+from parameterized import parameterized
+
 from utils.tests_bases import ProjectTestBase
-from projects import views
+from projects.forms import ProjectForm
 from projects.models import Project
+from projects import views
 
 
 class ProjectCreateTests(ProjectTestBase):
@@ -28,3 +31,25 @@ class ProjectCreateTests(ProjectTestBase):
         )
 
         self.assertEqual(Project.objects.count(), 1)
+
+    @parameterized.expand([
+        ('title', 'Título do projeto'),
+        ('description', 'Descreva seu projeto'),
+        ('explanatory_text', 'Sobre o seu projeto'),
+    ])
+    def test_project_create_form_placeholders(self, field, placeholder):
+        form = ProjectForm()
+        current_placeholder = form[field].field.widget.attrs['placeholder']
+
+        self.assertEqual(placeholder, current_placeholder)
+
+    @parameterized.expand([
+        ('title', 'Título'),
+        ('description', 'Descrição'),
+        ('explanatory_text', 'Texto de explicação'),
+    ])
+    def test_project_create_form_labels(self, field, label):
+        form = ProjectForm()
+        current_label = form[field].field.label
+
+        self.assertEqual(label, current_label)
