@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse, resolve
 from projects.models import Project, Comment
 from users.models import User
@@ -44,7 +44,11 @@ class ProjectMixin:
             author=self.make_author(**author_data)
         )
 
-
+@override_settings(
+    PASSWORD_HASHERS = [
+        'django.contrib.auth.hashers.MD5PasswordHasher',
+    ]
+)
 class TestBase(TestCase, ProjectMixin):
     def view_test_function(
         self, url: str, view: any, url_kwargs: dict = None

@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import check_password
 from utils.tests_bases import TestBase
 from users.models import User
 from projects.models import Project
@@ -139,3 +140,77 @@ class TestUserDetailView(TestBase):
         self.assertContains(response, text='False')
         for project in self.user_projects:
             self.assertContains(response, text=f'{project.title}')
+
+
+class TestUserUpdateView(TestBase):
+    def setUp(self, *args, **kwargs):
+        self.url = 'users:user_update'
+        self.user = self.make_author()
+        self.client.login(
+            email=self.user.email,
+            password='123456'
+        )
+        return super().setUp(*args, **kwargs)
+
+    def test_template(self):
+        self.template_test_function(
+            self.url,
+            url_kwargs={'id': 1},
+            template_url='users/pages/user_update.html'
+        )
+    
+    def test_with_valid_owner_user_get(self):
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1}
+        )
+        self.assertContains(response, text=f'{self.user.email}')
+    
+    def test_with_valid_owner_user_post(self):
+        new_user_data = {
+            'username': 'devid',
+            'email': 'devid@devid.com',
+            'password': '123456',
+            'new_password': 'devid3939!'
+        }
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1},
+            method='post',
+            data=new_user_data
+        )
+        user = User.objects.get(id=1)
+        self.assertContains(response, text='Login')
+        self.assertEqual(user.username, new_user_data['username'])
+        self.assertEqual(user.email, new_user_data['email'])
+        self.assertTrue(
+            check_password(new_user_data['new_password'], user.password)
+        )
+    
+    def test_with_invalid_email(self):
+        User.objects.create_user(
+            username='devid',
+            email='devid@devid.com',
+            password='devid3939!'
+        )
+        new_user_data={
+            'username': 'devid',
+            'email': 'devid@devid.com',
+            'password': '123456',
+            'new_password': ''
+        }
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1},
+            method='post',
+            data=new_user_data
+        )
+        self.assertContains(response, text='Este email já está em uso')
+        self.assertNotEqual(
+            self.user.username,
+            new_user_data['username']
+        )
+        self.assertNotEqual(
+            self.user.email,
+            new_user_data['email']
+        )
