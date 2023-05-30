@@ -54,7 +54,7 @@ def logout_view(request):
 
 def user_detail(request, id):
     user = get_object_or_404(User, id=id)
-    user_projects = Project.objects.filter(author=user)
+    user_projects = Project.objects.filter(author=user, is_approved=True)
     owner = False
     if request.user.is_authenticated and request.user.id == id:
         owner = True
