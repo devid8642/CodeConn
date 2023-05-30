@@ -1,5 +1,6 @@
 from utils.tests_bases import TestBase
 from users.models import User
+from projects.models import Project
 from django.urls import reverse
 
 class TestLoginView(TestBase):
@@ -94,3 +95,47 @@ class TestRegisterView(TestBase):
             len(User.objects.filter(email=user.email)),
             1
         )
+    
+
+class TestUserDetailView(TestBase):
+    def setUp(self, *args, **kwargs):
+        self.url = 'users:user_detail'
+        self.user = self.make_author()
+        for c in range(3):
+            Project.objects.create(
+                title='teste',
+                description='teste',
+                explanatory_text='teste',
+                author=self.user,
+                is_approved=True
+            )
+        self.user_projects = Project.objects.filter(author=self.user)
+        return super().setUp(*args, **kwargs)
+
+    def test_template(self):
+        self.template_test_function(
+            self.url,
+            url_kwargs={'id': 1},
+            template_url='users/pages/user_detail.html'
+        )
+
+    def test_with_valid_owner_user(self):
+        self.client.login(email=self.user.email, password='123456')
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1}
+        )
+        self.assertContains(response, text=f'{self.user.email}')
+        self.assertContains(response, text='True')
+        for project in self.user_projects:
+            self.assertContains(response, text=f'{project.title}')
+
+    def test_with_valid_not_owner_user(self):
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1}
+        )
+        self.assertContains(response, text=f'{self.user.email}')
+        self.assertContains(response, text='False')
+        for project in self.user_projects:
+            self.assertContains(response, text=f'{project.title}')
