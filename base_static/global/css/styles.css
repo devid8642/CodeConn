@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+  }
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+  :root {
+    --cor-primaria: #ff0000;
+    --tamanho-fonte: 16px;
+    --background: #262626;
+    --header-backgtound: #1b1d20;
+    --button-color: #d9d9d9;
+    --font-color: #080d0d;
+    --font: "Poppins", Arial, Helvetica, sans-serif;
+    --foter-background: #808080;
+  }
+  body {
+    background-color: var(--background);
+  }
+  
+  
+  
+  .formulario{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 3rem auto;
+    width: 400px;
+    height: 510px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+    gap: 1rem;
+    
+  }
+  .formulario-input{
+    padding: 1rem 2rem;
+    margin: 0 1rem;
+    border: none;
+    border-bottom:solid 1px #080d0d;
+    border-radius: 0;
+  }
+  .formulario-input::placeholder{
+    font-size: 1.4rem;
+  }
+  .formulario-input:focus{
+    outline: none;
+  }
+  .formulario-button:hover{
+  background-color: #1b1d20;
+  }
+  

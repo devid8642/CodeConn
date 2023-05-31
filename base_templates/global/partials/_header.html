@@ -1,7 +1,20 @@
 {% load static %}
 
-<form action="{% url 'projects:project_search' %}">
-  {% csrf_token %}
-  <input type="text" name="q" placeholder="Pesquisar" value={{ search_term }}>
-  <button type="submit">Pesquisar</button>
-</form>
+<header class="header">
+    <a href="{% url 'projects:home' %}" class="logo">
+      <img src="{% static 'global/img/logo.png' %}" alt="logo" class="logo"/>
+    </a>
+    <form action="{% url 'projects:project_search' %}">
+      {% csrf_token %}
+      <input type="text" name="q" placeholder="Pesquisar" value={{ search_term }}>
+      <button type="submit">Pesquisar</button>
+    </form>
+    <ul class="header-menu">
+      <li>
+        <a href="{% url 'users:register' %}">Registro</a>
+      </li>
+      <li>
+        <a href="{% url 'projects:home' %}">Home</a>
+      </li>
+    </ul>
+</header>
