@@ -11,8 +11,8 @@
             <fieldset class="fieldset">Login</fieldset>
             {{ form.non_field_errors }}
             {% for field in form %}
+                {{ field.errors }}
                 <div class="user-box">
-                    {{ field.errors }}
                     {{ field }}
                     {{ field.label_tag }}
                 </div>
