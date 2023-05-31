@@ -1,19 +1,24 @@
 {% extends 'global/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
+{% endblock head %}
 
 {% block content %}
-
-    <form action="{% url 'users:login' %}" method="POST">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {% for field in form %}
-            <div class="form-control">
-                {{ field.errors }}
-                {{ field.label_tag }} {{ field }}
-            </div>
-            <br>
-            <br>
-        {% endfor %}
-        <button type="submit">Login</button>
-    </form>
+    <main>
+        <form action="{% url 'users:login' %}" method="POST" class="formulario">
+            {% csrf_token %}
+            <fieldset class="fieldset">Login</fieldset>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="user-box">
+                    {{ field.errors }}
+                    {{ field }}
+                    {{ field.label_tag }}
+                </div>
+            {% endfor %}
+            <input type="submit" class="formulario-input formulario-button" value="Login">
+        </form>
+    </main>
 
 {% endblock content %}

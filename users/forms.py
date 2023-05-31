@@ -11,11 +11,20 @@ def add_attr(field, attr, value):
     )
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email', max_length=255)
+    email = forms.EmailField(
+        label='Email',
+        max_length=255,
+        widget=forms.TextInput()
+    )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_attr(self.fields['email'], 'class', 'formulario-input')
+        add_attr(self.fields['password'], 'class', 'formulario-input')
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Usuário', max_length=255)
