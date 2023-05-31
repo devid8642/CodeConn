@@ -28,7 +28,11 @@ class LoginForm(forms.Form):
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Usuário', max_length=255)
-    email = forms.EmailField(label='Email', max_length=255)
+    email = forms.EmailField(
+        label='Email',
+        max_length=255,
+        widget=forms.TextInput()
+    )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),
@@ -37,6 +41,13 @@ class RegisterForm(forms.Form):
         label='Confirme sua senha',
         widget=forms.PasswordInput()
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_attr(self.fields['username'], 'class', 'formulario-input')
+        add_attr(self.fields['email'], 'class', 'formulario-input')
+        add_attr(self.fields['password'], 'class', 'formulario-input')
+        add_attr(self.fields['confirmed_password'], 'class', 'formulario-input')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

@@ -1,19 +1,25 @@
 {% extends 'global/base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
+{% endblock head %}
 
 {% block content %}
-
-    <form action="{% url 'users:register' %}" method="POST">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {% for field in form %}
-            <div class="form-control">
+    <main>
+        <form action="{% url 'users:register' %}" method="POST" class="formulario">
+            {% csrf_token %}
+            <fieldset class="fieldset">Registro</fieldset>
+            {{ form.non_field_errors }}
+            {% for field in form %}
                 {{ field.errors }}
-                {{ field.label_tag }} {{ field }}
-            </div>
-            <br>
-            <br>
-        {% endfor %}
-        <button type="submit">Registrar</button>
-    </form>
+                <div class="user-box">
+                    {{ field }}
+                    {{ field.label_tag }}
+                </div>
+            {% endfor %}
+            <input type="submit" class="formulario-input formulario-button" value="Registrar-se">
+            <p>Já tem conta?<a href="{% url 'users:login' %}"> Faça login</a></p>
+        </form>
+    </main>
 
 {% endblock content %}
