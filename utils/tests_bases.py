@@ -44,8 +44,9 @@ class ProjectMixin:
             author=self.make_author(**author_data)
         )
 
+
 @override_settings(
-    PASSWORD_HASHERS = [
+    PASSWORD_HASHERS=[
         'django.contrib.auth.hashers.MD5PasswordHasher',
     ]
 )
@@ -59,7 +60,7 @@ class TestBase(TestCase, ProjectMixin):
         resolved_view = resolve(reverse(url, kwargs=url_kwargs))
 
         self.assertIs(resolved_view.func, view)
-    
+
     def template_test_function(
         self, url: str, template_url: str, url_kwargs: dict = None
     ) -> None:
@@ -70,7 +71,7 @@ class TestBase(TestCase, ProjectMixin):
         template = template_url
 
         self.assertTemplateUsed(response, template)
-    
+
     def response_test_function(
         self,
         url: str,
@@ -95,7 +96,7 @@ class TestBase(TestCase, ProjectMixin):
             )
 
         return response
-    
+
     def register_and_login(
         self,
         email: str = 'username@email.com',

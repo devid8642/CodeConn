@@ -1,29 +1,64 @@
 {% extends 'global/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'projects/css/project-detail.css'%}">
+{% endblock head %}
 
 {% block content %}
-    <p>{{ project.title }}</p>
-    <p>{{ project.description }}</p>
-    <p>{{ project.author }}</p>
-
-    {% if request.user.is_authenticated %}
-        <h2>Comment here</h2>
-        <form action="{% url 'projects:project_detail' project.id %}" method="POST">
-            {% csrf_token %}
-            {{ comment_form.as_div }}
-            <button type="submit">Comentar</button>
-        </form>
-    {% endif %}
-    <h3>Todos os Comentários</h3>
-    {% for comment in comments %}
-        <p>{{ comment.comment }}</p>
-        <h4>Comentado por: {{ comment.author.username }}</h4>
-        {% if comment.author == request.user %}
-            <form action="{% url 'projects:comment_delete' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="comment-id" value="{{ comment.id }}">
-                <button type="submit">Deletar comentário</button>
+  <div class="post-container">
+      <div class="post-area">
+        <div class="post-header">
+          <div class="post-user">
+            <a href="{% url 'users:user_detail' project.author.id %}" class="user-link">
+              {{ project.author.username }}
+            </a>
+            <p>{{ project.created_at | naturalday }}</p>
+          </div>
+          <h2 class="post-title">{{ project.title }}</h2>
+          <p class="post-description">{{ project.description }}</p>
+        </div>
+        <div class="post-body">
+          <div class="post-text">{{ project.explanatory_text }}</div>
+        </div>
+        <div class="post-footer">
+        </div>
+      </div>
+      <div class="comment-area">
+        {% if request.user.is_authenticated %}
+          <div class="user-comment">
+            <form class="comment-form" action="{% url 'projects:project_detail' project.id %}" method="POST">
+              {% csrf_token %}
+              <label for="{{ comment_form.id_for_label }}">{{ comment_form.label }}</label>
+              {{ comment_form.comment }}
+              <button type="submit">Comentar</button>
             </form>
+          </div>
         {% endif %}
-        <hr>
-    {% endfor %}
+        <div class="all-comments">
+          <h3>Comentários:</h3>
+          {% for comment in comments %}
+            <div class="comment">
+              <div class="comment-info">
+                <div class="comment-data">
+                  <a href="{% url 'users:user_detail' comment.author.id %}" class="comment-user">{{ comment.author.username }}</a>
+                  <p>{{ comment.created_at | naturalday }}</p>
+                </div>
+                {% if comment.author == request.user %}
+                  <form class="comment-delete" action="{% url 'projects:comment_delete' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment-id" value="{{ comment.id }}">
+                    <button type="submit">Deletar</button>
+                  </form>
+                {% endif %}
+              </div>
+              <div class="comment-body">
+                <p class="comment-text">{{ comment.comment }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+  </div>
 {% endblock content %}
