@@ -6,7 +6,7 @@
 
 {% block content %}
     <main>
-        <form action="{% url 'users:login' %}" method="POST" class="formulario">
+        <form action="{% url 'users:login' %}" method="POST" class="formulario" style="height: 670px;">
             {% csrf_token %}
             <fieldset class="fieldset">Login</fieldset>
             {{ form.non_field_errors }}

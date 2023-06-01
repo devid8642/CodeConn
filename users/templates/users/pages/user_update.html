@@ -1,19 +1,26 @@
 {% extends 'global/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
+{% endblock head %}
 
 {% block content %}
 
-    <form action="{% url 'users:user_update' id %}" method="POST">
+    <form action="{% url 'users:user_update' id %}" method="POST" class="formulario">
         {% csrf_token %}
+        <fieldset class="fieldset">Atualizar dados</fieldset>
         {{ form.non_field_errors }}
         {% for field in form %}
-            <div class="form-control">
-                {{ field.errors }}
-                {{ field.label_tag }} {{ field }}
+            {{ field.errors }}
+            <div class="user-box">
+                {{ field }}
+                {{ field.label_tag }}
                 <br>
                 <br>
             </div>
         {% endfor %}
-        <button type="submit">Atualizar</button>
+        <input type="submit" class="formulario-input formulario-button" value="Atualizar">
     </form>
 
 {% endblock content %}

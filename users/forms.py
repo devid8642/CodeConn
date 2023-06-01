@@ -74,9 +74,21 @@ class RegisterForm(forms.Form):
 
 class UpdateForm(forms.Form):
     username = forms.CharField(label='Usuário', max_length=255)
-    email = forms.EmailField(label='Email', max_length=255)
-    linkedin = forms.URLField(label='Linkedin', required=False)
-    github = forms.URLField(label='Github', required=False)
+    email = forms.EmailField(
+        label='Email',
+        max_length=255,
+        widget=forms.TextInput()
+    )
+    linkedin = forms.URLField(
+        label='Linkedin',
+        required=False,
+        widget=forms.TextInput()
+    )
+    github = forms.URLField(
+        label='Github',
+        required=False,
+        widget=forms.TextInput()
+    )
     password = forms.CharField(
         label='Senha atual',
         widget=forms.PasswordInput()
@@ -86,6 +98,11 @@ class UpdateForm(forms.Form):
         widget=forms.PasswordInput(),
         required=False
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            add_attr(self.fields[field], 'class', 'formulario-input')
 
     def clean_new_password(self):
         new_password = self.cleaned_data.get('new_password')
