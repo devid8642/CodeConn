@@ -1,23 +1,59 @@
 {% load static %}
 
-<header class="header">
-    <a href="{% url 'projects:home' %}" class="logo">
-      <img src="{% static 'global/img/logo.png' %}" alt="logo" class="logo"/>
-    </a>
-    <form action="{% url 'projects:project_search' %}">
-      {% csrf_token %}
-      <input type="text" name="q" placeholder="Pesquisar" value={{ search_term }}>
-      <button type="submit">Pesquisar</button>
-    </form>
-    <ul class="header-menu">
-      <li>
-        <a href="{% url 'users:register' %}">Registro</a>
-      </li>
-      <li>
-        <a href="{% url 'users:login' %}">Login</a>
-      </li>
-      <li>
-        <a href="{% url 'projects:home' %}">Home</a>
-      </li>
-    </ul>
+<header>
+    <nav class="container navbar">
+      <a href="" class="nav-brand">Projeto X</a>
+
+      <form class="project-search" action="">
+        <input type="text" placeholder="Pesquise aqui">
+        <button type="submit" class="btn">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="{% url 'projects:all_projects' %}" class="nav-link">Projetos</a>
+        </li>
+
+        {% if request.user.is_authenticated %}
+          <li class="nav-item user-nav">
+            <p class="profile-link">
+              <i class="bi bi-person"></i>
+              {{ request.user.username }}
+            </p>
+            <div class="user-dropdown">
+              <ul>
+                <li class="nav-item"><a href="{% url 'projects:project_create' %}">
+                  <i class="bi bi-file-earmark-plus"></i>
+                  Publicar projeto</a>
+                </li>
+                <li class="nav-item"><a href="{% url 'users:user_detail' request.user.id %}">
+                  <i class="bi bi-person-circle"></i>
+                  Meu Perfil</a>
+                </li>
+                <li class="nav-item"><a href="{% url 'users:logout' %}">
+                  <i class="bi bi-box-arrow-left"></i>
+                  Sair</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
+        {% else %}
+          <li class="nav-item">
+            <a href="{% url 'users:register' %}" class="nav-link register-link">Register</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'users:login' %}" class="nav-link login-link">Login</a>
+          </li>
+        {% endif %}
+      </ul>
+
+      <div class="hamburguer">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
 </header>
