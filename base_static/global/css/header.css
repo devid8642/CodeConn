@@ -150,6 +150,13 @@
     transform: translateY(-8px) rotate(-45deg);
   }
 
+  .navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 40;
+  }
+
   .navbar-nav {
     position: fixed;
     left: -100%;
@@ -159,6 +166,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgb(25, 25, 25);
+    z-index: 1;
     width: 100%;
     transition: 300ms;
   }

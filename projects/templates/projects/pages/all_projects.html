@@ -1,9 +1,46 @@
 {% extends 'global/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'projects/css/all-projects.css' %}">
+{% endblock head %}
 
 {% block content %}
-    {% for project in projects %}
-        <p>{{ project.title }}</p>
-        <p>{{ project.subtitle }}</p>
-        <p>{{ project.author }}</p>
-    {% endfor %}
+  <div class="container">
+    <h2 class="all-projects-title">Todos os projetos</h2>
+    <div class="projects-grid">
+      {% for project in projects %}
+        <div class="project-card">
+          <a class="project-author" href="{% url 'users:user_detail' project.author.id %}">
+            {{ project.author.username }}
+          </a>
+          <div class="card-header">
+            <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              <h3>{{ project.title }}</h3>
+              <p>
+                <i class="bi bi-chat"></i>
+                {{ project.comments.count }}
+              </p>
+            </div>
+            <div class="card-description">
+              <p>{{ project.description }}</p>
+            </div>
+            <div class="card-footer">
+              <div class="card-info">
+                
+                <p>{{ project.created_at | naturalday }}</p>
+              </div>
+              <a href="{% url 'projects:project_detail' project.id %}" class="card-button">Ver projeto</a>
+            </div>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock content %}

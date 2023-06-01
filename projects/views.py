@@ -56,6 +56,7 @@ def project_search(request):
         'projects/pages/project_search.html',
         context={
             'projects': projects,
+            'search_term': search_term
         }
     )
 
