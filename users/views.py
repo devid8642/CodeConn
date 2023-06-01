@@ -79,18 +79,22 @@ def user_update(request, id):
                 email = form.cleaned_data.get('email')
                 password = form.cleaned_data.get('password')
                 new_password = form.cleaned_data.get('new_password')
+                linkedin = form.cleaned_data.get('linkedin')
+                github = form.cleaned_data.get('github')
 
                 check = check_password(password, user.password)
                 if not check:
                     form.add_error(field='password', error='Senha atual incorreta')
                 exists = User.objects.filter(email=email).exists()
+                email_error = False
                 if exists and email != user.email:
-                     form.add_error(
+                    form.add_error(
                         field='email',
                         error='Este email já está em uso'
                     )
+                    email_error = True
 
-                if check and not exists:
+                if check and not email_error:
                     update_fields = []
                     if username != user.username:
                         user.username = username
@@ -98,6 +102,12 @@ def user_update(request, id):
                     if email != user.email:
                         user.email = email
                         update_fields.append('email')
+                    if linkedin:
+                        user.linkedin = linkedin
+                        update_fields.append('linkedin')
+                    if github:
+                        user.github = github
+                        update_fields.append('github')
                     if new_password:
                         user.password = make_password(new_password)
                         update_fields.append('password')

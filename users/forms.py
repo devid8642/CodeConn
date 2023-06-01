@@ -75,6 +75,8 @@ class RegisterForm(forms.Form):
 class UpdateForm(forms.Form):
     username = forms.CharField(label='Usuário', max_length=255)
     email = forms.EmailField(label='Email', max_length=255)
+    linkedin = forms.URLField(label='Linkedin', required=False)
+    github = forms.URLField(label='Github', required=False)
     password = forms.CharField(
         label='Senha atual',
         widget=forms.PasswordInput()

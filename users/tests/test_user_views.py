@@ -171,6 +171,8 @@ class TestUserUpdateView(TestBase):
             'username': 'devid',
             'email': 'devid@devid.com',
             'password': '123456',
+            'linkedin': '',
+            'github': '',
             'new_password': 'devid3939!'
         }
         response = self.response_test_function(
@@ -187,6 +189,22 @@ class TestUserUpdateView(TestBase):
             check_password(new_user_data['new_password'], user.password)
         )
     
+    def test_not_updating_email(self):
+        new_user_data = {
+            'username': 'devid',
+            'email': self.user.email,
+            'password': '123456'
+        }
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1},
+            method='post',
+            data=new_user_data
+        )
+        user = User.objects.get(id=1)
+        self.assertContains(response, text=f'{self.user.email}')
+        self.assertEqual(user.username, new_user_data['username'])
+    
     def test_with_invalid_email(self):
         User.objects.create_user(
             username='devid',
@@ -197,6 +215,8 @@ class TestUserUpdateView(TestBase):
             'username': 'devid',
             'email': 'devid@devid.com',
             'password': '123456',
+            'linkedin': '',
+            'github': '',
             'new_password': ''
         }
         response = self.response_test_function(
