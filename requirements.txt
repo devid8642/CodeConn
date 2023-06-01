@@ -1,12 +1,18 @@
-asgiref==3.6.0
-colorama==0.4.6
-Django==4.2.1
-django-environ==0.10.0
-iniconfig==2.0.0
-packaging==23.1
-parameterized==0.9.0
-pluggy==1.0.0
-pytest==7.3.1
-pytest-django==4.5.2
-sqlparse==0.4.4
-tzdata==2023.3
+asgiref==3.6.0 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:71e68008da809b957b7ee4b43dbccff33d1b23519fb8344e33f049897077afac \
+    --hash=sha256:9567dfe7bd8d3c8c892227827c41cce860b368104c3431da67a0c5a65a949506
+django-environ==0.10.0 ; python_version >= "3.10" and python_version < "4" \
+    --hash=sha256:510f8c9c1d0a38b0815f91504270c29440a0cf44fab07f55942fa8d31bbb9be6 \
+    --hash=sha256:b3559a91439c9d774a9e0c1ced872364772c612cdf6dc919506a2b13f7a77225
+django==4.2.1 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:066b6debb5ac335458d2a713ed995570536c8b59a580005acb0732378d5eb1ee \
+    --hash=sha256:7efa6b1f781a6119a10ac94b4794ded90db8accbe7802281cd26f8664ffed59c
+parameterized==0.9.0 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:4e0758e3d41bea3bbd05ec14fc2c24736723f243b28d702081aef438c9372b1b \
+    --hash=sha256:7fc905272cefa4f364c1a3429cbbe9c0f98b793988efb5bf90aac80f08db09b1
+sqlparse==0.4.4 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:5430a4fe2ac7d0f93e66f1efc6e1338a41884b7ddf2a350cedd20ccc4d9d28f3 \
+    --hash=sha256:d446183e84b8349fa3061f0fe7f06ca94ba65b426946ffebe6e3e8295332420c
+tzdata==2023.3 ; python_version >= "3.10" and python_version < "4.0" and sys_platform == "win32" \
+    --hash=sha256:11ef1e08e54acb0d4f95bdb1be05da659673de4acbd21bf9c69e94cc5e907a3a \
+    --hash=sha256:7e65763eef3120314099b6939b5546db7adce1e7d6f2e179e3df563c70511eda
