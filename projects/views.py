@@ -45,7 +45,7 @@ def project_search(request):
     projects = Project.objects.filter(
         Q(
             Q(title__icontains=search_term) |
-            Q(description__icontains=search_term) |
+            Q(subtitle__icontains=search_term) |
             Q(author__username__icontains=search_term)
         ),
         is_approved=True,
