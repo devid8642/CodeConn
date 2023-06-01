@@ -105,7 +105,7 @@ class TestUserDetailView(TestBase):
         for c in range(3):
             Project.objects.create(
                 title='teste',
-                description='teste',
+                subtitle='teste',
                 explanatory_text='teste',
                 author=self.user,
                 is_approved=True

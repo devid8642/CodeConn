@@ -5,11 +5,12 @@ from users.models import User
 
 class Project(models.Model):
     title = models.CharField('Título', max_length=50)
-    description = models.CharField('Descrição', max_length=100)
+    subtitle = models.CharField('Subtítulo', max_length=100)
     explanatory_text = models.TextField('Texto de explicação')
     author = models.ForeignKey(
         User, verbose_name='Autor', on_delete=models.SET_NULL, null=True
     )
+    link = models.URLField('Link do projeto', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_approved = models.BooleanField('Publicado', default=False)

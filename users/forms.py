@@ -2,13 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 from .models import User
-
-def add_attr(field, attr, value):
-    field.widget.attrs.update(
-        {
-            attr: value
-        }
-    )
+from utils.forms_utils import add_attr
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
@@ -44,10 +38,8 @@ class RegisterForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        add_attr(self.fields['username'], 'class', 'formulario-input')
-        add_attr(self.fields['email'], 'class', 'formulario-input')
-        add_attr(self.fields['password'], 'class', 'formulario-input')
-        add_attr(self.fields['confirmed_password'], 'class', 'formulario-input')
+        for field in self.fields:
+            add_attr(self.fields[field], 'class', 'formulario-input')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

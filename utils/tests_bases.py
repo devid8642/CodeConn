@@ -24,7 +24,7 @@ class ProjectMixin:
     def make_project(
         self,
         title: str = 'Project title',
-        description: str = 'Project description',
+        subtitle: str = 'Project subtitle',
         explanatory_text: str = 'Project explanatory',
         is_approved: bool = False,
         author_data: User = None,
@@ -38,7 +38,7 @@ class ProjectMixin:
 
         return Project.objects.create(
             title=title,
-            description=description,
+            subtitle=subtitle,
             explanatory_text=explanatory_text,
             is_approved=is_approved,
             author=self.make_author(**author_data)
@@ -121,7 +121,7 @@ class ProjectTestBase(TestBase):
     def setUp(self, *args, **kwargs):
         self.project_form_data = {
             'title': 'Project title',
-            'description': 'Project description',
+            'subtitle': 'Project subtitle',
             'explanatory_text': 'Project explanatory',
         }
 
