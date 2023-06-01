@@ -1,28 +1,29 @@
-from django.forms import ModelForm
+from django import forms
 
 from .models import Project, Comment
 from utils.forms_utils import add_attr
 
 
-class ProjectForm(ModelForm):
+class ProjectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        title = self.fields['title']
-        description = self.fields['description']
-        explanatory = self.fields['explanatory_text']
-
-        add_attr(title, 'placeholder', 'Título do projeto')
-        add_attr(description, 'placeholder', 'Descreva seu projeto')
-        add_attr(explanatory, 'placeholder', 'Sobre o seu projeto')
+        for field in self.fields:
+            if field == 'explanatory_text':
+                descricao = '''Descreva a ideia por trás do seu projeto, suas funcionalidadese e se possível adicione links para vídeos ou imagens do projeto.'''
+                self.fields[field].widget = forms.Textarea(
+                    attrs={'cols': 50, 'rows': 20}
+                )
+                add_attr(self.fields[field], 'placeholder', descricao)
+            add_attr(self.fields[field], 'class', 'formulario-input')
 
     class Meta:
         model = Project
 
-        fields = ('title', 'description', 'explanatory_text')
+        fields = ('title', 'subtitle', 'link', 'explanatory_text')
 
 
-class CommentForm(ModelForm):
+class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
