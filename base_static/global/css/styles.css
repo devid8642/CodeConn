@@ -7,7 +7,7 @@
   }
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
   :root {
-    --cor-primaria: #ff5e00;
+    --cor-primaria: #f0862a;
     --tamanho-fonte: 16px;
     --background: #262626;
     --header-background: #1b1d20;
@@ -19,8 +19,17 @@
   body {
     background-color: var(--background);
   }
+
+  .btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
   
-  
+  .container {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
   
   .formulario{
     display: grid;
@@ -51,5 +60,12 @@
   }
   .formulario-button:hover{
   background-color: #1b1d20;
+  }
+
+  @media (max-width: 1200px) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
   

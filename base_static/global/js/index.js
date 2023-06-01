@@ -1,9 +1,13 @@
-const btnMobile = document.getElementById("btn-mobile");
+const hamburguer = document.querySelector(".hamburguer");
+const navbarNav = document.querySelector(".navbar-nav");
 
-function toggleMenu() {
-  const nav = document.getElementById("nav");
-  nav.classList.toggle("active");
-}
+hamburguer.addEventListener("click", () => {
+  hamburguer.classList.toggle("active");
+  navbarNav.classList.toggle("active");
+})
 
-btnMobile.addEventListener("click", toggleMenu);
-btnMobile.addEventListener("tochstart", toggleMenu);
+document.querySelectorAll(".nav-link").forEach(
+  n => n.addEventListener("click", () => {
+    hamburguer.classList.remove("active");
+    navbarNav.classList.remove("active");
+  }))
