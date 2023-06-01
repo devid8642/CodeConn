@@ -160,6 +160,7 @@
 
 @media (max-width: 1100px) {
     .post-container {
+        margin-top: 4rem;
         padding: 0 1rem;
     }
 }

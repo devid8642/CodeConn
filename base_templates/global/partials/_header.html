@@ -2,10 +2,11 @@
 
 <header>
     <nav class="container navbar">
-      <a href="" class="nav-brand">Projeto X</a>
+      <a href="{% url 'projects:home' %}" class="nav-brand">Projeto X</a>
 
-      <form class="project-search" action="">
-        <input type="text" placeholder="Pesquise aqui">
+      <form class="project-search" action="{% url 'projects:project_search' %}">
+        {% csrf_token %}
+        <input type="text" placeholder="Pesquise aqui" name="q">
         <button type="submit" class="btn">
           <i class="bi bi-search"></i>
         </button>
