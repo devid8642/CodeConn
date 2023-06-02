@@ -6,6 +6,7 @@ from .models import User
 from projects.models import Project
 from .forms import LoginForm, RegisterForm, UpdateForm
 
+
 def login_view(request):
     form = LoginForm(request.POST or None)
     if form.is_valid():
@@ -46,6 +47,7 @@ def register_view(request):
             'form': form
         }
     )
+
 
 def logout_view(request):
     logout(request)

@@ -156,7 +156,9 @@ def project_edit(request, pk):
         project.is_approved = False
         project.save()
 
-        return redirect('projects:home')
+        return redirect(
+            reverse('users:user_detail', kwargs={'id': project.author.id})
+        )
 
     return render(
         request,
@@ -181,4 +183,6 @@ def project_delete(request):
 
     project.delete()
 
-    return redirect('projects:home')
+    return redirect(
+        reverse('users:user_detail', kwargs={'id': project.author.id})
+    )

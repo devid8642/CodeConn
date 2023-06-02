@@ -16,6 +16,9 @@
     border-radius: .8rem;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.599);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card-header {
@@ -45,7 +48,7 @@
 }
 
 .card-title h3 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #f97c0f;
 }
 
@@ -67,7 +70,7 @@
 }
 
 .card-description {
-    height: 4rem;
+    max-height: 3rem;
     overflow: hidden;
     padding-top: .3rem;
 }

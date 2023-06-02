@@ -8,16 +8,26 @@
 {% block content %}
   <div class="container">
     <div class="user-background">
+      {% if owner %}
+        <a class="logout-link" href="{% url 'users:logout' %}">
+          <i class="bi bi-box-arrow-left"></i>
+        </a>
+      {% endif %}
       <div class="user-profile">
         <div class="user-picture">
-          <img src="{% static 'global/img/user-img.svg' %}" alt="">
+          <img src="{% static 'global/img/user-img.svg' %}" alt="user-generic-img">
         </div>
         <div class="user-info">
           <div class="user-name">
-            <h2>{{ user.username }}</h2>
+            {% if owner %}
+              <h2>Bem vindo(a), {{ user.username }}!</h2>
+            {% else %}
+              <h2>{{ user.username }}</h2>
+            {% endif %}
           </div>
           <div class="user-data">
             <div class="user-links">
+              
               {% if user.github %}
                 <a href="{{ user.github }}" target="_blank">
                   <i class="bi bi-github"></i>
@@ -26,6 +36,12 @@
               {% if user.linkedin %}
                 <a href="{{ user.linkedin }}" target="_blank">
                   <i class="bi bi-linkedin"></i>
+                </a>
+              {% endif %}
+              {% if owner %}
+                <a href="">
+                  <i class="bi bi-pencil-square"></i>
+                  Editar perfil
                 </a>
               {% endif %}
             </div>
@@ -41,6 +57,20 @@
             <div>
               <div class="user-post-card-header">
                 <h2>{{ project.title }}</h2>
+                {% if owner %}
+                  <div class="user-post-links">
+                    <a class="post-edit" href="{% url 'projects:project_edit' project.id %}">
+                      <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <form action="{% url 'projects:project_delete' %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="project_id" value="{{ project.id }}">
+                      <button type="submit" class="post-delete" href="{% url 'projects:project_delete' %}">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </form>
+                  </div>
+                {% endif %}
               </div>
               <div class="user-post-card-body">
                 <p>{{ project.subtitle }}</p>
