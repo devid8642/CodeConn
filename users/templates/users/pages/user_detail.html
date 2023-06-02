@@ -39,7 +39,7 @@
                 </a>
               {% endif %}
               {% if owner %}
-                <a href="">
+                <a href="{% url 'users:user_update' user.id %}">
                   <i class="bi bi-pencil-square"></i>
                   Editar perfil
                 </a>
