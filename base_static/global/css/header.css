@@ -92,6 +92,7 @@
 
 .user-nav:hover > .user-dropdown {
   display: block;
+  z-index: 50;
 }
 
 .user-dropdown {

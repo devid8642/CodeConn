@@ -1,0 +1,143 @@
+.user-background {
+    width: 100%;
+    height: 12rem;
+    margin-top: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.599);
+}
+
+.user-profile {
+    height: 7rem;
+    display: flex;
+}
+
+.user-picture {
+    width: 13rem;
+    height: 13rem;
+    background-color: rgb(28, 28, 28);
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.599);
+    margin-left: 3rem;
+}
+
+.user-picture img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.user-name h2 {
+    color: #f97c0f;
+    font-size: 2rem;
+}
+
+.user-info {
+    margin-left: 3rem;
+    color: white
+}
+
+.user-data {
+    margin-top: .5rem;
+}
+
+.user-links a {
+    margin-bottom: .5rem;
+    text-decoration: none;
+    color: white;
+    font-size: 1.6rem;
+    margin-right: .5rem;
+}
+
+.user-posts {
+    margin: 8rem 0;
+    padding: 3rem;
+    width: 100%;
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.599);
+    color: white;
+}
+
+.user-posts h3 {
+    font-size: 1.9rem;
+}
+
+.user-posts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-top: 1rem;
+}
+
+.user-post-card {
+    padding-top: .5rem;
+    background-color: rgb(18, 18, 18);
+    width: 16.5rem;
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.599);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 200ms ease-in-out;
+    margin-bottom: 1rem;
+}
+
+.user-post-card:hover {
+    transform: scale(1.02);
+}
+
+.user-post-card-header,
+.user-post-card-body {
+    padding: .2rem .7rem;
+}
+
+.user-post-card-body {
+    color: rgb(146, 146, 146);
+}
+
+.user-post-card-footer a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: .5rem 0;
+    background-color: #f97c0f;
+    margin-top: .5rem
+}
+
+@media (max-width: 768px) {
+    .user-background {
+        margin-top: 7rem;
+        height: 9rem;
+    }
+
+    .user-profile {
+        height: 5rem;
+    }
+
+    .user-name h2 {
+        font-size: 1.5rem;
+    }
+
+    .user-picture {
+        width: 7rem;
+        height: 7rem;
+        margin-left: 1rem;
+    }
+
+    .user-info {
+        margin-left: 1rem;
+        color: white
+    }
+
+    .user-posts {
+        padding: 2rem;
+        margin: 4rem 0;
+    }
+
+    .user-posts h3 {
+        font-size: 1.5rem;
+    }
+
+    .user-posts-grid {
+        grid-template-columns: 1fr;
+    }
+}

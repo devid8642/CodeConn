@@ -1,12 +1,57 @@
 {% extends 'global/base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'users/css/user-detail.css' %}">
+{% endblock head %}
 
 {% block content %}
-
-    {{ user }}
-    {{ projects }}
-    {{ owner }}
-    {% if owner == True %}
-        <a href="#">Teste</a>
-    {% endif %}
-
+  <div class="container">
+    <div class="user-background">
+      <div class="user-profile">
+        <div class="user-picture">
+          <img src="{% static 'global/img/user-img.svg' %}" alt="">
+        </div>
+        <div class="user-info">
+          <div class="user-name">
+            <h2>{{ user.username }}</h2>
+          </div>
+          <div class="user-data">
+            <div class="user-links">
+              {% if user.github %}
+                <a href="{{ user.github }}" target="_blank">
+                  <i class="bi bi-github"></i>
+                </a>
+              {% endif %}
+              {% if user.linkedin %}
+                <a href="{{ user.linkedin }}" target="_blank">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="user-posts">
+      <h3>Posts de {{ user.username }}:</h3>
+      <div class="user-posts-grid">
+        {% for project in projects %}
+          <div class="user-post-card">
+            <div>
+              <div class="user-post-card-header">
+                <h2>{{ project.title }}</h2>
+              </div>
+              <div class="user-post-card-body">
+                <p>{{ project.subtitle }}</p>
+              </div>
+            </div>
+            <div class="user-post-card-footer">
+              <a href="{% url 'projects:project_detail' project.id %}">Ver projeto</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 {% endblock content %}

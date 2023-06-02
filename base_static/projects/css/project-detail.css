@@ -3,7 +3,7 @@
 }
 
 .post-area {
-    padding: 3rem 0;
+    padding: 2rem 0;
     color: white;
     border-bottom: 1px solid gray;
 }
@@ -37,6 +37,25 @@
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
     color: grey;
+}
+
+.post-link {
+    margin-top: .5rem;
+}
+
+.post-link a {
+    display: block;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #f97c0f;
+    padding: .3rem .1rem;
+    width: fit-content;
+    text-align: center;
+}
+
+.post-link a:hover {
+    background-color: rgb(53, 53, 53);
+    border-radius: .2rem;
 }
 
 .post-body,
