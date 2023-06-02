@@ -13,17 +13,18 @@
 
 .project-card {
     position: relative;
-    border-radius: .8rem;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.599);
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.599);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: rgb(18, 18, 18);
 }
 
 .card-header {
-    height: 15rem;
+    height: 100%;
     overflow: hidden;
+    background-color: white;
 }
 
 .card-header img {
@@ -34,7 +35,6 @@
 
 .card-body {
     padding: 1rem 1rem;
-    background-color: rgb(200, 200, 200);
 }
 
 .card-title {
@@ -45,6 +45,7 @@
 
 .card-title p {
     font-size: 1.2rem;
+    color: white;
 }
 
 .card-title h3 {
@@ -77,6 +78,7 @@
 
 .card-description p {
     font-size: 1.1rem;
+    color: rgb(146, 146, 146);
 }
 
 .card-info {

@@ -42,6 +42,14 @@
   align-items: center;
 }
 
+.nav-item .username {
+  text-align: left;
+  color: rgb(98, 98, 98);
+  padding: .7rem .7rem;
+  background-color: rgb(21, 21, 21);
+  font-size: .9rem;
+}
+
 .nav-item .nav-link,
 .navbar .nav-brand {
   text-decoration: none;
@@ -70,7 +78,22 @@
 }
 
 .nav-item .profile-link {
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: .3rem .48rem;
+  border: 1px solid white;
+  color: white;
   cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.nav-item .profile-link:hover {
+  border-color: var(--cor-primaria);
+  color: var(--cor-primaria)
+}
+
+.nav-item .logout-link:hover {
+  background-color: rgb(249, 45, 45);
 }
 
 .nav-item .login-link {
@@ -98,8 +121,8 @@
 .user-dropdown {
   display: none;
   position: absolute;
-  top: 1.9rem;
-  left: -1.3rem;
+  top: 2.5rem;
+  left: -5rem;
   width: 13rem;
   background-color: rgb(36, 36, 36);
   box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.618);
