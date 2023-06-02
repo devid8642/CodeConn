@@ -1,4 +1,9 @@
 {% extends 'global/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Editar projeto</title>
+{% endblock head %}
 
 {% block content %}
     <form action="{% url 'projects:project_edit' project.id %}" method="POST">
