@@ -8,6 +8,7 @@
 
 {% block content %}
   <div class="container">
+    {% include 'global/partials/_messages.html' %}
     <div class="user-background">
       {% if owner %}
         <a class="logout-link" href="{% url 'users:logout' %}">

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import Http404
 from django.urls import reverse
 from django.db.models import Q
@@ -128,8 +129,11 @@ def project_create(request):
         project.is_approved = False
 
         project.save()
+        messages.success(request, 'Projeto criado com sucesso!')
 
-        return redirect('projects:home')
+        return redirect(reverse(
+            'users:user_detail', kwargs={'id': request.user.id}
+        ))
 
     return render(
         request,
@@ -156,6 +160,8 @@ def project_edit(request, pk):
         project.is_approved = False
         project.save()
 
+        messages.success(request, f'Projeto "{project.title}" editado!')
+
         return redirect(
             reverse('users:user_detail', kwargs={'id': project.author.id})
         )
@@ -180,6 +186,8 @@ def project_delete(request):
         Project,
         id=project_id,
     )
+
+    messages.error(request, 'Projeto deletado com sucesso!')
 
     project.delete()
 

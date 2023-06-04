@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 '''
 # flake8: noqa
 
+from django.contrib.messages import constants
 from pathlib import Path
 import environ
 
@@ -148,6 +149,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_DIRS = [
     BASE_DIR / 'base_static'
 ]
+
+MESSAGE_TAGS = {
+    constants.DEBUG: 'message-debug',
+    constants.ERROR: 'message-error',
+    constants.INFO: 'message-info',
+    constants.SUCCESS: 'message-success',
+    constants.WARNING: 'message-warning',
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
