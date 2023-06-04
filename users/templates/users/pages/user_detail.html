@@ -51,7 +51,17 @@
       </div>
     </div>
     <div class="user-posts">
-      <h3>Posts de {{ user.username }}:</h3>
+      <div class="user-posts-header">
+        <h3>Posts de {{ user.username }}:</h3>
+        {% if owner %}
+          <div class="user-links">
+            <a href="{% url 'projects:project_create' %}">
+              <i class="bi bi-file-earmark-plus"></i>
+              Adicionar projeto
+            </a>
+          </div>
+        {% endif %}
+      </div>
       <div class="user-posts-grid">
         {% for project in projects %}
           <div class="user-post-card">

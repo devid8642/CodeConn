@@ -82,6 +82,16 @@
     color: white;
 }
 
+.comments-message {
+    color: white;
+    padding-bottom: .3rem;
+}
+
+.comments-message a {
+    text-decoration: none;
+    color: #f97c0f;
+}
+
 .comment-form {
     display: flex;
     flex-direction: column;
@@ -99,6 +109,11 @@
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
     border: 1px solid white;
     border-radius: .2rem;
+    transition: all 300ms ease-in-out;
+}
+
+.comment-form textarea:focus {
+    height: 5rem;
 }
 
 .comment-form button {
