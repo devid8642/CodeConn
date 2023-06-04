@@ -19,6 +19,11 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: rgb(18, 18, 18);
+    transition: 300ms;
+}
+
+.project-card:hover {
+    transform: scale(1.02);
 }
 
 .card-header {
