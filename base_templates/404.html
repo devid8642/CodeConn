@@ -1,0 +1,12 @@
+{% extends 'global/base.html' %}
+
+{% block head %}
+    <title>Erro</title>
+{% endblock head %}
+
+{% block content %}
+
+    <h1>Erro 404</h1>
+    <p>O recurso que você acessou não está disponível ou não existe, voltar para o <a href="{% url 'projects:home' %}">site</a></p>
+
+{% endblock content %}
