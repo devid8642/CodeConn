@@ -1,10 +1,68 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.hashers import check_password, make_password
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.contrib import messages
 from django.urls import reverse
-from .models import User
-from projects.models import Project
+
 from .forms import LoginForm, RegisterForm, UpdateForm
+from .tokens import account_activation_token
+from projects.models import Project
+from .models import User
+
+
+def activate(request, uidb64, token):
+    User = get_user_model()
+
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+
+    except:  # noqa
+        user = None
+
+    if user is not None and account_activation_token.check_token(
+        user, token
+    ):
+        user.is_active = True
+        user.save()
+
+        messages.success(request, 'Sua conta foi ativada com sucesso!')
+        return redirect('users:login')
+
+    else:
+        messages.error(request, 'Não foi possível ativar sua conta!')
+
+    return redirect('projects:home')
+
+
+def activate_email(request, user, to_email):
+    mail_subject = 'Ative sua conta de usuário.'
+    message = render_to_string(
+        'auth/pages/activate-account.html',
+        {
+            'user': user.username,
+            'domain': get_current_site(request).domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
+            'protocol': 'https' if request.is_secure() else 'http'
+        }
+    )
+    email = EmailMessage(mail_subject, message, to=[to_email])
+
+    if email.send():
+        messages.success(
+            request, f'Um email de confirmação foi enviado para {to_email}'
+        )
+    else:
+        messages.error(
+            request,
+            f'O email de verificação não pode ser enviado para {to_email}!'
+        )
 
 
 def login_view(request):
@@ -29,17 +87,23 @@ def login_view(request):
 
 def register_view(request):
     form = RegisterForm(request.POST or None)
+
     if form.is_valid():
         username = form.cleaned_data.get('username')
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
-        confirmed_password = form.cleaned_data.get('confirmed_password')
-        User.objects.create_user(
+        form.cleaned_data.get('confirmed_password')
+
+        user = User.objects.create_user(
             username=username,
             email=email,
-            password=password
+            password=password,
+            is_active=False,
         )
+        activate_email(request, user, email)
+
         return redirect('users:login')
+
     return render(
         request,
         'auth/pages/register.html',
@@ -86,7 +150,9 @@ def user_update(request, id):
 
                 check = check_password(password, user.password)
                 if not check:
-                    form.add_error(field='password', error='Senha atual incorreta')
+                    form.add_error(
+                        field='password', error='Senha atual incorreta'
+                    )
                 exists = User.objects.filter(email=email).exists()
                 email_error = False
                 if exists and email != user.email:
@@ -117,7 +183,7 @@ def user_update(request, id):
                         return redirect('users:login')
                     user.save(update_fields=update_fields)
                     return redirect(
-                            reverse('users:user_detail', kwargs={'id': user.id})
+                        reverse('users:user_detail', kwargs={'id': user.id})
                     )
         else:
             data = {

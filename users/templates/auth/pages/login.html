@@ -6,6 +6,7 @@
 {% endblock head %}
 
 {% block content %}
+    {% include 'global/partials/_messages.html' %}
     <main>
         <form action="{% url 'users:login' %}" method="POST" class="formulario" style="height: 670px;">
             {% csrf_token %}
