@@ -2,13 +2,41 @@
 {% load static %}
 
 {% block head %}
-    <title>Editar projeto</title>
+  <title>Editar projeto</title>
+  <link rel="stylesheet" href="{% static 'projects/css/project-edit.css'%}">
 {% endblock head %}
 
 {% block content %}
-    <form action="{% url 'projects:project_edit' project.id %}" method="POST">
+  <div class="container">
+    <div class="form-container">
+      
+      <form class="base-form" action="{% url 'projects:project_edit' project.id %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Editar</button>
-    </form>
+        <h2>{{ project.title }}</h2>
+        <div class="input-group">
+          <label class="input-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+          {{ form.title }}
+        </div>
+        <div class="input-group">
+          <label for="{{ form.subtitle.id_for_label }}">Descrição</label>
+          {{ form.subtitle }}
+        </div>
+        <div class="input-group">
+          <label for="{{ form.explanatory_text.id_for_label }}">{{ form.explanatory_text.label }}</label>
+          {{ form.explanatory_text }}
+        </div>
+        <div class="input-group">
+          <label for="{{ form.link.id_for_label }}">
+            <i class="bi bi-link-45deg"></i>
+            {{ form.link.label }}
+          </label>
+          {{ form.link }}
+        </div>
+        <button type="submit">
+          <i class="bi bi-pencil-square"></i>
+          Salvar projeto
+        </button>
+      </form>
+    </div>
+  </div>
 {% endblock content %}

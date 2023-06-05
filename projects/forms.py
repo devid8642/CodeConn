@@ -10,11 +10,14 @@ class ProjectForm(forms.ModelForm):
 
         for field in self.fields:
             if field == 'explanatory_text':
-                descricao = '''Descreva a ideia por trás do seu projeto, suas funcionalidadese e se possível adicione links para vídeos ou imagens do projeto.'''
+                description = '''
+                Descreva a ideia por trás do seu projeto, suas funcionalidades
+                e se possível adicione links para vídeos ou imagens do projeto.
+                '''
                 self.fields[field].widget = forms.Textarea(
                     attrs={'cols': 50, 'rows': 20}
                 )
-                add_attr(self.fields[field], 'placeholder', descricao)
+                add_attr(self.fields[field], 'placeholder', description)
             add_attr(self.fields[field], 'class', 'formulario-input')
 
     class Meta:
