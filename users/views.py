@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.contrib import messages
 from django.urls import reverse
+import os
 
 from .forms import LoginForm, RegisterForm, UpdateForm
 from .tokens import account_activation_token
@@ -25,7 +26,7 @@ def activate(request, uidb64, token):
     except:  # noqa
         user = None
 
-    if user is not None and account_activation_token.check_token(
+    if user and account_activation_token.check_token(
         user, token
     ):
         user.is_active = True
@@ -94,13 +95,25 @@ def register_view(request):
         password = form.cleaned_data.get('password')
         form.cleaned_data.get('confirmed_password')
 
-        user = User.objects.create_user(
-            username=username,
-            email=email,
-            password=password,
-            is_active=False,
-        )
-        activate_email(request, user, email)
+        if os.environ.get('EMAIL_CONFIRMATION') == 'True':
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                is_active=False,
+            )
+            activate_email(request, user, email)
+
+        else:
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                is_active=True,
+            )
+            messages.success(request, 'Você foi registrado com sucesso!')
+
+            return redirect('users:login')
 
         return redirect('users:login')
 
