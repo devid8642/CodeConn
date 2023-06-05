@@ -2,11 +2,28 @@
 
 {% block head %}
     <title>Erro</title>
+    <style>
+        main {
+            color: white;
+            padding: 10px;
+        }
+        a {
+            color: #f97c0f;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        } 
+        a:visited {
+            color: #914503;
+        }
+    </style>
 {% endblock head %}
 
 {% block content %}
-
-    <h1>Erro 404</h1>
-    <p>O recurso que você acessou não está disponível ou não existe, voltar para o <a href="{% url 'projects:home' %}">site</a></p>
+    <main>
+        <h1>Erro 404</h1>
+        <p>O recurso que você acessou não está disponível ou não existe, voltar para o <a href="{% url 'projects:home' %}">site</a></p>
+    </main>
 
 {% endblock content %}
