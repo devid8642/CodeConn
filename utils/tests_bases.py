@@ -154,3 +154,15 @@ class ProjectTestBase(TestBase):
             author=project.author,
             comment='Test comment',
         )
+
+
+class UserTestBase(TestBase):
+    def setUp(self, *args, **kwargs):
+        self.register_form_data = {
+            'username': 'username',
+            'email': 'username@email.com',
+            'password': 'User1234',
+            'confirmed_password': 'User1234'
+        }
+
+        return super().__init__(*args, **kwargs)

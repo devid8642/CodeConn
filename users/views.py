@@ -1,19 +1,37 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.hashers import check_password, make_password
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_str
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
+from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
 import os
 
 from .forms import LoginForm, RegisterForm, UpdateForm
+from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
 from .models import User
+
+
+def login_view(request):
+    form = LoginForm(request.POST or None)
+    if form.is_valid():
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('projects:home')
+        else:
+            form.add_error(field=None, error='Email ou senha inválidos')
+    return render(
+        request,
+        'auth/pages/login.html',
+        context={
+            'form': form
+        }
+    )
 
 
 def activate(request, uidb64, token):
@@ -38,52 +56,7 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'Não foi possível ativar sua conta!')
 
-    return redirect('projects:home')
-
-
-def activate_email(request, user, to_email):
-    mail_subject = 'Ative sua conta de usuário.'
-    message = render_to_string(
-        'auth/pages/activate-account.html',
-        {
-            'user': user.username,
-            'domain': get_current_site(request).domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': account_activation_token.make_token(user),
-            'protocol': 'https' if request.is_secure() else 'http'
-        }
-    )
-    email = EmailMessage(mail_subject, message, to=[to_email])
-
-    if email.send():
-        messages.success(
-            request, f'Um email de confirmação foi enviado para {to_email}'
-        )
-    else:
-        messages.error(
-            request,
-            f'O email de verificação não pode ser enviado para {to_email}!'
-        )
-
-
-def login_view(request):
-    form = LoginForm(request.POST or None)
-    if form.is_valid():
-        email = form.cleaned_data.get('email')
-        password = form.cleaned_data.get('password')
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('projects:home')
-        else:
-            form.add_error(field=None, error='Email ou senha inválidos')
-    return render(
-        request,
-        'auth/pages/login.html',
-        context={
-            'form': form
-        }
-    )
+    return redirect('users:login')
 
 
 def register_view(request):

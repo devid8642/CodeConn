@@ -196,14 +196,14 @@ class TestUserUpdateView(TestBase):
             'email': self.user.email,
             'password': '123456'
         }
-        response = self.response_test_function(
+        self.response_test_function(
             self.url,
             url_kwargs={'id': 1},
             method='post',
             data=new_user_data
         )
         user = User.objects.get(id=1)
-        # self.assertContains(response, text=f'{self.user.email}')
+
         self.assertEqual(user.username, new_user_data['username'])
 
     def test_with_invalid_email(self):
