@@ -74,7 +74,7 @@
                     <a class="post-edit" href="{% url 'projects:project_edit' project.id %}">
                       <i class="bi bi-pencil-square"></i>
                     </a>
-                    <form action="{% url 'projects:project_delete' %}" method="POST">
+                    <form class="form-delete" action="{% url 'projects:project_delete' %}" method="POST">
                       {% csrf_token %}
                       <input type="hidden" name="project_id" value="{{ project.id }}">
                       <button type="submit" class="post-delete" href="{% url 'projects:project_delete' %}">

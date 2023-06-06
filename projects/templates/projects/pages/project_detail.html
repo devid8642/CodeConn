@@ -64,7 +64,7 @@
                   <p>{{ comment.created_at | naturalday }}</p>
                 </div>
                 {% if comment.author == request.user %}
-                  <form class="comment-delete" action="{% url 'projects:comment_delete' %}" method="POST">
+                  <form class="form-delete comment-delete" action="{% url 'projects:comment_delete' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="comment-id" value="{{ comment.id }}">
                     <button type="submit">Deletar</button>
