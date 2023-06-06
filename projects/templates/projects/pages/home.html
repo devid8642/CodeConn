@@ -1,15 +1,55 @@
 {% extends 'global/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
-    <title>Home</title>
+  <title>Home</title>
+  <link rel="stylesheet" href="{% static 'projects/css/all-projects.css' %}">
+  <link rel="stylesheet" href="{% static 'projects/css/home.css' %}">
 {% endblock head %}
 
 {% block content %}
-    <h1>Home</h1>
-    {% for project in week_projects %}
-        <p>{{ project.title }}</p>
-        <p>{{ project.description }}</p>
-        <p>{{ project.author }}</p>
-    {% endfor %}
+  <div class="container">
+    <h2 class="home-title">Home Page</h2>
+    <div class="home-card-grid">
+      {% for project in week_projects %}
+        <div class="project-card">
+          {% if project.author.is_staff %}
+              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author staff-user">
+                {{ project.author.username }}
+                <i class="bi bi-code-slash"></i>
+              </a>
+            {% else %}
+              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author">
+                {{ project.author.username }}
+              </a>
+            {% endif %}
+          <div class="card-header">
+            <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">
+              <h3>{{ project.title }}</h3>
+              <p>
+                <i class="bi bi-chat"></i>
+                {{ project.comments.count }}
+              </p>
+            </div>
+            <div class="card-description">
+              <p>{{ project.subtitle }}</p>
+            </div>
+            <div class="card-footer">
+              <div class="card-info">
+                
+                <p>{{ project.created_at | naturalday }}</p>
+              </div>
+              <a href="{% url 'projects:project_detail' project.id %}" class="card-button">Ver projeto</a>
+            </div>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock content %}

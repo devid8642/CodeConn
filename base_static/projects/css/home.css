@@ -1,0 +1,27 @@
+.home-title {
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.home-card-grid {
+    margin-top: .5rem;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    overflow-x: auto;
+}
+
+.home-card-grid .project-card {
+    flex-shrink: 0;
+    width: 330px;
+}
+
+@media (max-width: 1200px) {
+    .home-title {
+        margin-top: 6.5rem;
+    }
+}
