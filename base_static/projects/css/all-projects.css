@@ -66,7 +66,9 @@
     left: .5rem;
     text-decoration: none;
     color: rgb(32, 32, 252);
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
     margin-right: .8rem;
     font-size: .9rem;
     background-color: rgb(155, 253, 220);
@@ -75,6 +77,15 @@
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
     width: fit-content;
     margin-bottom: .5rem;
+}
+
+.project-author.staff-user {
+    background-color: #f97c0f;
+    color: white;
+}
+
+.project-author.staff-user i {
+    font-size: 1rem;
 }
 
 .card-description {

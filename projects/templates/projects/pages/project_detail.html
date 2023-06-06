@@ -12,9 +12,16 @@
       <div class="post-area">
         <div class="post-header">
           <div class="post-user">
-            <a href="{% url 'users:user_detail' project.author.id %}" class="user-link">
-              {{ project.author.username }}
-            </a>
+            {% if project.author.is_staff %}
+              <a href="{% url 'users:user_detail' project.author.id %}" class="user-link staff-user">
+                {{ project.author.username }}
+                <i class="bi bi-code-slash"></i>
+              </a>
+            {% else %}
+              <a href="{% url 'users:user_detail' project.author.id %}" class="user-link">
+                {{ project.author.username }}
+              </a>
+            {% endif %}
             <p>{{ project.created_at | naturalday }}</p>
           </div>
           <h2 class="post-title">{{ project.title }}</h2>
@@ -60,7 +67,16 @@
             <div class="comment">
               <div class="comment-info">
                 <div class="comment-data">
-                  <a href="{% url 'users:user_detail' comment.author.id %}" class="comment-user">{{ comment.author.username }}</a>
+                  {% if comment.author.is_staff %}
+                    <a href="{% url 'users:user_detail' comment.author.id %}" class="comment-user staff-user">
+                      {{ comment.author.username }}
+                      <i class="bi bi-code-slash"></i>
+                    </a>
+                  {% else %}
+                    <a href="{% url 'users:user_detail' comment.author.id %}" class="comment-user">
+                      {{ comment.author.username }}
+                    </a>
+                  {% endif %}
                   <p>{{ comment.created_at | naturalday }}</p>
                 </div>
                 {% if comment.author == request.user %}

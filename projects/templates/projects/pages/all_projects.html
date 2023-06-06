@@ -13,9 +13,16 @@
     <div class="projects-grid">
       {% for project in projects %}
         <div class="project-card">
-          <a class="project-author" href="{% url 'users:user_detail' project.author.id %}">
-            {{ project.author.username }}
-          </a>
+          {% if project.author.is_staff %}
+              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author staff-user">
+                {{ project.author.username }}
+                <i class="bi bi-code-slash"></i>
+              </a>
+            {% else %}
+              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author">
+                {{ project.author.username }}
+              </a>
+            {% endif %}
           <div class="card-header">
             <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
           </div>
