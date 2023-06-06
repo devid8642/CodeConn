@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+    Olá, {{ user }}!
+
+    Clique no link abaixo para ativar sua conta e concluir seu cadastro!
+
+    http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}
+
+{% endautoescape %}
