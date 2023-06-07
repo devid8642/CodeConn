@@ -11,7 +11,8 @@
 {% block content %}
   <div class="container">
     <h2 class="home-title">Últimos projetos</h2>
-    <swiper-container class="mySwiper" init="false" navigation="true" pagination="true" pagination-clickable="true">
+    <swiper-container class="mySwiper" init="false" navigation="true" pagination="true" pagination-clickable="true"
+      loop="True">
       {% for project in week_projects %}
         <swiper-slide>
           <div class="project-card">
