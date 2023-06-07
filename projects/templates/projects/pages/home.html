@@ -11,45 +11,71 @@
 {% block content %}
   <div class="container">
     <h2 class="home-title">Últimos projetos</h2>
-    <div class="home-card-grid">
+    <swiper-container class="mySwiper" init="false" navigation="true" pagination="true" pagination-clickable="true">
       {% for project in week_projects %}
-        <div class="project-card">
-          {% if project.author.is_staff %}
-              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author staff-user">
-                {{ project.author.username }}
-                <i class="bi bi-code-slash"></i>
-              </a>
-            {% else %}
-              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author">
-                {{ project.author.username }}
-              </a>
-            {% endif %}
-          <div class="card-header">
-            <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
-          </div>
+        <swiper-slide>
+          <div class="project-card">
+            {% if project.author.is_staff %}
+                <a href="{% url 'users:user_detail' project.author.id %}" class="project-author staff-user">
+                  {{ project.author.username }}
+                  <i class="bi bi-code-slash"></i>
+                </a>
+              {% else %}
+                <a href="{% url 'users:user_detail' project.author.id %}" class="project-author">
+                  {{ project.author.username }}
+                </a>
+              {% endif %}
+            <div class="card-header">
+              <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
+            </div>
 
-          <div class="card-body">
-            <div class="card-title">
-              <h3>{{ project.title }}</h3>
-              <p>
-                <i class="bi bi-chat"></i>
-                {{ project.comments.count }}
-              </p>
-            </div>
-            <div class="card-description">
-              <p>{{ project.subtitle }}</p>
-            </div>
-            <div class="card-footer">
-              <div class="card-info">
-                
-                <p>{{ project.created_at | naturalday }}</p>
+            <div class="card-body">
+              <div class="card-title">
+                <h3>{{ project.title }}</h3>
+                <p>
+                  <i class="bi bi-chat"></i>
+                  {{ project.comments.count }}
+                </p>
               </div>
-              <a href="{% url 'projects:project_detail' project.id %}" class="card-button">Ver projeto</a>
+              <div class="card-description">
+                <p>{{ project.subtitle }}</p>
+              </div>
+              <div class="card-footer">
+                <div class="card-info">
+                  <p>{{ project.created_at | naturalday }}</p>
+                </div>
+                <a href="{% url 'projects:project_detail' project.id %}" class="card-button">Ver projeto</a>
+              </div>
             </div>
           </div>
-
-        </div>
+        </swiper-slide>
       {% endfor %}
-    </div>
+    </swiper-container>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+  <script>
+    const swiperEl = document.querySelector('swiper-container')
+    Object.assign(swiperEl, {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      pagination: {
+        clickable: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+    swiperEl.initialize();
+  </script>
 {% endblock content %}

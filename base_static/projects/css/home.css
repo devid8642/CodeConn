@@ -15,10 +15,17 @@
     overflow-x: auto;
 }
 
-.home-card-grid .project-card {
-    flex-shrink: 0;
-    width: 330px;
+swiper-container {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem .5rem 3rem .5rem;
 }
+
+swiper-slide .project-card {
+    height: 30rem;
+}
+
+
 
 @media (max-width: 1200px) {
     .home-title {
