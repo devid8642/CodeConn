@@ -12,7 +12,7 @@ from .forms import ProjectForm, CommentForm
 def home(request):
     week_projects = Project.objects.filter(
         is_approved=True,
-    )
+    )[:5]
 
     return render(
         request,

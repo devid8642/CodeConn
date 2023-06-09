@@ -10,9 +10,8 @@
 
 {% block content %}
   <div class="container">
-    <h2 class="home-title">Últimos projetos</h2>
-    <swiper-container class="mySwiper" init="false" navigation="true" pagination="true" pagination-clickable="true"
-      loop="True">
+    <h2 class="home-title">Projetos recentes</h2>
+    <swiper-container class="mySwiper" init="false">
       {% for project in week_projects %}
         <swiper-slide>
           <div class="project-card">
@@ -60,8 +59,10 @@
       slidesPerView: 1,
       spaceBetween: 10,
       pagination: {
-        clickable: true,
+        clickable: true
       },
+      navigation: true,
+      
       breakpoints: {
         640: {
           slidesPerView: 1,
@@ -69,11 +70,11 @@
         },
         768: {
           slidesPerView: 2,
-          spaceBetween: 20,
+          spaceBetween: 40,
         },
         1024: {
           slidesPerView: 3,
-          spaceBetween: 30,
+          spaceBetween: 50,
         },
       },
     });
