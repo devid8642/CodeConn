@@ -1,7 +1,8 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.hashers import check_password, make_password
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
@@ -188,29 +189,36 @@ def user_update(request, id):
     return redirect('projects:home')
 
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def admin_dashboard(request):
-    users = User.objects.all()
-    date = get_object_or_404(ProjectsDate, id=1)
-    delivered_projects = []
-    expired_users = []
+    if request.user.is_staff:
+        users = User.objects.all()
+        date = get_object_or_404(ProjectsDate, id=1)
+        delivered_projects = []
+        expired_users = []
 
-    form = ProjectsDateForm(
-        request.POST or None,
-        instance=date,
-    )
+        form = ProjectsDateForm(
+            request.POST or None,
+            instance=date,
+        )
 
-    if form.is_valid():
-        form.save()
-        return redirect('users:admin_dashboard')
+        if form.is_valid():
+            form.save()
+            return redirect('users:admin_dashboard')
 
-    for user in users:
-        project = Project.objects.filter(author=user, is_approved=True).first()
+        for user in users:
+            project = Project.objects.filter(
+                author=user, is_approved=True
+            ).first()
 
-        if project and project.created_at <= date.end_date:
-            delivered_projects.append(project)
+            if project and project.created_at <= date.end_date:
+                delivered_projects.append(project)
 
-        else:
-            expired_users.append(user)
+            else:
+                expired_users.append(user)
+
+    else:
+        return redirect('projects:home')
 
     return render(
         request,
