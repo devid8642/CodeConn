@@ -11,5 +11,6 @@ urlpatterns = [
     path(
         'user/<int:id>/update/profile/', views.user_update, name='user_update'
     ),
-    path('activate/<uidb64>/<token>', views.activate, name='activate')
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
+    path('admdash/', views.admin_dashboard, name='admin_dashboard'),
 ]

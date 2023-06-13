@@ -12,6 +12,7 @@ from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
 from .models import User
+from datetime import datetime
 
 
 def login_view(request):
@@ -186,3 +187,37 @@ def user_update(request, id):
             }
         )
     return redirect('projects:home')
+
+
+def admin_dashboard(request):
+    users = User.objects.all()
+    finish_date = datetime.now()
+    users_projects = []
+    finished_projects = []
+    expired_users = []
+
+    for user in users:
+        if Project.objects.filter(author=user).exists():
+            users_projects.append(
+                Project.objects.filter(author=user).first()
+            )
+        else:
+            expired_users.append(
+                user
+            )
+
+    for project in users_projects:
+        if project.created_at < finish_date:
+            finished_projects.append(project)
+        else:
+            expired_users.append(project.author)
+
+    return render(
+        request,
+        'users/pages/admin_dashboard.html',
+        context={
+            'projects': users_projects,
+            'finished_projects': finished_projects,
+            'expired_users': expired_users,
+        }
+    )
