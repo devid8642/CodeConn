@@ -219,5 +219,6 @@ def admin_dashboard(request):
             'delivered_projects': delivered_projects,
             'expired_users': expired_users,
             'form': form,
+            'date': date,
         }
     )

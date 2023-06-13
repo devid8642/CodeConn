@@ -1,0 +1,144 @@
+.admin-area {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    justify-content: space-between;
+}
+
+.admin-nav {
+    background-color: rgb(25, 25, 25);
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.6);
+    height: 100%;
+    width: 40%;
+    border-radius: 1rem;
+    padding-bottom: 2rem;
+}
+
+.admin-container {
+    padding: 1rem;
+}
+
+.admin-container h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.admin-container h4 {
+    color: #f97c0f;
+    margin-bottom: .7rem;
+    font-size: 1.2rem;
+}
+
+.admin-container-header p {
+    color: white;
+    margin-bottom: .5rem;
+}
+
+.admin-container-body {
+    margin-top: 3rem;
+}
+
+.admin-container-body .base-form {
+    width: 100%;
+    padding: 0;
+    box-shadow: none;
+    margin-top: 1rem;
+}
+
+.date-edit-form {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.deliver-area {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.success-users,
+.failed-users {
+    width: 100%;
+    max-height: 100%;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+    padding: .5rem 0;
+}
+
+.users-container h3,
+.failed-users-body ul li a,
+.success-users-body ul li a {
+    padding: 1rem;
+}
+
+.users-container h3 {
+    font-size: 1.4rem;
+    border-bottom: 2px solid rgb(95, 95, 95);
+}
+
+.failed-users-body ul,
+.success-users-body ul {
+    list-style: none;
+}
+
+.failed-users-body ul li,
+.success-users-body ul li {
+    border-bottom: 1px solid rgb(162, 162, 162);
+}
+
+.failed-users-body ul li a,
+.success-users-body ul li a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+
+}
+
+.expired-user {
+    color: rgb(252, 37, 37);
+    font-size: 1.2rem;
+}
+
+.failed-users-body ul li a:hover {
+    background-color: rgb(250, 61, 61);
+    color: white;
+}
+
+.success-users-body ul li a:hover {
+    background-color: rgb(55, 241, 86);
+}
+
+.delivered-user h4 {
+    margin-bottom: .3rem;
+    font-size: 1.2rem;
+    color: #f97c0f
+}
+
+
+.delivered-user p {
+    font-size: .9rem;
+    color: rgb(76, 76, 76)
+}
+
+@media (max-width: 1200px) {
+    .admin-area {
+        margin-top: 7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-area {
+        flex-flow: row wrap;
+    }
+
+    .admin-nav {
+        width: 100%;
+    }
+}

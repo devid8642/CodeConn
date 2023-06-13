@@ -1,23 +1,100 @@
 {% extends 'global/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'users/css/admin_dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'projects/css/project-edit.css' %}">
+{% endblock head %}
 
 {% block content %}
   <div class="container">
-    <p>Data de entrega</p>
-    <form action="" method="POST">
-      {% csrf_token %}
-      {{ form }}
-      <button type="submit">Mudar</button>
-    </form>
-    <h2>Usuários em dia:</h2>
-    {% for project in delivered_projects %}
-      <h2>{{ project.author.username }}</h2>
-      <p>{{ project.title }}</p>
-      <p>{{ project.created_at }}</p>
-    {% endfor %}
-    <hr>
-    <h2>Usuários que não entregaram:</h2>
-    {% for user in expired_users %}
-      <h2>{{ user.username}}</h2>
-    {% endfor %}
+    <div class="admin-area">
+
+
+      <div class="admin-nav">
+        <div class="admin-container">
+          <div class="admin-container-header">
+            <h3>Bem vindo, {{ request.user.username }}!</h3>
+            <h4>Prazo de entrega dos projetos:</h4>
+            <p><strong>Data de inicio:</strong> {{ date.start_date|naturalday }}</p>
+            <p><strong>Data final:</strong> {{ date.end_date|naturalday }}</p>
+          </div>
+          <div class="admin-container-body">
+            <h4>Mudar data de entrega:</h4>
+
+
+            <form class="base-form" action="" method="POST">
+              {% csrf_token %}
+              <div class="input-group">
+                <label class="input-label" for="{{ form.start_date.id_for_label }}">
+                  {{ form.start_date.label }}
+                </label>
+                {{ form.start_date }}
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="{{ form.end_date.id_for_label }}">
+                  {{ form.end_date.label }}
+                </label>
+                {{ form.end_date }}
+              </div>
+              <button type="submit">Mudar</button>
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="deliver-area">
+
+
+        <div class="success-users">
+          <div class="users-container">
+            <div class="success-users-header">
+              <h3>Usuários dentro do prazo de entrega:</h3>
+            </div>
+            <div class="success-users-body">
+              <ul>
+                {% for project in delivered_projects %}
+                  <li>
+                    <a class="delivered-user" href="{% url 'users:user_detail' project.author.id %}">
+                      <h4>{{ project.author.username }}</h4>
+                      <p>Projeto: {{ project.title }}</p>
+                      <p>Publicado: {{ project.created_at|naturalday }}</p>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="failed-users">
+          <div class="users-container">
+            <div class="failed-users-header">
+              <h3>Usuários fora do prazo de entrega:</h3>
+            </div>
+            <div class="failed-users-body">
+              <ul>
+                {% for user in expired_users %}
+                  <li>
+                    <a class="expired-user" href="{% url 'users:user_detail' user.id %}">
+                      <h4>
+                        {{ user.username}}
+                      </h4>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
   </div>
 {% endblock content %}
