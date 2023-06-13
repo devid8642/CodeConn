@@ -1,8 +1,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from .models import User
+from .models import User, ProjectsDate
 from utils.forms_utils import add_attr
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
@@ -19,6 +20,7 @@ class LoginForm(forms.Form):
         super().__init__(*args, **kwargs)
         add_attr(self.fields['email'], 'class', 'formulario-input')
         add_attr(self.fields['password'], 'class', 'formulario-input')
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField(label='Usuário', max_length=255)
@@ -48,7 +50,7 @@ class RegisterForm(forms.Form):
             if exists:
                 raise ValidationError('Já existe um usuário com este email')
         return email
-    
+
     def clean_password(self):
         password = self.cleaned_data.get('password')
         if password:
@@ -101,3 +103,23 @@ class UpdateForm(forms.Form):
         if new_password:
             validate_password(new_password)
         return new_password
+
+
+class ProjectsDateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['start_date'].widget = forms.widgets.DateTimeInput(
+            attrs={
+                'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)',
+            }
+        )
+        self.fields['end_date'].widget = forms.widgets.DateTimeInput(
+            attrs={
+                'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)',
+            }
+        )
+
+    class Meta:
+        model = ProjectsDate
+
+        fields = ('start_date', 'end_date')

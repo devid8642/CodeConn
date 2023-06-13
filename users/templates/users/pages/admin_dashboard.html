@@ -2,8 +2,14 @@
 
 {% block content %}
   <div class="container">
+    <p>Data de entrega</p>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit">Mudar</button>
+    </form>
     <h2>Usuários em dia:</h2>
-    {% for project in finished_projects %}
+    {% for project in delivered_projects %}
       <h2>{{ project.author.username }}</h2>
       <p>{{ project.title }}</p>
       <p>{{ project.created_at }}</p>

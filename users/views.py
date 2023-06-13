@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.urls import reverse
 import os
 
-from .forms import LoginForm, RegisterForm, UpdateForm
+from .forms import LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
 from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
@@ -191,14 +191,23 @@ def user_update(request, id):
 def admin_dashboard(request):
     users = User.objects.all()
     date = get_object_or_404(ProjectsDate, id=1)
-    finished_projects = []
+    delivered_projects = []
     expired_users = []
+
+    form = ProjectsDateForm(
+        request.POST or None,
+        instance=date,
+    )
+
+    if form.is_valid():
+        form.save()
+        return redirect('users:admin_dashboard')
 
     for user in users:
         project = Project.objects.filter(author=user, is_approved=True).first()
 
         if project and project.created_at <= date.end_date:
-            finished_projects.append(project)
+            delivered_projects.append(project)
 
         else:
             expired_users.append(user)
@@ -207,7 +216,8 @@ def admin_dashboard(request):
         request,
         'users/pages/admin_dashboard.html',
         context={
-            'finished_projects': finished_projects,
+            'delivered_projects': delivered_projects,
             'expired_users': expired_users,
+            'form': form,
         }
     )
