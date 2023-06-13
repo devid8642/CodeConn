@@ -24,3 +24,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'users'
         db_table = 'users'
         ordering = ['id']
+
+
+class ProjectsDate(models.Model):
+    start_date = models.DateTimeField('Data inicial')
+    end_date = models.DateTimeField('Data final')
+
+    def __str__(self):
+        return f'Prazo: {self.start_date} - {self.end_date}'

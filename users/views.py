@@ -11,8 +11,7 @@ from .forms import LoginForm, RegisterForm, UpdateForm
 from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
-from .models import User
-from datetime import date
+from .models import User, ProjectsDate
 
 
 def login_view(request):
@@ -191,27 +190,18 @@ def user_update(request, id):
 
 def admin_dashboard(request):
     users = User.objects.all()
-    start_date = date(2005, 1, 1)
-    end_date = date(2023, 6, 6 + 1)
+    date = get_object_or_404(ProjectsDate, id=1)
     finished_projects = []
     expired_users = []
 
     for user in users:
-        if Project.objects.filter(
-            author=user,
-            is_approved=True,
-            created_at__range=(start_date, end_date)
-        ):
-            finished_projects.append(
-                Project.objects.filter(
-                    author=user,
-                ).first()
-            )
+        project = Project.objects.filter(author=user, is_approved=True).first()
+
+        if project and project.created_at <= date.end_date:
+            finished_projects.append(project)
 
         else:
-            expired_users.append(
-                user
-            )
+            expired_users.append(user)
 
     return render(
         request,

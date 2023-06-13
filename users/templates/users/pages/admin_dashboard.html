@@ -1,17 +1,17 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h2>Usuários em dia:</h2>
-        {% for project in finished_projects %}
-            <h2>{{ project.author.username }}</h2>
-            <p>{{ project.title }}</p>
-            <p>{{ project.created_at }}</p>
-        {% endfor %}
-        <hr>
-        <h2>Usuários que não entregaram:</h2>
-        {% for user in expired_users %}
-            <h2>{{ user.username}}</h2>
-        {% endfor %}
-    </div>
+  <div class="container">
+    <h2>Usuários em dia:</h2>
+    {% for project in finished_projects %}
+      <h2>{{ project.author.username }}</h2>
+      <p>{{ project.title }}</p>
+      <p>{{ project.created_at }}</p>
+    {% endfor %}
+    <hr>
+    <h2>Usuários que não entregaram:</h2>
+    {% for user in expired_users %}
+      <h2>{{ user.username}}</h2>
+    {% endfor %}
+  </div>
 {% endblock content %}
