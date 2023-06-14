@@ -211,7 +211,10 @@ def admin_dashboard(request):
                 author=user, is_approved=True
             ).first()
 
-            if project and project.created_at <= date.end_date:
+            if project and (
+                project.created_at >= date.start_date and 
+                project.created_at <= date.end_date
+            ):
                 delivered_projects.append(project)
 
             else:
