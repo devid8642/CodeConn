@@ -13,7 +13,7 @@
 
 .project-card {
     position: relative;
-    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.599);
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.8);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -41,6 +41,7 @@
 
 .card-body {
     padding: 1rem 1rem;
+    background-color: rgb(15, 15, 15);
 }
 
 .card-title {
