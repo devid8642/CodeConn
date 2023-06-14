@@ -27,12 +27,6 @@
                 <li class="nav-item">
                   <p class="username">Logado como: <strong>{{ request.user.username }}</strong></p>
                 </li>
-                {% if request.user.is_staff %}
-                  <li class="nav-item"><a href="{% url 'users:admin_dashboard' %}">
-                    <i class="bi bi-clipboard-data"></i>
-                    Dashboard</a>
-                  </li>
-                {% endif %}
                 <li class="nav-item"><a href="{% url 'projects:project_create' %}">
                   <i class="bi bi-file-earmark-plus"></i>
                   Publicar projeto</a>
@@ -41,6 +35,18 @@
                   <i class="bi bi-person-circle"></i>
                   Meu Perfil</a>
                 </li>
+                {% if request.user.is_staff %}
+                  <li class="nav-item"><a href="{% url 'users:admin_dashboard' %}">
+                    <i class="bi bi-clipboard-data"></i>
+                    Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="admin/">
+                      <i class="bi bi-person-fill-lock"></i>
+                      Área Administrativa
+                    </a>
+                  </li>
+                {% endif %}
                 <li class="nav-item"><a class="logout-link" href="{% url 'users:logout' %}">
                   <i class="bi bi-box-arrow-left"></i>
                   Sair</a>
