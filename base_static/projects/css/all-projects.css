@@ -30,7 +30,7 @@
 .card-header {
     height: 100%;
     overflow: hidden;
-    background-color: white;
+    background-color: rgb(15, 15, 27);
 }
 
 .card-header img {

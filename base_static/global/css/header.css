@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(23, 23, 23);
+  background-color: rgb(15, 15, 27);
   border-bottom: 2px solid rgb(45, 45, 45);
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -75,7 +75,7 @@
   border-radius: 20px;
   color: var(--cor-primaria);
   margin-left: 1.5rem;
-  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 5px 15px rgba(0, 0, 0, .8);
 }
 
 .nav-item .profile-link {
@@ -101,7 +101,7 @@
   padding: .5rem 1.5rem;
   border: 1px solid var(--cor-primaria);
   background-color: var(--cor-primaria);
-  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.8);
   border-radius: 20px;
   color: white;
 }
@@ -125,7 +125,7 @@
   top: 2.5rem;
   left: -5rem;
   width: 13rem;
-  background-color: rgb(25, 25, 30);
+  background-color: rgb(15, 15, 27);
   box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.618);
   border-radius: .2rem;
 }
@@ -190,7 +190,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgb(25, 25, 25);
+    background-color: rgb(15, 15, 27);
     z-index: 1;
     width: 100%;
     transition: 300ms;

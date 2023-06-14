@@ -7,7 +7,7 @@
 }
 
 .admin-nav {
-    background-color: rgb(25, 25, 30);
+    background-color: rgb(15, 15, 27);
     box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
     height: 100%;
     width: 40%;
@@ -22,7 +22,7 @@
 .admin-container h3 {
     color: white;
     margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 }
 
 .admin-container h4 {
@@ -66,7 +66,7 @@
 .failed-users {
     width: 100%;
     max-height: 400px;
-    background-color: rgb(25, 25, 30);
+    background-color: rgb(15, 15, 27);
     border-radius: 1rem;
     box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
     overflow-y: auto;
@@ -81,7 +81,7 @@
 
 .users-container h3 {
     font-size: 1.4rem;
-    border-bottom: 4px solid rgb(20, 20, 20);
+    border-bottom: 4px solid rgb(15, 15, 15);
     color: white;
 }
 
@@ -108,18 +108,15 @@
     font-size: 1.2rem;
 }
 
-.failed-users-body ul li a:hover {
-    background-color: rgb(20, 20, 20);
-}
-
-.success-users-body ul li a:hover {
-    background-color: rgb(20, 20, 20);
+.failed-users-body ul li a:hover,
+.success-users-body ul li a:hover  {
+    background-color:rgb(15, 15, 15);
 }
 
 .delivered-user h4 {
     margin-bottom: .3rem;
     font-size: 1.2rem;
-    color: #f97c0f
+    color: #f97c0f;
 }
 
 
