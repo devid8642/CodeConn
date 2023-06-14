@@ -13,9 +13,10 @@
 }
 
 .base-form {
-    background-color: rgb(24, 24, 24);
+    background-color: rgb(30, 30, 30);
     padding: 2rem;
-    box-shadow: 2px 3px 7px black;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
     width: 30rem;
 }
 
@@ -66,6 +67,7 @@
     background-color: #f97c0f;
     color: white;
     cursor: pointer;
+    border-radius: .2rem;
 }
 
 .base-form button:hover {

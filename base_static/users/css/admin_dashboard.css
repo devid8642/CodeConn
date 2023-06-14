@@ -2,13 +2,13 @@
     width: 100%;
     display: flex;
     gap: 2rem;
-    margin-top: 3rem;
+    margin: 3rem 0;
     justify-content: space-between;
 }
 
 .admin-nav {
-    background-color: rgb(25, 25, 25);
-    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.6);
+    background-color: rgb(30, 30, 30);
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
     height: 100%;
     width: 40%;
     border-radius: 1rem;
@@ -45,6 +45,7 @@
     padding: 0;
     box-shadow: none;
     margin-top: 1rem;
+    background-color: rgb(30, 30, 30);
 }
 
 .date-edit-form {
@@ -64,10 +65,10 @@
 .success-users,
 .failed-users {
     width: 100%;
-    max-height: 100%;
-    background-color: white;
+    max-height: 400px;
+    background-color: rgb(30, 30, 30);
     border-radius: 1rem;
-    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.6);
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
     overflow-y: auto;
     padding: .5rem 0;
 }
@@ -80,7 +81,8 @@
 
 .users-container h3 {
     font-size: 1.4rem;
-    border-bottom: 2px solid rgb(95, 95, 95);
+    border-bottom: 4px solid rgb(20, 20, 20);
+    color: white;
 }
 
 .failed-users-body ul,
@@ -90,7 +92,7 @@
 
 .failed-users-body ul li,
 .success-users-body ul li {
-    border-bottom: 1px solid rgb(162, 162, 162);
+    border-bottom: 1px solid rgb(50, 50, 50);
 }
 
 .failed-users-body ul li a,
@@ -107,12 +109,11 @@
 }
 
 .failed-users-body ul li a:hover {
-    background-color: rgb(250, 61, 61);
-    color: white;
+    background-color: rgb(20, 20, 20);
 }
 
 .success-users-body ul li a:hover {
-    background-color: rgb(55, 241, 86);
+    background-color: rgb(20, 20, 20);
 }
 
 .delivered-user h4 {
