@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from solo.admin import SingletonModelAdmin
 from .models import User
 from .models import ProjectsDate
 
@@ -14,11 +14,4 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ('-id', '-date_joined')
     search_fields = ('username', 'email')
 
-
-@admin.register(ProjectsDate)
-class ProjectsDateAdmin(admin.ModelAdmin):
-    list_display = ('start_date', 'end_date')
-    list_display_links = ('start_date', 'end_date')
-    list_filter = ('start_date', 'end_date')
-    search_fields = ('start_date', 'end_date')
-    # list_editable = ('start_date', 'end_date')
+admin.site.register(ProjectsDate, SingletonModelAdmin)

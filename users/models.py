@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin, UserManager
 )
+from solo.models import SingletonModel
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -26,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ordering = ['id']
 
 
-class ProjectsDate(models.Model):
+class ProjectsDate(SingletonModel):
     start_date = models.DateTimeField('Data inicial')
     end_date = models.DateTimeField('Data final')
 
@@ -34,6 +35,5 @@ class ProjectsDate(models.Model):
         return f'Prazo: {self.start_date} - {self.end_date}'
     
     class Meta:
-        db_table = 'prazos'
+        db_table = 'prazo'
         verbose_name = 'prazo'
-        verbose_name_plural = 'prazos'
