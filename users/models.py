@@ -32,3 +32,8 @@ class ProjectsDate(models.Model):
 
     def __str__(self):
         return f'Prazo: {self.start_date} - {self.end_date}'
+    
+    class Meta:
+        db_table = 'prazos'
+        verbose_name = 'prazo'
+        verbose_name_plural = 'prazos'
