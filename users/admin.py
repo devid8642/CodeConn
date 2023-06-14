@@ -14,4 +14,5 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ('-id', '-date_joined')
     search_fields = ('username', 'email')
 
+
 admin.site.register(ProjectsDate, SingletonModelAdmin)

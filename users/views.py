@@ -193,7 +193,7 @@ def user_update(request, id):
 def admin_dashboard(request):
     if request.user.is_staff:
         users = User.objects.all()
-        date = get_object_or_404(ProjectsDate, id=1)
+        date = ProjectsDate.get_solo()
         delivered_projects = []
         expired_users = []
 
@@ -212,7 +212,7 @@ def admin_dashboard(request):
             ).first()
 
             if project and (
-                project.created_at >= date.start_date and 
+                project.created_at >= date.start_date and
                 project.created_at <= date.end_date
             ):
                 delivered_projects.append(project)

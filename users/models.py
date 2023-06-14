@@ -28,12 +28,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class ProjectsDate(SingletonModel):
-    start_date = models.DateTimeField('Data inicial')
-    end_date = models.DateTimeField('Data final')
+    start_date = models.DateTimeField('Data inicial', null=True)
+    end_date = models.DateTimeField('Data final', null=True)
 
     def __str__(self):
         return f'Prazo: {self.start_date} - {self.end_date}'
-    
+
     class Meta:
         db_table = 'prazo'
         verbose_name = 'prazo'
