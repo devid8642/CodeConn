@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'projeto_x.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-'''
+
 if prod == 'True':
     DATABASES = {
         'default': {
@@ -111,14 +111,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-'''
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -149,8 +141,10 @@ LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
-
 USE_TZ = False
+
+if prod == 'True':
+    USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -158,15 +152,17 @@ USE_TZ = False
 
 # Email settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = env('EMAIL_FROM')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-PASSWORD_RESET_TIMEOUT = int(env('PASSWORD_RESET_TIMEOUT', default=10000))
+EMAIL_CONFIRMATION = False
+if prod == 'True':
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_FROM = env('EMAIL_FROM')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    PASSWORD_RESET_TIMEOUT = int(env('PASSWORD_RESET_TIMEOUT', default=10000))
+    EMAIL_CONFIRMATION = True
 
 
 STATIC_URL = 'static/'

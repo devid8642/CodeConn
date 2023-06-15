@@ -6,7 +6,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
-import os
+from django.conf import settings
 
 from .forms import LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
 from utils.email_sending import activate_email
@@ -69,7 +69,7 @@ def register_view(request):
         password = form.cleaned_data.get('password')
         form.cleaned_data.get('confirmed_password')
 
-        if os.environ.get('EMAIL_CONFIRMATION') == 'True':
+        if settings.EMAIL_CONFIRMATION:
             user = User.objects.create_user(
                 username=username,
                 email=email,
