@@ -207,6 +207,12 @@
   .project-search input {
     width: 8rem;
   }
+
+  .nav-item .register-link,
+  .nav-item .profile-link,
+  .nav-item .nav-link {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 300px) {
