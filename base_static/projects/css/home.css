@@ -54,7 +54,6 @@ swiper-slide .project-card {
     color: rgb(177, 177, 177);
     line-height: 1.4rem;
     margin-bottom: 1.5rem;
-    margin-left: .5rem;
 }
 
 .about-body span {
@@ -147,5 +146,11 @@ swiper-slide .project-card {
 @media (max-width: 1200px) {
     .home-title {
         margin-top: 6.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .adm-card {
+        width: 90%;
     }
 }

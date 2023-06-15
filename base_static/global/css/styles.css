@@ -9,7 +9,7 @@
   :root {
     --cor-primaria: #f97c0f;
     --tamanho-fonte: 16px;
-    --background: #0a0015;
+    --background: rgb(5, 5, 15);
     --header-background: #1b1d20;
     --button-color: #d9d9d9;
     --font-color: #080d0d;
