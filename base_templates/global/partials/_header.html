@@ -17,6 +17,10 @@
           <a href="{% url 'projects:all_projects' %}" class="nav-link">Projetos</a>
         </li>
 
+        <li class="nav-item">
+          <a href="{% url 'projects:home' %}#about" class="nav-link">Sobre</a>
+        </li>
+
         {% if request.user.is_authenticated %}
           <li class="nav-item user-nav">
             <p class="profile-link">
