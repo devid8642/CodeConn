@@ -1,17 +1,15 @@
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
+from django.test import override_settings
 from utils.tests_bases import UserTestBase
-from unittest import mock
-import os
 
 from users.models import User
 from users.tokens import account_activation_token
 
-
+@override_settings(
+    EMAIL_CONFIRMATION = True
+)
 class RegisterConfirmationTests(UserTestBase):
-    @mock.patch.dict(os.environ, {
-        "EMAIL_CONFIRMATION": "True"
-    })
     def test_registered_user_confirmation_email_sended(self):
         response = self.response_test_function(
             'users:register',
@@ -23,9 +21,6 @@ class RegisterConfirmationTests(UserTestBase):
 
         self.assertIn(msg, response.content.decode('utf-8'))
 
-    @mock.patch.dict(os.environ, {
-        "EMAIL_CONFIRMATION": "True"
-    })
     def test_activate_account_success(self):
         self.response_test_function(
             'users:register',
@@ -47,9 +42,6 @@ class RegisterConfirmationTests(UserTestBase):
 
         self.assertIn(msg, response.content.decode('utf-8'))
 
-    @mock.patch.dict(os.environ, {
-        "EMAIL_CONFIRMATION": "True"
-    })
     def test_activate_account_fail(self):
         self.response_test_function(
             'users:register',
