@@ -1,26 +1,29 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
-    <title>Registre-se</title>
+  <link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
+  <title>Registre-se</title>
 {% endblock head %}
 
 {% block content %}
-    <main>
-        <form action="{% url 'users:register' %}" method="POST" class="formulario">
-            {% csrf_token %}
-            <fieldset class="fieldset">Registro</fieldset>
-            {{ form.non_field_errors }}
-            {% for field in form %}
-                {{ field.errors }}
-                <div class="user-box">
-                    {{ field }}
-                    {{ field.label_tag }}
-                </div>
-            {% endfor %}
-            <input type="submit" class="formulario-input formulario-button" value="Registrar-se">
-            <p>Já tem conta?<a href="{% url 'users:login' %}"> Faça login</a></p>
-        </form>
-    </main>
+  <div class="container">
+    <div class="auth-container">
+      <form class="auth-form" action="{% url 'users:register' %}" method="POST">
+        <h2>Registre-se</h2>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+          {{ field.errors }}
+          <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}:</label>
+          {{ field }}
+          {{ field.errors }}
+        {% endfor %}
+        <button type="submit" class="login-button">Registrar</button>
+        <p class="auth-message">Já tem uma conta? Faça 
+          <a href="{% url 'users:login' %}">login</a>
+        </p>
+      </form>
+    </div>
+  </div>
 
 {% endblock content %}

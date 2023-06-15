@@ -18,8 +18,10 @@ class LoginForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        add_attr(self.fields['email'], 'class', 'formulario-input')
-        add_attr(self.fields['password'], 'class', 'formulario-input')
+
+        add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
+        add_attr(self.fields['email'], 'autofocus', 'True')
+        add_attr(self.fields['password'], 'placeholder', 'Sua senha')
 
 
 class RegisterForm(forms.Form):
@@ -40,8 +42,15 @@ class RegisterForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
-            add_attr(self.fields[field], 'class', 'formulario-input')
+
+        add_attr(self.fields['username'], 'placeholder', 'Seu nome de usuário')
+        add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
+        add_attr(self.fields['password'], 'placeholder', 'Sua senha')
+        add_attr(
+            self.fields['confirmed_password'],
+            'placeholder',
+            'Confirme sua senha',
+        )
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
