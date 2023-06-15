@@ -209,7 +209,7 @@ def admin_dashboard(request):
         for user in users:
             project = Project.objects.filter(
                 author=user, is_approved=True
-            ).first()
+            ).last()
 
             if project and (
                 project.created_at >= date.start_date and

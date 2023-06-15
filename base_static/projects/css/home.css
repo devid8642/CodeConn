@@ -4,6 +4,15 @@
     color: white;
 }
 
+.date-deadline {
+    color: gray;
+    margin-left: 2.6rem;
+}
+
+.date-deadline span {
+    color:#f97c0f
+}
+
 swiper-container {
     width: 100%;
     height: 100%;
@@ -97,6 +106,7 @@ swiper-slide .project-card {
 .adm-stack {
     color: white;
     border-bottom: 1px solid grey;
+    height: 170px;
 }
 
 .adm-stack h4 {

@@ -7,18 +7,29 @@ from django.db.models import Q
 
 from .models import Project, Comment
 from .forms import ProjectForm, CommentForm
+from users.models import ProjectsDate
 
 
 def home(request):
-    week_projects = Project.objects.filter(
+    date = ProjectsDate.get_solo()
+    week_projects = []
+    projects = Project.objects.filter(
         is_approved=True,
-    )[:5]
+    )
+
+    for project in projects:
+        if project and (
+            project.created_at >= date.start_date and
+            project.created_at <= date.end_date
+        ):
+            week_projects.append(project)
 
     return render(
         request,
         'projects/pages/home.html',
         context={
             'week_projects': week_projects,
+            'date': date,
         }
     )
 
