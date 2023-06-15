@@ -7,7 +7,7 @@
 }
 
 .form-container h2 {
-    color: white;
+    color: rgb(200, 200, 200);
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -27,7 +27,7 @@
 .base-form label {
     display: block;
     margin-bottom: .5rem;
-    color: white;
+    color: rgb(200, 200, 200);
     font-weight: bold;
 }
 
@@ -65,7 +65,7 @@
     text-align: center;
     font-size: 1rem;
     background-color: #f97c0f;
-    color: white;
+    color: rgb(200, 200, 200);
     cursor: pointer;
     border-radius: .2rem;
 }

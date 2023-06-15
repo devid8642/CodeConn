@@ -20,7 +20,7 @@
 }
 
 .admin-container h3 {
-    color: white;
+    color: rgb(200, 200, 200);
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
@@ -32,7 +32,7 @@
 }
 
 .admin-container-header p {
-    color: white;
+    color: rgb(200, 200, 200);
     margin-bottom: .5rem;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .date-edit-form {
-    background-color: white;
+    background-color: rgb(200, 200, 200);
     border-radius: 1rem;
     padding: 1rem;
 }
@@ -82,7 +82,7 @@
 .users-container h3 {
     font-size: 1.4rem;
     border-bottom: 4px solid #0a0015;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .failed-users-body ul,

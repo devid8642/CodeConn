@@ -16,7 +16,7 @@
 .project-search {
   background-color: transparent;
   height: 2rem;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid rgb(200, 200, 200);
 }
 
 .project-search input {
@@ -27,13 +27,13 @@
   padding: 0 0.5rem;
   width: 15rem;
   border-radius: 0.2rem;
-  color: white;
+  color: rgb(200, 200, 200);
 }
 
 .project-search button {
   font-size: 1rem;
   padding: 0 .5rem;
-  color: white;
+  color: rgb(200, 200, 200);
 }
 
 .navbar-nav {
@@ -64,7 +64,7 @@
 .nav-item .nav-link {
   font-size: 1.1rem;
   margin-left: 1rem;
-  color: white;
+  color: rgb(200, 200, 200);
 }
 
 .nav-item .register-link,
@@ -82,8 +82,8 @@
   border-radius: 50%;
   font-size: 1.5rem;
   padding: .3rem .42rem;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid rgb(200, 200, 200);
+  color: rgb(200, 200, 200);
   cursor: pointer;
 }
 
@@ -103,11 +103,11 @@
   background-color: var(--cor-primaria);
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.8);
   border-radius: 20px;
-  color: white;
+  color: rgb(200, 200, 200);
 }
 
 .nav-item .login-link:hover {
-  color: white;
+  color: rgb(200, 200, 200);
 }
 
 .user-nav {
@@ -138,7 +138,7 @@
   text-decoration: none;
   display: block;
   padding: 1rem .8rem;
-  color: white;
+  color: rgb(200, 200, 200);
 }
 
 .user-dropdown ul li a:hover {
@@ -157,7 +157,7 @@
   margin: 5px auto;
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;
-  background-color: white;
+  background-color: rgb(200, 200, 200);
 }
 
 @media (max-width: 1200px) {

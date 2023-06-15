@@ -4,7 +4,7 @@
 
 .post-area {
     padding: 2rem 0;
-    color: white;
+    color: rgb(200, 200, 200);
     border-bottom: 1px solid gray;
 }
 
@@ -33,7 +33,7 @@
 .comment-area .comment-user.staff-user,
 .post-user .user-link.staff-user {
     background-color: #f97c0f;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .comment-area .comment-user.staff-user i,
@@ -83,7 +83,7 @@
 
 .post-text,
 .comment-text {
-    color: rgb(227, 227, 227);
+    color: rgb(200, 200, 200);
 }
 
 .comment-area {
@@ -92,11 +92,11 @@
 
 .comment-area h3 {
     font-size: 1.4rem;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .comments-message {
-    color: white;
+    color: rgb(200, 200, 200);
     padding-bottom: .3rem;
 }
 
@@ -120,7 +120,7 @@
     outline: none;
     font-size: .9rem;
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
-    border: 1px solid white;
+    border: 1px solid rgb(200, 200, 200);
     border-radius: .2rem;
     transition: all 300ms ease-in-out;
 }
@@ -135,16 +135,16 @@
     align-self: flex-end;
     margin-top: .5rem;
     border-radius: .2rem;
-    border: 1px solid white;
+    border: 1px solid rgb(200, 200, 200);
     cursor: pointer;
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
-    background-color: white;
+    background-color: rgb(200, 200, 200);
     transition: 200ms ease-in-out all;
 }
 
 .comment-form button:hover {
     background-color: transparent;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .all-comments {
@@ -174,7 +174,7 @@
 }
 
 .comment .comment-data p {
-    color: white;
+    color: rgb(200, 200, 200);
     font-size: .95rem;
 }
 
@@ -195,7 +195,7 @@
     border: 1px solid rgb(247, 74, 74);
     cursor: pointer;
     background-color: rgb(247, 74, 74);
-    color: white;
+    color: rgb(200, 200, 200);
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
     transition: all 200ms ease-in-out;
 }

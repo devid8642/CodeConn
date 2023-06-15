@@ -1,7 +1,7 @@
 .home-title {
     margin-top: 1.5rem;
     font-size: 2rem;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .date-deadline {
@@ -28,7 +28,7 @@ swiper-slide .project-card {
 }
 
 .about-header h2 {
-    color: white;
+    color: rgb(200, 200, 200);
     font-size: 2rem;
 }
 
@@ -45,7 +45,7 @@ swiper-slide .project-card {
 }
 
 .about-body h3 {
-    color: white;
+    color: rgb(200, 200, 200);
     margin-bottom: .3rem;
 }
 
@@ -100,11 +100,11 @@ swiper-slide .project-card {
 
 .adm-name h3 {
     text-align: center;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .adm-stack {
-    color: white;
+    color: rgb(200, 200, 200);
     border-bottom: 1px solid grey;
     height: 170px;
 }

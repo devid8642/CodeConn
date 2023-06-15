@@ -67,7 +67,7 @@
 
 .user-info {
     margin-left: 3rem;
-    color: white
+    color: rgb(200, 200, 200)
 }
 
 .user-data {
@@ -81,7 +81,7 @@
 .user-links a {
     margin-bottom: .5rem;
     text-decoration: none;
-    color: white;
+    color: rgb(200, 200, 200);
     font-size: 1.1rem;
     padding: .5rem;
     display: flex;
@@ -103,7 +103,7 @@
     padding: 3rem;
     width: 100%;
     box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.599);
-    color: white;
+    color: rgb(200, 200, 200);
     border-radius: 20px;
     background-color: rgb(15, 15, 27);
 }
@@ -185,7 +185,7 @@
     display: block;
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: rgb(200, 200, 200);
     padding: .5rem 0;
     background-color: #f97c0f;
     margin-top: .5rem
@@ -239,7 +239,7 @@
 
     .user-info {
         margin-left: 1rem;
-        color: white
+        color: rgb(200, 200, 200)
     }
 
     .user-posts {
@@ -254,7 +254,7 @@
     .user-links a {
         margin-bottom: .5rem;
         text-decoration: none;
-        color: white;
+        color: rgb(200, 200, 200);
         font-size: 1rem;
         padding: .3rem;
         display: flex;
@@ -276,7 +276,7 @@
     .user-links a {
         margin-bottom: .5rem;
         text-decoration: none;
-        color: white;
+        color: rgb(200, 200, 200);
         font-size: .8rem;
         padding: .3rem;
         display: flex;

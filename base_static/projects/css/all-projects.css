@@ -1,6 +1,6 @@
 .all-projects-title {
     font-size: 2rem;
-    color: white;
+    color: rgb(200, 200, 200);
     margin-top: 2rem;
 }
 
@@ -54,7 +54,7 @@
 
 .card-title p {
     font-size: 1.2rem;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .card-title h3 {
@@ -83,7 +83,7 @@
 
 .project-author.staff-user {
     background-color: #f97c0f;
-    color: white;
+    color: rgb(200, 200, 200);
 }
 
 .project-author.staff-user i {
@@ -117,7 +117,7 @@
     width: 100%;
     background-color: #f97c0f;
     border-radius: .2rem;
-    color: white;
+    color: rgb(200, 200, 200);
     text-decoration: none;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.599);
     margin-top: .5rem;
