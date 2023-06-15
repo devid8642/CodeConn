@@ -35,11 +35,22 @@ swiper-slide .project-card {
     padding-left: 1rem;
 }
 
+.about-body h3 {
+    color: white;
+    margin-bottom: .3rem;
+}
+
 .about-body p {
     font-size: 1.1rem;
-    color: white;
+    color: rgb(177, 177, 177);
     line-height: 1.4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    margin-left: .5rem;
+}
+
+.about-body span {
+    color:#f97c0f;
+    font-weight: bold;
 }
 
 .about-footer {
