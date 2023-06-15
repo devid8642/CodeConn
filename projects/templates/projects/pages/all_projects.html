@@ -43,7 +43,10 @@
                 
                 <p>{{ project.created_at | naturalday }}</p>
               </div>
-              <a href="{% url 'projects:project_detail' project.id %}" class="card-button">Ver projeto</a>
+              <a href="{% url 'projects:project_detail' project.id %}" class="card-button">
+                <i class="bi bi-eye"></i>
+                Ver projeto
+              </a>
             </div>
           </div>
 

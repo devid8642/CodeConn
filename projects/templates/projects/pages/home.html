@@ -10,7 +10,10 @@
 
 {% block content %}
   <div class="container">
-    <h2 class="home-title">Projetos recentes</h2>
+    <h2 class="home-title">
+      <i class="bi bi-calendar-check"></i>
+      Projetos recentes
+    </h2>
     <swiper-container class="mySwiper" init="false">
       {% for project in week_projects %}
         <swiper-slide>
@@ -44,7 +47,10 @@
                 <div class="card-info">
                   <p>{{ project.created_at | naturalday }}</p>
                 </div>
-                <a href="{% url 'projects:project_detail' project.id %}" class="card-button">Ver projeto</a>
+                <a href="{% url 'projects:project_detail' project.id %}" class="card-button">
+                  <i class="bi bi-eye"></i>
+                  Ver projeto
+                </a>
               </div>
             </div>
           </div>

@@ -17,12 +17,18 @@
         <div class="admin-container">
           <div class="admin-container-header">
             <h3>Bem vindo, {{ request.user.username }}!</h3>
-            <h4>Prazo de entrega dos projetos:</h4>
+            <h4>
+              <i class="bi bi-calendar-week"></i>
+              Prazo de entrega dos projetos:
+            </h4>
             <p><strong>Data de inicio:</strong> {{ date.start_date|naturalday }}</p>
             <p><strong>Data final:</strong> {{ date.end_date|naturalday }}</p>
           </div>
           <div class="admin-container-body">
-            <h4>Mudar data de entrega:</h4>
+            <h4>
+              <i class="bi bi-arrow-left-right"></i>
+              Mudar data de entrega:
+            </h4>
 
 
             <form class="base-form" action="" method="POST">
@@ -39,7 +45,7 @@
                 </label>
                 {{ form.end_date }}
               </div>
-              <button type="submit">Mudar</button>
+              <button type="submit">Mudar data</button>
             </form>
 
 
@@ -54,7 +60,10 @@
         <div class="success-users">
           <div class="users-container">
             <div class="success-users-header">
-              <h3>Usuários dentro do prazo de entrega:</h3>
+              <h3>
+                <i class="bi bi-calendar-check"></i>
+                Usuários dentro do prazo de entrega:
+              </h3>
             </div>
             <div class="success-users-body">
               <ul>
@@ -76,7 +85,10 @@
         <div class="failed-users">
           <div class="users-container">
             <div class="failed-users-header">
-              <h3>Usuários fora do prazo de entrega:</h3>
+              <h3>
+                <i class="bi bi-calendar-x"></i>
+                Usuários fora do prazo de entrega:
+              </h3>
             </div>
             <div class="failed-users-body">
               <ul>
