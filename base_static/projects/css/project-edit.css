@@ -15,7 +15,7 @@
 .base-form {
     background-color: rgb(15, 15, 27);
     padding: 2rem;
-    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     border-radius: 1rem;
     width: 30rem;
 }
@@ -43,7 +43,7 @@
     border-radius: .2rem;
     margin: 0;
     border: none;
-    box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.605);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     opacity: .8;
 }
 

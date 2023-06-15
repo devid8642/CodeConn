@@ -27,7 +27,7 @@
     background-color: rgb(155, 253, 220);
     padding: .2rem .5rem;
     border-radius: .2rem;
-    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
 .comment-area .comment-user.staff-user,
@@ -119,7 +119,7 @@
     border: none;
     outline: none;
     font-size: .9rem;
-    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     border: 1px solid rgb(200, 200, 200);
     border-radius: .2rem;
     transition: all 300ms ease-in-out;
@@ -137,7 +137,7 @@
     border-radius: .2rem;
     border: 1px solid rgb(200, 200, 200);
     cursor: pointer;
-    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     background-color: rgb(200, 200, 200);
     transition: 200ms ease-in-out all;
 }
@@ -196,7 +196,7 @@
     cursor: pointer;
     background-color: rgb(247, 74, 74);
     color: rgb(200, 200, 200);
-    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.601);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     transition: all 200ms ease-in-out;
 }
 

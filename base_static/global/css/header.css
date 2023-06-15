@@ -75,7 +75,7 @@
   border-radius: 20px;
   color: var(--cor-primaria);
   margin-left: 1.5rem;
-  box-shadow: 3px 5px 15px rgba(0, 0, 0, .8);
+  box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
 .nav-item .profile-link {
@@ -101,7 +101,7 @@
   padding: .5rem 1.5rem;
   border: 1px solid var(--cor-primaria);
   background-color: var(--cor-primaria);
-  box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
   border-radius: 20px;
   color: rgb(200, 200, 200);
 }
@@ -126,7 +126,7 @@
   left: -5rem;
   width: 13rem;
   background-color: rgb(15, 15, 27);
-  box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.618);
+  box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
   border-radius: .2rem;
 }
 
