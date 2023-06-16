@@ -2,27 +2,41 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'projects/css/project_create.css' %}">
-    <title>Novo projeto</title>
+  <link rel="stylesheet" href="{% static 'projects/css/project-edit.css'%}">
+  <title>Novo projeto</title>
 {% endblock head %}
 
 {% block content %}
-    <form action="{% url 'projects:project_create' %}" method='POST' class="formulario">
+  <div class="container">
+    <div class="form-container">
+
+      <form class="base-form" action="{% url 'projects:project_create' %}" method="POST">
+        <h2>Criar novo projeto</h2>
         {% csrf_token %}
-        <fieldset class="fieldset">Novo Projeto</fieldset>
-        {{ form.non_field_errors }}
-        {% for field in form %}
-            {{ field.errors }}
-            <div class="user-box">
-                {% if field.name == 'explanatory_text' %}
-                    <p>Adicione uma descrição ao seu projeto:</p>
-                    {{ field }}
-                {% else %}
-                    {{ field }}
-                    {{ field.label_tag }}
-                {% endif %}
-            </div>
-        {% endfor %}
-        <input type="submit" class="formulario-input formulario-button" value="Submeter projeto">
-    </form>
+        <div class="input-group">
+          <label class="input-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}:</label>
+          {{ form.title }}
+        </div>
+        <div class="input-group">
+          <label for="{{ form.subtitle.id_for_label }}">Descrição</label>
+          {{ form.subtitle }}
+        </div>
+        <div class="input-group">
+          <label for="{{ form.explanatory_text.id_for_label }}">{{ form.explanatory_text.label }}:</label>
+          {{ form.explanatory_text }}
+        </div>
+        <div class="input-group">
+          <label for="{{ form.link.id_for_label }}">
+            <i class="bi bi-link-45deg"></i>
+            {{ form.link.label }}:
+          </label>
+          {{ form.link }}
+        </div>
+        <button type="submit">
+          <i class="bi bi-plus-circle"></i>
+          Adicionar projeto
+        </button>
+      </form>
+    </div>
+  </div>
 {% endblock content %}

@@ -104,8 +104,20 @@ class UpdateForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field in self.fields:
-            add_attr(self.fields[field], 'class', 'formulario-input')
+
+        username = self.fields['username']
+        email = self.fields['email']
+        linkedin = self.fields['linkedin']
+        github = self.fields['github']
+        password = self.fields['password']
+        new_password = self.fields['new_password']
+
+        add_attr(username, 'placeholder', 'Nome de usuário')
+        add_attr(email, 'placeholder', 'Ex: user@email.com')
+        add_attr(linkedin, 'placeholder', 'Ex: linkedin.com/in/username')
+        add_attr(github, 'placeholder', 'Ex: github.com/username')
+        add_attr(password, 'placeholder', 'Nova senha')
+        add_attr(new_password, 'placeholder', 'Confirmar senha')
 
     def clean_new_password(self):
         new_password = self.cleaned_data.get('new_password')

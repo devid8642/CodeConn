@@ -7,18 +7,17 @@ from utils.forms_utils import add_attr
 class ProjectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        title = self.fields['title']
+        subtitle = self.fields['subtitle']
+        explanatory = self.fields['explanatory_text']
+        link = self.fields['link']
 
-        for field in self.fields:
-            if field == 'explanatory_text':
-                description = '''
-                Descreva a ideia por trás do seu projeto, suas funcionalidades
-                e se possível adicione links para vídeos ou imagens do projeto.
-                '''
-                self.fields[field].widget = forms.Textarea(
-                    attrs={'cols': 50, 'rows': 20}
-                )
-                add_attr(self.fields[field], 'placeholder', description)
-            add_attr(self.fields[field], 'class', 'formulario-input')
+        add_attr(title, 'placeholder', 'Título do seu projeto')
+        add_attr(subtitle, 'placeholder', 'Breve descrição')
+        add_attr(
+            explanatory, 'placeholder', 'Explique e demonstre seu projeto aqui'
+        )
+        add_attr(link, 'placeholder', 'Link para o seu projeto/repositório')
 
     class Meta:
         model = Project

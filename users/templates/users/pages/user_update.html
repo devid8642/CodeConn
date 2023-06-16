@@ -2,24 +2,29 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'users/css/auth.css' %}">
-    <title>Atualizar pefil</title>
+  <link rel="stylesheet" href="{% static 'projects/css/project-edit.css'%}">
+  <title>Atualizar pefil</title>
 {% endblock head %}
 
 {% block content %}
+  <div class="container">
+    <div class="form-container">
 
-    <form action="{% url 'users:user_update' id %}" method="POST" class="formulario">
+      <form class="base-form" action="{% url 'users:user_update' user.id %}" method="POST">
+        <h2>Editar perfil</h2>
         {% csrf_token %}
-        <fieldset class="fieldset">Atualizar dados</fieldset>
-        {{ form.non_field_errors }}
         {% for field in form %}
-            {{ field.errors }}
-            <div class="user-box">
-                {{ field }}
-                {{ field.label_tag }}
-            </div>
+          <div class="input-group">
+            <label class="input-label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+            {{ field }}
+          </div>
         {% endfor %}
-        <input type="submit" class="formulario-input formulario-button" value="Atualizar">
-    </form>
+        <button type="submit">
+          <i class="bi bi-arrow-left-right"></i>
+          Salvar alterações
+        </button>
+      </form>
+    </div>
+  </div>
 
 {% endblock content %}

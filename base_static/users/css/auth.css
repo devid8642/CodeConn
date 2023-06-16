@@ -5,8 +5,8 @@
 
 .auth-form {
     background-color: rgb(15, 15, 27);
-    padding: 1.5rem;
-    margin-top: 5rem;
+    padding: 3rem 1.5rem;
+    margin: 4rem 0;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
@@ -77,6 +77,6 @@
 
 @media (max-width: 768px) {
     .auth-form {
-        margin-top: 7rem
+        margin-top: 10rem
     }
 }

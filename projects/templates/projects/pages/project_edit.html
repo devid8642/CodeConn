@@ -11,8 +11,8 @@
     <div class="form-container">
       
       <form class="base-form" action="{% url 'projects:project_edit' project.id %}" method="POST">
+        <h2>Editar "{{ project.title }}"</h2>
         {% csrf_token %}
-        <h2>{{ project.title }}</h2>
         <div class="input-group">
           <label class="input-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
           {{ form.title }}
@@ -34,7 +34,7 @@
         </div>
         <button type="submit">
           <i class="bi bi-pencil-square"></i>
-          Salvar projeto
+          Editar projeto
         </button>
       </form>
     </div>

@@ -10,7 +10,7 @@
     <div class="container">
       <div class="auth-container">
         <form class="auth-form" action="{% url 'users:login' %}" method="POST">
-          <h2>Login</h2>
+          <h2>Faça login</h2>
           {% csrf_token %}
           {{ form.non_field_errors }}
           {% for field in form %}
@@ -18,7 +18,10 @@
           {{ field }}
           {{ field.errors }}
           {% endfor %}
-          <button type="submit" class="login-button">Login</button>
+          <button type="submit" class="login-button">
+            <i class="bi bi-box-arrow-in-right"></i>
+            Login
+          </button>
           <p class="auth-message">Ainda não tem uma conta? 
             <a href="{% url 'users:register' %}">Registre-se</a>
           </p>
