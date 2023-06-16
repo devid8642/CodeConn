@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from django.contrib.messages import constants
 from pathlib import Path
 import environ
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -92,17 +93,18 @@ WSGI_APPLICATION = 'projeto_x.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-'''
+
 if prod == 'True':
+    db_name = env('DB_NAME')
+    db_user = env('DB_USER')
+    db_pass = env('DB_PASSWORD')
+    db_host = env('DB_HOST')
+    db_port = env('DB_PORT')
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'HOST': env('DB_HOST'),
-            'PORT': env('DB_PORT'),
-        }
+        'default': dj_database_url.config(
+            default=f'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}',
+            conn_max_age=600
+        )
     }
 else:
     DATABASES = {
@@ -111,14 +113,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-'''
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -149,8 +143,10 @@ LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
-
 USE_TZ = False
+
+if prod == 'True':
+    USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -158,15 +154,17 @@ USE_TZ = False
 
 # Email settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_FROM = env('EMAIL_FROM')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-PASSWORD_RESET_TIMEOUT = int(env('PASSWORD_RESET_TIMEOUT', default=10000))
+EMAIL_CONFIRMATION = False
+if prod == 'True':
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_FROM = env('EMAIL_FROM')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    PASSWORD_RESET_TIMEOUT = int(env('PASSWORD_RESET_TIMEOUT', default=10000))
+    EMAIL_CONFIRMATION = True
 
 
 STATIC_URL = 'static/'
@@ -195,3 +193,7 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Render config
+if prod == 'True':
+    ALLOWED_HOSTS.append(env(RENDER_EXTERNAL_HOSTNAME))
