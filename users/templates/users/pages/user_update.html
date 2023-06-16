@@ -13,10 +13,12 @@
       <form class="base-form" action="{% url 'users:user_update' user.id %}" method="POST">
         <h2>Editar perfil</h2>
         {% csrf_token %}
+        {{ form.non_field_errors }}
         {% for field in form %}
           <div class="input-group">
             <label class="input-label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
             {{ field }}
+            {{ field.errors }}
           </div>
         {% endfor %}
         <button type="submit">
