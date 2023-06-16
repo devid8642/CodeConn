@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from django.contrib.messages import constants
 from pathlib import Path
 import environ
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,15 +95,16 @@ WSGI_APPLICATION = 'projeto_x.wsgi.application'
 
 
 if prod == 'True':
+    db_name = env('DB_NAME')
+    db_user = env('DB_USER')
+    db_pass = env('DB_PASSWORD')
+    db_host = env('DB_HOST')
+    db_port = env('DB_PORT')
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'HOST': env('DB_HOST'),
-            'PORT': env('DB_PORT'),
-        }
+        'default': dj_database_url.config(
+            default=f'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}',
+            conn_max_age=600
+        )
     }
 else:
     DATABASES = {
@@ -191,3 +193,7 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Render config
+if prod == 'True':
+    ALLOWED_HOSTS.append(env(RENDER_EXTERNAL_HOSTNAME))
