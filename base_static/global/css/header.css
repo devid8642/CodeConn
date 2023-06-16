@@ -134,11 +134,21 @@
   list-style: none;
 }
 
-.user-dropdown ul li a {
+.user-dropdown ul li a,
+.user-dropdown ul li .logout-link {
   text-decoration: none;
   display: block;
   padding: 1rem .8rem;
   color: rgb(200, 200, 200);
+}
+
+.logout-link {
+  border: none;
+  width: 100%;
+  text-align: left;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .user-dropdown ul li a:hover {

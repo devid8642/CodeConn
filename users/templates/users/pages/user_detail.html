@@ -11,9 +11,13 @@
     {% include 'global/partials/_messages.html' %}
     <div class="user-background">
       {% if owner %}
-        <a class="logout-link" href="{% url 'users:logout' %}">
-          <i class="bi bi-box-arrow-left"></i>
-        </a>
+        <form class="logout-form" action="{% url 'users:logout' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="user" value="{{ request.user.email }}">
+          <button class="logout-link">
+            <i class="bi bi-box-arrow-left"></i>
+          </button>
+        </form>
       {% endif %}
       <div class="user-profile">
         <div class="user-picture">

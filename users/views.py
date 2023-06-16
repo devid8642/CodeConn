@@ -100,8 +100,20 @@ def register_view(request):
     )
 
 
+@login_required(login_url='users:login', redirect_field_name='next')
 def logout_view(request):
+    if not request.POST:
+        messages.error(request, 'Não foi possível fazer o logout!')
+
+        return redirect('projects:home')
+
+    if request.POST.get('user') != request.user.email:
+        messages.error(request, 'Usuário inválido!')
+
+        return redirect('projects:home')
+
     logout(request)
+
     return redirect('projects:home')
 
 

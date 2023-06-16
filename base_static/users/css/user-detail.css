@@ -11,10 +11,13 @@
     background-color: rgb(15, 15, 27);
 }
 
-.user-background .logout-link {
+.logout-form {
     position: absolute;
     top: .5rem;
     right: .7rem;
+}
+
+.user-background .logout-link {
     font-size: 2rem;
     padding: .2rem .4rem 0 .1rem;
     color: rgb(248, 33, 33);

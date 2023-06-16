@@ -51,9 +51,15 @@
                     </a>
                   </li>
                 {% endif %}
-                <li class="nav-item"><a class="logout-link" href="{% url 'users:logout' %}">
-                  <i class="bi bi-box-arrow-left"></i>
-                  Sair</a>
+                <li class="nav-item">
+                  <form action="{% url 'users:logout' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="user" value="{{ request.user.email }}">
+                    <button type="submit" class="logout-link">
+                      <i class="bi bi-box-arrow-left"></i>
+                      Sair
+                    </button>
+                  </form>
                 </li>
               </ul>
             </div>
