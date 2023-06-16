@@ -7,6 +7,7 @@
 .date-deadline {
     color: gray;
     margin-left: 2.6rem;
+    margin-top: .5rem;
 }
 
 .date-deadline span {
@@ -105,7 +106,7 @@ swiper-slide .project-card {
 .adm-stack {
     color: rgb(200, 200, 200);
     border-bottom: 1px solid grey;
-    height: 170px;
+    height: 190px;
 }
 
 .adm-stack h4 {
