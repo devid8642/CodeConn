@@ -10,7 +10,7 @@
     background-color: rgb(15, 15, 27);
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     height: 100%;
-    width: 45%;
+    width: 30%;
     border-radius: 1rem;
     padding-bottom: 2rem;
 }
@@ -91,15 +91,15 @@
 
 .deliver-area {
     height: 100%;
-    width: 100%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
 .success-users,
-.failed-users {
-    width: 100%;
+.failed-users,
+.non-approved-projects {
     max-height: 400px;
     background-color: rgb(15, 15, 27);
     border-radius: 1rem;
@@ -110,7 +110,8 @@
 
 .users-container h3,
 .failed-users-body ul li a,
-.success-users-body ul li a {
+.success-users-body ul li a,
+.non-approved-body ul li a {
     padding: 1rem;
 }
 
@@ -121,17 +122,20 @@
 }
 
 .failed-users-body ul,
-.success-users-body ul {
+.success-users-body ul,
+.non-approved-body ul {
     list-style: none;
 }
 
 .failed-users-body ul li,
-.success-users-body ul li {
+.success-users-body ul li,
+.non-approved-body ul li {
     border-bottom: 1px solid rgb(50, 50, 50);
 }
 
 .failed-users-body ul li a,
-.success-users-body ul li a {
+.success-users-body ul li a,
+.non-approved-body ul li a  {
     text-decoration: none;
     display: block;
     width: 100%;
@@ -144,7 +148,8 @@
 }
 
 .failed-users-body ul li a:hover,
-.success-users-body ul li a:hover  {
+.success-users-body ul li a:hover,
+.non-approved-body ul li a:hover  {
     background-color:rgb(15, 15, 15);
 }
 
@@ -160,6 +165,10 @@
     color: rgb(76, 76, 76)
 }
 
+.non-approved-body h4 {
+    color: rgb(252, 37, 37)
+}
+
 @media (max-width: 1200px) {
     .admin-area {
         margin-top: 7rem;
@@ -172,6 +181,14 @@
     }
 
     .admin-nav {
+        width: 100%;
+    }
+
+    .deliver-area {
+        width: 100%;
+    }
+
+    .non-approved-projects {
         width: 100%;
     }
 }

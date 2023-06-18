@@ -20,7 +20,7 @@
               <h3>Bem vindo, {{ request.user.username }}!</h3>
               <a href="/admin/projects/project" class="non-approved" target="_blank">
                 <i class="bi bi-file-earmark-text"></i>
-                <span>{{ non_approved }}</span>
+                <span>{{ non_approved_count }}</span>
               </a>
             </div>
             <h4>
@@ -113,7 +113,31 @@
           </div>
         </div>
 
+        
+      </div>
 
+      <div class="non-approved-projects">
+        <div class="users-container">
+          <div class="non-approved-header">
+            <h3>
+              <i class="bi bi-x-circle"></i>
+              Não aprovados:
+            </h3>
+          </div>
+          <div class="non-approved-body">
+            <ul>
+              {% for project in non_approved %}
+                <li>
+                  <a class="delivered-user" href="/admin/projects/project/{{ project.id }}/change/">
+                    <h4>{{ project.author.username }}</h4>
+                    <p>Projeto: {{ project.title }}</p>
+                    <p>Publicado: {{ project.created_at|naturalday }}</p>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
