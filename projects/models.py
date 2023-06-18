@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 from users.models import User
 
@@ -6,7 +7,10 @@ from users.models import User
 class Project(models.Model):
     title = models.CharField('Título', max_length=50)
     subtitle = models.CharField('Subtítulo', max_length=100)
-    explanatory_text = models.TextField('Texto de explicação')
+    explanatory_text = RichTextField(
+        'Texto de explicação', blank=True, null=True
+    )
+    # explanatory_text = models.TextField('Texto de explicação')
     author = models.ForeignKey(
         User, verbose_name='Autor', on_delete=models.SET_NULL, null=True
     )

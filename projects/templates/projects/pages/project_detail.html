@@ -28,7 +28,7 @@
           <p class="post-description">{{ project.subtitle }}</p>
         </div>
         <div class="post-body">
-          <div class="post-text">{{ project.explanatory_text }}</div>
+          <div class="post-text">{{ project.explanatory_text|safe }}</div>
           <div class="post-link">
             {% if project.link %}
               <a href="{{ project.link }}" target="_blank">

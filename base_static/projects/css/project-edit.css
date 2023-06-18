@@ -17,7 +17,7 @@
     padding: 2rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     border-radius: 1rem;
-    width: 30rem;
+    width: 35rem;
 }
 
 .base-form .input-group {
@@ -46,6 +46,10 @@
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     opacity: .8;
+}
+
+.django-ckeditor-widget textarea {
+    width: 100%;
 }
 
 .base-form textarea {

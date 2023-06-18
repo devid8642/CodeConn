@@ -13,6 +13,7 @@
       <form class="base-form" action="{% url 'projects:project_create' %}" method="POST">
         <h2>Criar novo projeto</h2>
         {% csrf_token %}
+        {{ form.media }}
         <div class="input-group">
           <label class="input-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}:</label>
           {{ form.title }}
