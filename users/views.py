@@ -208,6 +208,9 @@ def admin_dashboard(request):
         date = ProjectsDate.get_solo()
         delivered_projects = []
         expired_users = []
+        non_approved = Project.objects.filter(
+            is_approved=False,
+        ).count()
 
         form = ProjectsDateForm(
             request.POST or None,
@@ -243,5 +246,6 @@ def admin_dashboard(request):
             'expired_users': expired_users,
             'form': form,
             'date': date,
+            'non_approved': non_approved,
         }
     )

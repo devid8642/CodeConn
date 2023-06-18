@@ -16,13 +16,20 @@
       <div class="admin-nav">
         <div class="admin-container">
           <div class="admin-container-header">
-            <h3>Bem vindo, {{ request.user.username }}!</h3>
+            <div class="header-title">
+              <h3>Bem vindo, {{ request.user.username }}!</h3>
+              <a href="/admin/projects/project" class="non-approved" target="_blank">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>{{ non_approved }}</span>
+              </a>
+            </div>
             <h4>
               <i class="bi bi-calendar-week"></i>
               Prazo de entrega dos projetos:
             </h4>
             <p><strong>Data de inicio:</strong> {{ date.start_date|naturalday }}</p>
             <p><strong>Data final:</strong> {{ date.end_date|naturalday }}</p>
+            
           </div>
           <div class="admin-container-body">
             <h4>

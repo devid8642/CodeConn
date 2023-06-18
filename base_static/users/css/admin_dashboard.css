@@ -21,7 +21,6 @@
 
 .admin-container h3 {
     color: rgb(200, 200, 200);
-    margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
 
@@ -34,6 +33,42 @@
 .admin-container-header p {
     color: rgb(200, 200, 200);
     margin-bottom: .5rem;
+}
+
+.header-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.non-approved {
+    display: block;
+    position: relative;
+    color:rgb(200, 200, 200);
+    text-decoration: none;
+    font-size: 1.7rem;
+    width: fit-content;
+    padding-right: .7rem;
+}
+
+.non-approved:hover {
+    color:#f97c0f
+}
+
+.non-approved span {
+    position: absolute;
+    font-size: .8rem;
+    top: -8px;
+    right: -7px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color:#1645ff;
+    min-width: 20px;
+    min-height: 20px; 
 }
 
 .admin-container-body {
@@ -116,7 +151,7 @@
 .delivered-user h4 {
     margin-bottom: .3rem;
     font-size: 1.2rem;
-    color: #f97c0f;
+    color: #1645ff;
 }
 
 
