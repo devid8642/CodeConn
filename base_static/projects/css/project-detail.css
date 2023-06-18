@@ -155,6 +155,10 @@
     margin-bottom: 1rem;
 }
 
+.all-comments p {
+    color: rgb(200, 200, 200);
+}
+
 .comment {
     margin-bottom: 2rem;
     padding-bottom: .7rem;

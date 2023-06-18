@@ -4,7 +4,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'projects/css/project-detail.css'%}">
-  <title>Projeto</title>
+  <title>{{ project.title }} - {{ project.author.username }}</title>
 {% endblock head %}
 
 {% block content %}
@@ -94,6 +94,8 @@
                 <p class="comment-text">{{ comment.comment }}</p>
               </div>
             </div>
+          {% empty %}
+            <p>Nenhum comentário ainda</p>
           {% endfor %}
         </div>
       </div>

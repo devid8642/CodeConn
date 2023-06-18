@@ -3,7 +3,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'users/css/user-detail.css' %}">
-  <title>Meu perfil</title>
+  <title>{{ user.username }}</title>
 {% endblock head %}
 
 {% block content %}
@@ -96,6 +96,8 @@
               <a href="{% url 'projects:project_detail' project.id %}">Ver projeto</a>
             </div>
           </div>
+        {% empty %}
+        <p>Nenhum post ainda</p>
         {% endfor %}
       </div>
     </div>
