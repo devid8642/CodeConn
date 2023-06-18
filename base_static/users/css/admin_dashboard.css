@@ -165,6 +165,10 @@
     color: rgb(76, 76, 76)
 }
 
+.non-approved-projects {
+    width: 30%;
+}
+
 .non-approved-body h4 {
     color: rgb(252, 37, 37)
 }
