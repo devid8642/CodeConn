@@ -10,7 +10,6 @@ class Project(models.Model):
     explanatory_text = RichTextField(
         'Texto de explicação', blank=True, null=True
     )
-    # explanatory_text = models.TextField('Texto de explicação')
     author = models.ForeignKey(
         User, verbose_name='Autor', on_delete=models.SET_NULL, null=True
     )
