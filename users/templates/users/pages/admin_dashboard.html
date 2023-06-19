@@ -82,6 +82,12 @@
                       <p>Publicado: {{ project.created_at|naturalday }}</p>
                     </a>
                   </li>
+                {% empty %}
+                  <li>
+                    <a class="delivered-user" href="/admin/projects/project" target="_blank">
+                      <p>Nenhum projeto dentro do prazo.</p>
+                    </a>
+                  </li>
                 {% endfor %}
               </ul>
             </div>
@@ -105,6 +111,12 @@
                       <h4>
                         {{ user.username}}
                       </h4>
+                    </a>
+                  </li>
+                {% empty %}
+                  <li>
+                    <a href="/admin/projects/project" class="expired-users" target="_blank">
+                      <p>Nenhum usuário fora do prazo</p>
                     </a>
                   </li>
                 {% endfor %}
@@ -132,6 +144,12 @@
                     <h4>{{ project.author.username }}</h4>
                     <p>Projeto: {{ project.title }}</p>
                     <p>Publicado: {{ project.created_at|naturalday }}</p>
+                  </a>
+                </li>
+              {% empty %}
+                <li>
+                  <a class="delivered-user" href="/admin/projects/project" target="_blank">
+                    <p>Nenhum projeto não aprovado.</p>
                   </a>
                 </li>
               {% endfor %}
