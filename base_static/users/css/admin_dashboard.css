@@ -100,6 +100,7 @@
 .success-users,
 .failed-users,
 .non-approved-projects {
+    height: fit-content;
     max-height: 400px;
     background-color: rgb(15, 15, 27);
     border-radius: 1rem;
