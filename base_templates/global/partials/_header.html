@@ -3,77 +3,78 @@
 <header>
     <nav class="container navbar">
       <a href="{% url 'projects:home' %}" class="nav-brand">Projeto X</a>
+      <div class="navbar-nav">
+        <form class="project-search" action="{% url 'projects:project_search' %}">
+          {% csrf_token %}
+          <input type="text" placeholder="Pesquise aqui" name="q">
+          <button type="submit" class="btn">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
 
-      <form class="project-search" action="{% url 'projects:project_search' %}">
-        {% csrf_token %}
-        <input type="text" placeholder="Pesquise aqui" name="q">
-        <button type="submit" class="btn">
-          <i class="bi bi-search"></i>
-        </button>
-      </form>
+        <ul class="navbar-items">
+          <li class="nav-item">
+            <a href="{% url 'projects:all_projects' %}" class="nav-link">Projetos</a>
+          </li>
 
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="{% url 'projects:all_projects' %}" class="nav-link">Projetos</a>
-        </li>
-
-        <li class="nav-item">
-          <a href="{% url 'projects:home' %}#about" class="nav-link">Sobre</a>
-        </li>
-
-        {% if request.user.is_authenticated %}
-          <li class="nav-item user-nav">
-            <p class="profile-link">
-              <i class="bi bi-person-fill"></i>
-            </p>
-            <div class="user-dropdown">
-              <ul>
-                <li class="nav-item">
-                  <p class="username">Logado como: <strong>{{ request.user.username }}</strong></p>
-                </li>
-                <li class="nav-item"><a href="{% url 'projects:project_create' %}">
-                  <i class="bi bi-file-earmark-plus"></i>
-                  Publicar projeto</a>
-                </li>
-                <li class="nav-item"><a href="{% url 'users:user_detail' request.user.id %}">
-                  <i class="bi bi-person-circle"></i>
-                  Meu Perfil</a>
-                </li>
-                {% if request.user.is_staff %}
-                  <li class="nav-item"><a href="{% url 'users:admin_dashboard' %}">
-                    <i class="bi bi-clipboard-data"></i>
-                    Dashboard</a>
-                  </li>
+          <li class="nav-item">
+            <a href="{% url 'projects:home' %}#about" class="nav-link">Sobre</a>
+          </li>
+  
+          {% if request.user.is_authenticated %}
+            <li class="nav-item user-nav">
+              <p class="profile-link">
+                <i class="bi bi-person-fill"></i>
+              </p>
+              <div class="user-dropdown">
+                <ul>
                   <li class="nav-item">
-                    <a href="/admin/" target="_blank">
-                      <i class="bi bi-person-fill-lock"></i>
-                      Área Administrativa
-                    </a>
+                    <p class="username">Logado como: <strong>{{ request.user.username }}</strong></p>
                   </li>
-                {% endif %}
-                <li class="nav-item">
-                  <form action="{% url 'users:logout' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="user" value="{{ request.user.email }}">
-                    <button type="submit" class="logout-link">
-                      <i class="bi bi-box-arrow-left"></i>
-                      Sair
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-          </li>
-          
-        {% else %}
-          <li class="nav-item">
-            <a href="{% url 'users:register' %}" class="nav-link register-link">Registre-se</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'users:login' %}" class="nav-link login-link">Login</a>
-          </li>
-        {% endif %}
-      </ul>
+                  <li class="nav-item"><a href="{% url 'projects:project_create' %}">
+                    <i class="bi bi-file-earmark-plus"></i>
+                    Publicar projeto</a>
+                  </li>
+                  <li class="nav-item"><a href="{% url 'users:user_detail' request.user.id %}">
+                    <i class="bi bi-person-circle"></i>
+                    Meu Perfil</a>
+                  </li>
+                  {% if request.user.is_staff %}
+                    <li class="nav-item"><a href="{% url 'users:admin_dashboard' %}">
+                      <i class="bi bi-clipboard-data"></i>
+                      Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/" target="_blank">
+                        <i class="bi bi-person-fill-lock"></i>
+                        Área Administrativa
+                      </a>
+                    </li>
+                  {% endif %}
+                  <li class="nav-item">
+                    <form action="{% url 'users:logout' %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="user" value="{{ request.user.email }}">
+                      <button type="submit" class="logout-link">
+                        <i class="bi bi-box-arrow-left"></i>
+                        Sair
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            
+          {% else %}
+            <li class="nav-item">
+              <a href="{% url 'users:register' %}" class="nav-link register-link">Registre-se</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'users:login' %}" class="nav-link login-link">Login</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
 
       <div class="hamburguer">
         <span class="bar"></span>

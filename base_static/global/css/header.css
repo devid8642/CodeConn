@@ -17,6 +17,7 @@
   background-color: transparent;
   height: 2rem;
   border-bottom: 1px solid rgb(200, 200, 200);
+  margin-right: 5rem;
 }
 
 .project-search input {
@@ -37,6 +38,11 @@
 }
 
 .navbar-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-nav .navbar-items {
   list-style: none;
   display: flex;
   align-items: center;
@@ -192,6 +198,11 @@
     z-index: 40;
   }
 
+  .project-search {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+
   .navbar-nav {
     position: fixed;
     left: -100%;
@@ -206,6 +217,14 @@
     transition: 300ms;
   }
 
+  .navbar-nav .navbar-items {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .navbar-nav .nav-item {
     margin: 10px 0;
   }
@@ -214,8 +233,8 @@
     left: 0;
   }
 
-  .project-search input {
-    width: 8rem;
+  .user-dropdown {
+    height: fit-content;
   }
 
   .nav-item .register-link,
@@ -227,6 +246,6 @@
 
 @media (max-width: 300px) {
   .project-search input {
-    width: 4rem;
+    width: 10rem;
   }
 }
