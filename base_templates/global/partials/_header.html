@@ -4,13 +4,23 @@
     <nav class="container navbar">
       <a href="{% url 'projects:home' %}" class="nav-brand">Projeto X</a>
       <div class="navbar-nav">
-        <form class="project-search" action="{% url 'projects:project_search' %}">
-          {% csrf_token %}
-          <input type="text" placeholder="Pesquise aqui" name="q">
-          <button type="submit" class="btn">
-            <i class="bi bi-search"></i>
-          </button>
-        </form>
+        {% if request.user.is_authenticated %}
+          <form class="project-search search-logged" action="{% url 'projects:project_search' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="Pesquise aqui" name="q">
+            <button type="submit" class="btn">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        {% else %}
+          <form class="project-search" action="{% url 'projects:project_search' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="Pesquise aqui" name="q">
+            <button type="submit" class="btn">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        {% endif %}
 
         <ul class="navbar-items">
           <li class="nav-item">
