@@ -2,7 +2,7 @@
 
 <header>
     <nav class="container navbar">
-      <a href="{% url 'projects:home' %}" class="nav-brand">Projeto X</a>
+      <a href="{% url 'projects:home' %}" class="nav-brand">CodeCon</a>
       <div class="navbar-nav">
         {% if request.user.is_authenticated %}
           <form class="project-search search-logged" action="{% url 'projects:project_search' %}">
