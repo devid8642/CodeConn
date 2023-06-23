@@ -134,17 +134,18 @@
     padding: .4rem .7rem;
     align-self: flex-end;
     margin-top: .5rem;
-    border-radius: .2rem;
-    border: 1px solid rgb(200, 200, 200);
+    border-radius: 1rem;
+    border: 1px solid #1645ff;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
-    background-color: rgb(200, 200, 200);
+    background-color: #1645ff;
     transition: 200ms ease-in-out all;
+    color: rgb(200, 200, 200);
 }
 
 .comment-form button:hover {
     background-color: transparent;
-    color: rgb(200, 200, 200);
+    color: #1645ff;
 }
 
 .all-comments {
@@ -193,9 +194,13 @@
 }
 
 .comment-delete button {
-    width: 5rem;
-    padding: .2rem .5rem;
-    border-radius: .2rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    border-radius: 50%;
     border: 1px solid rgb(247, 74, 74);
     cursor: pointer;
     background-color: rgb(247, 74, 74);

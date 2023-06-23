@@ -48,7 +48,10 @@
               {% csrf_token %}
               <label for="{{ comment_form.id_for_label }}">{{ comment_form.label }}</label>
               {{ comment_form.comment }}
-              <button type="submit">Comentar</button>
+              <button type="submit">
+                <i class="bi bi-chat"></i>
+                Comentar
+              </button>
             </form>
           </div>
         {% else %}
@@ -86,7 +89,9 @@
                   <form class="form-delete comment-delete" action="{% url 'projects:comment_delete' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="comment-id" value="{{ comment.id }}">
-                    <button type="submit">Deletar</button>
+                    <button type="submit">
+                      <i class="bi bi-trash"></i>
+                    </button>
                   </form>
                 {% endif %}
               </div>
