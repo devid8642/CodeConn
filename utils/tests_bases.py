@@ -10,6 +10,7 @@ class ProjectMixin:
         email: str = 'username@email.com',
         username: str = 'username',
         password: str = '123456',
+        is_staff: bool = False
     ) -> User:
         '''
         Create a user with the registration parameters.
@@ -19,6 +20,7 @@ class ProjectMixin:
             email=email,
             username=username,
             password=password,
+            is_staff=is_staff,
         )
 
     def make_project(
@@ -100,14 +102,18 @@ class TestBase(TestCase, ProjectMixin):
     def register_and_login(
         self,
         email: str = 'username@email.com',
+        username: str = 'username',
         password: str = '123456',
+        is_staff: bool = False
     ) -> User:
         '''
         Create a user and login.
         '''
         self.make_author(
             email=email,
+            username=username,
             password=password,
+            is_staff=is_staff,
         )
         login = self.client.login(
             email=email,
