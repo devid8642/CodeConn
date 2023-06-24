@@ -1,0 +1,35 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+  <title>Admin - Ideias</title>
+  <link rel="stylesheet" href="{% static 'users/css/ideas_admin.css' %}">
+{% endblock head %}
+
+{% block content %}
+  <div class="container">
+    <div class="ideas-admin-container">
+      <h2>Ideias de projetos</h2>
+      <h3>De: {{ date.start_date|naturalday }}</h3>
+      <h3>Até: {{ date.end_date|naturalday }}</h3>
+      <hr>
+      {% for idea in new_ideas %}
+        <h3>{{ idea.idea }}</h3>
+        <p>{{ idea.level }}</p>
+        <p>{{ idea.explanation }}</p>
+        <p>De: {{ idea.start_date|naturalday }}</p>
+        <p>Até {{ idea.end_date|naturalday }}</p>
+        <hr>
+      {% endfor %}
+      <hr>
+      {% for idea in all_ideas %}
+        <h3>{{ idea.idea }}</h3>
+        <p>{{ idea.level }}</p>
+        <p>De: {{ idea.start_date|naturalday }}</p>
+        <p>Até {{ idea.end_date|naturalday }}</p>
+        <hr>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

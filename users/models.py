@@ -37,3 +37,14 @@ class ProjectsDate(SingletonModel):
     class Meta:
         db_table = 'prazo'
         verbose_name = 'prazo'
+
+
+class ProjectsIdeas(models.Model):
+    idea = models.CharField('Ideia de projeto', max_length=255)
+    level = models.CharField('Nível', max_length=255)
+    explanation = models.TextField('Explicação')
+    start_date = models.DateTimeField('Data inicial', null=True)
+    end_date = models.DateTimeField('Data final', null=True)
+
+    def __str__(self):
+        return self.idea

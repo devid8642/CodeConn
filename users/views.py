@@ -12,7 +12,7 @@ from .forms import LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
 from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
-from .models import User, ProjectsDate
+from .models import User, ProjectsDate, ProjectsIdeas
 
 
 def login_view(request):
@@ -249,5 +249,29 @@ def admin_dashboard(request):
             'date': date,
             'non_approved': non_approved,
             'non_approved_count': non_approved_count,
+        }
+    )
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def ideas_admin(request):
+    if request.user.is_staff:
+        date = ProjectsDate.get_solo()
+        new_ideas = ProjectsIdeas.objects.filter(
+            start_date=date.start_date,
+            end_date=date.end_date,
+        ).order_by('-id')
+        all_ideas = ProjectsIdeas.objects.all().order_by('-id')
+
+    else:
+        return redirect('projects:home')
+
+    return render(
+        request,
+        'users/pages/ideas_admin.html',
+        context={
+            'new_ideas': new_ideas,
+            'all_ideas': all_ideas,
+            'date': date,
         }
     )
