@@ -6,6 +6,11 @@
     margin-top: 3rem;
 }
 
+.ideas-admin-container.default-user {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
 .ideas-add,
 .new-ideas,
 .all-ideas {
