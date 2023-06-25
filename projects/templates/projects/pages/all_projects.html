@@ -37,7 +37,7 @@
             </div>
             <div class="card-description">
               {% if project.is_inspired %}
-                <p>Inspirado em:  <a href="">{{ project.is_inspired }}</a></p>
+                <p>Inspirado em:  <a href="{% url 'users:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a></p>
                 <p>Stack utilizada: <a href="">{{ project.stack }}</a></p>
               {% endif %}
               <p>{{ project.subtitle }}</p>

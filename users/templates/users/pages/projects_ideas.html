@@ -14,7 +14,7 @@
       <div class="new-ideas">
         <h2>Novas ideias</h2>
         {% for idea in new_ideas %}
-          <a href="" class="ideas-card">
+          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
               <p>{{ idea.stack }}</p>
@@ -31,7 +31,7 @@
       <div class="all-ideas">
         <h2>Todas as ideias</h2>
         {% for idea in all_ideas %}
-          <a href="" class="ideas-card">
+          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
               <p>{{ idea.stack }}</p>

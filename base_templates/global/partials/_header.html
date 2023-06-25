@@ -45,6 +45,10 @@
                     <i class="bi bi-file-earmark-plus"></i>
                     Publicar projeto</a>
                   </li>
+                  <li class="nav-item"><a href="{% url 'users:projects_ideas' %}">
+                    <i class="bi bi-file-earmark-plus"></i>
+                    Ideias de projetos</a>
+                  </li>
                   <li class="nav-item"><a href="{% url 'users:user_detail' request.user.id %}">
                     <i class="bi bi-person-circle"></i>
                     Meu Perfil</a>
@@ -59,6 +63,10 @@
                         <i class="bi bi-person-fill-lock"></i>
                         Área Administrativa
                       </a>
+                    </li>
+                    <li class="nav-item"><a href="{% url 'users:ideas_admin' %}">
+                      <i class="bi bi-file-earmark-plus"></i>
+                      Adicionar ideia</a>
                     </li>
                   {% endif %}
                   <li class="nav-item">
