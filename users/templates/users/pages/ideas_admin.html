@@ -5,31 +5,59 @@
 {% block head %}
   <title>Admin - Ideias</title>
   <link rel="stylesheet" href="{% static 'users/css/ideas_admin.css' %}">
+  <link rel="stylesheet" href="{% static 'projects/css/project-edit.css' %}">
 {% endblock head %}
 
 {% block content %}
   <div class="container">
     <div class="ideas-admin-container">
-      <h2>Ideias de projetos</h2>
-      <h3>De: {{ date.start_date|naturalday }}</h3>
-      <h3>Até: {{ date.end_date|naturalday }}</h3>
-      <hr>
-      {% for idea in new_ideas %}
-        <h3>{{ idea.idea }}</h3>
-        <p>{{ idea.level }}</p>
-        <p>{{ idea.explanation }}</p>
-        <p>De: {{ idea.start_date|naturalday }}</p>
-        <p>Até {{ idea.end_date|naturalday }}</p>
-        <hr>
-      {% endfor %}
-      <hr>
-      {% for idea in all_ideas %}
-        <h3>{{ idea.idea }}</h3>
-        <p>{{ idea.level }}</p>
-        <p>De: {{ idea.start_date|naturalday }}</p>
-        <p>Até {{ idea.end_date|naturalday }}</p>
-        <hr>
-      {% endfor %}
+      <div class="ideas-add">
+        <h2>Adicionar ideia</h2>
+        <form action="" method="POST" class="base-form">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="" class="form-label">Label:</label>
+            <input type="text" class="form-control" placeholder="Input here">
+          </div>
+          <div class="input-group">
+            <label for="" class="form-label">Label:</label>
+            <input type="text" class="form-control" placeholder="Input here">
+          </div>
+          <div class="input-group">
+            <label for="" class="form-label">Label:</label>
+            <input type="text" class="form-control" placeholder="Input here">
+          </div>
+          <button type="submit">Adicionar ideia</button>
+        </form>
+      </div>
+      <div class="new-ideas">
+        <h2>Novas ideias</h2>
+        {% for idea in new_ideas %}
+          <a href="" class="ideas-card">
+            <div class="idea-title">
+              <h4>{{ idea.idea }}</h4>
+            </div>
+            <div class="idea-body">
+              <p class="idea-level">Nível: {{ idea.level }}</p>
+              <p class="idea-date">{{ idea.start_date|naturalday }} - {{ idea.end_date|naturalday }}</p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="all-ideas">
+        <h2>Todas as ideias</h2>
+        {% for idea in new_ideas %}
+          <a href="" class="ideas-card">
+            <div class="idea-title">
+              <h4>{{ idea.idea }}</h4>
+            </div>
+            <div class="idea-body">
+              <p class="idea-level">Nível: {{ idea.level }}</p>
+              <p class="idea-date">{{ idea.start_date|naturalday }} - {{ idea.end_date|naturalday }}</p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endblock content %}
