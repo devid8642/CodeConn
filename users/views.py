@@ -255,7 +255,6 @@ def admin_dashboard(request):
     )
 
 
-@login_required(login_url='users:login', redirect_field_name='next')
 def projects_ideas(request):
     date = ProjectsDate.get_solo()
     new_ideas = []
@@ -275,6 +274,18 @@ def projects_ideas(request):
             'new_ideas': new_ideas,
             'all_ideas': all_ideas,
             'date': date,
+        }
+    )
+
+
+def idea_detail(request, pk):
+    idea = get_object_or_404(ProjectsIdeas, pk=pk)
+
+    return render(
+        request,
+        'users/pages/idea_detail.html',
+        context={
+            'idea': idea
         }
     )
 

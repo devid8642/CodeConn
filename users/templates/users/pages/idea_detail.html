@@ -1,0 +1,14 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'users/css/idea_detail.css' %}">
+{% endblock head %}
+
+{% block content %}
+  <div class="container">
+    <h2>Idea detail</h2>
+    <p>{{ idea.idea }}</p>
+  </div>
+{% endblock content %}
