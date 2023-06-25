@@ -260,7 +260,7 @@ def ideas_admin(request):
     if request.user.is_staff:
         date = ProjectsDate.get_solo()
         new_ideas = []
-        all_ideas = ProjectsIdeas.objects.all()
+        all_ideas = ProjectsIdeas.objects.all().order_by('-id')
 
         form = IdeasForm(request.POST or None)
 

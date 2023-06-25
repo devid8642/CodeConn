@@ -43,6 +43,10 @@
                 </p>
               </div>
               <div class="card-description">
+                {% if project.is_inspired %}
+                  <p>Inspirado em:  <a href="">{{ project.is_inspired }}</a></p>
+                  <p>Stack utilizada: <a href="">{{ project.stack }}</a></p>
+                {% endif %}
                 <p>{{ project.subtitle }}</p>
               </div>
               <div class="card-footer">

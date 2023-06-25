@@ -23,6 +23,7 @@ class Project(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
+    stack = models.CharField('Stack utilizada', max_length=255, null=True)
 
     def __str__(self):
         return f'Project {self.id} - {self.title}'

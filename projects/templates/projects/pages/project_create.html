@@ -33,6 +33,13 @@
           </label>
           {{ form.link }}
         </div>
+        <div class="input-group">
+          <label for="{{ form.is_inspired.id_for_label }}">
+            <i class="bi bi-link-45deg"></i>
+            {{ form.is_inspired.label }}:
+          </label>
+          {{ form.is_inspired }}
+        </div>
         <button type="submit">
           <i class="bi bi-plus-circle"></i>
           Adicionar projeto

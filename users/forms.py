@@ -151,13 +151,9 @@ class IdeasForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         idea = self.fields['idea']
-        level = self.fields['level']
-        stack = self.fields['stack']
         explanation = self.fields['explanation']
 
-        add_attr(idea, 'placeholder', 'Ideia')
-        add_attr(level, 'placeholder', 'Dificuldade da ideia')
-        add_attr(stack, 'placeholder', 'Stack utilizada')
+        add_attr(idea, 'placeholder', 'Ideia de projeto')
         add_attr(explanation, 'placeholder', 'Explicação da ideia')
 
     class Meta:
