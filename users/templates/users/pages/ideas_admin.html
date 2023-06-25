@@ -13,20 +13,14 @@
     <div class="ideas-admin-container">
       <div class="ideas-add">
         <h2>Adicionar ideia</h2>
-        <form action="" method="POST" class="base-form">
+        <form action="{% url 'users:ideas_admin' %}" method="POST" class="base-form">
           {% csrf_token %}
-          <div class="input-group">
-            <label for="" class="form-label">Label:</label>
-            <input type="text" class="form-control" placeholder="Input here">
-          </div>
-          <div class="input-group">
-            <label for="" class="form-label">Label:</label>
-            <input type="text" class="form-control" placeholder="Input here">
-          </div>
-          <div class="input-group">
-            <label for="" class="form-label">Label:</label>
-            <input type="text" class="form-control" placeholder="Input here">
-          </div>
+          {% for field in form %}
+            <div class="input-group">
+              <label for="" class="form-label">{{ field.label }}:</label>
+              {{ field }}
+            </div>
+          {% endfor %}
           <button type="submit">Adicionar ideia</button>
         </form>
       </div>
@@ -36,24 +30,30 @@
           <a href="" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
+              <p>{{ idea.stack }}</p>
             </div>
             <div class="idea-body">
-              <p class="idea-level">Nível: {{ idea.level }}</p>
-              <p class="idea-date">{{ idea.start_date|naturalday }} - {{ idea.end_date|naturalday }}</p>
+              <p class="idea-level">Nível: {{ idea.get_level_display }}</p>
+              <p class="idea-date">
+                {{ idea.start_date|naturalday }}
+              </p>
             </div>
           </a>
         {% endfor %}
       </div>
       <div class="all-ideas">
         <h2>Todas as ideias</h2>
-        {% for idea in new_ideas %}
+        {% for idea in all_ideas %}
           <a href="" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
+              <p>{{ idea.stack }}</p>
             </div>
             <div class="idea-body">
               <p class="idea-level">Nível: {{ idea.level }}</p>
-              <p class="idea-date">{{ idea.start_date|naturalday }} - {{ idea.end_date|naturalday }}</p>
+              <p class="idea-date">
+                {{ idea.start_date|naturalday }}
+              </p>
             </div>
           </a>
         {% endfor %}

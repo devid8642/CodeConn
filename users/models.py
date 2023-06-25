@@ -39,12 +39,29 @@ class ProjectsDate(SingletonModel):
         verbose_name = 'prazo'
 
 
+STACK_CHOICES = (
+    ('1', 'Backend'),
+    ('2', 'Frontend'),
+    ('3', 'Fullstack')
+)
+
+LEVEL_CHOICES = (
+    ('1', 'Fácil'),
+    ('2', 'Médio'),
+    ('3', 'Difícil')
+)
+
+
 class ProjectsIdeas(models.Model):
     idea = models.CharField('Ideia de projeto', max_length=255)
-    level = models.CharField('Nível', max_length=255)
+    level = models.CharField('Nível', max_length=255, choices=LEVEL_CHOICES)
+    stack = models.CharField(
+        'Stack', max_length=255, null=True, choices=STACK_CHOICES
+    )
     explanation = models.TextField('Explicação')
-    start_date = models.DateTimeField('Data inicial', null=True)
-    end_date = models.DateTimeField('Data final', null=True)
+    start_date = models.DateTimeField(
+        'Data inicial', null=True, auto_now_add=True
+    )
 
     def __str__(self):
         return self.idea

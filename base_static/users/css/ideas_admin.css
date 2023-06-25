@@ -10,9 +10,9 @@
 .new-ideas,
 .all-ideas {
     background-color: rgb(15, 15, 27);
-    height: 500px;
-    max-height: 500px;
-    overflow-y: hidden;
+    height: fit-content;
+    max-height: 650px;
+    overflow-y: auto;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }

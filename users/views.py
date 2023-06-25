@@ -8,7 +8,9 @@ from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
 
-from .forms import LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
+from .forms import (
+    LoginForm, RegisterForm, UpdateForm, ProjectsDateForm, IdeasForm
+)
 from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
@@ -257,11 +259,28 @@ def admin_dashboard(request):
 def ideas_admin(request):
     if request.user.is_staff:
         date = ProjectsDate.get_solo()
-        new_ideas = ProjectsIdeas.objects.filter(
-            start_date=date.start_date,
-            end_date=date.end_date,
-        ).order_by('-id')
-        all_ideas = ProjectsIdeas.objects.all().order_by('-id')
+        new_ideas = []
+        all_ideas = ProjectsIdeas.objects.all()
+
+        form = IdeasForm(request.POST or None)
+
+        if form.is_valid():
+            idea = form.save(commit=False)
+            stack = idea.get_stack_display()
+            level = idea.get_level_display()
+            idea.stack = stack
+            idea.level = level
+
+            idea.save()
+
+            return redirect('users:ideas_admin')
+
+        for new_idea in all_ideas:
+            if new_idea and (
+                new_idea.start_date >= date.start_date and
+                new_idea.start_date <= date.end_date
+            ):
+                new_ideas.append(new_idea)
 
     else:
         return redirect('projects:home')
@@ -273,5 +292,6 @@ def ideas_admin(request):
             'new_ideas': new_ideas,
             'all_ideas': all_ideas,
             'date': date,
+            'form': form,
         }
     )

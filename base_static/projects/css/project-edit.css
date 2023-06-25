@@ -36,7 +36,8 @@
 }
 
 .base-form input,
-.base-form textarea {
+.base-form textarea,
+.base-form select {
     font-size: .9rem;
     width: 100%;
     padding: .5rem .7rem;
@@ -46,6 +47,12 @@
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     opacity: .8;
+}
+
+.base-form select option {
+    background-color: rgb(200, 200, 200);
+    font-size: .9rem;
+    font-family: var(--font);
 }
 
 .django-ckeditor-widget textarea {
