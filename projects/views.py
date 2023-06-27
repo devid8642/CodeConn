@@ -17,12 +17,13 @@ def home(request):
         is_approved=True,
     )
 
-    for project in projects:
-        if project and (
-            project.created_at >= date.start_date and
-            project.created_at <= date.end_date
-        ):
-            week_projects.append(project)
+    if date.start_date and date.end_date != 'None':
+        for project in projects:
+            if project and (
+                project.created_at >= date.start_date and
+                project.created_at <= date.end_date
+            ):
+                week_projects.append(project)
 
     return render(
         request,
