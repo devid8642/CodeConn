@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from .models import User, ProjectsDate, ProjectsIdeas
+from .models import User, ProjectsDate, ProjectIdea
 from utils.forms_utils import add_attr
 
 
@@ -157,6 +157,6 @@ class IdeasForm(forms.ModelForm):
         add_attr(explanation, 'placeholder', 'Explicação da ideia')
 
     class Meta:
-        model = ProjectsIdeas
+        model = ProjectIdea
 
         fields = ('idea', 'level', 'stack', 'explanation')

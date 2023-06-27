@@ -1,6 +1,6 @@
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
-from .models import User, ProjectsIdeas
+from .models import User, ProjectIdea
 from .models import ProjectsDate
 
 
@@ -15,7 +15,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('username', 'email')
 
 
-@admin.register(ProjectsIdeas)
+@admin.register(ProjectIdea)
 class ProjectIdeasAdmin(admin.ModelAdmin):
     list_display = ('idea', 'level', 'start_date')
     list_display_links = ('idea',)

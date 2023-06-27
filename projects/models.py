@@ -1,7 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-from users.models import User, ProjectsIdeas
+from users.models import User, ProjectIdea
 
 
 class Project(models.Model):
@@ -18,7 +18,7 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_approved = models.BooleanField('Publicado', default=False)
     is_inspired = models.ForeignKey(
-        ProjectsIdeas,
+        ProjectIdea,
         verbose_name='Inspirado em',
         on_delete=models.SET_NULL,
         null=True,

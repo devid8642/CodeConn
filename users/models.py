@@ -52,7 +52,7 @@ LEVEL_CHOICES = (
 )
 
 
-class ProjectsIdeas(models.Model):
+class ProjectIdea(models.Model):
     idea = models.CharField('Ideia de projeto', max_length=255)
     level = models.CharField('Nível', max_length=255, choices=LEVEL_CHOICES)
     stack = models.CharField(
@@ -65,3 +65,8 @@ class ProjectsIdeas(models.Model):
 
     def __str__(self):
         return self.idea
+    
+    class Meta:
+        db_table = 'projects_ideas'
+        verbose_name = 'Project Idea'
+        verbose_name_plural = 'Projects Ideas'

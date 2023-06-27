@@ -14,7 +14,7 @@ from .forms import (
 from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
-from .models import User, ProjectsDate, ProjectsIdeas
+from .models import User, ProjectsDate, ProjectIdea
 
 
 def login_view(request):
@@ -258,7 +258,7 @@ def admin_dashboard(request):
 def projects_ideas(request):
     date = ProjectsDate.get_solo()
     new_ideas = []
-    all_ideas = ProjectsIdeas.objects.all().order_by('-id')
+    all_ideas = ProjectIdea.objects.all().order_by('-id')
 
     for new_idea in all_ideas:
         if new_idea and (
@@ -279,7 +279,7 @@ def projects_ideas(request):
 
 
 def idea_detail(request, pk):
-    idea = get_object_or_404(ProjectsIdeas, pk=pk)
+    idea = get_object_or_404(ProjectIdea, pk=pk)
 
     return render(
         request,
@@ -295,7 +295,7 @@ def ideas_admin(request):
     if request.user.is_staff:
         date = ProjectsDate.get_solo()
         new_ideas = []
-        all_ideas = ProjectsIdeas.objects.all().order_by('-id')
+        all_ideas = ProjectIdea.objects.all().order_by('-id')
 
         form = IdeasForm(request.POST or None)
 

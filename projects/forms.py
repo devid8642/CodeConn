@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import Project, Comment
-from users.models import ProjectsDate, ProjectsIdeas
+from users.models import ProjectsDate, ProjectIdea
 from utils.forms_utils import add_attr
 
 
@@ -15,7 +15,7 @@ class ProjectForm(forms.ModelForm):
         date = ProjectsDate.get_solo()
 
         if self.instance:
-            self.fields['is_inspired'].queryset = ProjectsIdeas.objects.filter(
+            self.fields['is_inspired'].queryset = ProjectIdea.objects.filter(
                 start_date__range=[date.start_date, date.end_date]
             ).order_by('-id')
 
