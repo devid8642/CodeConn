@@ -6,6 +6,9 @@ from utils.forms_utils import add_attr
 
 
 class ProjectForm(forms.ModelForm):
+    is_inspired = forms.ModelChoiceField(queryset=None, required=False)
+
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         title = self.fields['title']
