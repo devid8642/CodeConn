@@ -210,7 +210,3 @@ CKEDITOR_CONFIGS = {
 }
 
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
-
-# Render config
-if prod == 'True':
-    ALLOWED_HOSTS.append(env(RENDER_EXTERNAL_HOSTNAME))
