@@ -161,6 +161,7 @@ def project_edit(request, pk):
     project = get_object_or_404(
         Project,
         id=pk,
+        author=request.user,
     )
     form = ProjectForm(
         request.POST or None,
