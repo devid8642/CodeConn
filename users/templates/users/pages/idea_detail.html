@@ -22,7 +22,7 @@
         <p>{{ idea.explanation }}</p>
       </div>
       <div class="idea-footer">
-        <a href="" class="idea-link">Criar este projeto</a>
+        <a href="{% url 'projects:project_create' %}?stack={{idea.stack}}&is_inspired={{idea.id}}" class="idea-link">Criar este projeto</a>
       </div>
     </div>
   </div>

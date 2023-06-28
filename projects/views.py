@@ -8,6 +8,7 @@ from django.db.models import Q
 from .models import Project, Comment
 from .forms import ProjectForm, CommentForm
 from users.models import ProjectsDate
+from utils.stack_index import get_stack_index
 
 
 def home(request):
@@ -135,6 +136,9 @@ def project_create(request):
     form = ProjectForm(
         request.POST or None,
     )
+    index = get_stack_index(request.GET.get('stack'))
+    form.fields['stack'].initial = index
+    form.fields['is_inspired'].initial = request.GET.get('is_inspired')
 
     if form.is_valid():
         project = form.save(commit=False)
