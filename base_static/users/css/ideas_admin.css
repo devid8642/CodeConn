@@ -1,18 +1,17 @@
 .ideas-admin-container {
     color: white;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     gap: 1rem;
     margin-top: 3rem;
 }
 
 .ideas-admin-container.default-user {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 3rem;
 }
 
 .ideas-add,
-.new-ideas,
 .all-ideas {
     background-color: rgb(15, 15, 27);
     height: fit-content;
@@ -23,14 +22,9 @@
 }
 
 .ideas-add h2,
-.new-ideas h2,
 .all-ideas h2 {
     padding: 1rem;
     border-bottom: 4px solid var(--background);
-}
-
-.new-ideas h2 {
-    color: var(--cor-primaria)
 }
 
 .all-ideas h2 {

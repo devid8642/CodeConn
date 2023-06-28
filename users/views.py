@@ -256,24 +256,13 @@ def admin_dashboard(request):
 
 
 def projects_ideas(request):
-    date = ProjectsDate.get_solo()
-    new_ideas = []
     all_ideas = ProjectIdea.objects.all().order_by('-id')
-
-    for new_idea in all_ideas:
-        if new_idea and (
-            new_idea.start_date >= date.start_date and
-            new_idea.start_date <= date.end_date
-        ):
-            new_ideas.append(new_idea)
 
     return render(
         request,
         'users/pages/projects_ideas.html',
         context={
-            'new_ideas': new_ideas,
             'all_ideas': all_ideas,
-            'date': date,
         }
     )
 
@@ -293,8 +282,6 @@ def idea_detail(request, pk):
 @login_required(login_url='users:login', redirect_field_name='next')
 def ideas_admin(request):
     if request.user.is_staff:
-        date = ProjectsDate.get_solo()
-        new_ideas = []
         all_ideas = ProjectIdea.objects.all().order_by('-id')
 
         form = IdeasForm(request.POST or None)
@@ -310,13 +297,6 @@ def ideas_admin(request):
 
             return redirect('users:ideas_admin')
 
-        for new_idea in all_ideas:
-            if new_idea and (
-                new_idea.start_date >= date.start_date and
-                new_idea.start_date <= date.end_date
-            ):
-                new_ideas.append(new_idea)
-
     else:
         return redirect('projects:home')
 
@@ -324,9 +304,7 @@ def ideas_admin(request):
         request,
         'users/pages/ideas_admin.html',
         context={
-            'new_ideas': new_ideas,
             'all_ideas': all_ideas,
-            'date': date,
             'form': form,
         }
     )
