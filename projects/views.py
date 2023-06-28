@@ -44,7 +44,7 @@ def all_projects(request):
             is_approved=True,
             is_inspired=idea,
         )
-        idea_title = f'para: {idea_name}'
+        idea_title = f'baseados em: {idea_name}'
 
     else:
         projects = Project.objects.filter(

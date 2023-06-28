@@ -69,6 +69,7 @@
 .idea-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .idea-title h4 {
@@ -103,5 +104,15 @@
 @media (max-width: 768px) {
     .ideas-header {
         margin-top: 7rem;
+    }
+
+    .ideas-admin-container {
+        grid-template-columns: 1fr;
+        margin-top: 7rem;
+    }
+
+    .ideas-admin-container.default-user {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
