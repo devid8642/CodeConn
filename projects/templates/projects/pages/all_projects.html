@@ -13,16 +13,24 @@
     <div class="projects-grid">
       {% for project in projects %}
         <div class="project-card">
-          {% if project.author.is_staff %}
-              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author staff-user">
-                {{ project.author.username }}
-                <i class="bi bi-code-slash"></i>
-              </a>
-            {% else %}
-              <a href="{% url 'users:user_detail' project.author.id %}" class="project-author">
-                {{ project.author.username }}
-              </a>
+          {% if project.author.is_staff %}  
+            <a href="{% url 'users:user_detail' project.author.id %}" class="project-author staff-user">
+              {{ project.author.username }}
+              <i class="bi bi-code-slash"></i>
+            </a>
+          {% else %}
+            <a href="{% url 'users:user_detail' project.author.id %}" class="project-author">
+              {{ project.author.username }}
+            </a>
+          {% endif %}
+          
+          <div class="project-info">
+            {% if project.is_inspired %}
+              <a class="idea-info" href="{% url 'users:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a>
+              <a href="{% url 'projects:project_search' %}?q={{project.is_inspired.stack}}">{{ project.stack }}</a>
             {% endif %}
+          </div>
+
           <div class="card-header">
             <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
           </div>
@@ -36,10 +44,6 @@
               </p>
             </div>
             <div class="card-description">
-              {% if project.is_inspired %}
-                <p>Inspirado em:  <a href="{% url 'users:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a></p>
-                <p>Stack utilizada: <a href="">{{ project.stack }}</a></p>
-              {% endif %}
               <p>{{ project.subtitle }}</p>
             </div>
             <div class="card-footer">

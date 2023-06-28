@@ -81,6 +81,35 @@
     margin-bottom: .5rem;
 }
 
+.project-info {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: .5rem;
+}
+
+.project-info a {
+    display: flex;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(81, 254, 228);
+    overflow-x: hidden;
+    padding: .3rem .7rem;
+    width: fit-content;
+    border-radius: .2rem;
+    color: var(--background);
+    font-size: .9rem;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+}
+
+.idea-info {
+    max-width: 10rem;
+}
+
 .project-author.staff-user {
     background-color: #f97c0f;
     color: rgb(200, 200, 200);
