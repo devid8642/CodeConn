@@ -3,6 +3,12 @@ from ckeditor.fields import RichTextField
 
 from users.models import User, ProjectIdea
 
+STACKS = (
+    ('1', 'Backend'),
+    ('2', 'Frontend'),
+    ('3', 'Fullstack'),
+)
+
 
 class Project(models.Model):
     title = models.CharField('Título', max_length=50)
@@ -23,7 +29,9 @@ class Project(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
-    stack = models.CharField('Stack utilizada', max_length=255, null=True)
+    stack = models.CharField(
+        'Stack utilizada', max_length=255, null=True, choices=STACKS
+    )
 
     def __str__(self):
         return f'Project {self.id} - {self.title}'
