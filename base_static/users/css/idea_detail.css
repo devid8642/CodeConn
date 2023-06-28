@@ -26,6 +26,8 @@
     padding: .2rem .5rem;
     border-radius: .2rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    text-decoration: none;
+    color: rgb(200, 200, 200);
 }
 
 .idea-stack {
@@ -54,7 +56,8 @@
     margin-top: 1rem;
 }
 
-.idea-link {
+.idea-link,
+.similar-link {
     display: block;
     text-decoration: none;
     color: rgb(200, 200, 200);
@@ -63,6 +66,13 @@
     padding: .8rem;
     border-radius: .2rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    margin-bottom: 1rem;
+}
+
+.similar-link {
+    background-color: rgb(15, 15, 27);
+    border: 1px solid #1645ff;
+    color: #1645ff;
 }
 
 .idea-link:hover {

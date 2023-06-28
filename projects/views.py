@@ -36,15 +36,28 @@ def home(request):
 
 
 def all_projects(request):
-    projects = Project.objects.filter(
-        is_approved=True,
-    )
+    idea = request.GET.get('idea')
+    idea_name = request.GET.get('idea_name')
+
+    if idea:
+        projects = Project.objects.filter(
+            is_approved=True,
+            is_inspired=idea,
+        )
+        idea_title = f'para: {idea_name}'
+
+    else:
+        projects = Project.objects.filter(
+            is_approved=True,
+        )
+        idea_title = ''
 
     return render(
         request,
         'projects/pages/all_projects.html',
         context={
             'projects': projects,
+            'idea_title': idea_title,
         }
     )
 
@@ -59,7 +72,9 @@ def project_search(request):
         Q(
             Q(title__icontains=search_term) |
             Q(subtitle__icontains=search_term) |
-            Q(author__username__icontains=search_term)
+            Q(author__username__icontains=search_term) |
+            Q(stack__icontains=search_term) |
+            Q(is_inspired__idea__icontains=search_term)
         ),
         is_approved=True,
     )
