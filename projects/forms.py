@@ -1,13 +1,12 @@
 from django import forms
 
 from .models import Project, Comment
-from users.models import ProjectsDate, ProjectIdea
+from users.models import ProjectIdea
 from utils.forms_utils import add_attr
 
 
 class ProjectForm(forms.ModelForm):
     is_inspired = forms.ModelChoiceField(queryset=None, required=False)
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -15,12 +14,9 @@ class ProjectForm(forms.ModelForm):
         subtitle = self.fields['subtitle']
         explanatory = self.fields['explanatory_text']
         link = self.fields['link']
-        date = ProjectsDate.get_solo()
 
         if self.instance:
-            self.fields['is_inspired'].queryset = ProjectIdea.objects.filter(
-                start_date__range=[date.start_date, date.end_date]
-            ).order_by('-id')
+            self.fields['is_inspired'].queryset = ProjectIdea.objects.all()
 
         add_attr(title, 'placeholder', 'Título do seu projeto')
         add_attr(subtitle, 'placeholder', 'Breve descrição')
@@ -33,7 +29,12 @@ class ProjectForm(forms.ModelForm):
         model = Project
 
         fields = (
-            'title', 'subtitle', 'link', 'explanatory_text', 'is_inspired'
+            'title',
+            'subtitle',
+            'link',
+            'explanatory_text',
+            'is_inspired',
+            'stack',
         )
 
 

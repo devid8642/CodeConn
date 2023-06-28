@@ -27,6 +27,12 @@
           {{ form.explanatory_text }}
         </div>
         <div class="input-group">
+          <label for="{{ form.stack.id_for_label }}">
+            {{ form.stack.label }}:
+          </label>
+          {{ form.stack }}
+        </div>
+        <div class="input-group">
           <label for="{{ form.link.id_for_label }}">
             <i class="bi bi-link-45deg"></i>
             {{ form.link.label }}:
@@ -35,7 +41,6 @@
         </div>
         <div class="input-group">
           <label for="{{ form.is_inspired.id_for_label }}">
-            <i class="bi bi-link-45deg"></i>
             {{ form.is_inspired.label }}:
           </label>
           {{ form.is_inspired }}
