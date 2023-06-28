@@ -7,6 +7,7 @@ from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
+from django.http import Http404
 
 from .forms import (
     LoginForm, RegisterForm, UpdateForm, ProjectsDateForm, IdeasForm
@@ -323,3 +324,19 @@ def ideas_admin(request):
             'form': form,
         }
     )
+
+
+def idea_delete(request):
+    if not request.POST:
+        raise Http404
+
+    idea_id = request.POST.get('idea_id')
+    idea = get_object_or_404(
+        ProjectIdea,
+        id=idea_id,
+    )
+
+    messages.error(request, 'Ideia deletada com sucesso!')
+    idea.delete()
+
+    return redirect('users:ideas_admin')

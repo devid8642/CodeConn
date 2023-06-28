@@ -10,6 +10,7 @@
 
 {% block content %}
   <div class="container">
+    {% include 'global/partials/_messages.html' %}
     <div class="ideas-admin-container">
       <div class="ideas-add">
         <h2>Adicionar ideia</h2>
@@ -29,8 +30,19 @@
         {% for idea in all_ideas %}
           <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
-              <h4>{{ idea.idea }}</h4>
-              <p>{{ idea.stack }}</p>
+              <div class="title-info">
+                <h4>{{ idea.idea }}</h4>
+                <p>{{ idea.stack }}</p>
+              </div>
+              <div class="idea-delete">
+                <form action="{% url 'users:idea_delete' %}" method="POST" class="form-delete">
+                  {% csrf_token %}
+                  <input type="hidden" name="idea_id" value="{{ idea.id }}">
+                  <button type="submit">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </form>
+              </div>
             </div>
             <div class="idea-body">
               <p class="idea-level">Nível: {{ idea.level }}</p>
@@ -43,4 +55,5 @@
       </div>
     </div>
   </div>
+  <script src="{% static 'global/js/modal.js' %}"></script>
 {% endblock content %}
