@@ -4,11 +4,26 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'users/css/idea_detail.css' %}">
+  <title>Ideia: {{ idea.idea }}</title>
 {% endblock head %}
 
 {% block content %}
   <div class="container">
-    <h2>Idea detail</h2>
-    <p>{{ idea.idea }}</p>
+    <div class="idea-container">
+      <div class="idea-header">
+        <h2 class="idea-title">{{ idea.idea }}</h2>
+        <div class="idea-info">
+          <p class="idea-stack">{{ idea.stack }}</p>
+          <p class="idea-level">{{ idea.level }}</p>
+        </div>
+      </div>
+      <div class="idea-body">
+        <h3>Proposta:</h3>
+        <p>{{ idea.explanation }}</p>
+      </div>
+      <div class="idea-footer">
+        <a href="" class="idea-link">Criar este projeto</a>
+      </div>
+    </div>
   </div>
 {% endblock content %}
