@@ -65,7 +65,7 @@ class ProjectIdea(models.Model):
 
     def __str__(self):
         return self.idea
-    
+
     class Meta:
         db_table = 'projects_ideas'
         verbose_name = 'Project Idea'
