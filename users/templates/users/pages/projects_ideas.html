@@ -5,15 +5,55 @@
 {% block head %}
   <title>Admin - Ideias</title>
   <link rel="stylesheet" href="{% static 'users/css/ideas_admin.css' %}">
-  <link rel="stylesheet" href="{% static 'projects/css/project-edit.css' %}">
 {% endblock head %}
 
 {% block content %}
   <div class="container">
+    <div class="ideas-header">
+      <h2>Sem ideias para projetos?</h2>
+      <p>Você pode escolher as ideias de todas as stacks e niveis logo abaixo:</p>
+    </div>
+    <div class="stacks-area">
+
+    </div>
     <div class="ideas-admin-container default-user">
       <div class="all-ideas">
-        <h2>Todas as ideias</h2>
-        {% for idea in all_ideas %}
+        <h2>Ideias Fullstack:</h2>
+        {% for idea in fullstack %}
+          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
+            <div class="idea-title">
+              <h4>{{ idea.idea }}</h4>
+              <p>{{ idea.stack }}</p>
+            </div>
+            <div class="idea-body">
+              <p class="idea-level">Nível: {{ idea.level }}</p>
+              <p class="idea-date">
+                {{ idea.start_date|naturalday }}
+              </p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="all-ideas">
+        <h2>Ideias Frontend:</h2>
+        {% for idea in frontend %}
+          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
+            <div class="idea-title">
+              <h4>{{ idea.idea }}</h4>
+              <p>{{ idea.stack }}</p>
+            </div>
+            <div class="idea-body">
+              <p class="idea-level">Nível: {{ idea.level }}</p>
+              <p class="idea-date">
+                {{ idea.start_date|naturalday }}
+              </p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="all-ideas">
+        <h2>Ideias Backend:</h2>
+        {% for idea in backend %}
           <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>

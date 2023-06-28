@@ -1,24 +1,36 @@
 .ideas-admin-container {
-    color: white;
+    color: rgb(200, 200, 200);
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 1rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 .ideas-admin-container.default-user {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
 }
 
 .ideas-add,
-.all-ideas {
+.all-ideas,
+.ideas-header {
     background-color: rgb(15, 15, 27);
     height: fit-content;
     max-height: 650px;
     overflow-y: auto;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+}
+
+.ideas-header {
+    padding: 1rem;
+    color: var(--background);
+    margin-top: 3rem;
+    background-color: var(--cor-primaria);
+}
+
+.ideas-header p {
+    font-size: 1.2rem;
 }
 
 .ideas-add h2,
@@ -73,4 +85,10 @@
 
 .idea-date {
     font-size: .9rem;
+}
+
+@media (max-width: 768px) {
+    .ideas-header {
+        margin-top: 7rem;
+    }
 }

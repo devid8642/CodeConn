@@ -257,12 +257,27 @@ def admin_dashboard(request):
 
 def projects_ideas(request):
     all_ideas = ProjectIdea.objects.all().order_by('-id')
+    backend = []
+    frontend = []
+    fullstack = []
+
+    for idea in all_ideas:
+        if idea.stack == 'Fullstack':
+            fullstack.append(idea)
+
+        elif idea.stack == 'Backend':
+            backend.append(idea)
+
+        else:
+            frontend.append(idea)
 
     return render(
         request,
         'users/pages/projects_ideas.html',
         context={
-            'all_ideas': all_ideas,
+            'backend': backend,
+            'frontend': frontend,
+            'fullstack': fullstack,
         }
     )
 
