@@ -132,7 +132,9 @@ def comment_delete(request):
 
 @login_required(login_url='users:login', redirect_field_name='next')
 def project_create(request):
-    form = ProjectForm(request.POST or None)
+    form = ProjectForm(
+        request.POST or None,
+    )
 
     if form.is_valid():
         project = form.save(commit=False)

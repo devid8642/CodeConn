@@ -14,6 +14,7 @@ class ProjectForm(forms.ModelForm):
         subtitle = self.fields['subtitle']
         explanatory = self.fields['explanatory_text']
         link = self.fields['link']
+        self.fields['stack'].required = False
 
         if self.instance:
             self.fields['is_inspired'].queryset = ProjectIdea.objects.all()

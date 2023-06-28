@@ -2,7 +2,6 @@ from parameterized import parameterized
 
 from utils.tests_bases import ProjectTestBase
 from projects.forms import ProjectForm
-from projects.models import Project
 from projects import views
 
 
@@ -24,13 +23,14 @@ class ProjectCreateTests(ProjectTestBase):
     def test_project_create_success(self):
         self.register_and_login()
 
-        self.response_test_function(
+        response = self.response_test_function(
             'projects:project_create',
             method='post',
             data=self.project_form_data
         )
+        msg = 'Projeto criado com sucesso!'
 
-        self.assertEqual(Project.objects.count(), 1)
+        self.assertIn(msg, response.content.decode('utf-8'))
 
     @parameterized.expand([
         ('title', 'Título'),

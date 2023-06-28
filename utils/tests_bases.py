@@ -28,6 +28,7 @@ class ProjectMixin:
         title: str = 'Project title',
         subtitle: str = 'Project subtitle',
         explanatory_text: str = 'Project explanatory',
+        stack: str = 'Backend',
         is_approved: bool = False,
         author_data: User = None,
     ) -> Project:
@@ -42,6 +43,7 @@ class ProjectMixin:
             title=title,
             subtitle=subtitle,
             explanatory_text=explanatory_text,
+            stack=stack,
             is_approved=is_approved,
             author=self.make_author(**author_data)
         )
