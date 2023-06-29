@@ -57,7 +57,7 @@
     </div>
     <div class="user-posts">
       <div class="user-posts-header">
-        <h3>Posts de {{ user.username }}:</h3>
+        <h3>Projetos de {{ user.username }}:</h3>
         {% if owner %}
           <div class="user-links">
             <a href="{% url 'projects:project_create' %}">
@@ -97,7 +97,7 @@
             </div>
           </div>
         {% empty %}
-        <p>Nenhum post ainda</p>
+        <p>Nenhum projeto ainda</p>
         {% endfor %}
       </div>
     </div>
