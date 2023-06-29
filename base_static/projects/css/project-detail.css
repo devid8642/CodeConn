@@ -23,7 +23,7 @@
     align-items: center;
     gap: .3rem;
     margin-right: .8rem;
-    font-size: .9rem;
+    font-size: 1rem;
     background-color: rgb(155, 253, 220);
     padding: .2rem .5rem;
     border-radius: .2rem;
@@ -56,7 +56,8 @@
     margin-top: .5rem;
 }
 
-.post-link a {
+.post-link a,
+.post-footer a {
     display: block;
     text-decoration: none;
     font-size: 1.1rem;
@@ -66,13 +67,15 @@
     text-align: center;
 }
 
-.post-link a:hover {
+.post-link a:hover,
+.post-footer a:hover {
     background-color: rgb(53, 53, 53);
     border-radius: .2rem;
 }
 
 .post-body,
-.comment-area {
+.comment-area,
+.post-footer {
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -84,6 +87,16 @@
 .post-text,
 .comment-text {
     color: rgb(200, 200, 200);
+}
+
+.post-footer {
+    margin-top: 1rem;
+}
+
+.post-footer a {
+    text-decoration: none;
+    color:#1645ff;
+    display: inline;
 }
 
 .comment-area {
