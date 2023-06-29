@@ -22,9 +22,11 @@
                 {{ project.author.username }}
               </a>
             {% endif %}
-            <a href="{% url 'projects:project_search' %}?q={{project.is_inspired.stack}}" class="user-link">
-              {{ project.get_stack_display }}
-            </a>
+            {% if project.stack %}
+              <a href="{% url 'projects:project_search' %}?q={{project.is_inspired.stack}}" class="user-link">
+                {{ project.get_stack_display }}
+              </a>
+            {% endif %}
             <p>{{ project.created_at | naturalday }}</p>
           </div>
           <h2 class="post-title">{{ project.title }}</h2>
@@ -42,10 +44,13 @@
           </div>
         </div>
         <div class="post-footer">
+          {% if project.is_inspired %}
           <p>Projeto baseado em: 
             <a href="{% url 'users:idea_detail' project.is_inspired.id %}">
-              {{ project.is_inspired }}</p>
+              {{ project.is_inspired }}
             </a>
+          </p>
+          {% endif %}
         </div>
       </div>
       <div class="comment-area">
@@ -66,7 +71,7 @@
             <p>
               Para comentar, faça 
               <a href="{% url 'users:login' %}">Login</a> 
-              ou 
+              ou
               <a href="{% url 'users:register' %}">Registre-se</a>!
             </p>
           </div>
