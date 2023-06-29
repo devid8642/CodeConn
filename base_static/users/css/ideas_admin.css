@@ -26,7 +26,7 @@
     padding: 1rem;
     color: rgb(200, 200, 200);
     margin-top: 3rem;
-    border: 1px solid #1645ff;
+    border: 1px solid var(--cor-primaria);
     background-color: transparent;
 }
 

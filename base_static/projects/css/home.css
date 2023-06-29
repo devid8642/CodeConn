@@ -85,7 +85,7 @@ swiper-slide .project-card {
     background-color: var(--cor-primaria);
     text-align: center;
     text-decoration: none;
-    color: rgb(200, 200, 200);
+    color: var(--background);
     padding: .7rem 0;
 }
 

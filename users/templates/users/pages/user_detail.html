@@ -93,7 +93,10 @@
               </div>
             </div>
             <div class="user-post-card-footer">
-              <a href="{% url 'projects:project_detail' project.id %}">Ver projeto</a>
+              <a href="{% url 'projects:project_detail' project.id %}">
+                <i class="bi bi-eye"></i>
+                Ver projeto
+              </a>
             </div>
           </div>
         {% empty %}

@@ -188,7 +188,7 @@
     display: block;
     text-align: center;
     text-decoration: none;
-    color: rgb(200, 200, 200);
+    color: var(--background);
     padding: .5rem 0;
     background-color: #f97c0f;
     margin-top: .5rem

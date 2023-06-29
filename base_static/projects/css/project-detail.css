@@ -33,7 +33,7 @@
 .comment-area .comment-user.staff-user,
 .post-user .user-link.staff-user {
     background-color: #f97c0f;
-    color: rgb(200, 200, 200);
+    color: var(--background);
 }
 
 .comment-area .comment-user.staff-user i,

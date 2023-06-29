@@ -112,7 +112,7 @@
 
 .project-author.staff-user {
     background-color: #f97c0f;
-    color: rgb(200, 200, 200);
+    color: var(--background);
 }
 
 .project-author.staff-user i {
@@ -146,7 +146,8 @@
     width: 100%;
     background-color: #f97c0f;
     border-radius: .2rem;
-    color: rgb(200, 200, 200);
+    color: var(--background);
+    font-size: 1.1rem;
     text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     margin-top: .5rem;
