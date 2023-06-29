@@ -26,7 +26,8 @@
     padding: 1rem;
     color: rgb(200, 200, 200);
     margin-top: 3rem;
-    background-color: #1645ff;
+    border: 1px solid #1645ff;
+    background-color: transparent;
 }
 
 .ideas-header p {

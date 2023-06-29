@@ -67,7 +67,10 @@
       </swiper-container>
 
       <section id="ideas">
-        <h2>Ideias de projetos</h2>
+        <h2>
+          <i class="bi bi-brightness-high"></i>
+          Ideias de projetos
+        </h2>
         <div class="ideas-container">
           <div class="ideas-cards">
             {% for idea in ideas %}
@@ -80,14 +83,20 @@
                   <p>Nível: {{ idea.level }}</p>
                 </div>
                 <div class="idea-footer">
-                  <a href="">Ver ideia</a>
+                  <a href="{% url 'users:idea_detail' idea.id %}">
+                    <i class="bi bi-eye"></i>
+                    Ver ideia
+                  </a>
                 </div>
               </div>
             {% endfor %}
           </div>
           <div class="ideas-link">
             <h2>Sem ideias para projetos?</h2>
-            <a href="">Ver todas as ideias</a>
+            <a href="{% url 'users:projects_ideas' %}">
+              <i class="bi bi-list"></i>
+              Ver todas as ideias
+            </a>
           </div>
         </div>
       </section>

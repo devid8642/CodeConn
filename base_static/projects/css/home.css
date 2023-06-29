@@ -82,7 +82,7 @@ swiper-slide .project-card {
 .idea-footer a {
     display: block;
     width: 100%;
-    background-color: #1645ff;
+    background-color: var(--cor-primaria);
     text-align: center;
     text-decoration: none;
     color: rgb(200, 200, 200);
@@ -102,7 +102,7 @@ swiper-slide .project-card {
     text-decoration: none;
     color: rgb(200, 200, 200);
     padding: .7rem 3rem;
-    border: 1px solid #1645ff;
+    border: 1px solid var(--cor-primaria);
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     border-radius: .2rem;
 }
