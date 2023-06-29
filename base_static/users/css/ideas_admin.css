@@ -24,9 +24,9 @@
 
 .ideas-header {
     padding: 1rem;
-    color: var(--background);
+    color: rgb(200, 200, 200);
     margin-top: 3rem;
-    background-color: var(--cor-primaria);
+    background-color: #1645ff;
 }
 
 .ideas-header p {
@@ -40,7 +40,7 @@
 }
 
 .all-ideas h2 {
-    color: #1645ff;
+    color: rgb(200, 200, 200);
 }
 
 .ideas-add .base-form {
@@ -78,7 +78,7 @@
 }
 
 .all-ideas .idea-title h4 {
-    color:#1645ff;
+    color:var(--cor-primaria);
 }
 
 .idea-body {
@@ -114,5 +114,6 @@
     .ideas-admin-container.default-user {
         grid-template-columns: 1fr;
         gap: 1rem;
+        margin-top: 1rem;
     }
 }
