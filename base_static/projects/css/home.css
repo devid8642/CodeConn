@@ -1,5 +1,11 @@
-.home-title {
+.home-header {
     margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-title h2 {
     font-size: 2rem;
     color: rgb(200, 200, 200);
 }
@@ -12,6 +18,15 @@
 
 .date-deadline span {
     color:#f97c0f
+}
+
+.all-projects-link a {
+    text-decoration: none;
+    color: var(--background);
+    padding: .5rem 1rem;
+    background-color: var(--cor-primaria);
+    border-radius: .2rem;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
 swiper-container {

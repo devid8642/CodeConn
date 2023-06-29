@@ -11,11 +11,21 @@
 {% block content %}
   <div class="container">
     {% include 'global/partials/_messages.html' %}
-    <h2 class="home-title">
-      <i class="bi bi-calendar-check"></i>
-      Projetos recentes
-    </h2>
-    <p class="date-deadline"><span>Prazo:</span> De: {{ date.start_date|naturalday }} - Até: {{ date.end_date|naturalday }}</p>
+    <div class="home-header">
+      <div class="home-title">
+        <h2>
+          <i class="bi bi-calendar-check"></i>
+          Projetos recentes
+        </h2>
+        <p class="date-deadline"><span>Prazo:</span> De: {{ date.start_date|naturalday }} - Até: {{ date.end_date|naturalday }}</p>
+      </div>
+      <div class="all-projects-link">
+        <a href="{% url 'projects:all_projects' %}">
+          <i class="bi bi-list"></i>
+          Todos os projetos
+        </a>
+      </div>
+    </div>
     <swiper-container class="mySwiper" init="false">
       {% for project in week_projects %}
         <swiper-slide>
