@@ -66,6 +66,31 @@
         {% endfor %}
       </swiper-container>
 
+      <section id="ideas">
+        <h2>Ideias de projetos</h2>
+        <div class="ideas-container">
+          <div class="ideas-cards">
+            {% for idea in ideas %}
+              <div class="idea-card">
+                <div class="idea-header">
+                  <h3>{{ idea.idea }}</h3>
+                </div>
+                <div class="idea-body">
+                  <p>Stack: {{ idea.stack }}</p>
+                  <p>Nível: {{ idea.level }}</p>
+                </div>
+                <div class="idea-footer">
+                  <a href="">Ver ideia</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="ideas-link">
+            <h2>Sem ideias para projetos?</h2>
+            <a href="">Ver todas as ideias</a>
+          </div>
+        </div>
+      </section>
 
       <section id="about">
         <div class="about-container">

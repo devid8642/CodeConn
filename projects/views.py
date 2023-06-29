@@ -7,7 +7,7 @@ from django.db.models import Q
 
 from .models import Project, Comment
 from .forms import ProjectForm, CommentForm
-from users.models import ProjectsDate
+from users.models import ProjectsDate, ProjectIdea
 from utils.stack_index import get_stack_index
 
 
@@ -17,6 +17,7 @@ def home(request):
     projects = Project.objects.filter(
         is_approved=True,
     )
+    ideas = ProjectIdea.objects.all().order_by('-id')[:4]
 
     for project in projects:
         if project and (
@@ -31,6 +32,7 @@ def home(request):
         context={
             'week_projects': week_projects,
             'date': date,
+            'ideas': ideas,
         }
     )
 

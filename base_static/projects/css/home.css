@@ -24,6 +24,89 @@ swiper-slide .project-card {
     height: 30rem;
 }
 
+#ideas h2 {
+    text-align: center;
+    color: rgb(200, 200, 200);
+    font-size: 2rem;
+    margin-top: 3rem;
+}
+
+.ideas-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    color: rgb(200, 200, 200);
+    margin-top: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    padding: 2rem;
+    border: 3px solid rgb(15, 15, 27);
+    border-radius: 1rem;
+}
+
+.ideas-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem
+}
+
+.idea-card {
+    background-color: var(--background);
+    border: 2px solid rgb(15, 15, 27);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.idea-card:hover {
+    transform: scale(1.02);
+}
+
+.idea-header {
+    border-bottom: 4px solid rgb(15, 15, 27);
+}
+
+.idea-header h3 {
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+}
+
+.idea-body {
+    margin: 1rem 0;
+}
+
+.idea-body p {
+    padding: 0 1rem;
+}
+
+.idea-footer a {
+    display: block;
+    width: 100%;
+    background-color: #1645ff;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(200, 200, 200);
+    padding: .7rem 0;
+}
+
+.ideas-link {
+    text-align: center;
+}
+
+.ideas-link h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.ideas-link a {
+    text-decoration: none;
+    color: rgb(200, 200, 200);
+    padding: .7rem 3rem;
+    border: 1px solid #1645ff;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    border-radius: .2rem;
+}
+
 .about-container {
     padding: 3rem 0;
 }
@@ -153,5 +236,14 @@ swiper-slide .project-card {
 @media (max-width: 768px) {
     .adm-card {
         width: 90%;
+    }
+
+    .ideas-container,
+    .ideas-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .ideas-link {
+        margin-top: 2rem;
     }
 }
