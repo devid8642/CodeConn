@@ -46,7 +46,7 @@
                     Publicar projeto</a>
                   </li>
                   <li class="nav-item"><a href="{% url 'users:projects_ideas' %}">
-                    <i class="bi bi-file-earmark-plus"></i>
+                    <i class="bi bi-brightness-high"></i>
                     Ideias de projetos</a>
                   </li>
                   <li class="nav-item"><a href="{% url 'users:user_detail' request.user.id %}">
@@ -58,15 +58,15 @@
                       <i class="bi bi-clipboard-data"></i>
                       Dashboard</a>
                     </li>
+                    <li class="nav-item"><a href="{% url 'users:ideas_admin' %}">
+                      <i class="bi bi-plus-circle"></i>
+                      Adicionar ideia</a>
+                    </li>
                     <li class="nav-item">
                       <a href="/admin/" target="_blank">
                         <i class="bi bi-person-fill-lock"></i>
                         Área Administrativa
                       </a>
-                    </li>
-                    <li class="nav-item"><a href="{% url 'users:ideas_admin' %}">
-                      <i class="bi bi-file-earmark-plus"></i>
-                      Adicionar ideia</a>
                     </li>
                   {% endif %}
                   <li class="nav-item">

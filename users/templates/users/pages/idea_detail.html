@@ -24,10 +24,12 @@
       <div class="idea-footer">
         <a href="{% url 'projects:project_create' %}?stack={{idea.stack}}&is_inspired={{idea.id}}" 
           class="idea-link">
+          <i class="bi bi-plus-circle"></i>
           Criar este projeto
         </a>
         <a href="{% url 'projects:all_projects' %}?idea={{idea.id}}&idea_name={{idea.idea}}" 
           class="similar-link">
+          <i class="bi bi-search"></i>
           Ver projetos com esta ideia
         </a>
       </div>
