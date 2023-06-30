@@ -12,6 +12,7 @@
 
       <form class="base-form" action="{% url 'projects:project_create' %}" method="POST">
         <h2>Criar novo projeto</h2>
+        <p class="form-info"><strong>Lembre-se:</strong> O projeto passará pela avaliação dos adms do site antes de ser publicado.</p>
         {% csrf_token %}
         {{ form.media }}
         <div class="input-group">

@@ -12,6 +12,7 @@
       
       <form class="base-form" action="{% url 'projects:project_edit' project.id %}" method="POST">
         <h2>Editar "{{ project.title }}"</h2>
+        <p class="form-info"><strong>Lembre-se:</strong> Ao editar o projeto ele precisará passar novamente pela avaliação dos adms.</p>
         {% csrf_token %}
         {{ form.media }}
         <div class="input-group">

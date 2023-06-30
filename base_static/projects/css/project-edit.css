@@ -12,6 +12,15 @@
     text-align: center;
 }
 
+.form-info {
+    color: rgb(200, 200, 200);
+    padding: .5rem;
+    border-radius: .2rem;
+    border: 1px solid var(--cor-primaria);
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    margin-bottom: 1rem;
+}
+
 .base-form {
     background-color: rgb(15, 15, 27);
     padding: 2rem;
