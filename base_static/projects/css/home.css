@@ -247,12 +247,24 @@ swiper-slide .project-card {
 }
 
 @media (max-width: 1200px) {
-    .home-title {
+    .home-header {
         margin-top: 6.5rem;
     }
 }
 
 @media (max-width: 768px) {
+    .home-header {
+        flex-flow: row wrap;
+    }
+
+    .all-projects-link a {
+        margin-left: .8rem;
+    }
+
+    .home-title {
+        margin-bottom: 2rem;
+    }
+
     .adm-card {
         width: 90%;
     }
