@@ -14,17 +14,20 @@
           {% csrf_token %}
           {{ form.non_field_errors }}
           {% for field in form %}
-          <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}:</label>
-          {{ field }}
-          {{ field.errors }}
+          <div class="input-group">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}:</label>
+            {{ field }}
+            {{ field.errors }}
+          </div>
           {% endfor %}
           <button type="submit" class="login-button">
             <i class="bi bi-box-arrow-in-right"></i>
             Login
           </button>
-          <p class="auth-message">Ainda não tem uma conta? 
-            <a href="{% url 'users:register' %}">Registre-se</a>
-          </p>
+          <a class="register-login" href="{% url 'users:register' %}">
+            <i class="bi bi-person-add"></i>
+            Registre-se
+          </a>
         </form>
       </div>
     </div>

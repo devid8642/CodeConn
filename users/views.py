@@ -90,9 +90,9 @@ def register_view(request):
             )
             messages.success(request, 'Você foi registrado com sucesso!')
 
-            return redirect('users:login')
+            return redirect('projects:home')
 
-        return redirect('users:login')
+        return redirect('projects:home')
 
     return render(
         request,
@@ -230,14 +230,15 @@ def admin_dashboard(request):
                 author=user, is_approved=True
             ).last()
 
-            if project and (
-                project.created_at >= date.start_date and
-                project.created_at <= date.end_date
-            ):
-                delivered_projects.append(project)
+            if date.start_date and date.end_date != 'None':
+                if project and (
+                    project.created_at >= date.start_date and
+                    project.created_at <= date.end_date
+                ):
+                    delivered_projects.append(project)
 
-            else:
-                expired_users.append(user)
+                else:
+                    expired_users.append(user)
 
     else:
         return redirect('projects:home')

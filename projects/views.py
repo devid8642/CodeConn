@@ -19,12 +19,13 @@ def home(request):
     )
     ideas = ProjectIdea.objects.all().order_by('-id')[:4]
 
-    for project in projects:
-        if project and (
-            project.created_at >= date.start_date and
-            project.created_at <= date.end_date
-        ):
-            week_projects.append(project)
+    if date.start_date and date.end_date != 'None':
+        for project in projects:
+            if project and (
+                project.created_at >= date.start_date and
+                project.created_at <= date.end_date
+            ):
+                week_projects.append(project)
 
     return render(
         request,
@@ -183,6 +184,7 @@ def project_edit(request, pk):
     project = get_object_or_404(
         Project,
         id=pk,
+        author=request.user,
     )
     form = ProjectForm(
         request.POST or None,

@@ -194,6 +194,13 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+if prod == 'True':
+    domain = env('DOMAIN')
+    CSRF_COOKIE_DOMAIN = '*.' + domain
+    CSRF_TRUSTED_ORIGINS = [
+        f'https://{domain}',
+        f'https://*.{domain}'
+    ]
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -210,7 +217,3 @@ CKEDITOR_CONFIGS = {
 }
 
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
-
-# Render config
-if prod == 'True':
-    ALLOWED_HOSTS.append(env(RENDER_EXTERNAL_HOSTNAME))

@@ -29,6 +29,10 @@
     color: rgb(255, 41, 41);
 }
 
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
 .auth-form label {
     display: block;
     margin-bottom: .5rem;
@@ -42,7 +46,6 @@
     height: 2.2rem;
     padding: .5rem .7rem;
     border-radius: .2rem;
-    margin-bottom: 1.5rem;
     border: none;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
@@ -51,6 +54,13 @@
 
 .auth-form input:focus {
     opacity: 1;
+}
+
+.help-text {
+    color: #1645ff;
+    margin-top: 0;
+    font-size: .8rem;
+    margin-top: .5rem;
 }
 
 .login-button {
@@ -63,6 +73,7 @@
     color: rgb(200, 200, 200);
     cursor: pointer;
     border-radius: .2rem;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
 .auth-message {
@@ -73,6 +84,24 @@
 
 .auth-message a {
     color:#1645ff
+}
+
+.login-button:hover {
+    background-color: #305afe;
+}
+
+.register-login {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    padding: .5rem;
+    color:#1645ff;
+    border: 1px solid #1645ff;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    font-size: 1.3rem;
+    border-radius: .2rem;
+    margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
