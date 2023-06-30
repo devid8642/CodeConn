@@ -29,11 +29,15 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(
         label='Email',
         max_length=255,
-        widget=forms.TextInput()
+        widget=forms.TextInput(),
+        help_text='O e-mail precisa ser válido.'
     )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),
+        help_text='''
+            A senha deve ter no mínimo 8 caracteres e conter letras e números.
+        '''
     )
     confirmed_password = forms.CharField(
         label='Confirme sua senha',
