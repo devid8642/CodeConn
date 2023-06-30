@@ -161,8 +161,6 @@ def project_create(request):
         project = form.save(commit=False)
         project.author = request.user
         project.is_approved = False
-        if project.is_inspired:
-            project.stack = project.is_inspired.stack
 
         project.save()
         messages.success(request, 'Projeto criado com sucesso!')
