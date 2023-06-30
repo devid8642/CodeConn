@@ -195,7 +195,9 @@ MESSAGE_TAGS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if prod == 'True':
-    CSRF_COOKIE_DOMAIN = env('DOMAIN')
+    domain = env('DOMAIN')
+    CSRF_COOKIE_DOMAIN = domain
+    CSRF_TRUSTED_ORIGINS = [f'https://{domain}']
 
 CKEDITOR_CONFIGS = {
     'default': {
