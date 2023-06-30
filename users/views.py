@@ -66,6 +66,8 @@ def register_view(request):
     if form.is_valid():
         username = form.cleaned_data.get('username')
         email = form.cleaned_data.get('email')
+        linkedin = form.cleaned_data.get('linkedin')
+        github = form.cleaned_data.get('github')
         password = form.cleaned_data.get('password')
         form.cleaned_data.get('confirmed_password')
 
@@ -73,6 +75,8 @@ def register_view(request):
             user = User.objects.create_user(
                 username=username,
                 email=email,
+                linkedin=linkedin,
+                github=github,
                 password=password,
                 is_active=False,
             )
@@ -82,6 +86,8 @@ def register_view(request):
             user = User.objects.create_user(
                 username=username,
                 email=email,
+                linkedin=linkedin,
+                github=github,
                 password=password,
                 is_active=True,
             )

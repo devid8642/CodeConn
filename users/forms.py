@@ -31,6 +31,16 @@ class RegisterForm(forms.Form):
         max_length=255,
         widget=forms.TextInput()
     )
+    linkedin = forms.URLField(
+        label='Linkedin',
+        required=False,
+        widget=forms.TextInput()
+    )
+    github = forms.URLField(
+        label='Github',
+        required=False,
+        widget=forms.TextInput()
+    )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),
@@ -45,6 +55,8 @@ class RegisterForm(forms.Form):
 
         add_attr(self.fields['username'], 'placeholder', 'Seu nome de usuário')
         add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
+        add_attr(self.fields['linkedin'], 'placeholder', 'Ex: https://linkedin.com/in/username')
+        add_attr(self.fields['github'], 'placeholder', 'Ex: https://github.com/username')
         add_attr(self.fields['password'], 'placeholder', 'Sua senha')
         add_attr(
             self.fields['confirmed_password'],
@@ -114,8 +126,8 @@ class UpdateForm(forms.Form):
 
         add_attr(username, 'placeholder', 'Nome de usuário')
         add_attr(email, 'placeholder', 'Ex: user@email.com')
-        add_attr(linkedin, 'placeholder', 'Ex: linkedin.com/in/username')
-        add_attr(github, 'placeholder', 'Ex: github.com/username')
+        add_attr(linkedin, 'placeholder', 'Ex: https://linkedin.com/in/username')
+        add_attr(github, 'placeholder', 'Ex: https://github.com/username')
         add_attr(password, 'placeholder', 'Nova senha')
         add_attr(new_password, 'placeholder', 'Confirmar senha')
 
