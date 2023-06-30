@@ -121,13 +121,15 @@
 
 .card-description {
     max-height: 3rem;
-    overflow: hidden;
     padding-top: .3rem;
 }
 
 .card-description p {
     font-size: 1.1rem;
     color: rgb(146, 146, 146);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .card-info {

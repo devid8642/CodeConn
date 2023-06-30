@@ -71,6 +71,7 @@ swiper-slide .project-card {
     border-radius: 1rem;
     overflow: hidden;
     transition: all 300ms ease-in-out;
+    text-overflow: ellipsis;
 }
 
 .idea-card:hover {
@@ -84,6 +85,9 @@ swiper-slide .project-card {
 .idea-header h3 {
     font-size: 1.5rem;
     padding: .5rem 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .idea-body {
