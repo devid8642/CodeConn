@@ -1,7 +1,8 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-from users.models import User, ProjectIdea
+from users.models import User
+from ideas.models import ProjectIdea
 
 STACKS = (
     ('1', 'Backend'),

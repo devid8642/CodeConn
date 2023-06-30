@@ -10,12 +10,12 @@ from django.conf import settings
 from django.http import Http404
 
 from .forms import (
-    LoginForm, RegisterForm, UpdateForm, ProjectsDateForm, IdeasForm
+    LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
 )
 from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
-from .models import User, ProjectsDate, ProjectIdea
+from .models import User, ProjectsDate
 
 
 def login_view(request):
@@ -255,89 +255,3 @@ def admin_dashboard(request):
             'non_approved_count': non_approved_count,
         }
     )
-
-
-def projects_ideas(request):
-    all_ideas = ProjectIdea.objects.all().order_by('-id')
-    backend = []
-    frontend = []
-    fullstack = []
-
-    for idea in all_ideas:
-        if idea.stack == 'Fullstack':
-            fullstack.append(idea)
-
-        elif idea.stack == 'Backend':
-            backend.append(idea)
-
-        else:
-            frontend.append(idea)
-
-    return render(
-        request,
-        'users/pages/projects_ideas.html',
-        context={
-            'backend': backend,
-            'frontend': frontend,
-            'fullstack': fullstack,
-        }
-    )
-
-
-def idea_detail(request, pk):
-    idea = get_object_or_404(ProjectIdea, pk=pk)
-
-    return render(
-        request,
-        'users/pages/idea_detail.html',
-        context={
-            'idea': idea
-        }
-    )
-
-
-@login_required(login_url='users:login', redirect_field_name='next')
-def ideas_admin(request):
-    if request.user.is_staff:
-        all_ideas = ProjectIdea.objects.all().order_by('-id')
-
-        form = IdeasForm(request.POST or None)
-
-        if form.is_valid():
-            idea = form.save(commit=False)
-            stack = idea.get_stack_display()
-            level = idea.get_level_display()
-            idea.stack = stack
-            idea.level = level
-
-            idea.save()
-
-            return redirect('users:ideas_admin')
-
-    else:
-        return redirect('projects:home')
-
-    return render(
-        request,
-        'users/pages/ideas_admin.html',
-        context={
-            'all_ideas': all_ideas,
-            'form': form,
-        }
-    )
-
-
-def idea_delete(request):
-    if not request.POST:
-        raise Http404
-
-    idea_id = request.POST.get('idea_id')
-    idea = get_object_or_404(
-        ProjectIdea,
-        id=idea_id,
-    )
-
-    messages.error(request, 'Ideia deletada com sucesso!')
-    idea.delete()
-
-    return redirect('users:ideas_admin')

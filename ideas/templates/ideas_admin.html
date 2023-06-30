@@ -14,7 +14,7 @@
     <div class="ideas-admin-container">
       <div class="ideas-add">
         <h2>Adicionar ideia</h2>
-        <form action="{% url 'users:ideas_admin' %}" method="POST" class="base-form">
+        <form action="{% url 'ideas:ideas_admin' %}" method="POST" class="base-form">
           {% csrf_token %}
           {% for field in form %}
             <div class="input-group">
@@ -28,14 +28,14 @@
       <div class="all-ideas">
         <h2>Todas as ideias</h2>
         {% for idea in all_ideas %}
-          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
+          <a href="{% url 'ideas:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <div class="title-info">
                 <h4>{{ idea.idea }}</h4>
                 <p>{{ idea.stack }}</p>
               </div>
               <div class="idea-delete">
-                <form action="{% url 'users:idea_delete' %}" method="POST" class="form-delete">
+                <form action="{% url 'ideas:idea_delete' %}" method="POST" class="form-delete">
                   {% csrf_token %}
                   <input type="hidden" name="idea_id" value="{{ idea.id }}">
                   <button type="submit">

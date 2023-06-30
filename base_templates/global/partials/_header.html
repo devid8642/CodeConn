@@ -45,7 +45,7 @@
                     <i class="bi bi-file-earmark-plus"></i>
                     Publicar projeto</a>
                   </li>
-                  <li class="nav-item"><a href="{% url 'users:projects_ideas' %}">
+                  <li class="nav-item"><a href="{% url 'ideas:projects_ideas' %}">
                     <i class="bi bi-brightness-high"></i>
                     Ideias de projetos</a>
                   </li>
@@ -54,7 +54,7 @@
                     Meu Perfil</a>
                   </li>
                   {% if request.user.is_staff %}
-                    <li class="nav-item"><a href="{% url 'users:ideas_admin' %}">
+                    <li class="nav-item"><a href="{% url 'ideas:ideas_admin' %}">
                       <i class="bi bi-plus-circle"></i>
                       Adicionar ideia</a>
                     </li>

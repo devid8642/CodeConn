@@ -7,7 +7,8 @@ from django.db.models import Q
 
 from .models import Project, Comment
 from .forms import ProjectForm, CommentForm
-from users.models import ProjectsDate, ProjectIdea
+from ideas.models import ProjectIdea
+from users.models import ProjectsDate
 from utils.stack_index import get_stack_index
 
 

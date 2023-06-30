@@ -46,7 +46,7 @@
         <div class="post-footer">
           {% if project.is_inspired %}
           <p>Projeto baseado em: 
-            <a href="{% url 'users:idea_detail' project.is_inspired.id %}">
+            <a href="{% url 'ideas:idea_detail' project.is_inspired.id %}">
               {{ project.is_inspired }}
             </a>
           </p>

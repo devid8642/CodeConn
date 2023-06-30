@@ -1,7 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from .models import User, ProjectsDate, ProjectIdea
+from .models import User, ProjectsDate
+from ideas.models import ProjectIdea
 from utils.forms_utils import add_attr
 
 
@@ -148,19 +149,3 @@ class ProjectsDateForm(forms.ModelForm):
         model = ProjectsDate
 
         fields = ('start_date', 'end_date')
-
-
-class IdeasForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        idea = self.fields['idea']
-        explanation = self.fields['explanation']
-
-        add_attr(idea, 'placeholder', 'Ideia de projeto')
-        add_attr(explanation, 'placeholder', 'Explicação da ideia')
-
-    class Meta:
-        model = ProjectIdea
-
-        fields = ('idea', 'level', 'stack', 'explanation')

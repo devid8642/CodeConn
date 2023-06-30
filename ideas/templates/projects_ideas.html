@@ -20,7 +20,7 @@
       <div class="all-ideas">
         <h2>Ideias Fullstack:</h2>
         {% for idea in fullstack %}
-          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
+          <a href="{% url 'ideas:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
               <p>{{ idea.stack }}</p>
@@ -37,7 +37,7 @@
       <div class="all-ideas">
         <h2>Ideias Frontend:</h2>
         {% for idea in frontend %}
-          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
+          <a href="{% url 'ideas:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
               <p>{{ idea.stack }}</p>
@@ -54,7 +54,7 @@
       <div class="all-ideas">
         <h2>Ideias Backend:</h2>
         {% for idea in backend %}
-          <a href="{% url 'users:idea_detail' idea.id %}" class="ideas-card">
+          <a href="{% url 'ideas:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
               <p>{{ idea.stack }}</p>

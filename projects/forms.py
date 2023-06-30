@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import Project, Comment
-from users.models import ProjectIdea
+from ideas.models import ProjectIdea
 from utils.forms_utils import add_attr
 
 

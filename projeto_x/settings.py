@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'solo',
     'users',
     'projects',
+    'ideas',
 ]
 
 MIDDLEWARE = [

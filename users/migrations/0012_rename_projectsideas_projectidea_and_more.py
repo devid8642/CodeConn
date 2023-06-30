@@ -19,8 +19,4 @@ class Migration(migrations.Migration):
             name='projectidea',
             options={'verbose_name': 'Project Idea', 'verbose_name_plural': 'Projects Ideas'},
         ),
-        migrations.AlterModelTable(
-            name='projectidea',
-            table='projects_ideas',
-        ),
     ]

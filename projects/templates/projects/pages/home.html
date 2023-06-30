@@ -42,7 +42,7 @@
               {% endif %}
               <div class="project-info">
                 {% if project.is_inspired %}
-                  <a class="idea-info" href="{% url 'users:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a>
+                  <a class="idea-info" href="{% url 'ideas:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a>
                   <a href="{% url 'projects:project_search' %}?q={{project.is_inspired.stack}}">{{ project.stack }}</a>
                 {% endif %}
               </div>
@@ -93,7 +93,7 @@
                   <p>Nível: {{ idea.level }}</p>
                 </div>
                 <div class="idea-footer">
-                  <a href="{% url 'users:idea_detail' idea.id %}">
+                  <a href="{% url 'ideas:idea_detail' idea.id %}">
                     <i class="bi bi-eye"></i>
                     Ver ideia
                   </a>
@@ -103,7 +103,7 @@
           </div>
           <div class="ideas-link">
             <h2>Sem ideias para projetos?</h2>
-            <a href="{% url 'users:projects_ideas' %}">
+            <a href="{% url 'ideas:projects_ideas' %}">
               <i class="bi bi-list"></i>
               Ver todas as ideias
             </a>

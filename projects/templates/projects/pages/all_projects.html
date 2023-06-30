@@ -26,7 +26,7 @@
           
           <div class="project-info">
             {% if project.is_inspired %}
-              <a class="idea-info" href="{% url 'users:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a>
+              <a class="idea-info" href="{% url 'ideas:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a>
               <a href="{% url 'projects:project_search' %}?q={{project.is_inspired.stack}}">{{ project.stack }}</a>
             {% endif %}
           </div>
