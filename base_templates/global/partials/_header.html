@@ -28,6 +28,10 @@
           </li>
 
           <li class="nav-item">
+            <a href="{% url 'ideas:projects_ideas' %}" class="nav-link">Ideias</a>
+          </li>
+
+          <li class="nav-item">
             <a href="{% url 'projects:home' %}#about" class="nav-link">Sobre</a>
           </li>
   
@@ -44,10 +48,6 @@
                   <li class="nav-item"><a href="{% url 'projects:project_create' %}">
                     <i class="bi bi-file-earmark-plus"></i>
                     Publicar projeto</a>
-                  </li>
-                  <li class="nav-item"><a href="{% url 'ideas:projects_ideas' %}">
-                    <i class="bi bi-brightness-high"></i>
-                    Ideias de projetos</a>
                   </li>
                   <li class="nav-item"><a href="{% url 'users:user_detail' request.user.id %}">
                     <i class="bi bi-person-circle"></i>
