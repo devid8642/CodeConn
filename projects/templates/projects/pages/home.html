@@ -92,8 +92,8 @@
                   <h3>{{ idea.idea }}</h3>
                 </div>
                 <div class="idea-body">
-                  <p>Stack: {{ idea.stack }}</p>
-                  <p>Nível: {{ idea.level }}</p>
+                  <p>Stack: {{ idea.get_stack_display }}</p>
+                  <p>Nível: {{ idea.get_level_display }}</p>
                 </div>
                 <div class="idea-footer">
                   <a href="{% url 'ideas:idea_detail' idea.id %}">
