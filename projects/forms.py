@@ -22,7 +22,7 @@ class ProjectForm(forms.ModelForm):
             self.fields['is_inspired'].queryset = ProjectIdea.objects.all()
 
         add_attr(title, 'placeholder', 'Título do seu projeto')
-        add_attr(subtitle, 'placeholder', 'Breve descrição')
+        add_attr(subtitle, 'placeholder', 'Breve descrição do seu projeto')
         add_attr(
             explanatory, 'placeholder', 'Explique e demonstre seu projeto aqui'
         )
