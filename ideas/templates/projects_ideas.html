@@ -23,10 +23,10 @@
           <a href="{% url 'ideas:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
-              <p>{{ idea.stack }}</p>
+              <p>{{ idea.get_stack_display }}</p>
             </div>
             <div class="idea-body">
-              <p class="idea-level">Nível: {{ idea.level }}</p>
+              <p class="idea-level">Nível: {{ idea.get_level_display }}</p>
               <p class="idea-date">
                 {{ idea.start_date|naturalday }}
               </p>
@@ -40,10 +40,10 @@
           <a href="{% url 'ideas:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
-              <p>{{ idea.stack }}</p>
+              <p>{{ idea.get_stack_display }}</p>
             </div>
             <div class="idea-body">
-              <p class="idea-level">Nível: {{ idea.level }}</p>
+              <p class="idea-level">Nível: {{ idea.get_level_display }}</p>
               <p class="idea-date">
                 {{ idea.start_date|naturalday }}
               </p>
@@ -57,10 +57,10 @@
           <a href="{% url 'ideas:idea_detail' idea.id %}" class="ideas-card">
             <div class="idea-title">
               <h4>{{ idea.idea }}</h4>
-              <p>{{ idea.stack }}</p>
+              <p>{{ idea.get_stack_display }}</p>
             </div>
             <div class="idea-body">
-              <p class="idea-level">Nível: {{ idea.level }}</p>
+              <p class="idea-level">Nível: {{ idea.get_level_display }}</p>
               <p class="idea-date">
                 {{ idea.start_date|naturalday }}
               </p>

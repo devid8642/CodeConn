@@ -13,8 +13,8 @@
       <div class="idea-header">
         <h2 class="idea-title">{{ idea.idea }}</h2>
         <div class="idea-info">
-          <a href="{% url 'projects:project_search' %}?q={{idea.stack}}" class="idea-stack">{{ idea.stack }}</a>
-          <p class="idea-level">{{ idea.level }}</p>
+          <a href="{% url 'projects:project_search' %}?q={{idea.stack}}" class="idea-stack">{{ idea.get_stack_display }}</a>
+          <p class="idea-level">{{ idea.get_level_display }}</p>
         </div>
       </div>
       <div class="idea-body">

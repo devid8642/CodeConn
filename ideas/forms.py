@@ -2,6 +2,7 @@ from django import forms
 from .models import ProjectIdea
 from utils.forms_utils import add_attr
 
+
 class IdeasForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

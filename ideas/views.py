@@ -14,9 +14,9 @@ def projects_ideas(request):
     fullstack = []
 
     for idea in all_ideas:
-        if idea.stack == 'Fullstack':
+        if idea.stack == '3':
             fullstack.append(idea)
-        elif idea.stack == 'Backend':
+        elif idea.stack == '1':
             backend.append(idea)
         else:
             frontend.append(idea)
@@ -53,10 +53,6 @@ def ideas_admin(request):
 
         if form.is_valid():
             idea = form.save(commit=False)
-            stack = idea.get_stack_display()
-            level = idea.get_level_display()
-            idea.stack = stack
-            idea.level = level
 
             idea.save()
 
