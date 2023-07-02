@@ -109,7 +109,7 @@ def register_view(request):
         )
         messages.success(request, 'Você foi registrado com sucesso!')
 
-        return redirect('projects:home')
+        return redirect('users:login')
 
     return render(
         request,
