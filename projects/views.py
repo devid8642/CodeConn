@@ -94,11 +94,18 @@ def project_search(request):
 
 
 def project_detail(request, pk):
-    project = get_object_or_404(
-        Project,
-        is_approved=True,
-        id=pk,
-    )
+    project = get_object_or_404(Project, id=pk)
+
+    if request.user == project.author:
+        project = get_object_or_404(Project, id=pk)
+
+    else:
+        project = get_object_or_404(
+            Project,
+            is_approved=True,
+            id=pk,
+        )
+
     comments = Comment.objects.filter(
         project=project,
     ).order_by('-created_at')
@@ -165,7 +172,13 @@ def project_create(request):
         project.is_approved = False
 
         project.save()
-        messages.success(request, 'Projeto criado com sucesso!')
+        messages.success(
+            request,
+            '''
+            Seu projeto foi criado com sucesso e passará por uma avaliação
+             antes de ser aprovado!
+            '''
+        )
 
         return redirect(reverse(
             'users:user_detail', kwargs={'id': request.user.id}

@@ -29,7 +29,13 @@
             {% endif %}
             <p>{{ project.created_at | naturalday }}</p>
           </div>
-          <h2 class="post-title">{{ project.title }}</h2>
+          <h2 class="post-title">
+            {% if project.is_approved %}
+              {{ project.title }}
+            {% else %}
+              {{ project.title }} (Não aprovado)
+            {% endif %}
+          </h2>
           <p class="post-description">{{ project.subtitle }}</p>
         </div>
         <div class="post-body">
