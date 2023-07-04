@@ -16,6 +16,7 @@ from utils.email_sending import activate_email
 from .tokens import account_activation_token
 from projects.models import Project
 from .models import User, ProjectsDate
+from datetime import datetime
 
 
 def login_view(request):
@@ -233,7 +234,16 @@ def admin_dashboard(request):
         )
 
         if form.is_valid():
-            form.save()
+            date = form.save(commit=False)
+            date.end_date = datetime(
+                year=date.end_date.year,
+                month=date.end_date.month,
+                day=date.end_date.day,
+                hour=23,
+                minute=59,
+                second=59
+            )
+            date.save()
             return redirect('users:admin_dashboard')
 
         for user in users:
