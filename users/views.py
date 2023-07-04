@@ -74,7 +74,6 @@ def register_view(request):
         password = form.cleaned_data.get('password')
         form.cleaned_data.get('confirmed_password')
 
-        '''
         if settings.EMAIL_CONFIRMATION:
             user = User.objects.create_user(
                 username=username,
@@ -98,16 +97,6 @@ def register_view(request):
             messages.success(request, 'Você foi registrado com sucesso!')
 
             return redirect('projects:home')
-        '''
-        User.objects.create_user(
-            username=username,
-            email=email,
-            linkedin=linkedin,
-            github=github,
-            password=password,
-            is_active=True,
-        )
-        messages.success(request, 'Você foi registrado com sucesso!')
 
         return redirect('users:login')
 
