@@ -151,7 +151,7 @@
 .failed-users-body ul li a:hover,
 .success-users-body ul li a:hover,
 .non-approved-body ul li a:hover  {
-    background-color:rgb(15, 15, 15);
+    background-color:var(--background);
 }
 
 .delivered-user h4 {
@@ -161,7 +161,8 @@
 }
 
 
-.delivered-user p {
+.delivered-user p,
+.failed-users-body ul li a p {
     font-size: .9rem;
     color: rgb(76, 76, 76)
 }
