@@ -82,6 +82,11 @@
 
 .post-body .post-text {
     line-height: 1.6rem;
+    white-space: pre-wrap;      /* Webkit */    
+    white-space: -moz-pre-wrap; /* Firefox */     
+    white-space: -pre-wrap;     /* Opera <7 */    
+    white-space: -o-pre-wrap;   /* Opera 7 */     
+    word-wrap: break-word;      /* IE */ 
 }
 
 .post-text,
@@ -204,6 +209,11 @@
     width: 100%;
     line-height: 1.2rem;
     font-size: 1rem;
+    white-space: pre-wrap;      /* Webkit */    
+    white-space: -moz-pre-wrap; /* Firefox */     
+    white-space: -pre-wrap;     /* Opera <7 */    
+    white-space: -o-pre-wrap;   /* Opera 7 */     
+    word-wrap: break-word;      /* IE */ 
 }
 
 .comment-delete button {
