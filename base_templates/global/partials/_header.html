@@ -53,18 +53,19 @@
                           {% csrf_token %}
                           <input type="hidden" name="comment_id" value="{{ comment.id }}">
                           <button type="submit">
-                            <h4>
-                              <i class="bi bi-chat"></i>
-                              Novo Comentário:
-                            </h4>
                             <p>
-                              <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>"{{ comment.project.title }}"</strong>
+                              <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>
+                                "{{ comment.project.title }}"
+                              </strong>
                             </p>
                           </button>
                         </form>
                       </li>
                     {% endif %}
-                    
+                  {% empty %}
+                    <li class="nav-item">
+                      <p class="username">Nenhuma notificação ainda.</p>
+                    </li>
                   {% endfor %}
                 </ul>
               </div>

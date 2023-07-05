@@ -164,6 +164,11 @@
   border-radius: .2rem;
 }
 
+.user-dropdown {
+  max-height: 25rem;
+  overflow-y: auto;
+}
+
 .user-dropdown.notification {
   width: 15rem;
 }
