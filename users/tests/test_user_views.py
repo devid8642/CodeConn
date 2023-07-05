@@ -71,7 +71,7 @@ class TestRegisterView(TestBase):
         )
         self.assertRedirects(
             response,
-            reverse('users:login')
+            reverse('projects:home')
         )
         self.assertTrue(
             User.objects.filter(email=data['email']).exists()
