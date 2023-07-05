@@ -306,6 +306,11 @@
   .nav-item .nav-link,
   .nav-item .notification-link {
     margin-left: 0;
+    margin-right: 0;
+  }
+
+  .comments-count {
+    right: -.9rem;
   }
 }
 
