@@ -221,6 +221,7 @@
 
 .user-dropdown ul li a:hover {
   background-color: var(--cor-primaria);
+  color: var(--background)
 }
 
 .hamburguer {
