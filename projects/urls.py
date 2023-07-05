@@ -15,4 +15,9 @@ urlpatterns = [
     path(
         'project/comment/delete', views.comment_delete, name='comment_delete'
     ),
+    path(
+        'project/comment/read/',
+        views.comment_notification,
+        name='comment_notification',
+    )
 ]

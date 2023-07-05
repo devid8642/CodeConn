@@ -139,6 +139,26 @@ def project_detail(request, pk):
 
 
 @login_required(login_url='users:login', redirect_field_name='next')
+def comment_notification(request):
+    if not request.POST:
+        raise Http404
+
+    comment_id = int(request.POST.get('comment_id'))
+
+    comment = get_object_or_404(
+        Comment,
+        id=comment_id,
+    )
+    comment.read = True
+
+    comment.save()
+
+    return redirect(
+        reverse('projects:project_detail', kwargs={'pk': comment.project.id})
+    )
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
 def comment_delete(request):
     if not request.POST:
         raise Http404

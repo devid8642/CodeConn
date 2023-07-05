@@ -89,6 +89,10 @@
   box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
+.nav-item .register-link {
+  margin-left: 1.5rem;
+}
+
 .nav-item .profile-link,
 .nav-item .notification-link {
   border-radius: 50%;
@@ -111,10 +115,10 @@
 
 .comments-count {
   position: absolute;
-  color: white;
+  color: var(--background);
   top: -1rem;
   right: -.4rem;
-  background-color: #1645ff;
+  background-color: var(--cor-primaria);
   padding: .1rem .3rem;
   border-radius: 50%;
   font-size: .8rem;
@@ -164,20 +168,26 @@
   width: 15rem;
 }
 
-.user-dropdown.notification a {
+.user-dropdown.notification button {
   font-size: .9rem;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  color: rgb(200, 200, 200);
+  padding: 1rem .8rem;
+  cursor: pointer;
 }
 
-.user-dropdown.notification a strong {
-  color: #1645ff;
+.user-dropdown.notification button strong {
+  color: var(--cor-primaria);
 }
 
-.user-dropdown.notification a:hover {
+.user-dropdown.notification button:hover {
   background-color: var(--background);
 }
 
-.user-dropdown.notification a h4 {
-  color: #1645ff;
+.user-dropdown.notification button h4 {
+  color: var(--cor-primaria);
   font-size: 1rem;
   margin-bottom: .5rem;
 }

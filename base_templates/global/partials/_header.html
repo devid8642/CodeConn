@@ -46,16 +46,25 @@
                   <li class="nav-item">
                     <p class="username"><strong>Suas Notificações</strong></p>
                   </li>
-                  {% for comment in comments %}
-                    <li class="nav-item">
-                      <a href="">
-                        <h4>
-                          <i class="bi bi-chat"></i>
-                          Novo Comentário:
-                        </h4>
-                        <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>"{{ comment.project.title }}"</strong>
-                      </a>
-                    </li>
+                  {% for comment in comments_notification %}
+                    {% if not comment.read %}
+                      <li class="nav-item">
+                        <form action="{% url 'projects:comment_notification' %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                          <button type="submit">
+                            <h4>
+                              <i class="bi bi-chat"></i>
+                              Novo Comentário:
+                            </h4>
+                            <p>
+                              <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>"{{ comment.project.title }}"</strong>
+                            </p>
+                          </button>
+                        </form>
+                      </li>
+                    {% endif %}
+                    
                   {% endfor %}
                 </ul>
               </div>
