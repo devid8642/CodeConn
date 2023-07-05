@@ -55,6 +55,7 @@ class Comment(models.Model):
     comment = models.TextField('Comentário')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    read = models.BooleanField('Lido', default=False)
 
     def __str__(self):
         return f'Comment {self.id}'

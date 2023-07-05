@@ -37,6 +37,31 @@
   
           {% if request.user.is_authenticated %}
             <li class="nav-item user-nav">
+              <p class="notification-link">
+                <i class="bi bi-bell"></i>
+              </p>
+              <p class="comments-count">{{ comments_count }}</p>
+              <div class="user-dropdown notification">
+                <ul>
+                  <li class="nav-item">
+                    <p class="username"><strong>Suas Notificações</strong></p>
+                  </li>
+                  {% for comment in comments %}
+                    <li class="nav-item">
+                      <a href="">
+                        <h4>
+                          <i class="bi bi-chat"></i>
+                          Novo Comentário:
+                        </h4>
+                        <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>"{{ comment.project.title }}"</strong>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item user-nav">
               <p class="profile-link">
                 <i class="bi bi-person-fill"></i>
               </p>

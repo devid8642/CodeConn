@@ -261,6 +261,10 @@ swiper-slide .project-card {
         margin-left: .8rem;
     }
 
+    .date-deadline {
+        margin-left: 0;
+    }
+
     .home-title {
         margin-bottom: 2rem;
     }
