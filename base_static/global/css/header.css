@@ -116,15 +116,16 @@
 
 .comments-count {
   position: absolute;
-  color: var(--background);
-  top: -1rem;
-  right: -.4rem;
-  background-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+  top: -.9rem;
+  right: -.2rem;
+  border: 1px solid var(--cor-primaria);
   padding: .1rem .3rem;
   border-radius: 50%;
   font-size: .8rem;
   display: block;
   text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
 .nav-item .logout-link:hover {
