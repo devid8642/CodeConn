@@ -115,6 +115,7 @@ swiper-slide .project-card {
 .ideas-link h2 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
+    margin-top: 0 !important;
 }
 
 .ideas-link a {
