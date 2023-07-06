@@ -66,9 +66,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if prod == 'True':
-    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
-
 ROOT_URLCONF = 'projeto_x.urls'
 
 TEMPLATES = [
