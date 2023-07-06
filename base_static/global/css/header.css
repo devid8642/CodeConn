@@ -78,17 +78,23 @@
 }
 
 .nav-item .register-link,
-.nav-item .profile-link {
+.nav-item .profile-link,
+.nav-item .notification-link {
   display: block;
   padding: .5rem .8rem;
   border: 1px solid var(--cor-primaria);
   border-radius: 20px;
   color: var(--cor-primaria);
-  margin-left: 1.5rem;
+  margin-left: .5rem;
   box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
-.nav-item .profile-link {
+.nav-item .register-link {
+  margin-left: 1.5rem;
+}
+
+.nav-item .profile-link,
+.nav-item .notification-link {
   border-radius: 50%;
   font-size: 1.5rem;
   padding: .3rem .42rem;
@@ -97,9 +103,29 @@
   cursor: pointer;
 }
 
-.nav-item .profile-link:hover {
+.nav-item .profile-link:hover,
+.nav-item .notification-link:hover {
   border-color: var(--cor-primaria);
   color: var(--cor-primaria)
+}
+
+.nav-item .notification-link {
+  margin-left: 1.5rem;
+  margin-right: .3rem;
+}
+
+.comments-count {
+  position: absolute;
+  color: var(--cor-primaria);
+  top: -.9rem;
+  right: -.5rem;
+  border: 1px solid var(--cor-primaria);
+  padding: .1rem .3rem;
+  border-radius: 50%;
+  font-size: .8rem;
+  display: block;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
 
 .nav-item .logout-link:hover {
@@ -140,6 +166,39 @@
   border-radius: .2rem;
 }
 
+.user-dropdown {
+  max-height: 25rem;
+  overflow-y: auto;
+}
+
+.user-dropdown.notification {
+  width: 15rem;
+}
+
+.user-dropdown.notification button {
+  font-size: .9rem;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  color: rgb(200, 200, 200);
+  padding: 1rem .8rem;
+  cursor: pointer;
+}
+
+.user-dropdown.notification button strong {
+  color: var(--cor-primaria);
+}
+
+.user-dropdown.notification button:hover {
+  background-color: var(--background);
+}
+
+.user-dropdown.notification button h4 {
+  color: var(--cor-primaria);
+  font-size: 1rem;
+  margin-bottom: .5rem;
+}
+
 .user-dropdown ul {
   list-style: none;
 }
@@ -163,6 +222,7 @@
 
 .user-dropdown ul li a:hover {
   background-color: var(--cor-primaria);
+  color: var(--background)
 }
 
 .hamburguer {
@@ -243,8 +303,14 @@
 
   .nav-item .register-link,
   .nav-item .profile-link,
-  .nav-item .nav-link {
+  .nav-item .nav-link,
+  .nav-item .notification-link {
     margin-left: 0;
+    margin-right: 0;
+  }
+
+  .comments-count {
+    right: -.9rem;
   }
 }
 

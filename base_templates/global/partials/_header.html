@@ -37,6 +37,41 @@
   
           {% if request.user.is_authenticated %}
             <li class="nav-item user-nav">
+              <p class="notification-link">
+                <i class="bi bi-bell"></i>
+              </p>
+              <p class="comments-count">{{ comments_count }}</p>
+              <div class="user-dropdown notification">
+                <ul>
+                  <li class="nav-item">
+                    <p class="username"><strong>Suas notificações:</strong></p>
+                  </li>
+                  {% for comment in comments_notification %}
+                    {% if not comment.read %}
+                      <li class="nav-item">
+                        <form action="{% url 'projects:comment_notification' %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                          <button type="submit">
+                            <p>
+                              <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>
+                                "{{ comment.project.title }}"
+                              </strong>
+                            </p>
+                          </button>
+                        </form>
+                      </li>
+                    {% endif %}
+                  {% empty %}
+                    <li class="nav-item">
+                      <p class="username">Nenhuma notificação ainda.</p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item user-nav">
               <p class="profile-link">
                 <i class="bi bi-person-fill"></i>
               </p>
