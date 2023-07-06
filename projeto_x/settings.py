@@ -197,13 +197,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-if prod == 'True':
-    STORAGES = {
-        'staticfiles': {
-            'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
-        },
-    }
-
 MESSAGE_TAGS = {
     constants.DEBUG: 'message-debug',
     constants.ERROR: 'message-error',
