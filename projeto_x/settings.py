@@ -174,8 +174,8 @@ if prod == 'True':
 USE_S3 = env('USE_S3') == 'True'
 
 if prod == 'True' and USE_S3:
-    AWS_ACESS_KEY = env('AWS_ACESS_KEY')
-    AWS_ACESS_SECRET_KEY = env('AWS_ACESS_SECRET_KEY')
+    AWS_S3_ACCESS_KEY_ID = env('AWS_S3_ACCESS_KEY_ID')
+    AWS_S3_SECRET_ACCESS_KEY = env('AWS_S3_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_LOCATION = 'static'
