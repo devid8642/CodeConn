@@ -1,14 +1,18 @@
-# Projeto X
-Gerenciador de projetos para uma organização independente de alunos da Estácio.
+# Code Connect
+O Code Connect foi criado por alunos e estudantes de programação, ele tem o propósito de estimular e incentivar outros como nós a por em prática o que aprendemos no dia a dia na área de tecnologia e sair do ócio. Deixar de ser o "programador" que apenas lê artigos ou copia códigos de vídeos e não cria nada próprio.
+
+### Como funciona
+
+O site funciona como um portifólio geral para os alunos de Ciência da Computação e áreas afins da Estácio. Os alunos cadastrados e verificados no site terão um prazo em torno de duas semanas ou mais para criarem seus próprios projetos e postarem na plataforma. Lembrando que o projeto não precisa ser algo enorme, pode ser algo simples e não precisa estar completo, o importante é se desafiar a algo novo, por em prática seus conhecimentos e aprender com os próprios erros!
 
 ## Setup do projeto
-Foi feito o setup do projeto em uma máquina com o python versão 3.10.11 e poetry 1.4.2, recomendo está versão em específico para rodar o projeto. Além disso, seguindo as boas práticas de projetos python, crie antes de tudo um ambiente virtual para instalar tudo, na linha de comando:
+Após baixar o código do projeto localmente, crie um ambiente virtual com o python:
 
 ```
 python -m venv venv
 ```
 
-Este comando criará um ambiente virtual de nome venv no diretório atual. Ativo-o em um ambiente Linux com:
+Ativo-o em um ambiente Linux com:
 
 ```
 source venv/bin/activate
@@ -33,8 +37,8 @@ Instalando via poetry:
 poetry install
 ```
 
-### Criando o arquivo .env
-Crie na raiz do projeto um arquivo de nome .env com as mesmas variáveis listadas no arquivo env.example. O valor da variável SECRET_KEY fica a seu gosto, porém é importante que você adote a variável PRODUCTION como False a não ser que você queira emular em sua máquina o ambite de produção, o que eu não recomendo pois depende de mais dependências que talvez seu computador não tenha.
+### Variáveis de Ambiente
+Crie na raiz do projeto um arquivo de nome .env com as mesmas variáveis listadas no arquivo env.example. As variáveis referentes ao servidor de email e ao banco de dados só devem ser setadas caso você deseje simular o ambiente de produção. Para isso considere utilizar um servidor SMTP como o Gmail e um servidor de banco de dados PostgreSQL devidamente configurados.
 
 ### Criando o schema do banco de dados
 Para isso execute:
@@ -60,8 +64,5 @@ pytest
 ## Contribuindo
 Segue o arquivo para os participantes do projeto com o guia de contribuição: [contribuindo](contrib.md)
 
-## Dependências de produção
---- VOU ESCREVER DPS ---
-
 ## Detalhes do projeto
-Toda a organização do backend do projeto está aqui: [backend do projeto](https://hilarious-wound-b4c.notion.site/Gerenciador-de-projetos-fbc072db38b04db9b38bc5fa9f29b3b2)
+Toda a organização do backend do projeto está aqui: [documentação do projeto](https://hilarious-wound-b4c.notion.site/CodeConnect-fbc072db38b04db9b38bc5fa9f29b3b2?pvs=4).
