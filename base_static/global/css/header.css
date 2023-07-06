@@ -111,14 +111,14 @@
 
 .nav-item .notification-link {
   margin-left: 1.5rem;
-  margin-right: .5rem;
+  margin-right: .3rem;
 }
 
 .comments-count {
   position: absolute;
   color: var(--cor-primaria);
   top: -.9rem;
-  right: -.2rem;
+  right: -.5rem;
   border: 1px solid var(--cor-primaria);
   padding: .1rem .3rem;
   border-radius: 50%;
