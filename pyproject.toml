@@ -16,16 +16,9 @@ six = "^1.16.0"
 django-solo = "^2.1.0"
 dj-database-url = "^2.0.0"
 django-ckeditor = "^6.6.1"
-
-[tool.poetry.group.prod.dependencies]
-psycopg = {extras = ["binary"], version = "^3.1.9"}
-gunicorn = "^20.1.0"
-whitenoise = {extras = ["brotli"], version = "^6.4.0"}
-supervisor = "^4.2.5"
-
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.3.2"
+psycopg = "^3.1.9"
+django-storages = "^1.13.2"
+pytest = "^7.4.0"
 pytest-django = "^4.5.2"
 
 [tool.pytest.ini_options]
