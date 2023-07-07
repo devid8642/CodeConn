@@ -139,11 +139,11 @@
   background-color: var(--cor-primaria);
   box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
   border-radius: 20px;
-  color: rgb(200, 200, 200);
+  color: var(--background);
 }
 
 .nav-item .login-link:hover {
-  color: rgb(200, 200, 200);
+  color: var(--background);
 }
 
 .user-nav {
@@ -167,7 +167,7 @@
 }
 
 .user-dropdown {
-  max-height: 25rem;
+  max-height: 15rem;
   overflow-y: auto;
 }
 
@@ -291,6 +291,10 @@
 
   .navbar-nav .nav-item {
     margin: 10px 0;
+  }
+
+  .user-dropdown .nav-item {
+    margin: 0;
   }
 
   .navbar-nav.active {
