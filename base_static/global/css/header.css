@@ -166,11 +166,6 @@
   border-radius: .2rem;
 }
 
-.user-dropdown {
-  max-height: 15rem;
-  overflow-y: auto;
-}
-
 .user-dropdown.notification {
   width: 15rem;
 }
@@ -241,6 +236,8 @@
 }
 
 @media (max-width: 1200px) {
+
+
   .hamburguer {
     display: block;
   }
@@ -302,7 +299,8 @@
   }
 
   .user-dropdown {
-    height: fit-content;
+    max-height: 15rem;
+    overflow-y: auto;
   }
 
   .nav-item .register-link,
