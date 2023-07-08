@@ -18,9 +18,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: rgb(18, 18, 18);
     transition: 300ms;
-    border-radius: .5rem;
+    border-radius: 1rem;
+    border: 3px solid rgb(25, 25, 35);
 }
 
 .project-card:hover {
@@ -30,7 +30,7 @@
 .card-header {
     height: 100%;
     overflow: hidden;
-    background-color: rgb(15, 15, 30);
+    border-bottom: 2px solid rgb(25, 25, 35);
 }
 
 .card-header img {
@@ -41,7 +41,6 @@
 
 .card-body {
     padding: 1rem 1rem;
-    background-color: rgb(15, 15, 15);
 }
 
 .card-title {
@@ -67,13 +66,15 @@
     top: .5rem;
     left: .5rem;
     text-decoration: none;
-    color: rgb(32, 32, 252);
+    color: var(--background);
     display: flex;
     align-items: center;
     gap: .3rem;
     margin-right: .8rem;
     font-size: .9rem;
-    background-color: rgb(155, 253, 220);
+    border: 1px solid rgb(155, 253, 220);
+    color: rgb(155, 253, 220);
+    background-color: var(--background);
     padding: .3rem .7rem;
     border-radius: .2rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
@@ -96,12 +97,13 @@
     display: flex;
     text-align: center;
     text-decoration: none;
-    background-color: rgb(81, 254, 228);
+    background-color: var(--background);
     overflow-x: hidden;
     padding: .3rem .7rem;
     width: fit-content;
     border-radius: .2rem;
-    color: var(--background);
+    color: var(--cor-primaria);
+    border: 1px solid var(--cor-primaria);
     font-size: .9rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
 }
@@ -112,6 +114,7 @@
 
 .project-author.staff-user {
     background-color: #f97c0f;
+    border: 1px solid var(--cor-primaria);
     color: var(--background);
 }
 
@@ -144,9 +147,10 @@
 .card-button {
     display: block;
     text-align: center;
-    padding: .6rem 0;
+    padding: .5rem 0;
     width: 100%;
-    background-color: #f97c0f;
+    background-color: var(--cor-primaria);
+    border: 1px solid var(--cor-primaria);
     border-radius: .2rem;
     color: var(--background);
     font-size: 1.1rem;
@@ -156,7 +160,8 @@
 }
 
 .card-button:hover {
-    background-color: #fa8d2d;
+    background-color: var(--background);
+    color: var(--cor-primaria);
 }
 
 @media (max-width: 1000px) {
