@@ -18,13 +18,13 @@
 .post-user .user-link,
 .comment-area .comment-user {
     text-decoration: none;
-    color: rgb(32, 32, 252);
+    color: rgb(155, 253, 220);
     display: flex;
     align-items: center;
     gap: .3rem;
     margin-right: .8rem;
     font-size: 1rem;
-    background-color: rgb(155, 253, 220);
+    border: 1px solid rgb(155, 253, 220);
     padding: .2rem .5rem;
     border-radius: .2rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
@@ -32,8 +32,9 @@
 
 .comment-area .comment-user.staff-user,
 .post-user .user-link.staff-user {
-    background-color: #f97c0f;
+    background-color: var(--cor-primaria);
     color: var(--background);
+    border: 1px solid var(--cor-primaria);
 }
 
 .comment-area .comment-user.staff-user i,
@@ -131,7 +132,7 @@
 
 .comment-form textarea {
     max-width: 100%;
-    height: 2.3rem;
+    height: 3rem;
     padding: .5rem 1rem;
     margin-top: .5rem;
     border: none;
