@@ -118,9 +118,9 @@
   position: absolute;
   color: var(--cor-primaria);
   top: -.9rem;
-  right: -.5rem;
+  right: -.4rem;
   border: 1px solid var(--cor-primaria);
-  padding: 0rem .4rem;
+  padding: 0 .35rem;
   border-radius: 50%;
   font-size: .7rem;
   display: block;

@@ -40,7 +40,9 @@
               <p class="notification-link">
                 <i class="bi bi-bell"></i>
               </p>
-              <p class="comments-count">{{ comments_count }}</p>
+              {% if comments_count %} 
+                <p class="comments-count">{{ comments_count }}</p>
+              {% endif %}
               <div class="user-dropdown notification">
                 <ul>
                   <li class="nav-item">
