@@ -1,80 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+:root {
+  --cor-primaria: #f97c0f;
+  --tamanho-fonte: 16px;
+  --background: rgb(5, 5, 15);
+  --header-background: #1b1d20;
+  --button-color: #d9d9d9;
+  --font-color: #080d0d;
+  --font: "Poppins", Arial, Helvetica, sans-serif;
+  --footer-background: #808080;
+
+  --color-dark-text: rgb(96, 95, 95);
+  --color-info-light: #cce5ff;
+  --color-debug-light: #cce5ff;
+  --color-success-light: #d4edda;
+  --color-alert-light: #fff3cd;
+  --color-warning-light: #fff3cd;
+  --color-error-light: #f8d7da;
+}
+
 * {
     box-sizing: border-box;
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
     font-family: var(--font);
-  }
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
-  :root {
-    --cor-primaria: #f97c0f;
-    --tamanho-fonte: 16px;
-    --background: rgb(5, 5, 15);
-    --header-background: #1b1d20;
-    --button-color: #d9d9d9;
-    --font-color: #080d0d;
-    --font: "Poppins", Arial, Helvetica, sans-serif;
-    --footer-background: #808080;
+}
 
-    --color-dark-text: rgb(96, 95, 95);
-    --color-info-light: #cce5ff;
-    --color-debug-light: #cce5ff;
-    --color-success-light: #d4edda;
-    --color-alert-light: #fff3cd;
-    --color-warning-light: #fff3cd;
-    --color-error-light: #f8d7da;
-  }
-  body {
-    background-color: var(--background);
-  }
+body {
+  background-color: var(--background);
+}
 
-  .btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .container {
-    padding-left: 10rem;
-    padding-right: 10rem;
-  }
-  
-  .formulario{
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 3rem auto;
-    width: 400px;
-    height: 510px;
-    background-color: #d9d9d9;
-    border-radius: 20px;
-    gap: 1rem;
-    
-  }
-  .formulario-input{
-    padding: 1rem 2rem;
-    margin: 0 1rem;
-    border: none;
-    border-bottom:solid 1px #080d0d;
-    border-radius: 0;
-  }
-  .formulario-input::placeholder{
-    font-size: 1.4rem;
-  }
-  .formulario-input:focus{
-    outline: none;
-  }
-  .formulario-button:hover{
-  background-color: #1b1d20;
-  }
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 
-  /* MESSAGES */
-  .center-messages {
-    width: 100%;
-    text-align: center;
-    padding: 1rem;
+.container {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+/* MESSAGES */
+.center-messages {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
 }
 
 .message {
@@ -85,46 +57,45 @@
     color: var(--color-dark-text);
 }
 
-  .message-error {
-      border: 1px solid var(--color-error-dark);
-      background: var(--color-error-light);
-      color: var(--color-error-dark);
-    }
-    
-  .message-success {
-  border: 1px solid var(--color-success-dark);
-  background: var(--color-success-light);
-  color: var(--color-success-dark);
-  }
-
-  .message-warning {
-  border: 1px solid var(--color-warning-dark);
-  background: var(--color-warning-light);
-  color: var(--color-warning-dark);
-  }
-
-  .message-alert {
-  border: 1px solid var(--color-alert-dark);
-  background: var(--color-alert-light);
-  color: var(--color-alert-dark);
-  }
-
-  .message-info {
-  border: 1px solid var(--color-info-dark);
-  background: var(--color-info-light);
-  color: var(--color-info-dark);
-  }
-
-  .message-debug {
-  border: 1px solid var(--color-debug-dark);
-  background: var(--color-debug-light);
-  color: var(--color-debug-dark);
-  }
-
-  @media (max-width: 1200px) {
-    .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
+.message-error {
+    border: 1px solid var(--color-error-dark);
+    background: var(--color-error-light);
+    color: var(--color-error-dark);
+}
   
+.message-success {
+border: 1px solid var(--color-success-dark);
+background: var(--color-success-light);
+color: var(--color-success-dark);
+}
+
+.message-warning {
+border: 1px solid var(--color-warning-dark);
+background: var(--color-warning-light);
+color: var(--color-warning-dark);
+}
+
+.message-alert {
+border: 1px solid var(--color-alert-dark);
+background: var(--color-alert-light);
+color: var(--color-alert-dark);
+}
+
+.message-info {
+border: 1px solid var(--color-info-dark);
+background: var(--color-info-light);
+color: var(--color-info-dark);
+}
+
+.message-debug {
+border: 1px solid var(--color-debug-dark);
+background: var(--color-debug-light);
+color: var(--color-debug-dark);
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
