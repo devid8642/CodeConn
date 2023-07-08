@@ -161,7 +161,10 @@
   top: 2.5rem;
   left: -5rem;
   width: 13rem;
-  background-color: rgba(15, 15, 27, .9);
+  background: rgba(15, 15, 27, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
   box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
   border-radius: .3rem;
   overflow: hidden;
