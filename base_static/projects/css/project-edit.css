@@ -102,5 +102,7 @@
 
     .base-form {
         width: 100%;
+        padding: 0rem;
+        background-color: transparent;
     }
 }
