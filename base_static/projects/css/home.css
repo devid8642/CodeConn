@@ -185,10 +185,11 @@ swiper-slide .project-card {
 
 .adm-card {
     width: 250px;
-    background-color: rgb(15, 15, 15);
+    border: 2px solid rgb(15, 15, 27);
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     border-radius: 1rem;
     transition: all 300ms ease-in-out;
+    overflow: hidden;
 }
 
 .adm-card:hover {
@@ -197,18 +198,22 @@ swiper-slide .project-card {
 
 .adm-name,
 .adm-stack {
-    border-bottom: 1px solid grey;
+    border-bottom: 2px solid rgb(15, 15, 27);
     padding: 1rem 1rem;
+}
+
+.adm-name {
+    background-color: var(--cor-primaria);
 }
 
 .adm-name h3 {
     text-align: center;
-    color: rgb(200, 200, 200);
+    color: var(--background);
 }
 
 .adm-stack {
     color: rgb(200, 200, 200);
-    border-bottom: 1px solid grey;
+    border-bottom: 2px solid rgb(15, 15, 27);
     height: 190px;
 }
 
