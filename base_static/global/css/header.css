@@ -97,7 +97,7 @@
 .nav-item .notification-link {
   border-radius: 50%;
   font-size: 1.5rem;
-  padding: .3rem .42rem;
+  padding: 0 .42rem;
   border: 1px solid rgb(200, 200, 200);
   color: rgb(200, 200, 200);
   cursor: pointer;
@@ -120,9 +120,9 @@
   top: -.9rem;
   right: -.5rem;
   border: 1px solid var(--cor-primaria);
-  padding: .1rem .3rem;
+  padding: 0rem .4rem;
   border-radius: 50%;
-  font-size: .8rem;
+  font-size: .7rem;
   display: block;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
@@ -164,7 +164,6 @@
   background: rgba(15, 15, 27, 0.8);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  /* border: 1px solid rgba(255, 255, 255, 0.3); */
   box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
   border-radius: .3rem;
   overflow: hidden;
