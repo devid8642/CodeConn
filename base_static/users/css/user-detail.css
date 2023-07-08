@@ -19,7 +19,7 @@
 
 .user-background .logout-link {
     font-size: 2rem;
-    padding: .2rem .4rem 0 .1rem;
+    padding: .2rem .5rem 0 .2rem;
     color: rgb(248, 33, 33);
     text-decoration: none;
 }
@@ -86,7 +86,7 @@
     text-decoration: none;
     color: rgb(200, 200, 200);
     font-size: 1.1rem;
-    padding: .5rem;
+    padding: 0rem .5rem;
     display: flex;
     width: fit-content;
     align-items: center;
@@ -132,8 +132,10 @@
 }
 
 .user-post-card {
+    position: relative;
     padding-top: .5rem;
-    background-color: rgb(15, 15, 15);
+    background-color: var(--background);
+    border: 1px solid var(--cor-primaria);
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     display: flex;
@@ -145,6 +147,17 @@
     overflow: hidden;
 }
 
+.user-post-card-header h2 {
+    font-size: 1.2rem;
+    color: var(--cor-primaria);
+    max-width: 80%;
+    white-space: pre-wrap;      /* Webkit */    
+    white-space: -moz-pre-wrap; /* Firefox */     
+    white-space: -pre-wrap;     /* Opera <7 */    
+    white-space: -o-pre-wrap;   /* Opera 7 */     
+    word-wrap: break-word;      /* IE */ 
+}
+
 .non-approved {
     border: 1px solid rgb(249, 57, 57);
 }
@@ -153,8 +166,15 @@
     background-color: rgb(249, 57, 57);
 }
 
+.user-post-card.non-approved .user-post-card-header h2 {
+    color: rgb(249, 57, 57);
+}
+
 .user-post-links {
     display: flex;
+    position: absolute;
+    top: .5rem;
+    right: .3rem;
 }
 
 .user-post-links a,
