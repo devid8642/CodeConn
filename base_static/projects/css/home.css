@@ -105,7 +105,7 @@ swiper-slide .project-card {
     text-align: center;
     text-decoration: none;
     color: var(--background);
-    padding: .7rem 0;
+    padding: .6rem 0;
 }
 
 .ideas-link {
@@ -199,7 +199,7 @@ swiper-slide .project-card {
 .adm-name,
 .adm-stack {
     border-bottom: 2px solid rgb(15, 15, 27);
-    padding: 1rem 1rem;
+    padding: .7rem 1rem;
 }
 
 .adm-name {
@@ -209,16 +209,17 @@ swiper-slide .project-card {
 .adm-name h3 {
     text-align: center;
     color: var(--background);
+    font-size: 1.3rem;
 }
 
 .adm-stack {
     color: rgb(200, 200, 200);
     border-bottom: 2px solid rgb(15, 15, 27);
-    height: 190px;
+    height: 200px;
 }
 
 .adm-stack h4 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color:#f97c0f;
 }
 
@@ -229,7 +230,7 @@ swiper-slide .project-card {
 
 .adm-stack p {
     margin-top: .3rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .adm-links {
@@ -237,19 +238,19 @@ swiper-slide .project-card {
     justify-content: center;
     align-items: center;
     gap: .5rem;
-    padding: .5rem 1rem;
+    padding: .3rem 0;
 }
 
 .adm-links a {
     text-decoration: none;
     display: block;
-    padding: .5rem;
+    padding: .1rem .3rem;
     color: white;
     font-size: 2rem;
 }
 
 .adm-links a:hover {
-    background-color: rgb(30, 30, 30);
+    color: var(--cor-primaria);
 }
 
 @media (max-width: 1200px) {
