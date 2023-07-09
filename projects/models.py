@@ -11,6 +11,13 @@ STACKS = (
 )
 
 
+class Complaint(models.Model):
+    complaint = models.TextField('Denúncia')
+
+    def __str__(self):
+        return self.complaint
+
+
 class Project(models.Model):
     title = models.CharField('Título', max_length=50)
     subtitle = models.CharField('Subtítulo', max_length=100)
@@ -32,6 +39,11 @@ class Project(models.Model):
     )
     stack = models.CharField(
         'Stack utilizada', max_length=255, null=True, choices=STACKS
+    )
+    complaints = models.ManyToManyField(
+        Complaint,
+        verbose_name='Denúncias',
+        blank=True,
     )
 
     def __str__(self):
