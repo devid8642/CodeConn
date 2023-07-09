@@ -19,5 +19,6 @@ urlpatterns = [
         'project/comment/read/',
         views.comment_notification,
         name='comment_notification',
-    )
+    ),
+    path('project/complaint/', views.make_complaint, name='make_complaint'),
 ]

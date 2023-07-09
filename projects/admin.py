@@ -1,15 +1,6 @@
 from django.contrib import admin
 
-from .models import Project, Comment, Complaint
-
-
-@admin.register(Complaint)
-class ComplaintAdmin(admin.ModelAdmin):
-    list_display = ('id', 'complaint')
-    list_display_links = ('id', 'complaint')
-    list_filter = ('id', 'complaint')
-    ordering = ('-id',)
-    search_fields = ('-id', 'complaint')
+from .models import Project, Comment
 
 
 @admin.register(Project)

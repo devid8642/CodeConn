@@ -35,6 +35,14 @@
             {% else %}
               {{ project.title }} (Não aprovado)
             {% endif %}
+            <form action="{% url 'projects:make_complaint' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="project_id" value="{{ project.id }}">
+              <button type="submit">
+                <i class="bi bi-flag-fill"></i>
+                Denúnciar
+              </button>
+            </form>
           </h2>
           <p class="post-description">{{ project.subtitle }}</p>
         </div>

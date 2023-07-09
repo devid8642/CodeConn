@@ -263,3 +263,29 @@ def project_delete(request):
     return redirect(
         reverse('users:user_detail', kwargs={'id': project.author.id})
     )
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def make_complaint(request):
+    if not request.POST:
+        raise Http404
+
+    id = request.POST.get('project_id')
+
+    project = get_object_or_404(
+        Project,
+        id=id,
+    )
+
+    if project.complaints:
+        project.complaints += 1
+    else:
+        project.complaints = 1
+
+    project.save()
+
+    messages.success(request, 'Sua denúncia foi enviada!')
+
+    return redirect(
+        reverse('projects:project_detail', kwargs={'pk': project.id})
+    )
