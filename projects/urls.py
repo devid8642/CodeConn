@@ -21,4 +21,9 @@ urlpatterns = [
         name='comment_notification',
     ),
     path('project/complaint/', views.make_complaint, name='make_complaint'),
+    path(
+        'project/complaint/read/',
+        views.complaint_notification,
+        name='complaint_notification',
+    )
 ]

@@ -1,4 +1,4 @@
-from projects.models import Comment
+from projects.models import Comment, Project
 
 
 def comments_notification(request):
@@ -6,8 +6,19 @@ def comments_notification(request):
         read=False,
         project__author=request.user.id,
     ).order_by('-id')
+    projects = Project.objects.filter(
+        author=request.user.id
+    )
+    complaints = []
+    notifications = 0 + comments.count()
+
+    for project in projects:
+        if project.complaints:
+            complaints.append(project)
+            notifications += 1
 
     return {
         'comments_notification': comments,
-        'comments_count': comments.count(),
+        'comments_count': notifications,
+        'complaints': complaints,
     }

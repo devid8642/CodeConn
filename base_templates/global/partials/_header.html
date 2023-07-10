@@ -56,6 +56,7 @@
                           <input type="hidden" name="comment_id" value="{{ comment.id }}">
                           <button type="submit">
                             <p>
+                              <i class="bi bi-chat-fill"></i>
                               <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>
                                 "{{ comment.project.title }}"
                               </strong>
@@ -64,11 +65,23 @@
                         </form>
                       </li>
                     {% endif %}
-                  {% empty %}
+                  {% endfor %}
+
+                  {% for complaint in complaints %}
                     <li class="nav-item">
-                      <p class="username">Nenhuma notificação ainda.</p>
+                      <form action="{% url 'projects:complaint_notification' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="complaint_id" value="{{ complaint.id }}">
+                        <button type="submit">
+                          <p>
+                            <i class="bi bi-flag-fill"></i>
+                            Seu post <strong>{{ complaint.title }}</strong> foi denunciado
+                          </p>
+                        </button>
+                      </form>
                     </li>
                   {% endfor %}
+
                 </ul>
               </div>
             </li>

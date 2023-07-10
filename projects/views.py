@@ -289,3 +289,24 @@ def make_complaint(request):
     return redirect(
         reverse('projects:project_detail', kwargs={'pk': project.id})
     )
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def complaint_notification(request):
+    if not request.POST:
+        raise Http404
+
+    complaint_id = request.POST.get('complaint_id')
+
+    complaint = get_object_or_404(
+        Project,
+        id=complaint_id,
+    )
+
+    complaint.complaints -= 1
+
+    complaint.save()
+
+    return redirect(
+        reverse('projects:project_detail', kwargs={'pk': complaint.id})
+    )
