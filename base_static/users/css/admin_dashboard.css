@@ -91,15 +91,15 @@
 
 .deliver-area {
     height: 100%;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
 
 .success-users,
 .failed-users,
-.non-approved-projects {
+.non-approved-projects,
+.complaint-projects {
     height: fit-content;
     max-height: 400px;
     background-color: rgb(15, 15, 27);
@@ -107,6 +107,7 @@
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     overflow-y: auto;
     padding: .5rem 0;
+    width: 400px;
 }
 
 .users-container h3,
@@ -168,7 +169,8 @@
 }
 
 .non-approved-projects {
-    width: 30%;
+    display: flex;
+    flex-direction: column;
 }
 
 .non-approved-body h4 {
@@ -191,6 +193,14 @@
     }
 
     .deliver-area {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .success-users,
+    .failed-users,
+    .non-approved-projects,
+    .complaint-projects {
         width: 100%;
     }
 

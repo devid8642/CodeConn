@@ -7,7 +7,6 @@ from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
-from django.http import Http404
 
 from .forms import (
     LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
@@ -221,6 +220,8 @@ def admin_dashboard(request):
     if request.user.is_staff:
         users = User.objects.all()
         date = ProjectsDate.get_solo()
+        projects = Project.objects.all()
+
         delivered_projects = []
         expired_users = []
         non_approved = Project.objects.filter(
@@ -268,6 +269,7 @@ def admin_dashboard(request):
         request,
         'users/pages/admin_dashboard.html',
         context={
+            'projects': projects,
             'delivered_projects': delivered_projects,
             'expired_users': expired_users,
             'form': form,
