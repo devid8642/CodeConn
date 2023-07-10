@@ -52,12 +52,12 @@
 }
 
 .card-title p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: rgb(200, 200, 200);
 }
 
 .card-title h3 {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     color: #f97c0f;
 }
 
@@ -68,7 +68,7 @@
     text-decoration: none;
     color: var(--background);
     margin-right: .8rem;
-    font-size: .9rem;
+    font-size: .8rem;
     border: 1px solid rgb(155, 253, 220);
     color: rgb(155, 253, 220);
     background-color: var(--background);
@@ -105,7 +105,7 @@
     border-radius: .2rem;
     color: var(--cor-primaria);
     border: 1px solid var(--cor-primaria);
-    font-size: .9rem;
+    font-size: .8rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     max-width: 150px;
 }
@@ -121,7 +121,7 @@
 }
 
 .project-author.staff-user i {
-    font-size: 1rem;
+    font-size: .8rem;
 }
 
 .card-description {
@@ -130,7 +130,7 @@
 }
 
 .card-description p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: rgb(146, 146, 146);
     text-overflow: ellipsis;
     overflow: hidden;
@@ -155,7 +155,7 @@
     border: 1px solid var(--cor-primaria);
     border-radius: .2rem;
     color: var(--background);
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     margin-top: .5rem;

@@ -148,7 +148,7 @@
 }
 
 .user-post-card-header h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--cor-primaria);
     max-width: 80%;
     white-space: pre-wrap;      /* Webkit */    
@@ -262,14 +262,14 @@
 
 @media (max-width: 768px) {
     .user-background {
-        margin-top: 3rem;
+        margin-top: 4rem;
         height: 9rem;
         background-color: transparent;
         box-shadow: none;
     }
 
     .logout-form {
-        top: 3.3rem;
+        top: 1.8rem;
     }
 
     .user-background .logout-link {

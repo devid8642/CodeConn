@@ -26,11 +26,15 @@
           
           <div class="project-info">
             {% if project.is_inspired %}
-              <a class="idea-info" href="{% url 'ideas:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a>
+              <a class="idea-info" href="{% url 'ideas:idea_detail' project.is_inspired.id %}">
+                {{ project.is_inspired }}
+              </a>
             {% endif %}
 
             {% if project.stack %}
-              <a href="{% url 'projects:project_search' %}?q={{project.stack}}">{{ project.get_stack_display }}</a>
+              <a href="{% url 'projects:project_search' %}?q={{project.stack}}">
+                {{ project.get_stack_display }}
+              </a>
             {% endif %}
           </div>
 
