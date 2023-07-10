@@ -40,14 +40,19 @@
               <p class="notification-link">
                 <i class="bi bi-bell"></i>
               </p>
-              {% if comments_count %} 
-                <p class="comments-count">{{ comments_count }}</p>
+              {% if notifications_count %} 
+                <p class="comments-count">{{ notifications_count }}</p>
               {% endif %}
               <div class="user-dropdown notification">
                 <ul>
                   <li class="nav-item">
                     <p class="username"><strong>Suas notificações:</strong></p>
                   </li>
+                  {% if not comments_notification and not complaints %}
+                    <li class="nav-item">
+                      <p class="username">Nenhuma notificação ainda</p>
+                    </li>
+                  {% endif %}
                   {% for comment in comments_notification %}
                     {% if not comment.read %}
                       <li class="nav-item">

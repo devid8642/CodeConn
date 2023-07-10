@@ -1,7 +1,7 @@
 from projects.models import Comment, Project
 
 
-def comments_notification(request):
+def notifications(request):
     comments = Comment.objects.filter(
         read=False,
         project__author=request.user.id,
@@ -19,6 +19,6 @@ def comments_notification(request):
 
     return {
         'comments_notification': comments,
-        'comments_count': notifications,
+        'notifications_count': notifications,
         'complaints': complaints,
     }
