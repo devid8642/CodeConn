@@ -67,9 +67,6 @@
     left: .5rem;
     text-decoration: none;
     color: var(--background);
-    display: flex;
-    align-items: center;
-    gap: .3rem;
     margin-right: .8rem;
     font-size: .9rem;
     border: 1px solid rgb(155, 253, 220);
@@ -80,6 +77,10 @@
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     width: fit-content;
     margin-bottom: .5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 160px;
 }
 
 .project-info {
@@ -106,6 +107,7 @@
     border: 1px solid var(--cor-primaria);
     font-size: .9rem;
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    max-width: 150px;
 }
 
 .idea-info {
@@ -178,5 +180,9 @@
 @media (max-width: 700px) {
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-author {
+        max-width: 130px;
     }
 }

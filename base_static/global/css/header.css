@@ -58,6 +58,11 @@
   padding: .7rem .7rem;
   background-color: rgb(21, 21, 21);
   font-size: .9rem;
+  white-space: pre-wrap;      /* Webkit */    
+  white-space: -moz-pre-wrap; /* Firefox */     
+  white-space: -pre-wrap;     /* Opera <7 */    
+  white-space: -o-pre-wrap;   /* Opera 7 */     
+  word-wrap: break-word;      /* IE */ 
 }
 
 .nav-item .nav-link,

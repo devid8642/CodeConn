@@ -228,6 +228,30 @@
     .user-posts-grid {
         grid-template-columns: 1fr 1fr 1fr;
     }
+
+    .user-name h2 {
+        white-space: pre-wrap;      /* Webkit */    
+        white-space: -moz-pre-wrap; /* Firefox */     
+        white-space: -pre-wrap;     /* Opera <7 */    
+        white-space: -o-pre-wrap;   /* Opera 7 */     
+        word-wrap: break-word;      /* IE */ 
+        max-width: 100%;
+    }
+
+    .user-posts-header h3 {
+        white-space: pre-wrap;      /* Webkit */    
+        white-space: -moz-pre-wrap; /* Firefox */     
+        white-space: -pre-wrap;     /* Opera <7 */    
+        white-space: -o-pre-wrap;   /* Opera 7 */     
+        word-wrap: break-word;      /* IE */ 
+        max-width: 100%;
+    }
+
+    .user-posts {
+        background-color: transparent;
+        box-shadow: none;
+        padding: 1rem;
+    }
 }
 
 @media (max-width: 950px) {
@@ -238,8 +262,14 @@
 
 @media (max-width: 768px) {
     .user-background {
-        margin-top: 7rem;
+        margin-top: 3rem;
         height: 9rem;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    .logout-form {
+        top: 3.3rem;
     }
 
     .user-background .logout-link {
@@ -276,7 +306,6 @@
     }
 
     .user-posts {
-        padding: 2rem;
         margin: 3rem 0;
     }
 
