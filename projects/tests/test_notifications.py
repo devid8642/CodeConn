@@ -1,5 +1,5 @@
-from utils.tests_bases import ProjectTestBase
 from projects import views
+from utils.tests_bases import ProjectTestBase
 
 
 class NotificationsTests(ProjectTestBase):
@@ -19,7 +19,7 @@ class NotificationsTests(ProjectTestBase):
     def test_empty_comment_notification(self):
         self.register_and_login()
         response = self.response_test_function('projects:home')
-        msg = 'Nenhuma notificação ainda.'
+        msg = 'Nenhuma notificação ainda'
 
         self.assertIn(msg, response.content.decode('utf-8'))
 
@@ -31,7 +31,7 @@ class NotificationsTests(ProjectTestBase):
             method='post',
             data={'comment_id': 1},
         )
-        msg = 'Nenhuma notificação ainda.'
+        msg = 'Nenhuma notificação ainda'
 
         self.assertIn(msg, response.content.decode('utf-8'))
 
