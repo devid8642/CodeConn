@@ -43,6 +43,10 @@ class RegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput()
     )
+    profile_photo = forms.FileField(
+        label='Foto de perfil',
+        required=False,
+    )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),

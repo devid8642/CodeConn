@@ -65,41 +65,43 @@ def activate(request, uidb64, token):
 
 
 def register_view(request):
-    form = RegisterForm(request.POST or None)
+    if request.method == 'POST':
+        form = RegisterForm(request.POST, request.FILES)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            linkedin = form.cleaned_data.get('linkedin')
+            github = form.cleaned_data.get('github')
+            password = form.cleaned_data.get('password')
+            profile_photo = form.cleaned_data.get('profile_photo')
 
-    if form.is_valid():
-        username = form.cleaned_data.get('username')
-        email = form.cleaned_data.get('email')
-        linkedin = form.cleaned_data.get('linkedin')
-        github = form.cleaned_data.get('github')
-        password = form.cleaned_data.get('password')
-        form.cleaned_data.get('confirmed_password')
+            if settings.EMAIL_CONFIRMATION:
+                user = User.objects.create_user(
+                    username=username,
+                    email=email,
+                    linkedin=linkedin,
+                    github=github,
+                    password=password,
+                    profile_photo=profile_photo,
+                    is_active=False,
+                )
+                activate_email(request, user, email)
 
-        if settings.EMAIL_CONFIRMATION:
-            user = User.objects.create_user(
-                username=username,
-                email=email,
-                linkedin=linkedin,
-                github=github,
-                password=password,
-                is_active=False,
-            )
-            activate_email(request, user, email)
+            else:
+                user = User.objects.create_user(
+                    username=username,
+                    email=email,
+                    linkedin=linkedin,
+                    github=github,
+                    password=password,
+                    profile_photo=profile_photo,
+                    is_active=True,
+                )
+                messages.success(request, 'Você foi registrado com sucesso!')
 
-        else:
-            user = User.objects.create_user(
-                username=username,
-                email=email,
-                linkedin=linkedin,
-                github=github,
-                password=password,
-                is_active=True,
-            )
-            messages.success(request, 'Você foi registrado com sucesso!')
-
-            return redirect('projects:home')
-
-        return redirect('projects:home')
+                return redirect('projects:home')
+    else:
+        form = RegisterForm()
 
     return render(
         request,

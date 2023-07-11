@@ -8,7 +8,7 @@
 {% block content %}
   <div class="container">
     <div class="auth-container">
-      <form class="auth-form" action="{% url 'users:register' %}" method="POST">
+      <form class="auth-form" action="{% url 'users:register' %}" method="POST" enctype="multipart/form-data">
         <h2>Cadastre-se aqui!</h2>
         {% csrf_token %}
         {{ form.non_field_errors }}
