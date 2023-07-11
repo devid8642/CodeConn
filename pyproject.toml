@@ -22,6 +22,7 @@ pytest = "^7.4.0"
 pytest-django = "^4.5.2"
 boto3 = "^1.27.1"
 whitenoise = "^6.5.0"
+pillow = "^10.0.0"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "projeto_x.settings"
