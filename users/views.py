@@ -7,6 +7,7 @@ from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
+from django.http import Http404
 
 from .forms import (
     LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
@@ -278,3 +279,51 @@ def admin_dashboard(request):
             'non_approved_count': non_approved_count,
         }
     )
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def project_block(request):
+    if not request.POST:
+        raise Http404
+
+    project_id = request.POST.get('project_id')
+
+    project = get_object_or_404(
+        Project,
+        id=project_id,
+    )
+
+    project.is_approved = False
+
+    project.save()
+
+    messages.error(request, f'"{project.title}" foi bloqueado!')
+
+    return redirect('users:admin_dashboard')
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def complaints_remove(request):
+    if not request.POST:
+        raise Http404
+
+    project_id = request.POST.get('project_id')
+
+    project = get_object_or_404(
+        Project,
+        id=project_id,
+    )
+
+    project.complaints = 0
+    project.complaints_notifications = 0
+
+    if not project.is_approved:
+        project.is_approved = True
+
+    project.save()
+
+    messages.success(
+        request, f'Denúncias de "{project.title}" removidas com sucesso!'
+    )
+
+    return redirect('users:admin_dashboard')

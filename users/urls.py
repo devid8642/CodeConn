@@ -13,4 +13,10 @@ urlpatterns = [
     ),
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path('admdash/', views.admin_dashboard, name='admin_dashboard'),
+    path('admdash/block/', views.project_block, name='project_block'),
+    path(
+        'admdash/complaints/remove/',
+        views.complaints_remove,
+        name='complaints_remove',
+    )
 ]
