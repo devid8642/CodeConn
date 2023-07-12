@@ -177,6 +177,43 @@
     color: rgb(252, 37, 37)
 }
 
+.complaint-projects .non-approved-body li:hover {
+    background-color: var(--background);
+}
+
+.complaints-forms {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+}
+
+.project-block button,
+.complaints-remove button {
+    padding: .5rem;
+    border: none;
+    border-radius: .2rem;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.project-block button:hover,
+.complaints-remove button:hover {
+    transform: scale(1.02);
+}
+
+.project-block button {
+    background-color: transparent;
+    border: 1px solid rgb(252, 37, 37);
+    color: rgb(252, 37, 37);
+}
+
+.complaints-remove button {
+    background-color: #1645ff;
+    color: rgb(200, 200, 200);
+    border: 1px solid #1645ff;
+}
+
 @media (max-width: 1200px) {
     .admin-area {
         margin-top: 7rem;

@@ -170,17 +170,29 @@
                 {% for project in projects %}
                   {% if project.complaints %}
                     <li>
-                      <a class="delivered-user" href="/admin/projects/project/{{ project.id }}/change/">
+                      <a class="delivered-user" href="{% url 'projects:project_detail' project.id %}" target="_blank">
                         <h4>{{ project.title }}</h4>
                         <p>Denúncias: {{ project.complaints }}</p>
                         <p>Autor: {{ project.author.username }}</p>
                       </a>
+                      <div class="complaints-forms">
+                        <form action="" method="POST" class="project-block">
+                          {% csrf_token %}
+                          <input type="hidden" name="project_id" value="{{ project.id }}">
+                          <button type="submit">Bloquear projeto</button>
+                        </form>
+                        <form action="" method="POST" class="complaints-remove">
+                          {% csrf_token %}
+                          <input type="hidden" name="project_id" value="{{ project.id }}">
+                          <button type="submit">Remover denúncias</button>
+                        </form>
+                      </div>
                     </li>
                   {% endif %}
                 {% empty %}
                   <li>
                     <a class="delivered-user" href="/admin/projects/project" target="_blank">
-                      <p>Nenhum projeto não aprovado.</p>
+                      <p>Nenhuma denúncia.</p>
                     </a>
                   </li>
                 {% endfor %}
