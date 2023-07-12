@@ -43,7 +43,7 @@ class RegisterForm(forms.Form):
         required=False,
         widget=forms.TextInput()
     )
-    profile_photo = forms.FileField(
+    profile_photo = forms.ImageField(
         label='Foto de perfil',
         required=False,
     )
@@ -113,7 +113,7 @@ class UpdateForm(forms.Form):
         required=False,
         widget=forms.TextInput()
     )
-    profile_photo = forms.FileField(
+    profile_photo = forms.ImageField(
         label='Foto de perfil',
         required=False,
     )
