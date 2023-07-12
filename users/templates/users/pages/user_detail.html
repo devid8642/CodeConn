@@ -21,7 +21,11 @@
       {% endif %}
       <div class="user-profile">
         <div class="user-picture">
-          <img src="{% get_media_prefix %}{{ user.profile_photo }}" alt="user-profile-photo">
+          {% if user.profile_photo %}
+            <img src="{% get_media_prefix %}{{ user.profile_photo }}" alt="user-profile-photo">
+          {% else %}
+            <img src="{% static 'global/img/user-img.svg' %}" alt="user-generic-img">
+          {% endif %}
         </div>
         <div class="user-info">
           <div class="user-name">
