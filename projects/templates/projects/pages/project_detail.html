@@ -49,6 +49,11 @@
             </form>
           </div>
           <p class="post-description">{{ project.subtitle }}</p>
+          {% if project.author == request.user and project.complaints %}
+            <div class="project-complaint">
+              <p>Seu projeto foi denunciado!</p>
+            </div>
+          {% endif %}
         </div>
         <div class="post-body">
           <div class="post-text">{{ project.explanatory_text|safe }}</div>
