@@ -13,7 +13,7 @@ def notifications(request):
     notifications = 0 + comments.count()
 
     for project in projects:
-        if project.complaints:
+        if project.complaints_notifications:
             complaints.append(project)
             notifications += 1
 

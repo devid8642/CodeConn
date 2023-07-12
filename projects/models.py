@@ -34,6 +34,9 @@ class Project(models.Model):
         'Stack utilizada', max_length=255, null=True, choices=STACKS
     )
     complaints = models.IntegerField('Denúncias', null=True, blank=True)
+    complaints_notifications = models.IntegerField(
+        'Notificação de denúncia', null=True, blank=True
+    )
 
     def __str__(self):
         return f'Project {self.id} - {self.title}'

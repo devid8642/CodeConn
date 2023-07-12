@@ -277,10 +277,12 @@ def make_complaint(request):
         id=id,
     )
 
-    if project.complaints:
+    if project.complaints and project.complaints_notifications:
         project.complaints += 1
+        project.complaints_notifications += 1
     else:
         project.complaints = 1
+        project.complaints_notifications = 1
 
     project.save()
 
@@ -296,17 +298,17 @@ def complaint_notification(request):
     if not request.POST:
         raise Http404
 
-    complaint_id = request.POST.get('complaint_id')
+    project_id = request.POST.get('complaint_id')
 
-    complaint = get_object_or_404(
+    project = get_object_or_404(
         Project,
-        id=complaint_id,
+        id=project_id,
     )
 
-    complaint.complaints -= 1
+    project.complaints_notifications -= 1
 
-    complaint.save()
+    project.save()
 
     return redirect(
-        reverse('projects:project_detail', kwargs={'pk': complaint.id})
+        reverse('projects:project_detail', kwargs={'pk': project.id})
     )
