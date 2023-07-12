@@ -16,6 +16,9 @@ dj-database-url==2.0.0 ; python_version >= "3.10" and python_version < "4.0" \
 django-ckeditor==6.6.1 ; python_version >= "3.10" and python_version < "4.0" \
     --hash=sha256:44894c2a1050f58edcab6f9e631dbb63fa5532e7432a5650cfd878b6f33b0d46 \
     --hash=sha256:a804a98137058c00fc092aafc475e9491b2ca7c68c84d6ca12c4fa2453696017
+django-cleanup==8.0.0 ; python_version >= "3.10" and python_version < "4.0" \
+    --hash=sha256:8cd8872d67fe1501b19a843d006cdb5673cfbb74ac3d6d8f2c60e8e7723a7f5b \
+    --hash=sha256:c739a05544e1e48dc848871c870dbf1595f8533d24523bc67360e43562edaf0d
 django-environ==0.10.0 ; python_version >= "3.10" and python_version < "4" \
     --hash=sha256:510f8c9c1d0a38b0815f91504270c29440a0cf44fab07f55942fa8d31bbb9be6 \
     --hash=sha256:b3559a91439c9d774a9e0c1ced872364772c612cdf6dc919506a2b13f7a77225

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'users',
     'projects',
     'ideas',
+    'django_cleanup.apps.CleanupConfig' # should be last
 ]
 
 MIDDLEWARE = [
