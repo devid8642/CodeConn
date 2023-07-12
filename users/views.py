@@ -164,6 +164,7 @@ def user_update(request, id):
                 linkedin = form.cleaned_data.get('linkedin')
                 github = form.cleaned_data.get('github')
                 profile_photo = form.cleaned_data.get('profile_photo')
+                old_profile_photo = None
 
                 check = check_password(password, user.password)
                 if not check:
