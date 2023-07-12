@@ -71,6 +71,14 @@
     color: grey;
 }
 
+.post-complaint {
+    border: 1px solid rgb(249, 43, 43);
+    margin-bottom: 1.5rem;
+    padding: .7rem;
+    border-radius: .2rem;
+    /* width: fit-content; */
+}
+
 .post-link {
     margin-top: .5rem;
 }

@@ -50,8 +50,8 @@
           </div>
           <p class="post-description">{{ project.subtitle }}</p>
           {% if project.author == request.user and project.complaints %}
-            <div class="project-complaint">
-              <p>Seu projeto foi denunciado!</p>
+            <div class="post-complaint">
+              <p>Seu projeto foi denunciado, e será revisado.</p>
             </div>
           {% endif %}
         </div>
