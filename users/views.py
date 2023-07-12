@@ -155,7 +155,7 @@ def user_update(request, id):
     if request.user.is_authenticated and request.user.id == id:
         user = get_object_or_404(User, id=id)
         if request.method == 'POST':
-            form = UpdateForm(request.POST)
+            form = UpdateForm(request.POST, request.FILES)
             if form.is_valid():
                 username = form.cleaned_data.get('username')
                 email = form.cleaned_data.get('email')
@@ -163,6 +163,7 @@ def user_update(request, id):
                 new_password = form.cleaned_data.get('new_password')
                 linkedin = form.cleaned_data.get('linkedin')
                 github = form.cleaned_data.get('github')
+                profile_photo = form.cleaned_data.get('profile_photo')
 
                 check = check_password(password, user.password)
                 if not check:
@@ -192,6 +193,9 @@ def user_update(request, id):
                     if github:
                         user.github = github
                         update_fields.append('github')
+                    if profile_photo:
+                        user.profile_photo = profile_photo
+                        update_fields.append('profile_photo')
                     if new_password:
                         user.password = make_password(new_password)
                         update_fields.append('password')

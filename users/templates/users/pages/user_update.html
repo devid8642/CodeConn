@@ -10,7 +10,7 @@
   <div class="container">
     <div class="form-container">
 
-      <form class="base-form" action="{% url 'users:user_update' user.id %}" method="POST">
+      <form class="base-form" action="{% url 'users:user_update' user.id %}" method="POST" enctype="multipart/form-data">
         <h2>Editar perfil</h2>
         {% csrf_token %}
         {{ form.non_field_errors }}
