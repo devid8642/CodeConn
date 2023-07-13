@@ -41,6 +41,12 @@
           {{ form.link }}
         </div>
         <div class="input-group">
+          <label for="{{ form.image.id_for_label }}">
+            {{ form.image.label }}
+          </label>
+          {{ form.image }}
+        </div>
+        <div class="input-group">
           <label for="{{ form.is_inspired.id_for_label }}">
             {{ form.is_inspired.label }}:
           </label>
