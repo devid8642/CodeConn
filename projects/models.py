@@ -33,6 +33,11 @@ class Project(models.Model):
     stack = models.CharField(
         'Stack utilizada', max_length=255, null=True, choices=STACKS
     )
+    image = models.ImageField(
+        'Imagem do projeto',
+        upload_to='projects_images/',
+        blank=True, null=True
+    )
 
     def __str__(self):
         return f'Project {self.id} - {self.title}'
