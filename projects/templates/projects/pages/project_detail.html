@@ -38,6 +38,11 @@
           </h2>
           <p class="post-description">{{ project.subtitle }}</p>
         </div>
+        <div class="post-image">
+          {% if project.image %}
+            <img src="{% get_media_prefix %}{{ project.image }}" alt="project-image">
+          {% endif %}
+        </div>
         <div class="post-body">
           <div class="post-text">{{ project.explanatory_text|safe }}</div>
           <div class="post-link">

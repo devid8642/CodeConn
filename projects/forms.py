@@ -38,6 +38,7 @@ class ProjectForm(forms.ModelForm):
             'explanatory_text',
             'is_inspired',
             'stack',
+            'image'
         )
 
 
