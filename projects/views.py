@@ -219,21 +219,23 @@ def project_edit(request, pk):
         id=pk,
         author=request.user,
     )
-    form = ProjectForm(
-        request.POST or None,
-        instance=project,
-    )
-
-    if form.is_valid():
-        project = form.save(commit=False)
-        project.is_approved = False
-        project.save()
-
-        messages.success(request, f'Projeto "{project.title}" editado!')
-
-        return redirect(
-            reverse('users:user_detail', kwargs={'id': project.author.id})
+    if request.method == 'POST':
+        form = ProjectForm(
+            request.POST, request.FILES,
+            instance=project
         )
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.is_approved = False
+            project.save()
+
+            messages.success(request, f'Projeto "{project.title}" editado!')
+
+            return redirect(
+                reverse('users:user_detail', kwargs={'id': project.author.id})
+            )
+    else:
+        form = ProjectForm(instance=project)
 
     return render(
         request,
