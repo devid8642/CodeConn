@@ -191,10 +191,7 @@ def project_create(request):
             project.save()
             messages.success(
                 request,
-                '''
-                Seu projeto foi criado com sucesso e passará por uma avaliação
-                antes de ser aprovado!
-                '''
+                'Seu projeto foi criado com sucesso e passará por uma avaliação antes de ser aprovado!'
             )
 
             return redirect(reverse(
