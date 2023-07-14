@@ -68,35 +68,15 @@ def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            linkedin = form.cleaned_data.get('linkedin')
-            github = form.cleaned_data.get('github')
-            password = form.cleaned_data.get('password')
-            profile_photo = form.cleaned_data.get('profile_photo')
-
+            user = form.save(commit=False)
+            user.password = make_password(user.password)
+            
             if settings.EMAIL_CONFIRMATION:
-                user = User.objects.create_user(
-                    username=username,
-                    email=email,
-                    linkedin=linkedin,
-                    github=github,
-                    password=password,
-                    profile_photo=profile_photo,
-                    is_active=False,
-                )
-                activate_email(request, user, email)
-
+                user.is_active = False
+                user.save()
+                activate_email(request, user, user.email)
             else:
-                user = User.objects.create_user(
-                    username=username,
-                    email=email,
-                    linkedin=linkedin,
-                    github=github,
-                    password=password,
-                    profile_photo=profile_photo,
-                    is_active=True,
-                )
+                user.save()
                 messages.success(request, 'Você foi registrado com sucesso!')
 
                 return redirect('projects:home')

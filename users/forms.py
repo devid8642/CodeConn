@@ -24,34 +24,28 @@ class LoginForm(forms.Form):
         add_attr(self.fields['email'], 'autofocus', 'True')
         add_attr(self.fields['password'], 'placeholder', 'Sua senha')
 
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email',
+            'linkedin',
+            'github',
+            'profile_photo',
+            'password'
+        )
 
-class RegisterForm(forms.Form):
-    username = forms.CharField(label='Usuário', max_length=255)
     email = forms.EmailField(
         label='Email',
         max_length=255,
-        widget=forms.TextInput(),
-        help_text='O e-mail precisa ser válido.'
-    )
-    linkedin = forms.URLField(
-        label='Linkedin',
-        required=False,
-        widget=forms.TextInput()
-    )
-    github = forms.URLField(
-        label='Github',
-        required=False,
-        widget=forms.TextInput()
-    )
-    profile_photo = forms.ImageField(
-        label='Foto de perfil',
-        required=False,
+        help_text='O email precisa ser válido.'
     )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),
         help_text='''
-            A senha deve ter no mínimo 8 caracteres e conter letras e números.
+        A senha deve ter no mínimo 8 caracteres e conter letras e números. 
         '''
     )
     confirmed_password = forms.CharField(
@@ -72,13 +66,13 @@ class RegisterForm(forms.Form):
             'placeholder',
             'Confirme sua senha',
         )
-
+    
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email:
             exists = User.objects.filter(email=email).exists()
             if exists:
-                raise ValidationError('Já existe um usuário com este email')
+                raise ValidationError('Já existe um usuário com este email.')
         return email
 
     def clean_password(self):
@@ -93,7 +87,7 @@ class RegisterForm(forms.Form):
         confirmed_password = cleaned_data.get('confirmed_password')
         if password and confirmed_password:
             if password != confirmed_password:
-                raise ValidationError('Você digitou senhas diferentes')
+                raise ValidationError('Você digitou senhas diferentes.')
 
 
 class UpdateForm(forms.Form):

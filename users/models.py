@@ -7,13 +7,16 @@ from solo.models import SingletonModel
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=255, unique=True)
-    username = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    linkedin = models.URLField(blank=True, null=True)
-    github = models.URLField(blank=True, null=True)
+    email = models.EmailField('Email', max_length=255, unique=True)
+    username = models.CharField('Usuário', max_length=255)
+    is_active = models.BooleanField('Conta ativa', default=True)
+    is_staff = models.BooleanField(
+        'Conta administrativa',
+        default=False
+    )
+    date_joined = models.DateTimeField('Data de cadastro', auto_now_add=True)
+    linkedin = models.URLField('Linkedin', blank=True, null=True)
+    github = models.URLField('Github', blank=True, null=True)
     profile_photo = models.ImageField(
         'Foto de perfil', blank=True, null=True,
         upload_to='profiles_photos/'
