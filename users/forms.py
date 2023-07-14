@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.hashers import check_password
 from .models import User, ProjectsDate
 from ideas.models import ProjectIdea
 from utils.forms_utils import add_attr
@@ -61,11 +62,12 @@ class RegisterForm(forms.ModelForm):
         add_attr(self.fields['linkedin'], 'placeholder', 'Ex: https://linkedin.com/in/username')
         add_attr(self.fields['github'], 'placeholder', 'Ex: https://github.com/username')
         add_attr(self.fields['password'], 'placeholder', 'Sua senha')
-        add_attr(
-            self.fields['confirmed_password'],
-            'placeholder',
-            'Confirme sua senha',
-        )
+        if 'confirmed_password' in self.fields:
+            add_attr(
+                self.fields['confirmed_password'],
+                'placeholder',
+                'Confirme sua senha',
+            )
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -90,27 +92,8 @@ class RegisterForm(forms.ModelForm):
                 raise ValidationError('Você digitou senhas diferentes.')
 
 
-class UpdateForm(forms.Form):
-    username = forms.CharField(label='Usuário', max_length=255)
-    email = forms.EmailField(
-        label='Email',
-        max_length=255,
-        widget=forms.TextInput()
-    )
-    linkedin = forms.URLField(
-        label='Linkedin',
-        required=False,
-        widget=forms.TextInput()
-    )
-    github = forms.URLField(
-        label='Github',
-        required=False,
-        widget=forms.TextInput()
-    )
-    profile_photo = forms.ImageField(
-        label='Foto de perfil',
-        required=False,
-    )
+class UpdateForm(RegisterForm):
+    confirmed_password = None
     password = forms.CharField(
         label='Senha atual',
         widget=forms.PasswordInput()
@@ -124,25 +107,37 @@ class UpdateForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        username = self.fields['username']
-        email = self.fields['email']
-        linkedin = self.fields['linkedin']
-        github = self.fields['github']
-        password = self.fields['password']
-        new_password = self.fields['new_password']
+        add_attr(self.fields['new_password'], 'placeholder', 'Nova senha')
 
-        add_attr(username, 'placeholder', 'Nome de usuário')
-        add_attr(email, 'placeholder', 'Ex: user@email.com')
-        add_attr(linkedin, 'placeholder', 'Ex: https://linkedin.com/in/username')
-        add_attr(github, 'placeholder', 'Ex: https://github.com/username')
-        add_attr(password, 'placeholder', 'Nova senha')
-        add_attr(new_password, 'placeholder', 'Confirmar senha')
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        
+        if password and not check_password(password, self.instance.password):
+            raise ValidationError('Senha atual incorreta!')
+
+        return password
 
     def clean_new_password(self):
         new_password = self.cleaned_data.get('new_password')
+
         if new_password:
             validate_password(new_password)
+        
         return new_password
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        if email:
+            exists = User.objects.filter(email=email).exists()
+
+            if exists and email != self.instance.email:
+                raise ValidationError('Este email já está em uso.')
+        
+        return email
+    
+    def clean(self):
+        pass
 
 
 class ProjectsDateForm(forms.ModelForm):

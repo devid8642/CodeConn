@@ -70,7 +70,7 @@ def register_view(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.password = make_password(user.password)
-            
+
             if settings.EMAIL_CONFIRMATION:
                 user.is_active = False
                 user.save()
@@ -135,63 +135,26 @@ def user_update(request, id):
     if request.user.is_authenticated and request.user.id == id:
         user = get_object_or_404(User, id=id)
         if request.method == 'POST':
-            form = UpdateForm(request.POST, request.FILES)
+            form = UpdateForm(
+                request.POST, request.FILES,
+                instance=user
+            )
             if form.is_valid():
-                username = form.cleaned_data.get('username')
-                email = form.cleaned_data.get('email')
-                password = form.cleaned_data.get('password')
+                user = form.save(commit=False)
                 new_password = form.cleaned_data.get('new_password')
-                linkedin = form.cleaned_data.get('linkedin')
-                github = form.cleaned_data.get('github')
-                profile_photo = form.cleaned_data.get('profile_photo')
-                old_profile_photo = None
 
-                check = check_password(password, user.password)
-                if not check:
-                    form.add_error(
-                        field='password', error='Senha atual incorreta'
-                    )
-                exists = User.objects.filter(email=email).exists()
-                email_error = False
-                if exists and email != user.email:
-                    form.add_error(
-                        field='email',
-                        error='Este email já está em uso'
-                    )
-                    email_error = True
+                if new_password:
+                    user.password = make_password(new_password)
+                    user.save()
+                    return redirect('users:login')
 
-                if check and not email_error:
-                    update_fields = []
-                    if username != user.username:
-                        user.username = username
-                        update_fields.append('username')
-                    if email != user.email:
-                        user.email = email
-                        update_fields.append('email')
-                    if linkedin:
-                        user.linkedin = linkedin
-                        update_fields.append('linkedin')
-                    if github:
-                        user.github = github
-                        update_fields.append('github')
-                    if profile_photo:
-                        user.profile_photo = profile_photo
-                        update_fields.append('profile_photo')
-                    if new_password:
-                        user.password = make_password(new_password)
-                        update_fields.append('password')
-                        user.save(update_fields=update_fields)
-                        return redirect('users:login')
-                    user.save(update_fields=update_fields)
-                    return redirect(
-                        reverse('users:user_detail', kwargs={'id': user.id})
-                    )
+                user.save()
+                
+                return redirect(
+                    reverse('users:user_detail', kwargs={'id': user.id})
+                )
         else:
-            data = {
-                'username': user.username,
-                'email': user.email,
-            }
-            form = UpdateForm(initial=data)
+            form = UpdateForm(instance=user)
         return render(
             request,
             'users/pages/user_update.html',

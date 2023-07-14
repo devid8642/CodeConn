@@ -183,7 +183,7 @@ class TestUserUpdateView(TestBase):
             data=new_user_data
         )
         user = User.objects.get(id=1)
-        self.assertContains(response, text='Login')
+        self.assertRedirects(response, reverse('users:login'))
         self.assertEqual(user.username, new_user_data['username'])
         self.assertEqual(user.email, new_user_data['email'])
         self.assertTrue(
