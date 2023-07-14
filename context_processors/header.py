@@ -10,9 +10,14 @@ def notifications(request):
         author=request.user.id
     )
     complaints = []
+    non_approved = []
     notifications = 0 + comments.count()
 
     for project in projects:
+        if not project.is_approved:
+            non_approved.append(project)
+            notifications += 1
+
         if project.complaints_notifications:
             complaints.append(project)
             notifications += 1
@@ -21,4 +26,5 @@ def notifications(request):
         'comments_notification': comments,
         'notifications_count': notifications,
         'complaints': complaints,
+        'projects': non_approved,
     }
