@@ -93,7 +93,7 @@
                     {% if not project.is_approved %}
                       <li class="nav-item">
                         <a class="approved-link" href="{% url 'projects:project_detail' project.id %}">
-                          <i class="bi bi-flag-fill"></i>
+                          <i class="bi bi-x-circle"></i>
                           Seu post <strong>{{ project.title }}</strong> está bloqueado
                           devido a denúncias.
                         </a>
