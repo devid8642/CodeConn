@@ -277,12 +277,8 @@ def make_complaint(request):
         id=id,
     )
 
-    if project.complaints and project.complaints_notifications:
-        project.complaints += 1
-        project.complaints_notifications += 1
-    else:
-        project.complaints = 1
-        project.complaints_notifications = 1
+    project.complaints += 1
+    project.complaints_notifications += 1
 
     project.save()
 

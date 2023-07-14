@@ -33,9 +33,11 @@ class Project(models.Model):
     stack = models.CharField(
         'Stack utilizada', max_length=255, null=True, choices=STACKS
     )
-    complaints = models.IntegerField('Denúncias', null=True, blank=True)
+    complaints = models.IntegerField(
+        'Denúncias', default=0, null=True, blank=True
+    )
     complaints_notifications = models.IntegerField(
-        'Notificação de denúncia', null=True, blank=True
+        'Notificação de denúncia', default=0, null=True, blank=True
     )
 
     def __str__(self):
