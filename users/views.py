@@ -10,7 +10,8 @@ from django.conf import settings
 from django.http import Http404
 
 from .forms import (
-    LoginForm, RegisterForm, UpdateForm, ProjectsDateForm
+    LoginForm, RegisterForm, UpdateForm, ProjectsDateForm,
+    UpdatePasswordForm
 )
 from utils.email_sending import activate_email
 from .tokens import account_activation_token
@@ -143,6 +144,7 @@ def user_update(request, id):
             if form.is_valid():
                 form.save()
 
+                messages.success(request, 'Perfil editado com sucesso.')
                 return redirect(
                     reverse('users:user_detail', kwargs={'id': user.id})
                 )
@@ -155,6 +157,37 @@ def user_update(request, id):
                 'form': form,
                 'id': user.id
             }
+        )
+    return redirect('projects:home')
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def user_update_password(request, id):
+    if request.user.id == id:
+        user = get_object_or_404(User, pk=id)
+        form = UpdatePasswordForm(request.POST or None)
+
+        if form.is_valid():
+            password = form.cleaned_data.get('password')
+
+            if not check_password(password, user.password):
+                form.add_error(
+                    field='password', error='Senha atual incorreta.'
+                )
+            else:
+                user.set_password(form.cleaned_data.get('new_password'))
+                user.save(update_fields=['password'])
+                messages.success(
+                    request,
+                    'Senha redefinida com sucesso.'
+                )
+
+                return redirect('users:login')
+
+        return render(
+            request,
+            'users/pages/user_update_password.html',
+            context={'form': form}
         )
     return redirect('projects:home')
 

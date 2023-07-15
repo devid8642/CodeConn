@@ -125,6 +125,28 @@ class UpdateForm(RegisterForm):
         pass
 
 
+class UpdatePasswordForm(forms.Form):
+    password = forms.CharField(
+        label='Senha atual',
+        widget=forms.PasswordInput()
+    )
+    new_password = forms.CharField(
+        label='Nova senha',
+        widget=forms.PasswordInput(),
+        help_text='''
+        A senha deve ter no mínimo 8 caracteres e conter letras e números.
+        '''
+    )
+
+    def clean_new_password(self):
+        new_password = self.cleaned_data.get('new_password')
+
+        if new_password:
+            validate_password(new_password)
+        
+        return new_password
+
+
 class ProjectsDateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
