@@ -69,7 +69,7 @@ def register_view(request):
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
-            user.password = make_password(user.password)
+            user.set_password(form.cleaned_data.get('password'))
 
             if settings.EMAIL_CONFIRMATION:
                 user.is_active = False
@@ -139,17 +139,10 @@ def user_update(request, id):
                 request.POST, request.FILES,
                 instance=user
             )
+
             if form.is_valid():
-                user = form.save(commit=False)
-                new_password = form.cleaned_data.get('new_password')
+                form.save()
 
-                if new_password:
-                    user.password = make_password(new_password)
-                    user.save()
-                    return redirect('users:login')
-
-                user.save()
-                
                 return redirect(
                     reverse('users:user_detail', kwargs={'id': user.id})
                 )

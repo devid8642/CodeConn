@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password, make_password
 from .models import User, ProjectsDate
 from ideas.models import ProjectIdea
 from utils.forms_utils import add_attr
@@ -61,7 +61,8 @@ class RegisterForm(forms.ModelForm):
         add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
         add_attr(self.fields['linkedin'], 'placeholder', 'Ex: https://linkedin.com/in/username')
         add_attr(self.fields['github'], 'placeholder', 'Ex: https://github.com/username')
-        add_attr(self.fields['password'], 'placeholder', 'Sua senha')
+        if 'password' in self.fields:
+            add_attr(self.fields['password'], 'placeholder', 'Sua senha')
         if 'confirmed_password' in self.fields:
             add_attr(
                 self.fields['confirmed_password'],
@@ -93,37 +94,18 @@ class RegisterForm(forms.ModelForm):
 
 
 class UpdateForm(RegisterForm):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email',
+            'linkedin',
+            'github',
+            'profile_photo',
+        )
+
+    password = None
     confirmed_password = None
-    password = forms.CharField(
-        label='Senha atual',
-        widget=forms.PasswordInput()
-    )
-    new_password = forms.CharField(
-        label='Nova senha',
-        widget=forms.PasswordInput(),
-        required=False
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        add_attr(self.fields['new_password'], 'placeholder', 'Nova senha')
-
-    def clean_password(self):
-        password = self.cleaned_data.get('password')
-        
-        if password and not check_password(password, self.instance.password):
-            raise ValidationError('Senha atual incorreta!')
-
-        return password
-
-    def clean_new_password(self):
-        new_password = self.cleaned_data.get('new_password')
-
-        if new_password:
-            validate_password(new_password)
-        
-        return new_password
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -136,6 +118,9 @@ class UpdateForm(RegisterForm):
         
         return email
     
+    def clean_password(self):
+        pass
+
     def clean(self):
         pass
 

@@ -2,7 +2,7 @@ from django.contrib.auth.hashers import check_password
 from utils.tests_bases import TestBase
 from users.models import User
 from projects.models import Project
-from django.urls import reverse
+from django.urls import reverse, resolve
 
 
 class TestLoginView(TestBase):
@@ -171,10 +171,6 @@ class TestUserUpdateView(TestBase):
         new_user_data = {
             'username': 'devid',
             'email': 'devid@devid.com',
-            'password': '123456',
-            'linkedin': '',
-            'github': '',
-            'new_password': 'devid3939!'
         }
         response = self.response_test_function(
             self.url,
@@ -183,18 +179,17 @@ class TestUserUpdateView(TestBase):
             data=new_user_data
         )
         user = User.objects.get(id=1)
-        self.assertRedirects(response, reverse('users:login'))
+        self.assertRedirects(
+            response,
+            reverse('users:user_detail', kwargs={'id': 1})
+        )
         self.assertEqual(user.username, new_user_data['username'])
         self.assertEqual(user.email, new_user_data['email'])
-        self.assertTrue(
-            check_password(new_user_data['new_password'], user.password)
-        )
 
     def test_not_updating_email(self):
         new_user_data = {
             'username': 'devid',
             'email': self.user.email,
-            'password': '123456'
         }
         self.response_test_function(
             self.url,
@@ -215,10 +210,6 @@ class TestUserUpdateView(TestBase):
         new_user_data = {
             'username': 'devid',
             'email': 'devid@devid.com',
-            'password': '123456',
-            'linkedin': '',
-            'github': '',
-            'new_password': ''
         }
         response = self.response_test_function(
             self.url,
