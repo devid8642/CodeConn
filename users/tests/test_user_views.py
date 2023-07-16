@@ -239,3 +239,82 @@ class TestUserUpdateView(TestBase):
             self.user.email,
             new_user_data['email']
         )
+
+
+class TestUserUpdatePasswordView(TestBase):
+    def setUp(self, *args, **kwargs):
+        self.url = 'users:user_update_password'
+        self.user = self.make_author()
+        self.client.login(
+            email=self.user.email,
+            password='123456'
+        )
+        return super().setUp(*args, **kwargs)
+    
+    def test_template(self):
+        self.template_test_function(
+            self.url,
+            'users/pages/user_update_password.html',
+            {'id': 1}
+        )
+    
+    def test_with_valid_data(self):
+        response = self.response_test_function(
+            url=self.url,
+            url_kwargs={'id': 1},
+            data={
+                'password': '123456',
+                'new_password': 'devid3939!'
+            },
+            method='post'
+        )
+        user = User.objects.get(pk=1)
+
+        self.assertRedirects(
+            response,
+            reverse('users:login')
+        )
+        self.assertTrue(
+            check_password('devid3939!', user.password)
+        )
+    
+    def test_with_invalid_password(self):
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1},
+            method='post',
+            data={
+                'password': 'teste',
+                'new_password': 'devid3939!'
+            }
+        )
+        user = User.objects.get(pk=1)
+
+        self.assertContains(response, text='Senha atual incorreta.')
+        self.assertFalse(check_password('devid3939!', user.password))
+
+    def test_with_week_new_password(self):
+        response = self.response_test_function(
+            self.url,
+            url_kwargs={'id': 1},
+            method='post',
+            data={
+                'password': '123456',
+                'new_password': '123'
+            }
+        )
+        user = User.objects.get(pk=1)
+
+        self.assertContains(
+            response,
+            text='''Esta senha é muito curta. Ela precisa conter pelo menos 8 caracteres.'''
+        )
+        self.assertContains(
+            response,
+            text='Esta senha é muito comum.'
+        )
+        self.assertContains(
+            response,
+            text='Esta senha é inteiramente numérica.'
+        )
+        self.assertFalse(check_password('123', user.password))
