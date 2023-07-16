@@ -91,15 +91,15 @@
 
 .deliver-area {
     height: 100%;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
 
 .success-users,
 .failed-users,
-.non-approved-projects {
+.non-approved-projects,
+.complaint-projects {
     height: fit-content;
     max-height: 400px;
     background-color: rgb(15, 15, 27);
@@ -107,6 +107,7 @@
     box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
     overflow-y: auto;
     padding: .5rem 0;
+    width: 400px;
 }
 
 .users-container h3,
@@ -168,11 +169,49 @@
 }
 
 .non-approved-projects {
-    width: 30%;
+    display: flex;
+    flex-direction: column;
 }
 
 .non-approved-body h4 {
     color: rgb(252, 37, 37)
+}
+
+.complaint-projects .non-approved-body li:hover {
+    background-color: var(--background);
+}
+
+.complaints-forms {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+}
+
+.project-block button,
+.complaints-remove button {
+    padding: .5rem;
+    border: none;
+    border-radius: .2rem;
+    box-shadow: rgba(0, 0, 0, 0.707) 0px 20px 30px -10px;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.project-block button:hover,
+.complaints-remove button:hover {
+    transform: scale(1.02);
+}
+
+.project-block button {
+    background-color: transparent;
+    border: 1px solid rgb(252, 37, 37);
+    color: rgb(252, 37, 37);
+}
+
+.complaints-remove button {
+    background-color: #1645ff;
+    color: rgb(200, 200, 200);
+    border: 1px solid #1645ff;
 }
 
 @media (max-width: 1200px) {
@@ -191,6 +230,14 @@
     }
 
     .deliver-area {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .success-users,
+    .failed-users,
+    .non-approved-projects,
+    .complaint-projects {
         width: 100%;
     }
 

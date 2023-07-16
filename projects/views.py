@@ -188,14 +188,13 @@ def project_create(request):
     if form.is_valid():
         project = form.save(commit=False)
         project.author = request.user
-        project.is_approved = False
+        project.is_approved = True
 
         project.save()
         messages.success(
             request,
             '''
-            Seu projeto foi criado com sucesso e passará por uma avaliação
-             antes de ser aprovado!
+            Seu projeto foi criado com sucesso!
             '''
         )
 
@@ -226,7 +225,6 @@ def project_edit(request, pk):
 
     if form.is_valid():
         project = form.save(commit=False)
-        project.is_approved = False
         project.save()
 
         messages.success(request, f'Projeto "{project.title}" editado!')
@@ -262,4 +260,49 @@ def project_delete(request):
 
     return redirect(
         reverse('users:user_detail', kwargs={'id': project.author.id})
+    )
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def make_complaint(request):
+    if not request.POST:
+        raise Http404
+
+    id = request.POST.get('project_id')
+
+    project = get_object_or_404(
+        Project,
+        id=id,
+    )
+
+    project.complaints += 1
+    project.complaints_notifications += 1
+
+    project.save()
+
+    messages.success(request, 'Sua denúncia foi enviada!')
+
+    return redirect(
+        reverse('projects:project_detail', kwargs={'pk': project.id})
+    )
+
+
+@login_required(login_url='users:login', redirect_field_name='next')
+def complaint_notification(request):
+    if not request.POST:
+        raise Http404
+
+    project_id = request.POST.get('complaint_id')
+
+    project = get_object_or_404(
+        Project,
+        id=project_id,
+    )
+
+    project.complaints_notifications -= 1
+
+    project.save()
+
+    return redirect(
+        reverse('projects:project_detail', kwargs={'pk': project.id})
     )

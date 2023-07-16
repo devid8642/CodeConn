@@ -2,7 +2,9 @@
 
 <header>
     <nav class="container navbar">
-      <a href="{% url 'projects:home' %}" class="nav-brand">CodeConn</a>
+      <a href="{% url 'projects:home' %}" class="nav-brand">
+        CodeConn
+      </a>
       <div class="navbar-nav">
         {% if request.user.is_authenticated %}
           <form class="project-search search-logged" action="{% url 'projects:project_search' %}">
@@ -40,14 +42,19 @@
               <p class="notification-link">
                 <i class="bi bi-bell"></i>
               </p>
-              {% if comments_count %} 
-                <p class="comments-count">{{ comments_count }}</p>
+              {% if notifications_count %} 
+                <p class="comments-count">{{ notifications_count }}</p>
               {% endif %}
               <div class="user-dropdown notification">
                 <ul>
                   <li class="nav-item">
                     <p class="username"><strong>Suas notificações:</strong></p>
                   </li>
+                  {% if not comments_notification and not complaints and not non_approved %}
+                    <li class="nav-item">
+                      <p class="username">Nenhuma notificação ainda</p>
+                    </li>
+                  {% endif %}
                   {% for comment in comments_notification %}
                     {% if not comment.read %}
                       <li class="nav-item">
@@ -56,6 +63,7 @@
                           <input type="hidden" name="comment_id" value="{{ comment.id }}">
                           <button type="submit">
                             <p>
+                              <i class="bi bi-chat-fill"></i>
                               <strong>{{ comment.author.username }}</strong> comentou no seu post <strong>
                                 "{{ comment.project.title }}"
                               </strong>
@@ -64,11 +72,35 @@
                         </form>
                       </li>
                     {% endif %}
-                  {% empty %}
+                  {% endfor %}
+
+                  {% for complaint in complaints %}
                     <li class="nav-item">
-                      <p class="username">Nenhuma notificação ainda.</p>
+                      <form action="{% url 'projects:complaint_notification' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="complaint_id" value="{{ complaint.id }}">
+                        <button type="submit">
+                          <p>
+                            <i class="bi bi-flag-fill"></i>
+                            Seu post <strong>{{ complaint.title }}</strong> foi denunciado
+                          </p>
+                        </button>
+                      </form>
                     </li>
                   {% endfor %}
+
+                  {% for project in non_approved %}
+                      {% if project.author == request.user %}
+                        <li class="nav-item">
+                          <a class="approved-link" href="{% url 'projects:project_detail' project.id %}">
+                            <i class="bi bi-x-circle"></i>
+                            Seu post <strong>{{ project.title }}</strong> está bloqueado
+                            devido a denúncias.
+                          </a>
+                        </li>
+                      {% endif %}
+                  {% endfor %}
+
                 </ul>
               </div>
             </li>

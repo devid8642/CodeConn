@@ -11,6 +11,13 @@
 .navbar .nav-brand {
   font-size: 1.5rem;
   color: var(--cor-primaria);
+  width: 200px;
+}
+
+.navbar .nav-brand img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .project-search {
@@ -188,12 +195,22 @@
   cursor: pointer;
 }
 
-.user-dropdown.notification button strong {
+.approved-link {
+  text-decoration: none;
+  display: block;
+  padding: 1rem .8rem;
+  font-size: .9rem;
+}
+
+.user-dropdown.notification button strong,
+.approved-link strong {
   color: var(--cor-primaria);
 }
 
-.user-dropdown.notification button:hover {
+.user-dropdown.notification button:hover,
+.user-dropdown.notification .approved-link:hover {
   background-color: var(--background);
+  color: rgb(200, 200, 200);
 }
 
 .user-dropdown.notification button h4 {

@@ -29,8 +29,7 @@ class ProjectCreateTests(ProjectTestBase):
             data=self.project_form_data
         )
         msg = '''
-            Seu projeto foi criado com sucesso e passará por uma avaliação
-             antes de ser aprovado!
+            Seu projeto foi criado com sucesso!
         '''
 
         self.assertIn(msg, response.content.decode('utf-8'))

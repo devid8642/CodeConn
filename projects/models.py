@@ -23,7 +23,7 @@ class Project(models.Model):
     link = models.URLField('Link do projeto', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_approved = models.BooleanField('Publicado', default=False)
+    is_approved = models.BooleanField('Publicado', default=True)
     is_inspired = models.ForeignKey(
         ProjectIdea,
         verbose_name='Inspirado em',
@@ -32,6 +32,12 @@ class Project(models.Model):
     )
     stack = models.CharField(
         'Stack utilizada', max_length=255, null=True, choices=STACKS
+    )
+    complaints = models.IntegerField(
+        'Denúncias', default=0, null=True, blank=True
+    )
+    complaints_notifications = models.IntegerField(
+        'Notificação de denúncia', default=0, null=True, blank=True
     )
 
     def __str__(self):

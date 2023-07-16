@@ -103,7 +103,7 @@ class TestBase(TestCase, ProjectMixin):
 
     def register_and_login(
         self,
-        email: str = 'username@email.com',
+        email: str = 'user@email.com',
         username: str = 'username',
         password: str = '123456',
         is_staff: bool = False

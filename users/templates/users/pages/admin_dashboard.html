@@ -10,6 +10,7 @@
 
 {% block content %}
   <div class="container">
+    {% include 'global/partials/_messages.html' %}
     <div class="admin-area">
 
 
@@ -125,38 +126,91 @@
           </div>
         </div>
 
-        
-      </div>
-
-      <div class="non-approved-projects">
-        <div class="users-container">
-          <div class="non-approved-header">
-            <h3>
-              <i class="bi bi-x-circle"></i>
-              Não aprovados:
-            </h3>
+        <div class="non-approved-projects">
+          <div class="users-container">
+            <div class="non-approved-header">
+              <h3>
+                <i class="bi bi-x-circle"></i>
+                Não aprovados:
+              </h3>
+            </div>
+            <div class="non-approved-body">
+              <ul>
+                {% for project in non_approved %}
+                  <li>
+                    <a class="delivered-user" href="/admin/projects/project/{{ project.id }}/change/">
+                      <h4>{{ project.title }}</h4>
+                      <p>Projeto: {{ project.author.username }}</p>
+                      <p>Publicado: {{ project.created_at|naturalday }}</p>
+                    </a>
+                  </li>
+                {% empty %}
+                  <li>
+                    <a class="delivered-user" href="/admin/projects/project" target="_blank">
+                      <p>Nenhum projeto não aprovado.</p>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
           </div>
-          <div class="non-approved-body">
-            <ul>
-              {% for project in non_approved %}
-                <li>
-                  <a class="delivered-user" href="/admin/projects/project/{{ project.id }}/change/">
-                    <h4>{{ project.author.username }}</h4>
-                    <p>Projeto: {{ project.title }}</p>
-                    <p>Publicado: {{ project.created_at|naturalday }}</p>
-                  </a>
-                </li>
-              {% empty %}
-                <li>
-                  <a class="delivered-user" href="/admin/projects/project" target="_blank">
-                    <p>Nenhum projeto não aprovado.</p>
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
+  
+          
+        </div>
+
+        <div class="complaint-projects">
+          <div class="users-container">
+            <div class="non-approved-header">
+              <h3>
+                <i class="bi bi-flag-fill"></i>
+                Denunciados:
+              </h3>
+            </div>
+            <div class="non-approved-body">
+              <ul>
+                {% for project in projects %}
+                  {% if project.complaints %}
+                    <li>
+                      <a class="delivered-user" href="{% url 'projects:project_detail' project.id %}" target="_blank">
+                        <h4>
+                          {{ project.title }}
+                          {% if not project.is_approved %}
+                            (Bloqueado)
+                          {% endif %}
+                        </h4>
+                        <p>Denúncias: {{ project.complaints }}</p>
+                        <p>Autor: {{ project.author.username }}</p>
+                      </a>
+                      <div class="complaints-forms">
+                        {% if project.is_approved %}
+                          <form action="{% url 'users:project_block' %}" method="POST" class="project-block">
+                            {% csrf_token %}
+                            <input type="hidden" name="project_id" value="{{ project.id }}">
+                            <button type="submit">Bloquear projeto</button>
+                          </form>
+                        {% endif %}
+                        <form action="{% url 'users:complaints_remove' %}" method="POST" class="complaints-remove">
+                          {% csrf_token %}
+                          <input type="hidden" name="project_id" value="{{ project.id }}">
+                          <button type="submit">Remover denúncias</button>
+                        </form>
+                      </div>
+                    </li>
+                  {% endif %}
+                {% empty %}
+                  <li>
+                    <a class="delivered-user" href="/admin/projects/project" target="_blank">
+                      <p>Nenhuma denúncia.</p>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+
+      
     </div>
   </div>
 {% endblock content %}

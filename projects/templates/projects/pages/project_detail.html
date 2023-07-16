@@ -9,6 +9,7 @@
 
 {% block content %}
   <div class="post-container">
+    {% include 'global/partials/_messages.html' %}
       <div class="post-area">
         <div class="post-header">
           <div class="post-user">
@@ -23,20 +24,36 @@
               </a>
             {% endif %}
             {% if project.stack %}
-              <a href="{% url 'projects:project_search' %}?q={{project.is_inspired.stack}}" class="user-link">
+              <a href="{% url 'projects:project_search' %}?q={{project.is_inspired.stack}}" 
+                class="user-link">
                 {{ project.get_stack_display }}
               </a>
             {% endif %}
             <p>{{ project.created_at | naturalday }}</p>
           </div>
-          <h2 class="post-title">
-            {% if project.is_approved %}
-              {{ project.title }}
-            {% else %}
-              {{ project.title }} (Não aprovado)
-            {% endif %}
-          </h2>
+          <div class="post-title">
+            <h2>
+              {% if project.is_approved %}
+                {{ project.title }}
+              {% else %}
+                {{ project.title }} (Não aprovado)
+              {% endif %}
+            </h2>
+            <form action="{% url 'projects:make_complaint' %}" method="POST" class="form-complaint">
+              {% csrf_token %}
+              <input type="hidden" name="project_id" value="{{ project.id }}">
+              <button type="submit">
+                <i class="bi bi-flag-fill"></i>
+                Denúnciar
+              </button>
+            </form>
+          </div>
           <p class="post-description">{{ project.subtitle }}</p>
+          {% if project.author == request.user and project.complaints %}
+            <div class="post-complaint">
+              <p>Seu projeto foi denunciado, e será revisado.</p>
+            </div>
+          {% endif %}
         </div>
         <div class="post-body">
           <div class="post-text">{{ project.explanatory_text|safe }}</div>
