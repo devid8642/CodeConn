@@ -46,7 +46,9 @@ class TestUpdateForm(TestBase):
         form = UpdateForm(initial={
             'username': 'devid',
             'email': 'devid@devid.com',
-            'password': 'teste123',
-            'new_password': ''
         })
         self.assertFalse(form.is_valid())
+
+
+class TestUpdatePasswordForm(TestBase):
+    pass

@@ -124,6 +124,17 @@ class UpdateForm(RegisterForm):
     def clean(self):
         pass
 
+    def save(self, old_email, commit=True):
+        user = super().save(commit=False)
+
+        if user.email != old_email:
+            user.is_active = False
+        
+        if commit:
+            user.save()
+
+        return user
+
 
 class UpdatePasswordForm(forms.Form):
     password = forms.CharField(

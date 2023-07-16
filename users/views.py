@@ -136,13 +136,19 @@ def user_update(request, id):
     if request.user.is_authenticated and request.user.id == id:
         user = get_object_or_404(User, id=id)
         if request.method == 'POST':
+            old_email = user.email
             form = UpdateForm(
                 request.POST, request.FILES,
                 instance=user
             )
 
             if form.is_valid():
-                form.save()
+                user = form.save(old_email=old_email)
+
+                if not user.is_active and settings.EMAIL_CONFIRMATION:
+                    activate_email(request, user, user.email)
+                    
+                    return redirect('users:logout')
 
                 messages.success(request, 'Perfil editado com sucesso.')
                 return redirect(
