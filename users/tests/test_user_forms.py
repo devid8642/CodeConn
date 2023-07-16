@@ -47,6 +47,8 @@ class TestRegisterForm(TestBase):
 class TestUpdateForm(TestBase):
     def setUp(self, *args, **kwargs):
         self.user = self.make_author()
+        
+        return super().setUp(*args, **kwargs)
     
     def test_with_exist_email(self):
         form = UpdateForm(

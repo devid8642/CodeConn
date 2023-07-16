@@ -148,7 +148,7 @@ def user_update(request, id):
                 if not user.is_active and settings.EMAIL_CONFIRMATION:
                     activate_email(request, user, user.email)
                     
-                    return redirect('users:logout')
+                    return redirect('users:login')
 
                 messages.success(request, 'Perfil editado com sucesso.')
                 return redirect(

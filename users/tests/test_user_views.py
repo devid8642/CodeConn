@@ -1,8 +1,10 @@
+from django.core import mail
+from django.test import override_settings
+from django.urls import reverse, resolve
 from django.contrib.auth.hashers import check_password
 from utils.tests_bases import TestBase
 from users.models import User
 from projects.models import Project
-from django.urls import reverse, resolve
 
 
 class TestLoginView(TestBase):
@@ -103,6 +105,7 @@ class TestUserDetailView(TestBase):
     def setUp(self, *args, **kwargs):
         self.url = 'users:user_detail'
         self.user = self.make_author()
+
         for c in range(3):
             Project.objects.create(
                 title='teste',
@@ -111,6 +114,7 @@ class TestUserDetailView(TestBase):
                 author=self.user,
                 is_approved=True
             )
+
         self.user_projects = Project.objects.filter(author=self.user)
         return super().setUp(*args, **kwargs)
 
@@ -186,12 +190,15 @@ class TestUserUpdateView(TestBase):
         self.assertEqual(user.username, new_user_data['username'])
         self.assertEqual(user.email, new_user_data['email'])
 
-    def test_not_updating_email(self):
+    @override_settings(
+        EMAIL_CONFIRMATION = True
+    )
+    def test_with_valid_user_and_email_validation(self):
         new_user_data = {
             'username': 'devid',
-            'email': self.user.email,
+            'email': 'devid@devid.com',
         }
-        self.response_test_function(
+        response = self.response_test_function(
             self.url,
             url_kwargs={'id': 1},
             method='post',
@@ -199,7 +206,13 @@ class TestUserUpdateView(TestBase):
         )
         user = User.objects.get(id=1)
 
+        self.assertFalse(user.is_active)
+        self.assertRedirects(
+            response,
+            reverse('users:login')
+        )
         self.assertEqual(user.username, new_user_data['username'])
+        self.assertEqual(user.email, new_user_data['email'])
 
     def test_with_invalid_email(self):
         User.objects.create_user(

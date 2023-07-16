@@ -185,6 +185,7 @@ if prod == 'True' and USE_S3:
 else:
     STATIC_URL = 'static/'
     STATIC_ROOT = BASE_DIR / 'static'
+    DEBUG = True
 
 
 STATICFILES_DIRS = [
