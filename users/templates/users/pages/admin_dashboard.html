@@ -172,16 +172,23 @@
                   {% if project.complaints %}
                     <li>
                       <a class="delivered-user" href="{% url 'projects:project_detail' project.id %}" target="_blank">
-                        <h4>{{ project.title }}</h4>
+                        <h4>
+                          {{ project.title }}
+                          {% if not project.is_approved %}
+                            (Bloqueado)
+                          {% endif %}
+                        </h4>
                         <p>Denúncias: {{ project.complaints }}</p>
                         <p>Autor: {{ project.author.username }}</p>
                       </a>
                       <div class="complaints-forms">
-                        <form action="{% url 'users:project_block' %}" method="POST" class="project-block">
-                          {% csrf_token %}
-                          <input type="hidden" name="project_id" value="{{ project.id }}">
-                          <button type="submit">Bloquear projeto</button>
-                        </form>
+                        {% if project.is_approved %}
+                          <form action="{% url 'users:project_block' %}" method="POST" class="project-block">
+                            {% csrf_token %}
+                            <input type="hidden" name="project_id" value="{{ project.id }}">
+                            <button type="submit">Bloquear projeto</button>
+                          </form>
+                        {% endif %}
                         <form action="{% url 'users:complaints_remove' %}" method="POST" class="complaints-remove">
                           {% csrf_token %}
                           <input type="hidden" name="project_id" value="{{ project.id }}">

@@ -50,7 +50,7 @@
                   <li class="nav-item">
                     <p class="username"><strong>Suas notificações:</strong></p>
                   </li>
-                  {% if not comments_notification and not complaints and not projects %}
+                  {% if not comments_notification and not complaints and not non_approved %}
                     <li class="nav-item">
                       <p class="username">Nenhuma notificação ainda</p>
                     </li>
@@ -89,16 +89,16 @@
                     </li>
                   {% endfor %}
 
-                  {% for project in projects %}
-                    {% if not project.is_approved %}
-                      <li class="nav-item">
-                        <a class="approved-link" href="{% url 'projects:project_detail' project.id %}">
-                          <i class="bi bi-x-circle"></i>
-                          Seu post <strong>{{ project.title }}</strong> está bloqueado
-                          devido a denúncias.
-                        </a>
-                      </li>
-                    {% endif %}
+                  {% for project in non_approved %}
+                      {% if project.author == request.user %}
+                        <li class="nav-item">
+                          <a class="approved-link" href="{% url 'projects:project_detail' project.id %}">
+                            <i class="bi bi-x-circle"></i>
+                            Seu post <strong>{{ project.title }}</strong> está bloqueado
+                            devido a denúncias.
+                          </a>
+                        </li>
+                      {% endif %}
                   {% endfor %}
 
                 </ul>
