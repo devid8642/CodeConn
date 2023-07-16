@@ -188,14 +188,13 @@ def project_create(request):
     if form.is_valid():
         project = form.save(commit=False)
         project.author = request.user
-        project.is_approved = False
+        project.is_approved = True
 
         project.save()
         messages.success(
             request,
             '''
-            Seu projeto foi criado com sucesso e passará por uma avaliação
-             antes de ser aprovado!
+            Seu projeto foi criado com sucesso!
             '''
         )
 
@@ -226,7 +225,6 @@ def project_edit(request, pk):
 
     if form.is_valid():
         project = form.save(commit=False)
-        project.is_approved = False
         project.save()
 
         messages.success(request, f'Projeto "{project.title}" editado!')

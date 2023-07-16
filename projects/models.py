@@ -23,7 +23,7 @@ class Project(models.Model):
     link = models.URLField('Link do projeto', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_approved = models.BooleanField('Publicado', default=False)
+    is_approved = models.BooleanField('Publicado', default=True)
     is_inspired = models.ForeignKey(
         ProjectIdea,
         verbose_name='Inspirado em',
