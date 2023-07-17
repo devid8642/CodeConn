@@ -40,10 +40,6 @@
     font-weight: bold;
 }
 
-.base-form input {
-    height: 2rem;
-}
-
 .base-form input,
 .base-form textarea,
 .base-form select {

@@ -28,11 +28,11 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
+            'profile_photo',
             'username',
             'email',
             'linkedin',
             'github',
-            'profile_photo',
             'password'
         )
 
@@ -58,6 +58,8 @@ class RegisterForm(forms.ModelForm):
 
         add_attr(self.fields['username'], 'placeholder', 'Seu nome de usuário')
         add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
+        add_attr(self.fields['profile_photo'], 'class', 'profile-img')
+        add_attr(self.fields['profile_photo'], 'onchange', 'preview()')
         add_attr(
             self.fields['linkedin'],
             'placeholder',
@@ -106,11 +108,11 @@ class UpdateForm(RegisterForm):
     class Meta:
         model = User
         fields = (
+            'profile_photo',
             'username',
             'email',
             'linkedin',
             'github',
-            'profile_photo',
         )
 
     password = None

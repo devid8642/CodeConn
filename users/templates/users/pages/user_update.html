@@ -15,6 +15,9 @@
         <h2>Editar perfil</h2>
         {% csrf_token %}
         {{ form.non_field_errors }}
+        <div class="img-field">
+          <img src="" id="frame" alt="">
+        </div>
         {% for field in form %}
           <div class="input-group">
             <label class="input-label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
@@ -25,7 +28,7 @@
             {{ field.errors }}
           </div>
         {% endfor %}
-        <button type="submit">
+        <button type="submit" onclick="clearImg()">
           <i class="bi bi-arrow-left-right"></i>
           Salvar alterações
         </button>
@@ -33,4 +36,5 @@
     </div>
   </div>
 
+  <script src="{% static 'global/js/img-show.js' %}"></script>
 {% endblock content %}
