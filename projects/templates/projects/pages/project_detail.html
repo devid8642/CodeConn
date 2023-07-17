@@ -38,20 +38,22 @@
           </h2>
           <p class="post-description">{{ project.subtitle }}</p>
         </div>
-        <div class="post-image">
-          {% if project.image %}
-            <img src="{% get_media_prefix %}{{ project.image }}" alt="project-image">
-          {% endif %}
-        </div>
         <div class="post-body">
-          <div class="post-text">{{ project.explanatory_text|safe }}</div>
-          <div class="post-link">
-            {% if project.link %}
-              <a href="{{ project.link }}" target="_blank">
-                <i class="bi bi-link-45deg"></i>
-                Link do projeto
-              </a>
-            {% endif %}
+          {% if project.image %}
+            <div class="post-image">
+              <img src="{% get_media_prefix %}{{ project.image }}" alt="project-image">
+            </div>
+          {% endif %}
+          <div class="text-area">
+            <div class="post-text">{{ project.explanatory_text|safe }}</div>
+            <div class="post-link">
+              {% if project.link %}
+                <a href="{{ project.link }}" target="_blank">
+                  <i class="bi bi-link-45deg"></i>
+                  Link do projeto
+                </a>
+              {% endif %}
+            </div>
           </div>
         </div>
         <div class="post-footer">
