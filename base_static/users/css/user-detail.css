@@ -58,8 +58,9 @@
 }
 
 .user-picture img {
-    max-width: 100%;
+    width: 100%;
     height: 100%;
+    object-position: center;
     object-fit: cover;
 }
 
@@ -313,8 +314,12 @@
         font-size: 1.5rem;
     }
 
+    .user-links {
+        flex-flow: row wrap;
+    }
+
     .user-links a {
-        margin-bottom: .5rem;
+        margin-bottom: 0;
         text-decoration: none;
         color: rgb(200, 200, 200);
         font-size: 1rem;

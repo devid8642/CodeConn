@@ -40,7 +40,7 @@
 }
 
 .input-group a {
-    color: red;
+    display: none;
 }
 
 .auth-form label {
