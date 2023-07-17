@@ -1,9 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.hashers import check_password, make_password
 from .models import User, ProjectsDate
-from ideas.models import ProjectIdea
 from utils.forms_utils import add_attr
 
 
@@ -24,6 +22,7 @@ class LoginForm(forms.Form):
         add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
         add_attr(self.fields['email'], 'autofocus', 'True')
         add_attr(self.fields['password'], 'placeholder', 'Sua senha')
+
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -46,7 +45,7 @@ class RegisterForm(forms.ModelForm):
         label='Senha',
         widget=forms.PasswordInput(),
         help_text='''
-        A senha deve ter no mínimo 8 caracteres e conter letras e números. 
+        A senha deve ter no mínimo 8 caracteres e conter letras e números.
         '''
     )
     confirmed_password = forms.CharField(
@@ -59,17 +58,27 @@ class RegisterForm(forms.ModelForm):
 
         add_attr(self.fields['username'], 'placeholder', 'Seu nome de usuário')
         add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
-        add_attr(self.fields['linkedin'], 'placeholder', 'Ex: https://linkedin.com/in/username')
-        add_attr(self.fields['github'], 'placeholder', 'Ex: https://github.com/username')
+        add_attr(
+            self.fields['linkedin'],
+            'placeholder',
+            'Ex: https://linkedin.com/in/username'
+        )
+        add_attr(
+            self.fields['github'],
+            'placeholder',
+            'Ex: https://github.com/username'
+        )
+
         if 'password' in self.fields:
             add_attr(self.fields['password'], 'placeholder', 'Sua senha')
+
         if 'confirmed_password' in self.fields:
             add_attr(
                 self.fields['confirmed_password'],
                 'placeholder',
                 'Confirme sua senha',
             )
-    
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email:
@@ -106,7 +115,7 @@ class UpdateForm(RegisterForm):
 
     password = None
     confirmed_password = None
-    
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
 
@@ -115,9 +124,9 @@ class UpdateForm(RegisterForm):
 
             if exists and email != self.instance.email:
                 raise ValidationError('Este email já está em uso.')
-        
+
         return email
-    
+
     def clean_password(self):
         pass
 
@@ -129,7 +138,7 @@ class UpdateForm(RegisterForm):
 
         if user.email != old_email:
             user.is_active = False
-        
+
         if commit:
             user.save()
 
@@ -154,7 +163,7 @@ class UpdatePasswordForm(forms.Form):
 
         if new_password:
             validate_password(new_password)
-        
+
         return new_password
 
 

@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.http import urlsafe_base64_decode
@@ -7,7 +7,6 @@ from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
-from django.http import Http404
 
 from .forms import (
     LoginForm, RegisterForm, UpdateForm, ProjectsDateForm,
@@ -22,15 +21,20 @@ from datetime import datetime
 
 def login_view(request):
     form = LoginForm(request.POST or None)
+
     if form.is_valid():
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         user = authenticate(request, email=email, password=password)
+
         if user is not None:
             login(request, user)
+
             return redirect('projects:home')
+
         else:
             form.add_error(field=None, error='Email ou senha inválidos')
+
     return render(
         request,
         'auth/pages/login.html',
@@ -147,7 +151,7 @@ def user_update(request, id):
 
                 if not user.is_active and settings.EMAIL_CONFIRMATION:
                     activate_email(request, user, user.email)
-                    
+
                     return redirect('users:login')
 
                 messages.success(request, 'Perfil editado com sucesso.')
@@ -180,6 +184,7 @@ def user_update_password(request, id):
                 form.add_error(
                     field='password', error='Senha atual incorreta.'
                 )
+
             else:
                 user.set_password(form.cleaned_data.get('new_password'))
                 user.save(update_fields=['password'])
