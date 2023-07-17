@@ -11,10 +11,18 @@
     <div class="form-container">
       
       <form class="base-form" action="{% url 'projects:project_edit' project.id %}" method="POST" enctype="multipart/form-data">
-        <h2>Editar "{{ project.title }}"</h2>
-        <p class="form-info"><strong>Lembre-se:</strong> Ao editar o projeto ele precisará passar novamente pela avaliação dos adms.</p>
         {% csrf_token %}
+        <h2>Editar "{{ project.title }}"</h2>
         {{ form.media }}
+        <div class="img-field">
+          <img src="" alt="" id="frame" class="">
+        </div>
+        <div class="input-group">
+          <label for="{{ form.image.id_for_label }}">
+            {{ form.image.label }}
+          </label>
+          {{ form.image }}
+        </div>
         <div class="input-group">
           <label class="input-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}:</label>
           {{ form.title }}
@@ -41,12 +49,6 @@
           {{ form.link }}
         </div>
         <div class="input-group">
-          <label for="{{ form.image.id_for_label }}">
-            {{ form.image.label }}
-          </label>
-          {{ form.image }}
-        </div>
-        <div class="input-group">
           <label for="{{ form.is_inspired.id_for_label }}">
             {{ form.is_inspired.label }}:
           </label>
@@ -59,4 +61,5 @@
       </form>
     </div>
   </div>
+  <script src="{% static 'global/js/img-show.js' %}"></script>
 {% endblock content %}

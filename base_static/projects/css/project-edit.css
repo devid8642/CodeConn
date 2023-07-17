@@ -38,6 +38,7 @@
     margin-bottom: .5rem;
     color: rgb(200, 200, 200);
     font-weight: bold;
+    font-size: 1rem !important;
 }
 
 .base-form input,
@@ -62,6 +63,43 @@
 
 .django-ckeditor-widget textarea {
     width: 100%;
+}
+
+.post-img {
+    background-color: rgb(200, 200, 200);
+}
+
+.img-field {
+    width: 100%;
+}
+
+.frame-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.frame-img:hover {
+    height: auto;
+}
+
+#profile_photo-clear_id {
+    width: 20px;
+}
+
+.input-group {
+    color: rgb(200, 200, 200);
+    font-size: .8rem;
+}
+
+.input-group a {
+    display: none;
+}
+
+#image-clear_id {
+    width: 20px;
 }
 
 .base-form textarea {
