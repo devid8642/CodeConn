@@ -108,6 +108,21 @@
   cursor: pointer;
 }
 
+.profile-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+
 .nav-item .profile-link:hover,
 .nav-item .notification-link:hover {
   border-color: var(--cor-primaria);
