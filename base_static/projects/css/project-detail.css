@@ -271,7 +271,6 @@
 }
 
 @media (max-width: 768px) {
-<<<<<<< HEAD
     .post-user {
         flex-flow: row wrap;
         gap: .5rem;
@@ -279,10 +278,10 @@
 
     .post-user .user-link {
         margin-right: 0;
-=======
+    }
+
     .post-title {
         flex-flow: row wrap;
         margin-bottom: 1rem;
->>>>>>> complaints
     }
 }
