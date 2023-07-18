@@ -29,11 +29,7 @@
         </div>
         <div class="user-info">
           <div class="user-name">
-            {% if owner %}
-              <h2>Bem vindo(a), {{ user.username }}!</h2>
-            {% else %}
-              <h2>{{ user.username }}</h2>
-            {% endif %}
+            <h2>{{ user.username }}</h2>
           </div>
           <div class="user-data">
             <div class="user-links">
