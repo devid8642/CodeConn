@@ -24,7 +24,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
-    
+
     def save(self, *args, **kwargs):
         saved = super().save(*args, **kwargs)
 
@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                 resize_image(self.profile_photo, new_width=208)
             except FileNotFoundError:
                 pass
-        
+
         return saved
 
     def __str__(self):
