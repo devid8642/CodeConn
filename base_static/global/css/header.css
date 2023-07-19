@@ -260,9 +260,23 @@
   background-color: rgb(200, 200, 200);
 }
 
+@media (max-width: 1400px) {
+  .project-search input {
+    width: 10rem;
+  }
+}
+
+@media (max-width: 1300px) {
+  .project-search {
+    margin-right: 2rem;
+  }
+
+  .project-search input {
+    width: 7rem;
+  }
+}
+
 @media (max-width: 1200px) {
-
-
   .hamburguer {
     display: block;
   }
