@@ -131,14 +131,14 @@
 
 .nav-item .notification-link {
   margin-left: 1.5rem;
-  margin-right: .3rem;
+  margin-right: .7rem;
 }
 
 .comments-count {
   position: absolute;
   color: var(--cor-primaria);
   top: -.9rem;
-  right: -.4rem;
+  right: -.1rem;
   border: 1px solid var(--cor-primaria);
   padding: 0 .35rem;
   border-radius: 50%;
