@@ -41,7 +41,18 @@
         <div class="post-body">
           {% if project.image %}
             <div class="post-image">
-              <img src="{% get_media_prefix %}{{ project.image }}" alt="project-image">
+              <img src="{% get_media_prefix %}{{ project.image }}" alt="{{ project.title }}" id="myImg">
+            </div>
+            <div id="myModal" class="modal">
+
+              <!-- The Close Button -->
+              <span class="close">&times;</span>
+            
+              <!-- Modal Content (The Image) -->
+              <img class="modal-content" id="img01">
+            
+              <!-- Modal Caption (Image Text) -->
+              <div id="caption"></div>
             </div>
           {% endif %}
           <div class="text-area">
@@ -130,5 +141,6 @@
         </div>
       </div>
   </div>
+  <script src="{% static 'global/js/image-modal.js' %}"></script>
   <script src="{% static 'global/js/modal.js' %}"></script>
 {% endblock content %}
