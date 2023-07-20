@@ -7,6 +7,7 @@ from django.utils.encoding import force_str
 from django.contrib import messages
 from django.urls import reverse
 from django.conf import settings
+from django.http import Http404
 
 from .forms import (
     LoginForm, RegisterForm, UpdateForm, ProjectsDateForm,
