@@ -11,6 +11,10 @@ urlpatterns = [
     path(
         'user/<int:id>/update/profile/', views.user_update, name='user_update'
     ),
+    path(
+        'user/<int:id>/update/password/', views.user_update_password,
+        name='user_update_password'
+    ),
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path('admdash/', views.admin_dashboard, name='admin_dashboard'),
     path('admdash/block/', views.project_block, name='project_block'),

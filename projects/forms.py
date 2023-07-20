@@ -16,11 +16,14 @@ class ProjectForm(forms.ModelForm):
         subtitle = self.fields['subtitle']
         explanatory = self.fields['explanatory_text']
         link = self.fields['link']
+        image = self.fields['image']
         self.fields['stack'].required = False
 
         if self.instance:
             self.fields['is_inspired'].queryset = ProjectIdea.objects.all()
 
+        add_attr(image, 'class', 'post-img')
+        add_attr(image, 'onchange', 'preview()')
         add_attr(title, 'placeholder', 'Título do seu projeto')
         add_attr(subtitle, 'placeholder', 'Breve descrição do seu projeto')
         add_attr(
@@ -38,6 +41,7 @@ class ProjectForm(forms.ModelForm):
             'explanatory_text',
             'is_inspired',
             'stack',
+            'image'
         )
 
 

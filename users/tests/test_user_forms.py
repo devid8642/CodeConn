@@ -1,5 +1,8 @@
 from utils.tests_bases import TestBase
-from users.forms import LoginForm, RegisterForm, UpdateForm
+from users.forms import (
+    LoginForm, RegisterForm, UpdateForm,
+    UpdatePasswordForm
+)
 
 
 class TestLoginForm(TestBase):
@@ -42,11 +45,37 @@ class TestRegisterForm(TestBase):
 
 
 class TestUpdateForm(TestBase):
+    def setUp(self, *args, **kwargs):
+        self.user = self.make_author()
+        
+        return super().setUp(*args, **kwargs)
+    
+    def test_with_exist_email(self):
+        form = UpdateForm(
+            initial={
+                'username': 'teste',
+                'email': self.user.email
+            }
+        )
+
+        self.assertFalse(form.is_valid())
+
+    def test_validation_email(self):
+        old_email = self.user.email
+        form = UpdateForm(instance=self.user )
+        form.instance.email = 'teste@teste.com'
+        user = form.save(old_email=old_email)
+
+        self.assertFalse(user.is_active)
+
+
+class TestUpdatePasswordForm(TestBase):
     def test_with_week_password(self):
-        form = UpdateForm(initial={
-            'username': 'devid',
-            'email': 'devid@devid.com',
-            'password': 'teste123',
-            'new_password': ''
-        })
+        form = UpdatePasswordForm(
+            initial={
+                'password': 'teste',
+                'new_password': '123'
+            }
+        )
+
         self.assertFalse(form.is_valid())

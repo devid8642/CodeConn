@@ -178,29 +178,28 @@ def comment_delete(request):
 
 @login_required(login_url='users:login', redirect_field_name='next')
 def project_create(request):
-    form = ProjectForm(
-        request.POST or None,
-    )
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
 
-    form.fields['stack'].initial = request.GET.get('stack')
-    form.fields['is_inspired'].initial = request.GET.get('is_inspired')
+        form.fields['stack'].initial = request.GET.get('stack')
+        form.fields['is_inspired'].initial = request.GET.get('is_inspired')
 
-    if form.is_valid():
-        project = form.save(commit=False)
-        project.author = request.user
-        project.is_approved = True
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.author = request.user
+            project.is_approved = False
 
-        project.save()
-        messages.success(
-            request,
-            '''
-            Seu projeto foi criado com sucesso!
-            '''
-        )
+            project.save()
+            messages.success(
+                request,
+                'Seu projeto foi criado com sucesso e passará por uma avaliação antes de ser aprovado!'
+            )
 
-        return redirect(reverse(
-            'users:user_detail', kwargs={'id': request.user.id}
-        ))
+            return redirect(reverse(
+                'users:user_detail', kwargs={'id': request.user.id}
+            ))
+    else:
+        form = ProjectForm()
 
     return render(
         request,
@@ -218,20 +217,25 @@ def project_edit(request, pk):
         id=pk,
         author=request.user,
     )
-    form = ProjectForm(
-        request.POST or None,
-        instance=project,
-    )
 
-    if form.is_valid():
-        project = form.save(commit=False)
-        project.save()
-
-        messages.success(request, f'Projeto "{project.title}" editado!')
-
-        return redirect(
-            reverse('users:user_detail', kwargs={'id': project.author.id})
+    if request.method == 'POST':
+        form = ProjectForm(
+            request.POST, request.FILES,
+            instance=project
         )
+        
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.is_approved = False
+            project.save()
+
+            messages.success(request, f'Projeto "{project.title}" editado!')
+
+            return redirect(
+                reverse('users:user_detail', kwargs={'id': project.author.id})
+            )
+    else:
+        form = ProjectForm(instance=project)
 
     return render(
         request,

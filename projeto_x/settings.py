@@ -48,12 +48,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    # third party apps
     'ckeditor',
     'solo',
     'storages',
+    # projects apps
     'users',
     'projects',
     'ideas',
+    'django_cleanup.apps.CleanupConfig' # should be last
 ]
 
 MIDDLEWARE = [
@@ -174,24 +177,28 @@ if prod == 'True' and USE_S3:
     AWS_S3_SECRET_ACCESS_KEY = env('AWS_S3_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     STORAGES = {
+        'default': {
+            'BACKEND': 'custom_storages.storage_backends.PublicMediaStorage'
+        },
         'staticfiles': {
-            'BACKEND': 'storages.backends.s3boto3.S3StaticStorage',
+            'BACKEND': 'custom_storages.storage_backends.StaticStorage',
         },
     }
 else:
     STATIC_URL = 'static/'
     STATIC_ROOT = BASE_DIR / 'static'
-
+    MEDIA_URL = 'media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+    DEBUG = True
 
 STATICFILES_DIRS = [
     BASE_DIR / 'base_static'
 ]
-
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 MESSAGE_TAGS = {
     constants.DEBUG: 'message-debug',

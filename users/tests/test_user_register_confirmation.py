@@ -1,8 +1,9 @@
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.test import override_settings
-from utils.tests_bases import UserTestBase
+from django.core import mail
 
+from utils.tests_bases import UserTestBase
 from users.models import User
 from users.tokens import account_activation_token
 
@@ -16,10 +17,8 @@ class RegisterConfirmationTests(UserTestBase):
             method='post',
             data=self.register_form_data
         )
-        email = self.register_form_data['email']
-        msg = f'Um email de confirmação foi enviado para {email}'
 
-        self.assertIn(msg, response.content.decode('utf-8'))
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_activate_account_success(self):
         self.response_test_function(

@@ -3,7 +3,7 @@
 {% load humanize %}
 
 {% block head %}
-  <link rel="stylesheet" href="{% static 'projects/css/all-projects.css' %}">
+  <link rel="stylesheet" href="{% static 'projects/css/cards.css' %}">
   <title>Todos os projetos</title>
 {% endblock head %}
 
@@ -12,59 +12,7 @@
     <h2 class="all-projects-title">Todos os projetos {{ idea_title }}</h2>
     <div class="projects-grid">
       {% for project in projects %}
-        <div class="project-card">
-          {% if project.author.is_staff %}  
-            <a href="{% url 'users:user_detail' project.author.id %}" class="project-author staff-user">
-              {{ project.author.username }}
-              <i class="bi bi-code-slash"></i>
-            </a>
-          {% else %}
-            <a href="{% url 'users:user_detail' project.author.id %}" class="project-author">
-              {{ project.author.username }}
-            </a>
-          {% endif %}
-          
-          <div class="project-info">
-            {% if project.is_inspired %}
-              <a class="idea-info" href="{% url 'ideas:idea_detail' project.is_inspired.id %}">
-                {{ project.is_inspired }}
-              </a>
-            {% endif %}
-
-            {% if project.stack %}
-              <a href="{% url 'projects:project_search' %}?q={{project.stack}}">
-                {{ project.get_stack_display }}
-              </a>
-            {% endif %}
-          </div>
-
-          <div class="card-header">
-            <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
-          </div>
-
-          <div class="card-body">
-            <div class="card-title">
-              <h3>{{ project.title }}</h3>
-              <p>
-                <i class="bi bi-chat"></i>
-                {{ project.comments.count }}
-              </p>
-            </div>
-            <div class="card-description">
-              <p>{{ project.subtitle }}</p>
-            </div>
-            <div class="card-footer">
-              <div class="card-info">
-                <p>{{ project.created_at | naturalday }}</p>
-              </div>
-              <a href="{% url 'projects:project_detail' project.id %}" class="card-button">
-                <i class="bi bi-eye"></i>
-                Ver projeto
-              </a>
-            </div>
-          </div>
-
-        </div>
+        {% include 'projects/partials/_cards.html' %}
       {% endfor %}
     </div>
   </div>

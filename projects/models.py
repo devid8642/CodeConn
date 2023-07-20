@@ -4,6 +4,8 @@ from ckeditor.fields import RichTextField
 from users.models import User
 from ideas.models import ProjectIdea
 
+from utils.image import resize_image
+
 STACKS = (
     ('1', 'Backend'),
     ('2', 'Frontend'),
@@ -39,6 +41,23 @@ class Project(models.Model):
     complaints_notifications = models.IntegerField(
         'Notificação de denúncia', default=0,
     )
+    image = models.ImageField(
+        'Imagem do projeto',
+        upload_to='projects_images/',
+        blank=True, null=True
+    )
+
+    def save(self, *args, **kwargs):
+        saved = super().save(*args, **kwargs)
+
+        if self.image:
+            try:
+                resize_image(self.image, new_width=800)
+            except FileNotFoundError:
+                pass
+        
+        return saved
+
 
     def __str__(self):
         return f'Project {self.id} - {self.title}'

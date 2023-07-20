@@ -31,6 +31,16 @@
 
 .input-group {
     margin-bottom: 1.5rem;
+    color: rgb(200, 200, 200);
+    font-size: .8rem;
+}
+
+.input-group label {
+    font-size: 1rem;
+}
+
+.input-group a {
+    display: none;
 }
 
 .auth-form label {
@@ -54,6 +64,30 @@
 
 .auth-form input:focus {
     opacity: 1;
+}
+
+.profile-img {
+    background-color: rgb(200, 200, 200);
+}
+
+.img-field {
+    width: 100%;
+}
+
+.frame-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.frame-img:hover {
+    height: auto;
+}
+
+#profile_photo-clear_id {
+    width: 20px;
 }
 
 .help-text {

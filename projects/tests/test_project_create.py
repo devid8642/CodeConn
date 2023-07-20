@@ -28,11 +28,12 @@ class ProjectCreateTests(ProjectTestBase):
             method='post',
             data=self.project_form_data
         )
-        msg = '''
-            Seu projeto foi criado com sucesso!
-        '''
+        msg = 'Seu projeto foi criado com sucesso e passará por uma avaliação antes de ser aprovado!'
 
-        self.assertIn(msg, response.content.decode('utf-8'))
+        self.assertContains(
+            response,
+            text=msg,
+        )
 
     @parameterized.expand([
         ('title', 'Título'),

@@ -10,10 +10,19 @@
   <div class="container">
     <div class="form-container">
 
-      <form class="base-form" action="{% url 'projects:project_create' %}" method="POST">
+      <form class="base-form" action="{% url 'projects:project_create' %}" method="POST" enctype="multipart/form-data">
         <h2>Criar novo projeto</h2>
         {% csrf_token %}
         {{ form.media }}
+        <div class="img-field">
+          <img src="" alt="" id="frame" class="">
+        </div>
+        <div class="input-group">
+          <label for="{{ form.image.id_for_label }}">
+            {{ form.image.label }}
+          </label>
+          {{ form.image }}
+        </div>
         <div class="input-group">
           <label class="input-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}:</label>
           {{ form.title }}
@@ -45,11 +54,12 @@
           </label>
           {{ form.is_inspired }}
         </div>
-        <button type="submit">
+        <button type="submit" onclick="clearImage()">
           <i class="bi bi-plus-circle"></i>
           Adicionar projeto
         </button>
       </form>
     </div>
   </div>
+  <script src="{% static 'global/js/img-show.js' %}"></script>
 {% endblock content %}

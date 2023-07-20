@@ -10,10 +10,19 @@
   <div class="container">
     <div class="form-container">
       
-      <form class="base-form" action="{% url 'projects:project_edit' project.id %}" method="POST">
-        <h2>Editar "{{ project.title }}"</h2>
+      <form class="base-form" action="{% url 'projects:project_edit' project.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        <h2>Editar "{{ project.title }}"</h2>
         {{ form.media }}
+        <div class="img-field">
+          <img src="" alt="" id="frame" class="">
+        </div>
+        <div class="input-group">
+          <label for="{{ form.image.id_for_label }}">
+            {{ form.image.label }}
+          </label>
+          {{ form.image }}
+        </div>
         <div class="input-group">
           <label class="input-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}:</label>
           {{ form.title }}
@@ -52,4 +61,5 @@
       </form>
     </div>
   </div>
+  <script src="{% static 'global/js/img-show.js' %}"></script>
 {% endblock content %}

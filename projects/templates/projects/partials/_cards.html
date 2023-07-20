@@ -1,0 +1,59 @@
+{% load static %}
+{% load humanize %}
+<div class="project-card">
+  <div class="card-author">
+    <div class="author-info">
+      {% if project.author.profile_photo %}
+        <a href="{% url 'users:user_detail' project.author.id %}" class="author-img">
+          <img src="{{ project.author.profile_photo.url }}" alt="{{ project.author.username }} profile">
+        </a>
+      {% else %}
+        <a href="{% url 'users:user_detail' project.author.id %}" class="author-icon">
+          <i class="bi bi-person-circle"></i>
+        </a>
+      {% endif %}
+      {% if project.author.is_staff %}
+        <a href="{% url 'users:user_detail' project.author.id %}" class="author-link staff-user">
+          {{ project.author.username }}
+          <i class="bi bi-code-slash"></i>
+        </a>
+      {% else %}
+        <a href="{% url 'users:user_detail' project.author.id %}" class="author-link">
+          {{ project.author.username }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="project-info">
+      <p>{{ project.created_at | naturalday }}</p>
+    </div>
+  </div>
+  <a href="{% url 'projects:project_detail' project.id %}" class="card-header">
+    {% if project.image %}
+      <img src="{% get_media_prefix %}{{ project.image }}" alt="project-image">
+    {% else %}
+      <img src="{% static 'global/img/card-img.svg' %}" alt="project-card-img">
+    {% endif %}
+  </a>
+
+  <div class="card-body">
+    <div class="card-title">
+      <div class="card-status">
+        <p class="comment-count">
+          <i class="bi bi-chat"></i>
+          {{ project.comments.count }}
+        </p>
+        {% if project.is_inspired %}
+          <a class="idea-info" href="{% url 'ideas:idea_detail' project.is_inspired.id %}">{{ project.is_inspired }}</a>
+        {% endif %}
+
+        {% if project.stack %}
+          <a href="{% url 'projects:project_search' %}?q={{project.stack}}">{{ project.get_stack_display }}</a>
+        {% endif %}
+      </div>
+      <a class="project-title" href="{% url 'projects:project_detail' project.id %}">{{ project.title }}</a>
+    </div>
+    <div class="card-description">
+      <p>{{ project.subtitle }}</p>
+    </div>
+  </div>
+</div>

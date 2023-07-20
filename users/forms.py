@@ -2,7 +2,6 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
 from .models import User, ProjectsDate
-from ideas.models import ProjectIdea
 from utils.forms_utils import add_attr
 
 
@@ -25,29 +24,28 @@ class LoginForm(forms.Form):
         add_attr(self.fields['password'], 'placeholder', 'Sua senha')
 
 
-class RegisterForm(forms.Form):
-    username = forms.CharField(label='Usuário', max_length=255)
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            'profile_photo',
+            'username',
+            'email',
+            'linkedin',
+            'github',
+            'password'
+        )
+
     email = forms.EmailField(
         label='Email',
         max_length=255,
-        widget=forms.TextInput(),
-        help_text='O e-mail precisa ser válido.'
-    )
-    linkedin = forms.URLField(
-        label='Linkedin',
-        required=False,
-        widget=forms.TextInput()
-    )
-    github = forms.URLField(
-        label='Github',
-        required=False,
-        widget=forms.TextInput()
+        help_text='O email precisa ser válido.'
     )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),
         help_text='''
-            A senha deve ter no mínimo 8 caracteres e conter letras e números.
+        A senha deve ter no mínimo 8 caracteres e conter letras e números.
         '''
     )
     confirmed_password = forms.CharField(
@@ -60,21 +58,35 @@ class RegisterForm(forms.Form):
 
         add_attr(self.fields['username'], 'placeholder', 'Seu nome de usuário')
         add_attr(self.fields['email'], 'placeholder', 'Ex: user@email.com')
-        add_attr(self.fields['linkedin'], 'placeholder', 'Ex: https://linkedin.com/in/username')
-        add_attr(self.fields['github'], 'placeholder', 'Ex: https://github.com/username')
-        add_attr(self.fields['password'], 'placeholder', 'Sua senha')
+        add_attr(self.fields['profile_photo'], 'class', 'profile-img')
+        add_attr(self.fields['profile_photo'], 'onchange', 'preview()')
         add_attr(
-            self.fields['confirmed_password'],
+            self.fields['linkedin'],
             'placeholder',
-            'Confirme sua senha',
+            'Ex: https://linkedin.com/in/username'
         )
+        add_attr(
+            self.fields['github'],
+            'placeholder',
+            'Ex: https://github.com/username'
+        )
+
+        if 'password' in self.fields:
+            add_attr(self.fields['password'], 'placeholder', 'Sua senha')
+
+        if 'confirmed_password' in self.fields:
+            add_attr(
+                self.fields['confirmed_password'],
+                'placeholder',
+                'Confirme sua senha',
+            )
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email:
             exists = User.objects.filter(email=email).exists()
             if exists:
-                raise ValidationError('Já existe um usuário com este email')
+                raise ValidationError('Já existe um usuário com este email.')
         return email
 
     def clean_password(self):
@@ -89,26 +101,53 @@ class RegisterForm(forms.Form):
         confirmed_password = cleaned_data.get('confirmed_password')
         if password and confirmed_password:
             if password != confirmed_password:
-                raise ValidationError('Você digitou senhas diferentes')
+                raise ValidationError('Você digitou senhas diferentes.')
 
 
-class UpdateForm(forms.Form):
-    username = forms.CharField(label='Usuário', max_length=255)
-    email = forms.EmailField(
-        label='Email',
-        max_length=255,
-        widget=forms.TextInput()
-    )
-    linkedin = forms.URLField(
-        label='Linkedin',
-        required=False,
-        widget=forms.TextInput()
-    )
-    github = forms.URLField(
-        label='Github',
-        required=False,
-        widget=forms.TextInput()
-    )
+class UpdateForm(RegisterForm):
+    class Meta:
+        model = User
+        fields = (
+            'profile_photo',
+            'username',
+            'email',
+            'linkedin',
+            'github',
+        )
+
+    password = None
+    confirmed_password = None
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        if email:
+            exists = User.objects.filter(email=email).exists()
+
+            if exists and email != self.instance.email:
+                raise ValidationError('Este email já está em uso.')
+
+        return email
+
+    def clean_password(self):
+        pass
+
+    def clean(self):
+        pass
+
+    def save(self, old_email, commit=True):
+        user = super().save(commit=False)
+
+        if user.email != old_email:
+            user.is_active = False
+
+        if commit:
+            user.save()
+
+        return user
+
+
+class UpdatePasswordForm(forms.Form):
     password = forms.CharField(
         label='Senha atual',
         widget=forms.PasswordInput()
@@ -116,30 +155,17 @@ class UpdateForm(forms.Form):
     new_password = forms.CharField(
         label='Nova senha',
         widget=forms.PasswordInput(),
-        required=False
+        help_text='''
+        A senha deve ter no mínimo 8 caracteres e conter letras e números.
+        '''
     )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        username = self.fields['username']
-        email = self.fields['email']
-        linkedin = self.fields['linkedin']
-        github = self.fields['github']
-        password = self.fields['password']
-        new_password = self.fields['new_password']
-
-        add_attr(username, 'placeholder', 'Nome de usuário')
-        add_attr(email, 'placeholder', 'Ex: user@email.com')
-        add_attr(linkedin, 'placeholder', 'Ex: https://linkedin.com/in/username')
-        add_attr(github, 'placeholder', 'Ex: https://github.com/username')
-        add_attr(password, 'placeholder', 'Nova senha')
-        add_attr(new_password, 'placeholder', 'Confirmar senha')
 
     def clean_new_password(self):
         new_password = self.cleaned_data.get('new_password')
+
         if new_password:
             validate_password(new_password)
+
         return new_password
 
 

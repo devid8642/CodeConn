@@ -21,15 +21,15 @@
       {% endif %}
       <div class="user-profile">
         <div class="user-picture">
-          <img src="{% static 'global/img/user-img.svg' %}" alt="user-generic-img">
+          {% if user.profile_photo %}
+            <img src="{% get_media_prefix %}{{ user.profile_photo }}" alt="user-profile-photo">
+          {% else %}
+            <img src="{% static 'global/img/user-img.svg' %}" alt="user-generic-img">
+          {% endif %}
         </div>
         <div class="user-info">
           <div class="user-name">
-            {% if owner %}
-              <h2>Bem vindo(a), {{ user.username }}!</h2>
-            {% else %}
-              <h2>{{ user.username }}</h2>
-            {% endif %}
+            <h2>{{ user.username }}</h2>
           </div>
           <div class="user-data">
             <div class="user-links">
@@ -48,6 +48,10 @@
                 <a href="{% url 'users:user_update' user.id %}">
                   <i class="bi bi-pencil-square"></i>
                   Editar perfil
+                </a>
+                <a href="{% url 'users:user_update_password' user.id %}">
+                  <i class="bi bi-key"></i>
+                  Alterar senha
                 </a>
               {% endif %}
             </div>
