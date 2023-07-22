@@ -46,6 +46,13 @@
     align-items: center;
 }
 
+.author-link.staff-user i {
+    color: white;
+    background-color: #1645ff;
+    padding: 0 .2rem;
+    border-radius: 50%;
+}
+
 .author-img {
     width: 35px;
     height: 35px;
