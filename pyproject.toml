@@ -21,7 +21,7 @@ django-storages = "^1.13.2"
 pytest = "^7.4.0"
 pytest-django = "^4.5.2"
 boto3 = "^1.27.1"
-whitenoise = "^6.5.0"
+whitenoise = {extras = ["brotli"], version = "^6.5.0"}
 pillow = "^10.0.0"
 django-cleanup = "^8.0.0"
 
