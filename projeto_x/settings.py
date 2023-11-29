@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'solo',
     'storages',
+    'debug_toolbar',
     # projects apps
     'users',
     'projects',
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -229,3 +231,8 @@ CKEDITOR_CONFIGS = {
 }
 
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+# Setting for django debug toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

@@ -24,6 +24,7 @@ boto3 = "^1.27.1"
 whitenoise = {extras = ["brotli"], version = "^6.5.0"}
 pillow = "^10.0.0"
 django-cleanup = "^8.0.0"
+django-debug-toolbar = "^4.2.0"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "projeto_x.settings"
