@@ -1,6 +1,6 @@
-from utils.tests_bases import TestBase
-from ideas.models import ProjectIdea
 from ideas import views
+from ideas.models import ProjectIdea
+from utils.tests_bases import TestBase
 
 
 class IdeasAdminTests(TestBase):
@@ -21,7 +21,7 @@ class IdeasAdminTests(TestBase):
                 'stack': '1',
                 'level': '1',
                 'explanation': 'Idea Explanation',
-            }
+            },
         )
         idea = '<h4>Idea test</h4>'
 
@@ -37,9 +37,7 @@ class IdeasAdminTests(TestBase):
         )
 
         response = self.response_test_function(
-            'ideas:idea_delete',
-            method='post',
-            data={'idea_id': 1}
+            'ideas:idea_delete', method='post', data={'idea_id': 1}
         )
         msg = 'Ideia deletada com sucesso!'
 

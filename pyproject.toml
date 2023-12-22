@@ -18,17 +18,52 @@ dj-database-url = "^2.0.0"
 django-ckeditor = "^6.6.1"
 psycopg = "^3.1.9"
 django-storages = "^1.13.2"
-pytest = "^7.4.0"
-pytest-django = "^4.5.2"
 boto3 = "^1.27.1"
 whitenoise = {extras = ["brotli"], version = "^6.5.0"}
 pillow = "^10.0.0"
 django-cleanup = "^8.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^4.1.0"
+taskipy = "^1.12.2"
+blue = "^0.9.1"
+ruff = "^0.1.9"
+isort = "^5.13.2"
+pytest = "^7.4.3"
+pytest-django = "^4.7.0"
 django-debug-toolbar = "^4.2.0"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "projeto_x.settings"
 python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
+
+[tool.ruff]
+line-length = 79
+exclude = ['.venv', 'migrations']
+
+[tool.isort]
+profile = "black"
+line_length = 79
+extend_skip = ['migrations']
+
+[tool.blue]
+extend-exclude = '(migrations/)'
+
+[tool.coverage.run]
+omit = [
+    '*/tests/*',
+    'utils/*',
+    'projeto_x/*',
+    '*/migrations/*'
+]
+
+[tool.taskipy.tasks]
+lint = 'ruff . && blue --check . --diff'
+format = 'blue .  && isort .'
+run = 'python manage.py runserver'
+pre_test = 'task lint'
+test = 'pytest -s --cov'
+post_test = 'coverage html'
 
 
 [build-system]

@@ -1,8 +1,8 @@
-from datetime import date
+from datetime import date, timedelta
 
-from utils.tests_bases import ProjectTestBase
-from users.models import ProjectsDate
 from projects import views
+from users.models import ProjectsDate
+from utils.tests_bases import ProjectTestBase
 
 
 class HomeTests(ProjectTestBase):
@@ -11,10 +11,12 @@ class HomeTests(ProjectTestBase):
 
     def test_home_showing_approved_projects(self):
         project = self.make_project(is_approved=True)
-        ProjectsDate.objects.create(
-            start_date=date(2023, 1, 1),
-            end_date=date(2023, 12, 12),
+        today = date.today()
+        project_date = ProjectsDate.objects.create(
+            start_date=today,
+            end_date=today + timedelta(days=1),
         )
+        project_date.save()
 
         response = self.response_test_function('projects:home')
 

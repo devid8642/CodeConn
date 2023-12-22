@@ -1,8 +1,9 @@
 from django import forms
 
-from .models import Project, Comment
 from ideas.models import ProjectIdea
 from utils.forms_utils import add_attr
+
+from .models import Comment, Project
 
 
 class ProjectForm(forms.ModelForm):
@@ -41,7 +42,7 @@ class ProjectForm(forms.ModelForm):
             'explanatory_text',
             'is_inspired',
             'stack',
-            'image'
+            'image',
         )
 
 

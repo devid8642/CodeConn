@@ -25,5 +25,5 @@ urlpatterns = [
         'project/complaint/read/',
         views.complaint_notification,
         name='complaint_notification',
-    )
+    ),
 ]

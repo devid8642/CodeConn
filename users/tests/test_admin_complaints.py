@@ -1,5 +1,5 @@
-from utils.tests_bases import ProjectTestBase
 from users import views
+from utils.tests_bases import ProjectTestBase
 
 
 class AdminComplaintTests(ProjectTestBase):
@@ -20,9 +20,7 @@ class AdminComplaintTests(ProjectTestBase):
         self.register_and_login(is_staff=True)
 
         response = self.response_test_function(
-            'users:project_block',
-            method='post',
-            data={'project_id': 1}
+            'users:project_block', method='post', data={'project_id': 1}
         )
         msg = f'&quot;{project.title}&quot; foi bloqueado!'
 
@@ -58,8 +56,7 @@ class AdminComplaintTests(ProjectTestBase):
         self.register_and_login(is_staff=True)
 
         response = self.response_test_function(
-            'users:complaints_remove',
-            data={'project_id': 1}
+            'users:complaints_remove', data={'project_id': 1}
         )
 
         self.assertEqual(response.status_code, 404)

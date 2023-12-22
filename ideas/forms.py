@@ -1,6 +1,8 @@
 from django import forms
-from .models import ProjectIdea
+
 from utils.forms_utils import add_attr
+
+from .models import ProjectIdea
 
 
 class IdeasForm(forms.ModelForm):

@@ -1,23 +1,28 @@
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.hashers import check_password
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.utils.http import urlsafe_base64_decode
-from django.utils.encoding import force_str
-from django.contrib import messages
-from django.urls import reverse
+from datetime import datetime
+
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
+
+from projects.models import Project
+from utils.email_sending import activate_email
 
 from .forms import (
-    LoginForm, RegisterForm, UpdateForm, ProjectsDateForm,
-    UpdatePasswordForm
+    LoginForm,
+    ProjectsDateForm,
+    RegisterForm,
+    UpdateForm,
+    UpdatePasswordForm,
 )
-from utils.email_sending import activate_email
+from .models import ProjectsDate, User
 from .tokens import account_activation_token
-from projects.models import Project
-from .models import User, ProjectsDate
-from datetime import datetime
 
 
 def login_view(request):
@@ -36,13 +41,7 @@ def login_view(request):
         else:
             form.add_error(field=None, error='Email ou senha inválidos')
 
-    return render(
-        request,
-        'auth/pages/login.html',
-        context={
-            'form': form
-        }
-    )
+    return render(request, 'auth/pages/login.html', context={'form': form})
 
 
 def activate(request, uidb64, token):
@@ -55,9 +54,7 @@ def activate(request, uidb64, token):
     except:  # noqa
         user = None
 
-    if user and account_activation_token.check_token(
-        user, token
-    ):
+    if user and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
 
@@ -89,13 +86,7 @@ def register_view(request):
     else:
         form = RegisterForm()
 
-    return render(
-        request,
-        'auth/pages/register.html',
-        context={
-            'form': form
-        }
-    )
+    return render(request, 'auth/pages/register.html', context={'form': form})
 
 
 @login_required(login_url='users:login', redirect_field_name='next')
@@ -129,11 +120,7 @@ def user_detail(request, id):
     return render(
         request,
         'users/pages/user_detail.html',
-        context={
-            'user': user,
-            'projects': user_projects,
-            'owner': owner
-        }
+        context={'user': user, 'projects': user_projects, 'owner': owner},
     )
 
 
@@ -142,10 +129,7 @@ def user_update(request, id):
         user = get_object_or_404(User, id=id)
         if request.method == 'POST':
             old_email = user.email
-            form = UpdateForm(
-                request.POST, request.FILES,
-                instance=user
-            )
+            form = UpdateForm(request.POST, request.FILES, instance=user)
 
             if form.is_valid():
                 user = form.save(old_email=old_email)
@@ -164,10 +148,7 @@ def user_update(request, id):
         return render(
             request,
             'users/pages/user_update.html',
-            context={
-                'form': form,
-                'id': user.id
-            }
+            context={'form': form, 'id': user.id},  # type: ignore
         )
     return redirect('projects:home')
 
@@ -189,17 +170,14 @@ def user_update_password(request, id):
             else:
                 user.set_password(form.cleaned_data.get('new_password'))
                 user.save(update_fields=['password'])
-                messages.success(
-                    request,
-                    'Senha redefinida com sucesso.'
-                )
+                messages.success(request, 'Senha redefinida com sucesso.')
 
                 return redirect('users:login')
 
         return render(
             request,
             'users/pages/user_update_password.html',
-            context={'form': form}
+            context={'form': form},
         )
     return redirect('projects:home')
 
@@ -231,7 +209,7 @@ def admin_dashboard(request):
                 day=date.end_date.day,
                 hour=23,
                 minute=59,
-                second=59
+                second=59,
             )
             date.save()
             return redirect('users:admin_dashboard')
@@ -243,8 +221,8 @@ def admin_dashboard(request):
 
             if date.start_date and date.end_date != 'None':
                 if project and (
-                    project.created_at >= date.start_date and
-                    project.created_at <= date.end_date
+                    project.created_at >= date.start_date
+                    and project.created_at <= date.end_date  # type: ignore
                 ):
                     delivered_projects.append(project)
 
@@ -265,7 +243,7 @@ def admin_dashboard(request):
             'date': date,
             'non_approved': non_approved,
             'non_approved_count': non_approved_count,
-        }
+        },
     )
 
 

@@ -1,30 +1,25 @@
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
-from django.test import override_settings
 from django.core import mail
+from django.test import override_settings
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 
-from utils.tests_bases import UserTestBase
 from users.models import User
 from users.tokens import account_activation_token
+from utils.tests_bases import UserTestBase
 
-@override_settings(
-    EMAIL_CONFIRMATION = True
-)
+
+@override_settings(EMAIL_CONFIRMATION=True)
 class RegisterConfirmationTests(UserTestBase):
     def test_registered_user_confirmation_email_sended(self):
-        response = self.response_test_function(
-            'users:register',
-            method='post',
-            data=self.register_form_data
+        self.response_test_function(
+            'users:register', method='post', data=self.register_form_data
         )
 
         self.assertEqual(len(mail.outbox), 1)
 
     def test_activate_account_success(self):
         self.response_test_function(
-            'users:register',
-            method='post',
-            data=self.register_form_data
+            'users:register', method='post', data=self.register_form_data
         )
         user = User.objects.get(pk=1)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
@@ -35,7 +30,7 @@ class RegisterConfirmationTests(UserTestBase):
             url_kwargs={
                 'uidb64': uid,
                 'token': token,
-            }
+            },
         )
         msg = 'Sua conta foi ativada com sucesso!'
 
@@ -43,9 +38,7 @@ class RegisterConfirmationTests(UserTestBase):
 
     def test_activate_account_fail(self):
         self.response_test_function(
-            'users:register',
-            method='post',
-            data=self.register_form_data
+            'users:register', method='post', data=self.register_form_data
         )
         user = User.objects.get(pk=1)
         token = account_activation_token.make_token(user)
@@ -55,7 +48,7 @@ class RegisterConfirmationTests(UserTestBase):
             url_kwargs={
                 'uidb64': 'changed',
                 'token': token,
-            }
+            },
         )
         msg = 'Não foi possível ativar sua conta!'
 

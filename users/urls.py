@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import views
 
 app_name = 'users'
@@ -12,8 +13,9 @@ urlpatterns = [
         'user/<int:id>/update/profile/', views.user_update, name='user_update'
     ),
     path(
-        'user/<int:id>/update/password/', views.user_update_password,
-        name='user_update_password'
+        'user/<int:id>/update/password/',
+        views.user_update_password,
+        name='user_update_password',
     ),
     path('activate/<uidb64>/<token>', views.activate, name='activate'),
     path('admdash/', views.admin_dashboard, name='admin_dashboard'),
@@ -22,5 +24,5 @@ urlpatterns = [
         'admdash/complaints/remove/',
         views.complaints_remove,
         name='complaints_remove',
-    )
+    ),
 ]

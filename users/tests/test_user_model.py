@@ -1,6 +1,8 @@
-from django.contrib.auth.hashers import make_password 
-from utils.tests_bases import TestBase
+from django.contrib.auth.hashers import make_password
+
 from users.models import User
+from utils.tests_bases import TestBase
+
 
 class TestUserModel(TestBase):
     def setUp(self, *args, **kwargs):
@@ -16,11 +18,7 @@ class TestUserModel(TestBase):
         self.expected_user.email = 'devid@devid.com'
         self.expected_user.password = make_password('devid3939!')
         self.expected_user.save(
-            update_fields=[
-                'username',
-                'email',
-                'password'
-            ]
+            update_fields=['username', 'email', 'password']
         )
         user = User.objects.get(id=self.expected_user.id)
         self.assertEqual(self.expected_user, user)

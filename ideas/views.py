@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .models import ProjectIdea
 from .forms import IdeasForm
+from .models import ProjectIdea
 
 
 def projects_ideas(request):
@@ -28,20 +28,14 @@ def projects_ideas(request):
             'backend': backend,
             'frontend': frontend,
             'fullstack': fullstack,
-        }
+        },
     )
 
 
 def idea_detail(request, pk):
     idea = get_object_or_404(ProjectIdea, pk=pk)
 
-    return render(
-        request,
-        'idea_detail.html',
-        context={
-            'idea': idea
-        }
-    )
+    return render(request, 'idea_detail.html', context={'idea': idea})
 
 
 @login_required(login_url='users:login', redirect_field_name='next')
@@ -67,7 +61,7 @@ def ideas_admin(request):
         context={
             'all_ideas': all_ideas,
             'form': form,
-        }
+        },
     )
 
 

@@ -1,7 +1,7 @@
-from utils.tests_bases import ProjectTestBase
-from projects import views
-
 from django.urls import reverse
+
+from projects import views
+from utils.tests_bases import ProjectTestBase
 
 
 class ProjectSearchTests(ProjectTestBase):
@@ -16,9 +16,7 @@ class ProjectSearchTests(ProjectTestBase):
         search_term = 'title'
 
         search_url = reverse('projects:project_search')
-        response = self.client.get(
-            f'{search_url}?q={search_term}'
-        )
+        response = self.client.get(f'{search_url}?q={search_term}')
 
         self.assertIn(project.title, response.content.decode('utf-8'))
 
@@ -26,9 +24,7 @@ class ProjectSearchTests(ProjectTestBase):
         search_term = ''
 
         search_url = reverse('projects:project_search')
-        response = self.client.get(
-            f'{search_url}?q={search_term}'
-        )
+        response = self.client.get(f'{search_url}?q={search_term}')
 
         self.assertEqual(response.status_code, 404)
 
@@ -37,11 +33,6 @@ class ProjectSearchTests(ProjectTestBase):
         search_term = 'title'
 
         search_url = reverse('projects:project_search')
-        response = self.client.get(
-            f'{search_url}?q={search_term}'
-        )
+        response = self.client.get(f'{search_url}?q={search_term}')
 
-        self.assertTemplateUsed(
-            response,
-            'projects/pages/project_search.html'
-        )
+        self.assertTemplateUsed(response, 'projects/pages/project_search.html')

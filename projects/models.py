@@ -1,9 +1,8 @@
-from django.db import models
 from ckeditor.fields import RichTextField
+from django.db import models
 
-from users.models import User
 from ideas.models import ProjectIdea
-
+from users.models import User
 from utils.image import resize_image
 
 STACKS = (
@@ -36,15 +35,18 @@ class Project(models.Model):
         'Stack utilizada', max_length=255, null=True, choices=STACKS
     )
     complaints = models.IntegerField(
-        'Denúncias', default=0,
+        'Denúncias',
+        default=0,
     )
     complaints_notifications = models.IntegerField(
-        'Notificação de denúncia', default=0,
+        'Notificação de denúncia',
+        default=0,
     )
     image = models.ImageField(
         'Imagem do projeto',
         upload_to='projects_images/',
-        blank=True, null=True
+        blank=True,
+        null=True,
     )
 
     def save(self, *args, **kwargs):
@@ -55,9 +57,8 @@ class Project(models.Model):
                 resize_image(self.image, new_width=800)
             except FileNotFoundError:
                 pass
-        
-        return saved
 
+        return saved
 
     def __str__(self):
         return f'Project {self.id} - {self.title}'
@@ -72,7 +73,8 @@ class Comment(models.Model):
         Project, on_delete=models.CASCADE, related_name='comments'
     )
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL,
+        User,
+        on_delete=models.SET_NULL,
         related_name='comment_user',
         null=True,
         default='',

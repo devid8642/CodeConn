@@ -1,8 +1,8 @@
-from utils.tests_bases import ProjectTestBase
-from users.models import ProjectsDate
-from users import views
-
 from datetime import date
+
+from users import views
+from users.models import ProjectsDate
+from utils.tests_bases import ProjectTestBase
 
 
 class AdminDashboardTests(ProjectTestBase):
@@ -32,8 +32,7 @@ class AdminDashboardTests(ProjectTestBase):
 
     def test_deadline_changed_still_on_dashboard(self):
         ProjectsDate.objects.create(
-            start_date=date(2022, 6, 23),
-            end_date=date(2030, 6, 30)
+            start_date=date(2022, 6, 23), end_date=date(2030, 6, 30)
         )
         self.register_and_login(is_staff=True)
         response = self.response_test_function('users:admin_dashboard')
@@ -52,7 +51,7 @@ class AdminDashboardTests(ProjectTestBase):
             data={
                 'start_date': date(2022, 6, 23),
                 'end_date': date(2022, 6, 30),
-            }
+            },
         )
         start_date = '23 de Junho de 2022'
         end_date = '30 de Junho de 2022'
@@ -62,8 +61,7 @@ class AdminDashboardTests(ProjectTestBase):
 
     def test_projects_on_deadline(self):
         ProjectsDate.objects.create(
-            start_date=date(2022, 6, 23),
-            end_date=date(2030, 6, 30)
+            start_date=date(2022, 6, 23), end_date=date(2030, 6, 30)
         )
         self.register_and_login(
             email='testdate@email.com',

@@ -1,16 +1,8 @@
 from django.db import models
 
-STACK_CHOICES = (
-    ('1', 'Backend'),
-    ('2', 'Frontend'),
-    ('3', 'Fullstack')
-)
+STACK_CHOICES = (('1', 'Backend'), ('2', 'Frontend'), ('3', 'Fullstack'))
 
-LEVEL_CHOICES = (
-    ('1', 'Fácil'),
-    ('2', 'Médio'),
-    ('3', 'Difícil')
-)
+LEVEL_CHOICES = (('1', 'Fácil'), ('2', 'Médio'), ('3', 'Difícil'))
 
 
 class ProjectIdea(models.Model):

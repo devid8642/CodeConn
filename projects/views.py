@@ -1,14 +1,15 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import Http404
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 
-from .models import Project, Comment
-from .forms import ProjectForm, CommentForm
 from ideas.models import ProjectIdea
 from users.models import ProjectsDate
+
+from .forms import CommentForm, ProjectForm
+from .models import Comment, Project
 
 
 def home(request):
@@ -22,8 +23,8 @@ def home(request):
     if date.start_date and date.end_date != 'None':
         for project in projects:
             if project and (
-                project.created_at >= date.start_date and
-                project.created_at <= date.end_date
+                project.created_at >= date.start_date
+                and project.created_at <= date.end_date
             ):
                 week_projects.append(project)
 
@@ -34,7 +35,7 @@ def home(request):
             'week_projects': week_projects,
             'date': date,
             'ideas': ideas,
-        }
+        },
     )
 
 
@@ -61,7 +62,7 @@ def all_projects(request):
         context={
             'projects': projects,
             'idea_title': idea_title,
-        }
+        },
     )
 
 
@@ -73,11 +74,11 @@ def project_search(request):
 
     projects = Project.objects.filter(
         Q(
-            Q(title__icontains=search_term) |
-            Q(subtitle__icontains=search_term) |
-            Q(author__username__icontains=search_term) |
-            Q(stack__icontains=search_term) |
-            Q(is_inspired__idea__icontains=search_term)
+            Q(title__icontains=search_term)
+            | Q(subtitle__icontains=search_term)
+            | Q(author__username__icontains=search_term)
+            | Q(stack__icontains=search_term)
+            | Q(is_inspired__idea__icontains=search_term)
         ),
         is_approved=True,
     )
@@ -85,10 +86,7 @@ def project_search(request):
     return render(
         request,
         'projects/pages/project_search.html',
-        context={
-            'projects': projects,
-            'search_term': search_term
-        }
+        context={'projects': projects, 'search_term': search_term},
     )
 
 
@@ -133,7 +131,7 @@ def project_detail(request, pk):
             'project': project,
             'comments': comments,
             'comment_form': comment_form,
-        }
+        },
     )
 
 
@@ -190,14 +188,11 @@ def project_create(request):
             project.is_approved = True
 
             project.save()
-            messages.success(
-                request,
-                'Seu projeto foi criado com sucesso!'
-            )
+            messages.success(request, 'Seu projeto foi criado com sucesso!')
 
-            return redirect(reverse(
-                'users:user_detail', kwargs={'id': request.user.id}
-            ))
+            return redirect(
+                reverse('users:user_detail', kwargs={'id': request.user.id})
+            )
     else:
         form = ProjectForm()
 
@@ -206,7 +201,7 @@ def project_create(request):
         'projects/pages/project_create.html',
         context={
             'form': form,
-        }
+        },
     )
 
 
@@ -219,10 +214,7 @@ def project_edit(request, pk):
     )
 
     if request.method == 'POST':
-        form = ProjectForm(
-            request.POST, request.FILES,
-            instance=project
-        )
+        form = ProjectForm(request.POST, request.FILES, instance=project)
 
         if form.is_valid():
             project = form.save(commit=False)
@@ -243,7 +235,7 @@ def project_edit(request, pk):
         context={
             'form': form,
             'project': project,
-        }
+        },
     )
 
 

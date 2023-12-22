@@ -1,5 +1,5 @@
-from utils.tests_bases import ProjectTestBase
 from projects import views
+from utils.tests_bases import ProjectTestBase
 
 
 class ProjectDetailTests(ProjectTestBase):
@@ -13,8 +13,7 @@ class ProjectDetailTests(ProjectTestBase):
     def test_project_detail_showing_correct_project(self):
         project = self.make_project(is_approved=True)
         response = self.response_test_function(
-            'projects:project_detail',
-            url_kwargs={'pk': 1}
+            'projects:project_detail', url_kwargs={'pk': 1}
         )
 
         self.assertIn(project.title, response.content.decode('utf-8'))
@@ -61,7 +60,7 @@ class ProjectDetailTests(ProjectTestBase):
         response = self.response_test_function(
             'projects:comment_delete',
             method='post',
-            data={'comment-id': comment.id}
+            data={'comment-id': comment.id},
         )
 
         self.assertEqual(response.status_code, 200)
@@ -70,8 +69,7 @@ class ProjectDetailTests(ProjectTestBase):
         comment = self.make_comment_and_login()
 
         response = self.response_test_function(
-            'projects:comment_delete',
-            data={'comment-id': comment.id}
+            'projects:comment_delete', data={'comment-id': comment.id}
         )
 
         self.assertEqual(response.status_code, 404)

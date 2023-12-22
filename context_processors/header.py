@@ -6,9 +6,7 @@ def notifications(request):
         read=False,
         project__author=request.user.id,
     ).order_by('-id')
-    projects = Project.objects.filter(
-        author=request.user.id
-    )
+    projects = Project.objects.filter(author=request.user.id)
     non_approved = Project.objects.filter(
         author=request.user.id,
         is_approved=False,

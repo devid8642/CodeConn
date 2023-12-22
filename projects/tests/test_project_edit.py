@@ -1,14 +1,12 @@
-from utils.tests_bases import ProjectTestBase
-from projects.models import Project
 from projects import views
+from projects.models import Project
+from utils.tests_bases import ProjectTestBase
 
 
 class ProjectEditTests(ProjectTestBase):
     def test_project_edit_view_function(self):
         self.view_test_function(
-            'projects:project_edit',
-            views.project_edit,
-            {'pk': 1}
+            'projects:project_edit', views.project_edit, {'pk': 1}
         )
 
     def test_project_edit_success(self):
@@ -24,18 +22,13 @@ class ProjectEditTests(ProjectTestBase):
         )
         project = new_title
 
-        self.assertEqual(
-            Project.objects.get(id=1).title,
-            project
-        )
+        self.assertEqual(Project.objects.get(id=1).title, project)
 
     def test_project_edit_not_found(self):
         self.register_and_login()
 
         response = self.response_test_function(
-            'projects:project_edit',
-            url_kwargs={'pk': 1},
-            method='post'
+            'projects:project_edit', url_kwargs={'pk': 1}, method='post'
         )
 
         self.assertEqual(response.status_code, 404)
@@ -46,5 +39,5 @@ class ProjectEditTests(ProjectTestBase):
         self.template_test_function(
             'projects:project_edit',
             url_kwargs={'pk': 1},
-            template_url='projects/pages/project_edit.html'
+            template_url='projects/pages/project_edit.html',
         )

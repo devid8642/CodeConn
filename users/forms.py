@@ -1,15 +1,15 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password
-from .models import User, ProjectsDate
+from django.core.exceptions import ValidationError
+
 from utils.forms_utils import add_attr
+
+from .models import ProjectsDate, User
 
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
-        label='Email',
-        max_length=255,
-        widget=forms.TextInput()
+        label='Email', max_length=255, widget=forms.TextInput()
     )
     password = forms.CharField(
         label='Senha',
@@ -33,24 +33,21 @@ class RegisterForm(forms.ModelForm):
             'email',
             'linkedin',
             'github',
-            'password'
+            'password',
         )
 
     email = forms.EmailField(
-        label='Email',
-        max_length=255,
-        help_text='O email precisa ser válido.'
+        label='Email', max_length=255, help_text='O email precisa ser válido.'
     )
     password = forms.CharField(
         label='Senha',
         widget=forms.PasswordInput(),
-        help_text='''
+        help_text="""
         A senha deve ter no mínimo 8 caracteres e conter letras e números.
-        '''
+        """,
     )
     confirmed_password = forms.CharField(
-        label='Confirme sua senha',
-        widget=forms.PasswordInput()
+        label='Confirme sua senha', widget=forms.PasswordInput()
     )
 
     def __init__(self, *args, **kwargs):
@@ -63,12 +60,12 @@ class RegisterForm(forms.ModelForm):
         add_attr(
             self.fields['linkedin'],
             'placeholder',
-            'Ex: https://linkedin.com/in/username'
+            'Ex: https://linkedin.com/in/username',
         )
         add_attr(
             self.fields['github'],
             'placeholder',
-            'Ex: https://github.com/username'
+            'Ex: https://github.com/username',
         )
 
         if 'password' in self.fields:
@@ -149,15 +146,14 @@ class UpdateForm(RegisterForm):
 
 class UpdatePasswordForm(forms.Form):
     password = forms.CharField(
-        label='Senha atual',
-        widget=forms.PasswordInput()
+        label='Senha atual', widget=forms.PasswordInput()
     )
     new_password = forms.CharField(
         label='Nova senha',
         widget=forms.PasswordInput(),
-        help_text='''
+        help_text="""
         A senha deve ter no mínimo 8 caracteres e conter letras e números.
-        '''
+        """,
     )
 
     def clean_new_password(self):
@@ -174,12 +170,14 @@ class ProjectsDateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['start_date'].widget = forms.widgets.DateTimeInput(
             attrs={
-                'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)',
+                'type': 'date',
+                'placeholder': 'yyyy-mm-dd (DOB)',
             }
         )
         self.fields['end_date'].widget = forms.widgets.DateTimeInput(
             attrs={
-                'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)',
+                'type': 'date',
+                'placeholder': 'yyyy-mm-dd (DOB)',
             }
         )
 

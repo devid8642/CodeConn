@@ -1,8 +1,8 @@
 from parameterized import parameterized
 
-from utils.tests_bases import ProjectTestBase
-from projects.forms import ProjectForm
 from projects import views
+from projects.forms import ProjectForm
+from utils.tests_bases import ProjectTestBase
 
 
 class ProjectCreateTests(ProjectTestBase):
@@ -26,7 +26,7 @@ class ProjectCreateTests(ProjectTestBase):
         response = self.response_test_function(
             'projects:project_create',
             method='post',
-            data=self.project_form_data
+            data=self.project_form_data,
         )
         msg = 'Seu projeto foi criado com sucesso!'
 
@@ -35,11 +35,13 @@ class ProjectCreateTests(ProjectTestBase):
             text=msg,
         )
 
-    @parameterized.expand([
-        ('title', 'Título'),
-        ('subtitle', 'Subtítulo'),
-        ('explanatory_text', 'Texto de explicação'),
-    ])
+    @parameterized.expand(
+        [
+            ('title', 'Título'),
+            ('subtitle', 'Subtítulo'),
+            ('explanatory_text', 'Texto de explicação'),
+        ]
+    )
     def test_project_create_form_labels(self, field, label):
         form = ProjectForm()
         current_label = form[field].field.label

@@ -1,25 +1,24 @@
-from django.db import models
 from django.contrib.auth.models import (
-    AbstractBaseUser, PermissionsMixin, UserManager
+    AbstractBaseUser,
+    PermissionsMixin,
+    UserManager,
 )
-from utils.image import resize_image
+from django.db import models
 from solo.models import SingletonModel
+
+from utils.image import resize_image
 
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Email', max_length=255, unique=True)
     username = models.CharField('Usuário', max_length=255)
     is_active = models.BooleanField('Conta ativa', default=True)
-    is_staff = models.BooleanField(
-        'Conta administrativa',
-        default=False
-    )
+    is_staff = models.BooleanField('Conta administrativa', default=False)
     date_joined = models.DateTimeField('Data de cadastro', auto_now_add=True)
     linkedin = models.URLField('Linkedin', blank=True, null=True)
     github = models.URLField('Github', blank=True, null=True)
     profile_photo = models.ImageField(
-        'Foto de perfil', blank=True, null=True,
-        upload_to='profiles_photos/'
+        'Foto de perfil', blank=True, null=True, upload_to='profiles_photos/'
     )
     objects = UserManager()
     USERNAME_FIELD = 'email'

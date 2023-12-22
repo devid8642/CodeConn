@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Project, Comment
+from .models import Comment, Project
 
 
 @admin.register(Project)
@@ -8,7 +8,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'author', 'is_approved', 'created_at')
     list_display_links = ('id', 'title')
     list_editable = ('is_approved',)
-    list_filter = ('is_approved', )
+    list_filter = ('is_approved',)
     ordering = ('-id', '-created_at')
     search_fields = ('title', 'author__username')
 

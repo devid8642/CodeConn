@@ -1,12 +1,10 @@
-from utils.tests_bases import ProjectTestBase
 from projects import views
+from utils.tests_bases import ProjectTestBase
 
 
 class AllProjectsTests(ProjectTestBase):
     def test_all_projects_view(self):
-        self.view_test_function(
-            'projects:all_projects', views.all_projects
-        )
+        self.view_test_function('projects:all_projects', views.all_projects)
 
     def test_all_projects_showing_approved_projects(self):
         project = self.make_project(is_approved=True)
